@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Diet Plan · Operating System · Voyage 2050</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,340;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081420;
+    --bg-panel:#0d1f31;
+    --bg-card:#112539;
+    --bg-card-hover:#152e47;
+    --ink:#ede7d9;
+    --ink-dim:#8fa4ba;
+    --hairline:rgba(237,231,217,0.13);
+    --hairline-soft:rgba(237,231,217,0.06);
+
+    --gold:#d3a355;
+    --gold-soft:rgba(211,163,85,0.14);
+    --teal:#53a89f;
+    --red:#c08487;
+    --green:#7ea179;
+    --green-soft:rgba(126,161,121,0.14);
+    --blue:#6f97bd;
+
+    --font-display:'Fraunces', serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(rgba(237,231,217,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,231,217,0.022) 1px, transparent 1px);
+    background-size:48px 48px;
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(126,161,121,0.1), transparent 60%),
+      radial-gradient(ellipse 80% 45% at 50% 105%, rgba(83,168,159,0.06), transparent 60%);
+  }
+  .wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 28px;}
+
+  /* ================= NAV ================= */
+  #progress{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--teal)); z-index:60;}
+  .nav{position:sticky; top:0; z-index:50; background:rgba(8,20,32,0.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--hairline-soft);}
+  .nav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex:none;}
+  .brand svg{width:26px; height:26px;}
+  .brand-name{font-family:var(--font-display); font-weight:600; font-size:16px;}
+  .brand-name em{font-style:italic; color:var(--gold); font-weight:500;}
+  .nav-links{display:flex; align-items:center; gap:4px;}
+  .nav-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:8px 13px; border-radius:3px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; white-space:nowrap;}
+  .nav-links a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .nav-links a.active{color:var(--gold); border-color:rgba(211,163,85,0.4); background:var(--gold-soft);}
+  .nav-links a .num{color:var(--gold); margin-right:5px;}
+  .nav-links a.active .num{color:inherit;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--hairline); border-radius:3px; color:var(--ink); padding:7px 11px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;}
+  @media(max-width:820px){
+    .nav-toggle{display:block;}
+    .nav-links{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:rgba(8,20,32,0.97); border-bottom:1px solid var(--hairline); padding:8px 20px 16px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:13px 10px; border-bottom:1px solid var(--hairline-soft); border-radius:0;}
+    .nav-links a.active{border:none; border-bottom:1px solid rgba(211,163,85,0.4);}
+  }
+
+  /* ================= SUB NAV ================= */
+  .subnav{position:sticky; top:60px; z-index:45; background:rgba(13,31,49,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline-soft);}
+  .subnav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:2px; height:46px; overflow-x:auto; scrollbar-width:none;}
+  .subnav-inner::-webkit-scrollbar{display:none;}
+  .subnav-label{font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-dim); margin-right:14px; flex:none;}
+  .subnav a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:6px 12px; border-radius:3px; transition:color .2s, background .2s; white-space:nowrap; flex:none;}
+  .subnav a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .subnav a.here{color:var(--green); background:var(--green-soft);}
+  .subnav a .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:7px; vertical-align:1px;}
+
+  /* ================= HERO ================= */
+  .hero{text-align:center; padding:64px 28px 44px;}
+  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--green); margin:0 0 20px;}
+  .hero h1{font-family:var(--font-display); font-weight:600; font-size:clamp(36px,6vw,58px); line-height:1.05; letter-spacing:-0.015em; margin:0 0 16px;}
+  .hero h1 em{font-style:italic; font-weight:340; color:var(--teal);}
+  .thesis{max-width:560px; margin:0 auto; font-size:16px; color:var(--ink-dim); font-style:italic; line-height:1.7; font-family:var(--font-display); font-weight:340;}
+  .thesis b{color:var(--ink); font-weight:500;}
+
+  /* target strip */
+  .target-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--hairline); border:1px solid var(--hairline); border-radius:4px; overflow:hidden;
+    max-width:760px; margin:40px auto 0;
+  }
+  @media(max-width:640px){.target-strip{grid-template-columns:repeat(2,1fr);}}
+  .t-cell{background:var(--bg-panel); padding:18px 12px; text-align:center;}
+  .t-cell .v{font-family:var(--font-mono); font-size:19px; font-weight:600; color:var(--green);}
+  .t-cell .l{font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-dim); margin-top:6px;}
+
+  /* ================= SECTION HEADS ================= */
+  .section-head{max-width:960px; margin:68px auto 0; padding:0 28px; text-align:center;}
+  .kicker{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--green);}
+  .section-head h2{font-family:var(--font-display); font-size:clamp(25px,4vw,33px); font-weight:600; margin:12px 0 10px;}
+  .section-head h2 em{font-style:italic; font-weight:340; color:var(--teal);}
+  .section-head p{color:var(--ink-dim); font-size:14px; max-width:560px; margin:0 auto;}
+
+  /* ================= MEAL RAIL ================= */
+  .meals{position:relative; max-width:760px; margin:36px auto 0; padding:0 28px;}
+  .meals::before{content:''; position:absolute; top:10px; bottom:10px; left:calc(28px + 52px); width:0; border-left:2px dashed rgba(126,161,121,0.32);}
+  @media(max-width:600px){.meals::before{left:calc(28px + 40px);}}
+
+  .meal{
+    position:relative; display:grid; grid-template-columns:106px 1fr; gap:0 26px; margin-bottom:16px;
+    opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease;
+  }
+  .meal.in-view{opacity:1; transform:translateY(0);}
+  @media(max-width:600px){.meal{grid-template-columns:82px 1fr; gap:0 16px;}}
+
+  .m-slot{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--green); text-align:right; padding-top:19px; position:relative; line-height:1.4;
+  }
+  .m-slot::after{
+    content:''; position:absolute; right:-31px; top:23px; width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--green); z-index:2;
+  }
+  @media(max-width:600px){.m-slot::after{right:-21px;}}
+
+  .m-card{
+    background:var(--bg-card); border:1px solid var(--hairline); border-radius:4px;
+    padding:18px 22px; transition:background .25s, border-color .25s;
+  }
+  .m-card:hover{background:var(--bg-card-hover); border-color:rgba(126,161,121,0.42);}
+  .m-name{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .m-name h3{font-family:var(--font-display); font-size:18px; font-weight:600; margin:0;}
+  .m-name .icon{font-size:17px;}
+  .m-what{font-size:14px; color:var(--ink); margin-top:6px; line-height:1.6;}
+  .m-what strong{font-weight:600;}
+  .m-why{font-size:12.5px; color:var(--ink-dim); margin-top:6px; font-style:italic; line-height:1.55;}
+  .m-why b{color:var(--teal); font-style:normal; font-weight:600; font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; margin-right:6px;}
+
+  .meal.anchor .m-card{border-color:rgba(211,163,85,0.5); background:rgba(211,163,85,0.06);}
+  .meal.anchor .m-slot{color:var(--gold);}
+  .meal.anchor .m-slot::after{border-color:var(--gold); background:var(--gold);}
+  .a-tag{display:inline-block; padding:2px 8px; font-size:9.5px; letter-spacing:0.1em; font-family:var(--font-mono); text-transform:uppercase; border-radius:2px; border:1px solid var(--gold); color:var(--gold); background:var(--gold-soft);}
+
+  /* ================= RULES ================= */
+  .rules-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:4px; overflow:hidden; max-width:960px; margin:36px auto 0;}
+  @media(max-width:820px){.rules-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:540px){.rules-grid{grid-template-columns:1fr;}}
+  .rule-card{background:var(--bg-card); padding:22px 22px; transition:background .25s;}
+  .rule-card:hover{background:var(--bg-card-hover);}
+  .rule-card .n{font-family:var(--font-mono); font-size:11px; color:var(--green); letter-spacing:0.1em; text-transform:uppercase;}
+  .rule-card h3{font-family:var(--font-display); font-size:16.5px; font-weight:600; margin:8px 0 8px; line-height:1.35;}
+  .rule-card p{margin:0; font-size:13px; color:var(--ink-dim); line-height:1.6;}
+  .rule-card p b{color:var(--ink); font-weight:600;}
+  .rule-card.hard{border-top:2px solid var(--red);}
+  .rule-card.hard .n{color:var(--red);}
+
+  /* ================= BATCH COOK SPOTLIGHT ================= */
+  .batch{max-width:960px; margin:36px auto 0; padding:0 28px;}
+  .batch-inner{
+    border:1px solid rgba(83,168,159,0.4); border-radius:5px; background:rgba(83,168,159,0.07);
+    padding:32px 34px; display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:center;
+  }
+  @media(max-width:640px){.batch-inner{grid-template-columns:1fr; text-align:center;}}
+  .batch-icon{font-size:44px; line-height:1;}
+  .batch h3{font-family:var(--font-display); font-size:21px; font-weight:600; margin:0 0 8px;}
+  .batch h3 .kicker2{display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal); margin-bottom:6px;}
+  .batch p{margin:0; font-size:14px; color:var(--ink-dim); line-height:1.7;}
+  .batch p b{color:var(--ink); font-weight:600;}
+
+  /* ================= WHY PROTEIN ================= */
+  .why{max-width:960px; margin:36px auto 0; padding:0 28px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media(max-width:760px){.why{grid-template-columns:1fr;}}
+  .why-card{border:1px solid var(--hairline); border-radius:4px; background:var(--bg-panel); padding:22px 22px;}
+  .why-card .p-n{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.14em; color:var(--green); text-transform:uppercase; display:block; margin-bottom:8px;}
+  .why-card h3{font-family:var(--font-display); font-size:17px; font-weight:600; margin:0 0 8px;}
+  .why-card p{margin:0; font-size:13.5px; color:var(--ink-dim); line-height:1.65;}
+  .why-card p b{color:var(--ink); font-weight:600;}
+
+  /* ================= CTAs / FOOTER ================= */
+  .cta-row{max-width:960px; margin:64px auto 0; padding:0 28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-row a{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; border-radius:3px; padding:16px 26px; transition:background .25s, transform .25s;}
+  .cta-row a.primary{color:var(--red); border:1px solid rgba(192,132,135,0.5); background:rgba(192,132,135,0.12);}
+  .cta-row a.primary:hover{background:rgba(192,132,135,0.22); transform:translateY(-2px);}
+  .cta-row a.ghost{color:var(--ink-dim); border:1px solid var(--hairline);}
+  .cta-row a.ghost:hover{color:var(--ink); background:rgba(237,231,217,0.05); transform:translateY(-2px);}
+
+  footer{max-width:640px; margin:0 auto; padding:52px 28px 90px; text-align:center;}
+  footer .rule{width:60px; height:1px; background:var(--hairline); margin:0 auto 22px;}
+  footer p{font-size:14.5px; color:var(--ink-dim); line-height:1.75; margin:0; font-style:italic; font-family:var(--font-display); font-weight:340;}
+  footer .lead{font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--green); margin-bottom:12px; display:block; font-style:normal;}
+
+  @media(prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .meal{opacity:1 !important; transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../../">
+      <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="52" stroke="#8fa4ba" stroke-opacity="0.5" stroke-width="4"/><path d="M60 22 L67 60 L60 98 L53 60 Z" fill="#d3a355"/><path d="M22 60 L60 53 L98 60 L60 67 Z" fill="#ede7d9" fill-opacity="0.6"/></svg>
+      <span class="brand-name">Voyage <em>2050</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../../"><span class="num">01</span>Decade Map</a>
+      <a href="../../yearly-plan/"><span class="num">02</span>1-Year Plan</a>
+      <a href="../../three-month-plan/"><span class="num">03</span>90-Day Plan</a>
+      <a href="../" class="active"><span class="num">04</span>Operating System</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="subnav" aria-label="Operating System sections">
+  <div class="subnav-inner">
+    <span class="subnav-label">System /</span>
+    <a href="../">Hub</a>
+    <a href="../schedule/"><span class="dot" style="background:var(--blue)"></span>Schedule</a>
+    <a href="./" class="here"><span class="dot" style="background:var(--green)"></span>Diet</a>
+    <a href="../speech/"><span class="dot" style="background:var(--red)"></span>Speech</a>
+    <a href="../protocol/"><span class="dot" style="background:var(--gold)"></span>Protocol Book</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">04b · The Operating System</p>
+    <h1>The Diet <em>Plan</em></h1>
+    <p class="thesis">The diet fuels a brain that runs on protein. <b>Clean, Indian-friendly, cheap, low-cook-effort</b> — realistic beats perfect.</p>
+
+    <div class="target-strip">
+      <div class="t-cell"><div class="v">110–130g</div><div class="l">Protein / day</div></div>
+      <div class="t-cell"><div class="v">2.5–3L</div><div class="l">Water / day</div></div>
+      <div class="t-cell"><div class="v">☕ ×2</div><div class="l">Coffee cap · none after 2pm</div></div>
+      <div class="t-cell"><div class="v">0</div><div class="l">Sugar drinks</div></div>
+    </div>
+  </header>
+</div>
+
+<!-- ============ DAILY TEMPLATE ============ -->
+<div class="section-head">
+  <span class="kicker">The Fuel Line</span>
+  <h2>Daily Template · <em>Five Feeds</em></h2>
+  <p>Same meals, every day. No decisions, no scrolling recipes at 8am — the answer to "what do I eat" is pre-written.</p>
+</div>
+
+<main class="meals">
+
+  <div class="meal anchor">
+    <div class="m-slot">Breakfast</div>
+    <div class="m-card">
+      <div class="m-name"><span class="icon">🌯</span><h3>High Protein Burrito</h3><span class="a-tag">Non-skippable</span></div>
+      <div class="m-what"><strong>Tofu or Paneer</strong> + vegetables.</div>
+      <div class="m-why"><b>Why</b>ADHD brain without fuel = the "lying in bed" spiral. This meal is the day's ignition — it happens every single day, no exceptions.</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="m-slot">Lunch</div>
+    <div class="m-card">
+      <div class="m-name"><span class="icon">🥣</span><h3>Protein Bowl</h3></div>
+      <div class="m-what"><strong>Soya chunks, whey protein, milk.</strong></div>
+      <div class="m-why"><b>Why</b>The biggest protein hit of the day, with near-zero cook effort.</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="m-slot">Snack</div>
+    <div class="m-card">
+      <div class="m-name"><span class="icon">🥜</span><h3>The Handful</h3></div>
+      <div class="m-what"><strong>Almonds, banana, dates, cashews</strong> + omega capsules.</div>
+      <div class="m-why"><b>Why</b>Grab-and-go — no prep barrier means it actually happens.</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="m-slot">Dinner</div>
+    <div class="m-card">
+      <div class="m-name"><span class="icon">🍛</span><h3>Rice + Daal + Yogurt</h3></div>
+      <div class="m-what"><strong>Double the daal, halve the rice</strong> + 1 cup yogurt.</div>
+      <div class="m-why"><b>Why</b>Same comfort food, inverted ratio — the protein goes up without the meal changing.</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="m-slot">Before Bed</div>
+    <div class="m-card">
+      <div class="m-name"><span class="icon">🥛</span><h3>1 Glass Milk</h3></div>
+      <div class="m-why"><b>Why</b>Slow protein through the night; pairs with the 21:45 sleep keystone.</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============ THE RULES ============ -->
+<div class="section-head">
+  <span class="kicker">Standing Orders</span>
+  <h2>The 7 Rules</h2>
+  <p>The meals are the fuel; these are the guardrails. Red-flagged rules are the load-bearing ones.</p>
+</div>
+
+<div class="wrap">
+  <div class="rules-grid">
+    <div class="rule-card hard">
+      <span class="n">Rule 01 · Hard</span>
+      <h3>Never skip breakfast</h3>
+      <p>ADHD brain without fuel = the "lying in bed" spiral. <b>Starving yourself is self-sabotage wearing a disguise.</b></p>
+    </div>
+    <div class="rule-card">
+      <span class="n">Rule 02 · 💧</span>
+      <h3>Water: 2.5–3L/day</h3>
+      <p>Fill a 1L bottle 3×; <b>keep it at the desk.</b> Fatigue is usually thirst.</p>
+    </div>
+    <div class="rule-card">
+      <span class="n">Rule 03 · 🥬</span>
+      <h3>1 veg with dinner minimum</h3>
+      <p>Frozen veg is fine — <b>zero prep shame.</b></p>
+    </div>
+    <div class="rule-card">
+      <span class="n">Rule 04 · 🍬☕</span>
+      <h3>Sugar zero, coffee capped</h3>
+      <p>Sugar drinks → zero. Coffee capped at 2, <b>none after 2pm</b> — protects the 21:45 sleep keystone.</p>
+    </div>
+    <div class="rule-card">
+      <span class="n">Rule 05 · 🍳</span>
+      <h3>Fried food: max 1×/week</h3>
+      <p>Your current habit, kept. <b>Realistic beats perfect.</b></p>
+    </div>
+    <div class="rule-card hard">
+      <span class="n">Rule 06 · Hard</span>
+      <h3>Sunday batch-cook</h3>
+      <p>Daal, chopped veggies, etc. — <b>Fri–Sun work-lunch containers</b> prepped before the work weekend starts.</p>
+    </div>
+    <div class="rule-card">
+      <span class="n">Rule 07 · 💊</span>
+      <h3>Consider supplements</h3>
+      <p><b>Whey</b> (cheapest protein per $) and <b>Vitamin D</b> (Canadian winters) — discuss with doctor.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BATCH COOK SPOTLIGHT ============ -->
+<div class="batch">
+  <div class="batch-inner">
+    <div class="batch-icon">🍲</div>
+    <div>
+      <h3><span class="kicker2">The keystone hour of the food week</span>Sunday Batch-Cook</h3>
+      <p>Fri–Sun are 12-hour Valid days running on survival mode — <b>no starving</b> is a schedule rule, and this is how it's kept. One session on Sunday fills the work-lunch containers, so the hardest days of the week require <b>zero food decisions and zero cooking.</b> The diet plan and the schedule meet right here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WHY IT'S BUILT THIS WAY ============ -->
+<div class="section-head">
+  <span class="kicker">Why It's Built This Way</span>
+  <h2>Three Design Principles</h2>
+</div>
+
+<div class="why">
+  <div class="why-card">
+    <span class="p-n">Principle 01</span>
+    <h3>Protein is the backbone</h3>
+    <p>Every one of the five feeds carries protein — tofu, soya, whey, daal, yogurt, milk, nuts. <b>110–130g lands automatically</b> if the template is simply followed.</p>
+  </div>
+  <div class="why-card">
+    <span class="p-n">Principle 02</span>
+    <h3>Low friction or it won't happen</h3>
+    <p>Low-cook-effort meals, frozen veg allowed, grab-and-go snacks, batch-cooked containers. <b>The plan assumes an ADHD brain</b> and removes every prep barrier it can.</p>
+  </div>
+  <div class="why-card">
+    <span class="p-n">Principle 03</span>
+    <h3>Kept habits beat perfect rules</h3>
+    <p>Fried food once a week stays. Rice and daal stay. <b>Indian-friendly, cheap, familiar</b> — a clean diet you'll still be on in 2031 beats a perfect one abandoned by October.</p>
+  </div>
+</div>
+
+<div class="cta-row">
+  <a class="ghost" href="../schedule/">← 04a · The Schedule</a>
+  <a class="primary" href="../speech/">Next → 04c · The Speech</a>
+</div>
+
+<footer>
+  <div class="rule"></div>
+  <span class="lead">Fuel, not willpower</span>
+  <p>Eat breakfast, fill the bottle three times, double the daal. The brain that has to execute this whole voyage runs on what's on the plate.</p>
+</footer>
+
+<script>
+  const prog = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
+  }, {passive:true});
+
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, {threshold:0.08});
+    document.querySelectorAll('.meal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.meal').forEach(el => el.classList.add('in-view'));
+  }
+</script>
+
+</body>
+</html>

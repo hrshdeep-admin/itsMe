@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Operating System · Voyage 2050</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,340;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081420;
+    --bg-panel:#0d1f31;
+    --bg-card:#112539;
+    --bg-card-hover:#152e47;
+    --ink:#ede7d9;
+    --ink-dim:#8fa4ba;
+    --hairline:rgba(237,231,217,0.13);
+    --hairline-soft:rgba(237,231,217,0.06);
+
+    --gold:#d3a355;
+    --gold-soft:rgba(211,163,85,0.14);
+    --teal:#53a89f;
+    --red:#c08487;
+    --green:#7ea179;
+    --blue:#6f97bd;
+
+    --font-display:'Fraunces', serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(rgba(237,231,217,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,231,217,0.022) 1px, transparent 1px);
+    background-size:48px 48px;
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(211,163,85,0.09), transparent 60%),
+      radial-gradient(ellipse 80% 45% at 50% 105%, rgba(83,168,159,0.06), transparent 60%);
+  }
+  .wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 28px;}
+
+  /* ================= MAIN NAV ================= */
+  #progress{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--teal)); z-index:60;}
+  .nav{position:sticky; top:0; z-index:50; background:rgba(8,20,32,0.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--hairline-soft);}
+  .nav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex:none;}
+  .brand svg{width:26px; height:26px;}
+  .brand-name{font-family:var(--font-display); font-weight:600; font-size:16px;}
+  .brand-name em{font-style:italic; color:var(--gold); font-weight:500;}
+  .nav-links{display:flex; align-items:center; gap:4px;}
+  .nav-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:8px 13px; border-radius:3px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; white-space:nowrap;}
+  .nav-links a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .nav-links a.active{color:var(--gold); border-color:rgba(211,163,85,0.4); background:var(--gold-soft);}
+  .nav-links a .num{color:var(--gold); margin-right:5px;}
+  .nav-links a.active .num{color:inherit;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--hairline); border-radius:3px; color:var(--ink); padding:7px 11px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;}
+  @media(max-width:820px){
+    .nav-toggle{display:block;}
+    .nav-links{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:rgba(8,20,32,0.97); border-bottom:1px solid var(--hairline); padding:8px 20px 16px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:13px 10px; border-bottom:1px solid var(--hairline-soft); border-radius:0;}
+    .nav-links a.active{border:none; border-bottom:1px solid rgba(211,163,85,0.4);}
+  }
+
+  /* ================= SUB NAV (system section) ================= */
+  .subnav{position:sticky; top:60px; z-index:45; background:rgba(13,31,49,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline-soft);}
+  .subnav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:2px; height:46px; overflow-x:auto; scrollbar-width:none;}
+  .subnav-inner::-webkit-scrollbar{display:none;}
+  .subnav-label{font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-dim); margin-right:14px; flex:none;}
+  .subnav a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:6px 12px; border-radius:3px; transition:color .2s, background .2s; white-space:nowrap; flex:none;}
+  .subnav a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .subnav a.here{color:var(--gold); background:var(--gold-soft);}
+  .subnav a .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:7px; vertical-align:1px;}
+
+  /* ================= HERO ================= */
+  .hero{text-align:center; padding:64px 28px 44px;}
+  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin:0 0 20px;}
+  .hero h1{font-family:var(--font-display); font-weight:600; font-size:clamp(36px,6vw,58px); line-height:1.05; letter-spacing:-0.015em; margin:0 0 18px;}
+  .hero h1 em{font-style:italic; font-weight:340; color:var(--teal);}
+  .thesis{max-width:640px; margin:0 auto; font-size:16px; color:var(--ink-dim); font-style:italic; line-height:1.7; font-family:var(--font-display); font-weight:340;}
+  .thesis b{color:var(--ink); font-weight:500; font-style:italic;}
+
+  /* ================= DOC CARDS ================= */
+  .docs{max-width:960px; margin:36px auto 0; padding:0 28px; display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:760px){.docs{grid-template-columns:1fr;}}
+
+  .doc{
+    display:block; text-decoration:none; color:var(--ink);
+    background:var(--bg-card); border:1px solid var(--hairline); border-radius:5px;
+    padding:28px 28px 24px; position:relative; overflow:hidden;
+    transition:background .25s, border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .doc::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--accent), transparent 75%); opacity:0.55; transition:opacity .25s;}
+  .doc:hover{background:var(--bg-card-hover); border-color:var(--accent-border); transform:translateY(-3px); box-shadow:0 14px 34px rgba(0,0,0,0.35);}
+  .doc:hover::before{opacity:1;}
+
+  .doc.schedule{--accent:var(--blue); --accent-border:rgba(111,151,189,0.5);}
+  .doc.diet{--accent:var(--green); --accent-border:rgba(126,161,121,0.5);}
+  .doc.speech{--accent:var(--red); --accent-border:rgba(192,132,135,0.5);}
+  .doc.protocol{--accent:var(--gold); --accent-border:rgba(211,163,85,0.5);}
+
+  .doc-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .doc-code{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);}
+  .doc-icon{font-size:22px; line-height:1; opacity:0.9;}
+  .doc h2{font-family:var(--font-display); font-size:23px; font-weight:600; margin:0 0 8px;}
+  .doc .role{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .doc p.desc{margin:0 0 18px; font-size:13.5px; color:var(--ink-dim); line-height:1.65;}
+  .doc p.desc b{color:var(--ink); font-weight:600;}
+
+  .doc-meta{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+  .chip{font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); border:1px solid var(--hairline); border-radius:2px; padding:4px 9px; background:rgba(237,231,217,0.03);}
+
+  .doc-open{font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); display:inline-flex; align-items:center; gap:8px;}
+  .doc-open .arr{transition:transform .25s;}
+  .doc:hover .doc-open .arr{transform:translateX(4px);}
+
+  /* ================= TRIGGER STRIP ================= */
+  .trigger-head{max-width:960px; margin:56px auto 0; padding:0 28px; text-align:center;}
+  .kicker{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);}
+  .trigger-head h2{font-family:var(--font-display); font-size:clamp(22px,3.5vw,28px); font-weight:600; margin:12px 0 8px;}
+  .trigger-head p{color:var(--ink-dim); font-size:13.5px; max-width:520px; margin:0 auto;}
+
+  .triggers{max-width:960px; margin:26px auto 0; padding:0 28px; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:4px; overflow:hidden;}
+  @media(max-width:760px){.triggers{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.triggers{grid-template-columns:1fr;}}
+  .trigger{background:var(--bg-panel); padding:18px 18px;}
+  .trigger .when{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; color:var(--teal); text-transform:uppercase; display:block; margin-bottom:6px;}
+  .trigger .what{font-size:13px; color:var(--ink); line-height:1.5;}
+  .trigger .what a{color:inherit; text-decoration:none; border-bottom:1px dotted var(--ink-dim);}
+  .trigger .what a:hover{color:var(--gold); border-color:var(--gold);}
+
+  /* ================= CTAs / FOOTER ================= */
+  .cta-row{max-width:960px; margin:56px auto 0; padding:0 28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-row a{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; border-radius:3px; padding:16px 26px; transition:background .25s, transform .25s;}
+  .cta-row a.primary{color:var(--gold); border:1px solid rgba(211,163,85,0.45); background:var(--gold-soft);}
+  .cta-row a.primary:hover{background:rgba(211,163,85,0.22); transform:translateY(-2px);}
+  .cta-row a.ghost{color:var(--ink-dim); border:1px solid var(--hairline);}
+  .cta-row a.ghost:hover{color:var(--ink); background:rgba(237,231,217,0.05); transform:translateY(-2px);}
+
+  footer{max-width:640px; margin:0 auto; padding:48px 28px 90px; text-align:center;}
+  footer .rule{width:60px; height:1px; background:var(--hairline); margin:0 auto 22px;}
+  footer p{font-size:14.5px; color:var(--ink-dim); line-height:1.75; margin:0; font-style:italic; font-family:var(--font-display); font-weight:340;}
+  footer .lead{font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; font-style:normal;}
+
+  @media(prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../">
+      <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="52" stroke="#8fa4ba" stroke-opacity="0.5" stroke-width="4"/><path d="M60 22 L67 60 L60 98 L53 60 Z" fill="#d3a355"/><path d="M22 60 L60 53 L98 60 L60 67 Z" fill="#ede7d9" fill-opacity="0.6"/></svg>
+      <span class="brand-name">Voyage <em>2050</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../"><span class="num">01</span>Decade Map</a>
+      <a href="../yearly-plan/"><span class="num">02</span>1-Year Plan</a>
+      <a href="../three-month-plan/"><span class="num">03</span>90-Day Plan</a>
+      <a href="./" class="active"><span class="num">04</span>Operating System</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="subnav" aria-label="Operating System sections">
+  <div class="subnav-inner">
+    <span class="subnav-label">System /</span>
+    <a href="./" class="here">Hub</a>
+    <a href="schedule/"><span class="dot" style="background:var(--blue)"></span>Schedule</a>
+    <a href="diet/"><span class="dot" style="background:var(--green)"></span>Diet</a>
+    <a href="speech/"><span class="dot" style="background:var(--red)"></span>Speech</a>
+    <a href="protocol/"><span class="dot" style="background:var(--gold)"></span>Protocol Book</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Part 04 · The Supporting System</p>
+    <h1>The Operating<br><em>System</em></h1>
+    <p class="thesis">Four documents that run the day so the day doesn't have to be decided. <b>The schedule removes decisions. The diet fuels the brain. The speech is the emergency restart button. The protocol book is who you are in written form.</b></p>
+  </header>
+</div>
+
+<!-- ============ THE FOUR DOCUMENTS ============ -->
+<main class="docs">
+
+  <a class="doc schedule" href="schedule/">
+    <div class="doc-top"><span class="doc-code">04a · Document</span><span class="doc-icon">🗓</span></div>
+    <h2>The Schedule</h2>
+    <div class="role">Removes decisions</div>
+    <p class="desc">The full Mon–Thu block plan from <b>6:30 wake</b> to <b>21:45 sleep</b> — workout before phone, protocol read at 8:15, hardest study first — plus the Fri–Sun survival-mode plan for Valid work days.</p>
+    <div class="doc-meta">
+      <span class="chip">Mon–Thu · 14 blocks</span>
+      <span class="chip">Fri–Sun · survival mode</span>
+      <span class="chip">Sleep 21:45 · keystone</span>
+    </div>
+    <span class="doc-open">Open the schedule <span class="arr">→</span></span>
+  </a>
+
+  <a class="doc diet" href="diet/">
+    <div class="doc-top"><span class="doc-code">04b · Document</span><span class="doc-icon">🍛</span></div>
+    <h2>The Diet Plan</h2>
+    <div class="role">Fuels the brain</div>
+    <p class="desc">Clean, Indian-friendly, cheap, low-cook-effort. The daily meal template from high-protein breakfast to before-bed milk, plus the <b>7 rules</b> — never skip breakfast, 3L water, Sunday batch-cook.</p>
+    <div class="doc-meta">
+      <span class="chip">~110–130g protein/day</span>
+      <span class="chip">5 meals</span>
+      <span class="chip">7 rules</span>
+    </div>
+    <span class="doc-open">Open the diet plan <span class="arr">→</span></span>
+  </a>
+
+  <a class="doc speech" href="speech/">
+    <div class="doc-top"><span class="doc-code">04c · Document</span><span class="doc-icon">🔥</span></div>
+    <h2>The Motivational Speech</h2>
+    <div class="role">Emergency restart button</div>
+    <p class="desc">Read aloud when you're lying in bed at 10am, when the plan feels pointless, when the void whispers. Her, your parents, the sea — and the two-minute start. <b>Distraction-free reading page.</b></p>
+    <div class="doc-meta">
+      <span class="chip">Read aloud</span>
+      <span class="chip">~2 min</span>
+      <span class="chip">Break glass when needed</span>
+    </div>
+    <span class="doc-open">Open the speech <span class="arr">→</span></span>
+  </a>
+
+  <a class="doc protocol" href="protocol/">
+    <div class="doc-top"><span class="doc-code">04d · Document</span><span class="doc-icon">📖</span></div>
+    <h2>The Protocol Book</h2>
+    <div class="role">Who you are, in written form</div>
+    <p class="desc">Not a to-do list — an identity. <b>23 protocols in 6 sections:</b> Identity, Body, Mind, People, Money, and the Prime Protocol. Read 15 minutes daily at 8:15 AM, same chair, same time.</p>
+    <div class="doc-meta">
+      <span class="chip">23 protocols</span>
+      <span class="chip">6 sections</span>
+      <span class="chip">Daily · 8:15 AM · 15 min</span>
+    </div>
+    <span class="doc-open">Open the protocol book <span class="arr">→</span></span>
+  </a>
+
+</main>
+
+<!-- ============ WHEN EACH DOC FIRES ============ -->
+<div class="trigger-head">
+  <span class="kicker">Daily Triggers</span>
+  <h2>When Each Document Fires</h2>
+  <p>The system isn't read once — it runs on a clock. These are the moments each document takes over.</p>
+</div>
+
+<div class="triggers">
+  <div class="trigger">
+    <span class="when">6:30 · Wake</span>
+    <div class="what"><a href="schedule/">The Schedule</a> takes over — water, workout, no phone. It holds the wheel until 21:45.</div>
+  </div>
+  <div class="trigger">
+    <span class="when">8:15 · Daily read</span>
+    <div class="what">15 minutes in <a href="protocol/">the Protocol Book</a>. Same chair, same time. Identity before tasks.</div>
+  </div>
+  <div class="trigger">
+    <span class="when">Every meal</span>
+    <div class="what"><a href="diet/">The Diet Plan</a> answers "what do I eat" before the question is asked. Breakfast is non-skippable.</div>
+  </div>
+  <div class="trigger">
+    <span class="when">Emergency</span>
+    <div class="what">Lying in bed at 10am? Plan feels pointless? Open <a href="speech/">the Speech</a> and read it aloud.</div>
+  </div>
+</div>
+
+<div class="cta-row">
+  <a class="ghost" href="../three-month-plan/">← 03 · The 90-Day Plan</a>
+  <a class="primary" href="schedule/">Start → 04a · The Schedule</a>
+</div>
+
+<footer>
+  <div class="rule"></div>
+  <span class="lead">The daily operating system</span>
+  <p>Print the Protocol Book. Tape the schedule to the wall. Batch-cook Sunday. The plan above this page is the map — these four documents are the engine that actually moves the ship.</p>
+</footer>
+
+<script>
+  const prog = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
+  }, {passive:true});
+
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

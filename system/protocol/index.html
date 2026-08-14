@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Protocol Book · Operating System · Voyage 2050</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,340;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081420;
+    --bg-panel:#0d1f31;
+    --bg-card:#112539;
+    --bg-card-hover:#152e47;
+    --ink:#ede7d9;
+    --ink-dim:#8fa4ba;
+    --hairline:rgba(237,231,217,0.13);
+    --hairline-soft:rgba(237,231,217,0.06);
+
+    --gold:#d3a355;
+    --gold-soft:rgba(211,163,85,0.14);
+    --teal:#53a89f;
+    --red:#c08487;
+    --green:#7ea179;
+    --blue:#6f97bd;
+    --violet:#918bab;
+
+    --font-display:'Fraunces', serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(rgba(237,231,217,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,231,217,0.022) 1px, transparent 1px);
+    background-size:48px 48px;
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(211,163,85,0.11), transparent 60%),
+      radial-gradient(ellipse 80% 45% at 50% 105%, rgba(83,168,159,0.06), transparent 60%);
+  }
+  .wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 28px;}
+
+  /* ================= NAV ================= */
+  #progress{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--teal)); z-index:60;}
+  .nav{position:sticky; top:0; z-index:50; background:rgba(8,20,32,0.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--hairline-soft);}
+  .nav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex:none;}
+  .brand svg{width:26px; height:26px;}
+  .brand-name{font-family:var(--font-display); font-weight:600; font-size:16px;}
+  .brand-name em{font-style:italic; color:var(--gold); font-weight:500;}
+  .nav-links{display:flex; align-items:center; gap:4px;}
+  .nav-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:8px 13px; border-radius:3px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; white-space:nowrap;}
+  .nav-links a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .nav-links a.active{color:var(--gold); border-color:rgba(211,163,85,0.4); background:var(--gold-soft);}
+  .nav-links a .num{color:var(--gold); margin-right:5px;}
+  .nav-links a.active .num{color:inherit;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--hairline); border-radius:3px; color:var(--ink); padding:7px 11px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;}
+  @media(max-width:820px){
+    .nav-toggle{display:block;}
+    .nav-links{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:rgba(8,20,32,0.97); border-bottom:1px solid var(--hairline); padding:8px 20px 16px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:13px 10px; border-bottom:1px solid var(--hairline-soft); border-radius:0;}
+    .nav-links a.active{border:none; border-bottom:1px solid rgba(211,163,85,0.4);}
+  }
+
+  /* ================= SUB NAV ================= */
+  .subnav{position:sticky; top:60px; z-index:45; background:rgba(13,31,49,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline-soft);}
+  .subnav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:2px; height:46px; overflow-x:auto; scrollbar-width:none;}
+  .subnav-inner::-webkit-scrollbar{display:none;}
+  .subnav-label{font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-dim); margin-right:14px; flex:none;}
+  .subnav a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:6px 12px; border-radius:3px; transition:color .2s, background .2s; white-space:nowrap; flex:none;}
+  .subnav a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .subnav a.here{color:var(--gold); background:var(--gold-soft);}
+  .subnav a .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:7px; vertical-align:1px;}
+
+  /* ================= SECTION JUMPER ================= */
+  .jumper{position:sticky; top:106px; z-index:40; background:rgba(8,20,32,0.9); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--hairline-soft);}
+  .jumper-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:6px; height:44px; overflow-x:auto; scrollbar-width:none;}
+  .jumper-inner::-webkit-scrollbar{display:none;}
+  .jumper a{
+    font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-dim); text-decoration:none; padding:5px 11px; border-radius:20px;
+    border:1px solid var(--hairline); transition:color .2s, border-color .2s, background .2s; white-space:nowrap; flex:none;
+  }
+  .jumper a:hover{color:var(--gold); border-color:rgba(211,163,85,0.5); background:var(--gold-soft);}
+  .jumper a .rn{color:var(--gold); margin-right:5px;}
+
+  /* ================= HERO ================= */
+  .hero{text-align:center; padding:60px 28px 40px;}
+  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin:0 0 20px;}
+  .hero h1{font-family:var(--font-display); font-weight:600; font-size:clamp(36px,6vw,58px); line-height:1.05; letter-spacing:-0.015em; margin:0 0 16px;}
+  .hero h1 em{font-style:italic; font-weight:340; color:var(--teal);}
+  .thesis{max-width:540px; margin:0 auto; font-size:16px; color:var(--ink-dim); font-style:italic; line-height:1.7; font-family:var(--font-display); font-weight:340;}
+  .thesis b{color:var(--ink); font-weight:500;}
+
+  .ritual-bar{
+    display:inline-flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:center; margin-top:28px;
+    border:1px solid rgba(211,163,85,0.4); background:var(--gold-soft); border-radius:3px; padding:13px 22px;
+  }
+  .ritual-bar .r-item{font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink);}
+  .ritual-bar .r-item b{color:var(--gold); font-weight:600;}
+  .ritual-btn{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:#081420; background:var(--gold); border:1px solid var(--gold); border-radius:3px;
+    padding:9px 16px; cursor:pointer; font-weight:600; transition:transform .2s, box-shadow .2s;
+  }
+  .ritual-btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(211,163,85,0.3);}
+  .ritual-btn.running{background:transparent; color:var(--teal); border-color:rgba(83,168,159,0.5);}
+
+  /* ================= BOOK SECTIONS ================= */
+  .book{max-width:760px; margin:24px auto 0; padding:0 28px;}
+
+  .chapter{margin-top:56px; scroll-margin-top:170px;}
+  .ch-head{display:flex; align-items:baseline; gap:16px; border-bottom:1px solid rgba(211,163,85,0.4); padding-bottom:14px; margin-bottom:10px;}
+  .ch-roman{font-family:var(--font-display); font-style:italic; font-weight:340; font-size:34px; color:var(--gold); line-height:1; flex:none;}
+  .ch-head h2{font-family:var(--font-display); font-size:clamp(22px,3.5vw,28px); font-weight:600; margin:0;}
+  .ch-head .ch-sub{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-dim); margin-left:auto; white-space:nowrap;}
+  @media(max-width:560px){.ch-head .ch-sub{display:none;}}
+
+  .protocol{
+    display:grid; grid-template-columns:52px 1fr; gap:0 20px; padding:22px 0;
+    border-bottom:1px solid var(--hairline-soft);
+    opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;
+  }
+  .protocol.in-view{opacity:1; transform:translateY(0);}
+  .protocol:last-child{border-bottom:none;}
+
+  .p-num{
+    font-family:var(--font-mono); font-size:13px; color:var(--gold); text-align:right; padding-top:5px;
+    letter-spacing:0.03em;
+  }
+  .p-body .decl{
+    font-family:var(--font-display); font-weight:500; font-size:clamp(17px,2.4vw,20px);
+    line-height:1.55; color:var(--ink); margin:0;
+  }
+  .p-body .decl b{font-weight:600; color:var(--gold); font-style:italic;}
+  .p-body .expand{
+    font-size:13.5px; color:var(--ink-dim); margin:7px 0 0; line-height:1.65; font-style:italic;
+  }
+
+  /* ================= PRIME PROTOCOL ================= */
+  .prime{max-width:960px; margin:72px auto 0; padding:0 28px; scroll-margin-top:170px;}
+  .prime-inner{
+    border:1px solid rgba(211,163,85,0.45); border-radius:6px; background:var(--bg-panel);
+    padding:52px 40px; text-align:center; position:relative; overflow:hidden;
+  }
+  .prime-inner::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .prime-inner .pk{font-family:var(--font-mono); font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:8px;}
+  .prime-inner .pn{font-family:var(--font-mono); font-size:12px; color:var(--ink-dim); display:block; margin-bottom:24px;}
+  .prime-inner p{
+    font-family:var(--font-display); font-weight:500; font-size:clamp(21px,3.4vw,30px);
+    line-height:1.55; margin:0 auto; max-width:720px; color:var(--ink);
+  }
+  .prime-inner p b{color:var(--gold); font-weight:600; font-style:italic;}
+
+  /* ================= CTAs / FOOTER ================= */
+  .cta-row{max-width:960px; margin:64px auto 0; padding:0 28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-row a{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; border-radius:3px; padding:16px 26px; transition:background .25s, transform .25s;}
+  .cta-row a.primary{color:var(--gold); border:1px solid rgba(211,163,85,0.45); background:var(--gold-soft);}
+  .cta-row a.primary:hover{background:rgba(211,163,85,0.22); transform:translateY(-2px);}
+  .cta-row a.ghost{color:var(--ink-dim); border:1px solid var(--hairline);}
+  .cta-row a.ghost:hover{color:var(--ink); background:rgba(237,231,217,0.05); transform:translateY(-2px);}
+
+  footer{max-width:640px; margin:0 auto; padding:52px 28px 90px; text-align:center;}
+  footer .rule{width:60px; height:1px; background:var(--hairline); margin:0 auto 22px;}
+  footer p{font-size:14.5px; color:var(--ink-dim); line-height:1.75; margin:0; font-style:italic; font-family:var(--font-display); font-weight:340;}
+  footer .lead{font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; font-style:normal;}
+
+  /* print-friendly: the book is meant to be printed */
+  @media print{
+    .nav,.subnav,.jumper,#progress,.cta-row,.ritual-bar{display:none !important;}
+    body{background:#fff; color:#111;}
+    body::before{display:none;}
+    .p-body .decl{color:#111;}
+    .p-body .decl b, .p-num, .ch-roman{color:#8a6520;}
+    .prime-inner{border-color:#8a6520; background:#fff;}
+    .prime-inner p{color:#111;}
+    .protocol{opacity:1 !important; transform:none !important;}
+  }
+
+  @media(prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .protocol{opacity:1 !important; transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../../">
+      <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="52" stroke="#8fa4ba" stroke-opacity="0.5" stroke-width="4"/><path d="M60 22 L67 60 L60 98 L53 60 Z" fill="#d3a355"/><path d="M22 60 L60 53 L98 60 L60 67 Z" fill="#ede7d9" fill-opacity="0.6"/></svg>
+      <span class="brand-name">Voyage <em>2050</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../../"><span class="num">01</span>Decade Map</a>
+      <a href="../../yearly-plan/"><span class="num">02</span>1-Year Plan</a>
+      <a href="../../three-month-plan/"><span class="num">03</span>90-Day Plan</a>
+      <a href="../" class="active"><span class="num">04</span>Operating System</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="subnav" aria-label="Operating System sections">
+  <div class="subnav-inner">
+    <span class="subnav-label">System /</span>
+    <a href="../">Hub</a>
+    <a href="../schedule/"><span class="dot" style="background:var(--blue)"></span>Schedule</a>
+    <a href="../diet/"><span class="dot" style="background:var(--green)"></span>Diet</a>
+    <a href="../speech/"><span class="dot" style="background:var(--red)"></span>Speech</a>
+    <a href="./" class="here"><span class="dot" style="background:var(--gold)"></span>Protocol Book</a>
+  </div>
+</nav>
+
+<nav class="jumper" aria-label="Protocol sections">
+  <div class="jumper-inner">
+    <a href="#identity"><span class="rn">I</span>Identity</a>
+    <a href="#body"><span class="rn">II</span>Body</a>
+    <a href="#mind"><span class="rn">III</span>Mind</a>
+    <a href="#people"><span class="rn">IV</span>People</a>
+    <a href="#money"><span class="rn">V</span>Money</a>
+    <a href="#prime"><span class="rn">VI</span>Prime</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">04d · The Operating System</p>
+    <h1>The Protocol <em>Book</em></h1>
+    <p class="thesis">This is not a to-do list. <b>This is who you are</b> — 23 protocols, read daily, revised never (except on Sunday).</p>
+
+    <div class="ritual-bar">
+      <span class="r-item">Read <b>15 min daily</b></span>
+      <span class="r-item">At <b>8:15 AM</b></span>
+      <span class="r-item">Same chair, same time</span>
+      <button class="ritual-btn" id="ritualBtn">▸ Begin the 15-min read</button>
+    </div>
+  </header>
+</div>
+
+<main class="book">
+
+  <!-- ============ I · IDENTITY ============ -->
+  <section class="chapter" id="identity">
+    <div class="ch-head">
+      <span class="ch-roman">I</span>
+      <h2>Identity Protocols</h2>
+      <span class="ch-sub">Protocols 1–5</span>
+    </div>
+
+    <div class="protocol">
+      <div class="p-num">01</div>
+      <div class="p-body">
+        <p class="decl">I am <b>a man of execution</b>.</p>
+        <p class="expand">Planning is limited to the Sunday review; every other hour is action.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">02</div>
+      <div class="p-body">
+        <p class="decl">I <b>never miss twice</b>.</p>
+        <p class="expand">One broken day is data; two is a decision — and I don't make that decision.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">03</div>
+      <div class="p-body">
+        <p class="decl">I start with <b>2 minutes</b>.</p>
+        <p class="expand">I am never required to finish — only to begin.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">04</div>
+      <div class="p-body">
+        <p class="decl">I do <b>the hardest thing first</b>, when my brain is freshest.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">05</div>
+      <div class="p-body">
+        <p class="decl">I don't hide my capabilities out of fear; I withhold them <b>out of choice</b> — and I know the difference.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ II · BODY ============ -->
+  <section class="chapter" id="body">
+    <div class="ch-head">
+      <span class="ch-roman">II</span>
+      <h2>Body Protocols</h2>
+      <span class="ch-sub">Protocols 6–10</span>
+    </div>
+
+    <div class="protocol">
+      <div class="p-num">06</div>
+      <div class="p-body">
+        <p class="decl">I eat breakfast <b>every single day</b>.</p>
+        <p class="expand">Starving myself is self-sabotage wearing a disguise.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">07</div>
+      <div class="p-body">
+        <p class="decl">I train <b>4 days a week</b>.</p>
+        <p class="expand">Twenty minutes counts. Zero doesn't.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">08</div>
+      <div class="p-body">
+        <p class="decl">I drink <b>3 liters of water</b>.</p>
+        <p class="expand">Fatigue is usually thirst.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">09</div>
+      <div class="p-body">
+        <p class="decl">I sleep at <b>21:45</b>.</p>
+        <p class="expand">The bed is for sleep, not for scrolling, not for hiding.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">10</div>
+      <div class="p-body">
+        <p class="decl">I go <b>outside every day</b>.</p>
+        <p class="expand">Sunlight is medication I don't need a prescription for.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ III · MIND ============ -->
+  <section class="chapter" id="mind">
+    <div class="ch-head">
+      <span class="ch-roman">III</span>
+      <h2>Mind Protocols</h2>
+      <span class="ch-sub">Protocols 11–15</span>
+    </div>
+
+    <div class="protocol">
+      <div class="p-num">11</div>
+      <div class="p-body">
+        <p class="decl">My phone charges <b>in the kitchen</b>.</p>
+        <p class="expand">It is a tool, not a limb.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">12</div>
+      <div class="p-body">
+        <p class="decl"><b>Timers run my work blocks</b> — not mood, not motivation.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">13</div>
+      <div class="p-body">
+        <p class="decl">The existential void is <b>acknowledged, not argued with</b>.</p>
+        <p class="expand">I nod at it and keep working.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">14</div>
+      <div class="p-body">
+        <p class="decl">Guilt during rest is <b>forbidden</b>.</p>
+        <p class="expand">Rest is scheduled. Scheduled rest is work.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">15</div>
+      <div class="p-body">
+        <p class="decl">I don't redesign my systems <b>mid-week</b>.</p>
+        <p class="expand">Frustration edits nothing; only Sunday does.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IV · PEOPLE ============ -->
+  <section class="chapter" id="people">
+    <div class="ch-head">
+      <span class="ch-roman">IV</span>
+      <h2>People Protocols</h2>
+      <span class="ch-sub">Protocols 16–19</span>
+    </div>
+
+    <div class="protocol">
+      <div class="p-num">16</div>
+      <div class="p-body">
+        <p class="decl">My fiancée gets <b>my presence, not my leftovers</b>.</p>
+        <p class="expand">18:00–21:00 is hers.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">17</div>
+      <div class="p-body">
+        <p class="decl">I call my parents <b>weekly</b>.</p>
+        <p class="expand">They get my voice while I still have theirs.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">18</div>
+      <div class="p-body">
+        <p class="decl">I don't argue with <b>stubborn people</b>.</p>
+        <p class="expand">I protect my peace and walk away richer.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">19</div>
+      <div class="p-body">
+        <p class="decl">I let it pass — <b>my father's law</b>.</p>
+        <p class="expand">One insult ignored is a week of peace earned.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ V · MONEY ============ -->
+  <section class="chapter" id="money">
+    <div class="ch-head">
+      <span class="ch-roman">V</span>
+      <h2>Money Protocols</h2>
+      <span class="ch-sub">Protocols 20–22</span>
+    </div>
+
+    <div class="protocol">
+      <div class="p-num">20</div>
+      <div class="p-body">
+        <p class="decl"><b>$3,100 moves to IBKR monthly</b>, same date, no debate, no market-timing.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">21</div>
+      <div class="p-body">
+        <p class="decl">I don't touch <b>the principal</b>.</p>
+        <p class="expand">The portfolio is a one-way door until 2046.</p>
+      </div>
+    </div>
+    <div class="protocol">
+      <div class="p-num">22</div>
+      <div class="p-body">
+        <p class="decl">I buy nothing <b>to impress anyone</b>.</p>
+        <p class="expand">Every dollar is a brick in the 2050 house.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ VI · PRIME ============ -->
+<div class="prime" id="prime">
+  <div class="prime-inner">
+    <span class="pk">VI · The Prime Protocol</span>
+    <span class="pn">Protocol 23 — everything above serves this one sentence</span>
+    <p>Get to the ship, climb the ranks, retire my parents, and build the quiet life — <b>and it all depends on what I do before 9:30 AM today.</b></p>
+  </div>
+</div>
+
+<div class="cta-row">
+  <a class="ghost" href="../speech/">← 04c · The Speech</a>
+  <a class="primary" href="../">↑ Back to the System Hub</a>
+</div>
+
+<footer>
+  <div class="rule"></div>
+  <span class="lead">Who you are, in written form</span>
+  <p>Print this book. Read it at 8:15, same chair, same time. The plans upstream of this page describe what you'll do — these twenty-three lines describe who does it.</p>
+</footer>
+
+<script>
+  // Scroll progress
+  const prog = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
+  }, {passive:true});
+
+  // Mobile nav
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Reveal
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, {threshold:0.08});
+    document.querySelectorAll('.protocol').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.protocol').forEach(el => el.classList.add('in-view'));
+  }
+
+  // ===== 15-MINUTE RITUAL TIMER =====
+  const btn = document.getElementById('ritualBtn');
+  let remaining = 15 * 60, tick = null, running = false;
+
+  btn.addEventListener('click', () => {
+    if (running) return;
+    running = true;
+    btn.classList.add('running');
+    // scroll to the first chapter to begin the read
+    document.getElementById('identity').scrollIntoView({behavior:'smooth'});
+    tick = setInterval(() => {
+      remaining--;
+      const m = Math.floor(remaining/60), s = String(remaining%60).padStart(2,'0');
+      btn.textContent = '📖 Reading · ' + m + ':' + s;
+      if (remaining <= 0) {
+        clearInterval(tick);
+        btn.textContent = '✓ Read complete — go execute';
+      }
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>

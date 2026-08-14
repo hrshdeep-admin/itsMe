@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 1-Year Plan · Aug 2026 → Aug 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,340;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081420;
+    --bg-panel:#0d1f31;
+    --bg-card:#112539;
+    --bg-card-hover:#152e47;
+    --ink:#ede7d9;
+    --ink-dim:#8fa4ba;
+    --hairline:rgba(237,231,217,0.13);
+    --hairline-soft:rgba(237,231,217,0.06);
+
+    --gold:#d3a355;
+    --gold-soft:rgba(211,163,85,0.14);
+    --teal:#53a89f;
+    --red:#c08487;
+    --c-career:#d3a355;
+    --c-wealth:#53a89f;
+    --c-study:#6f97bd;
+    --c-health:#7ea179;
+    --c-family:#c08487;
+    --c-admin:#918bab;
+
+    --font-display:'Fraunces', serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(rgba(237,231,217,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,231,217,0.022) 1px, transparent 1px);
+    background-size:48px 48px;
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(211,163,85,0.09), transparent 60%),
+      radial-gradient(ellipse 80% 45% at 50% 105%, rgba(83,168,159,0.06), transparent 60%);
+  }
+  .wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 28px;}
+
+  /* ================= NAV ================= */
+  #progress{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--teal)); z-index:60;}
+  .nav{position:sticky; top:0; z-index:50; background:rgba(8,20,32,0.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--hairline-soft);}
+  .nav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex:none;}
+  .brand svg{width:26px; height:26px;}
+  .brand-name{font-family:var(--font-display); font-weight:600; font-size:16px;}
+  .brand-name em{font-style:italic; color:var(--gold); font-weight:500;}
+  .nav-links{display:flex; align-items:center; gap:4px;}
+  .nav-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:8px 13px; border-radius:3px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; white-space:nowrap;}
+  .nav-links a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .nav-links a.active{color:var(--gold); border-color:rgba(211,163,85,0.4); background:var(--gold-soft);}
+  .nav-links a .num{color:var(--gold); margin-right:5px;}
+  .nav-links a.active .num{color:inherit;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--hairline); border-radius:3px; color:var(--ink); padding:7px 11px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;}
+  @media(max-width:820px){
+    .nav-toggle{display:block;}
+    .nav-links{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:rgba(8,20,32,0.97); border-bottom:1px solid var(--hairline); padding:8px 20px 16px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:13px 10px; border-bottom:1px solid var(--hairline-soft); border-radius:0;}
+    .nav-links a.active{border:none; border-bottom:1px solid rgba(211,163,85,0.4);}
+  }
+
+  /* ================= HERO ================= */
+  .hero{text-align:center; padding:80px 28px 56px;}
+  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin:0 0 20px;}
+  .hero h1{font-family:var(--font-display); font-weight:600; font-size:clamp(38px,6.5vw,64px); line-height:1.04; letter-spacing:-0.015em; margin:0 0 18px;}
+  .hero h1 em{font-style:italic; font-weight:340; color:var(--teal);}
+  .course-line{font-family:var(--font-mono); font-size:13px; letter-spacing:0.16em; color:var(--ink-dim); text-transform:uppercase; margin:0 0 34px;}
+  .course-line b{color:var(--ink); font-weight:600;}
+
+  .mission-banner{
+    max-width:680px; margin:0 auto; padding:26px 30px;
+    border:1px solid rgba(211,163,85,0.35); border-radius:4px; background:var(--gold-soft);
+    font-family:var(--font-display); font-weight:340; font-style:italic;
+    font-size:18px; line-height:1.65; color:var(--ink);
+  }
+  .mission-banner b{display:block; font-family:var(--font-mono); font-style:normal; font-weight:600; font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;}
+  .mission-banner .fig{font-style:normal;}
+
+  .fig{font-family:var(--font-mono); color:var(--gold); font-weight:600;}
+  strong{color:var(--ink); font-weight:600;}
+
+  /* ================= SECTION HEADS ================= */
+  .section-head{max-width:960px; margin:70px auto 0; padding:0 28px; text-align:center;}
+  .kicker{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);}
+  .section-head h2{font-family:var(--font-display); font-size:clamp(25px,4vw,33px); font-weight:600; margin:12px 0 10px;}
+  .section-head p{color:var(--ink-dim); font-size:14px; max-width:540px; margin:0 auto;}
+
+  /* ================= NON-NEGOTIABLES ================= */
+  .nn-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:4px; overflow:hidden; max-width:960px; margin:36px auto 0;}
+  @media(max-width:820px){.nn-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:540px){.nn-grid{grid-template-columns:1fr;}}
+  .nn{background:var(--bg-card); padding:22px 22px 20px; position:relative; transition:background .25s;}
+  .nn:hover{background:var(--bg-card-hover);}
+  .nn .n{font-family:var(--font-mono); font-size:11px; color:var(--gold); letter-spacing:0.1em;}
+  .nn h3{font-family:var(--font-display); font-size:17px; font-weight:600; margin:8px 0 10px; line-height:1.35;}
+  .nn .due{display:inline-block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); border:1px solid rgba(83,168,159,0.4); border-radius:2px; padding:3px 8px;}
+
+  /* ================= CHECKPOINT TRACK ================= */
+  .checkpoints{max-width:960px; margin:38px auto 0; padding:0 28px;}
+  .cp-rail{position:relative; display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+  .cp-rail::before{content:''; position:absolute; top:7px; left:6%; right:6%; height:2px; background:linear-gradient(90deg, rgba(83,168,159,0.2), rgba(83,168,159,0.8)); border-radius:1px;}
+  .cp{position:relative; text-align:center; padding-top:24px;}
+  .cp::before{content:''; position:absolute; top:1px; left:50%; transform:translateX(-50%); width:13px; height:13px; border-radius:50%; background:var(--bg); border:2px solid var(--teal);}
+  .cp:last-child::before{background:var(--teal); box-shadow:0 0 14px rgba(83,168,159,0.7);}
+  .cp .v{font-family:var(--font-mono); font-size:15px; font-weight:600; color:var(--teal);}
+  .cp:last-child .v{color:var(--gold);}
+  .cp .l{font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-dim); margin-top:3px;}
+  @media(max-width:640px){
+    .cp-rail{grid-template-columns:1fr; gap:0;}
+    .cp-rail::before{left:7px; right:auto; top:8px; bottom:8px; width:2px; height:auto; background:linear-gradient(180deg, rgba(83,168,159,0.2), rgba(83,168,159,0.8));}
+    .cp{text-align:left; padding:10px 0 10px 32px;}
+    .cp::before{left:1px; top:14px; transform:none;}
+  }
+
+  /* ================= MONTH RAIL ================= */
+  .months{position:relative; max-width:800px; margin:40px auto 0; padding:0 28px;}
+  .months::before{content:''; position:absolute; top:8px; bottom:40px; left:calc(28px + 26px); width:0; border-left:2px dashed rgba(211,163,85,0.26);}
+  @media(max-width:640px){.months::before{left:calc(28px + 20px);}}
+
+  .month{position:relative; display:grid; grid-template-columns:54px 1fr; gap:0 26px; margin-bottom:34px; opacity:0; transform:translateY(20px); transition:opacity .65s ease, transform .65s ease;}
+  .month.in-view{opacity:1; transform:translateY(0);}
+  @media(max-width:640px){.month{grid-template-columns:42px 1fr; gap:0 16px;}}
+
+  .m-marker{
+    width:54px; height:54px; border-radius:50%; background:var(--bg-panel);
+    border:1.5px solid rgba(211,163,85,0.5); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; font-family:var(--font-mono);
+    position:relative; z-index:2; transition:border-color .3s, box-shadow .3s;
+  }
+  .m-marker .mo{font-size:10.5px; letter-spacing:0.08em; color:var(--gold); text-transform:uppercase; line-height:1.1;}
+  .m-marker .yr{font-size:8.5px; color:var(--ink-dim); line-height:1.2;}
+  .month:hover .m-marker{border-color:var(--gold); box-shadow:0 0 18px rgba(211,163,85,0.25);}
+  @media(max-width:640px){.m-marker{width:42px; height:42px;} .m-marker .mo{font-size:9px;} .m-marker .yr{font-size:7.5px;}}
+
+  .m-card{
+    background:var(--bg-card); border:1px solid var(--hairline); border-radius:4px;
+    padding:24px 26px; position:relative; overflow:hidden;
+    transition:background .25s, border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .m-card::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--gold), transparent 70%); opacity:0; transition:opacity .25s;}
+  .m-card:hover{background:var(--bg-card-hover); border-color:rgba(211,163,85,0.38); transform:translateY(-2px); box-shadow:0 12px 30px rgba(0,0,0,0.32);}
+  .m-card:hover::before{opacity:1;}
+
+  .month.star .m-card{border-color:rgba(211,163,85,0.5);}
+  .month.star .m-marker{border-color:var(--gold); box-shadow:0 0 0 5px rgba(211,163,85,0.12);}
+  .month.danger .m-card{border-color:rgba(192,132,135,0.45);}
+  .month.danger .m-card::before{background:linear-gradient(90deg, var(--red), transparent 70%);}
+  .month.danger .m-marker{border-color:rgba(192,132,135,0.7);}
+  .month.danger .m-marker .mo{color:var(--red);}
+
+  .m-title{font-family:var(--font-display); font-size:21px; font-weight:600; margin:0 0 2px;}
+  .m-theme{font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:14px;}
+  .m-tag{display:inline-block; margin-left:8px; padding:2px 8px; font-size:9.5px; letter-spacing:0.1em; font-family:var(--font-mono); text-transform:uppercase; border-radius:2px; vertical-align:middle;}
+  .m-tag.key{border:1px solid var(--gold); color:var(--gold); background:var(--gold-soft);}
+  .m-tag.warn{border:1px solid var(--red); color:var(--red); background:rgba(192,132,135,0.1);}
+
+  ul.items{list-style:none; margin:0; padding:0;}
+  ul.items li{position:relative; padding:8px 0 8px 17px; border-top:1px solid var(--hairline-soft); font-size:14px;}
+  ul.items li:first-child{border-top:none;}
+  ul.items li::before{content:''; position:absolute; left:0; top:16px; width:6px; height:6px; border-radius:50%;}
+  .i-career::before{background:var(--c-career); box-shadow:0 0 6px var(--c-career);}
+  .i-wealth::before{background:var(--c-wealth); box-shadow:0 0 6px var(--c-wealth);}
+  .i-study::before{background:var(--c-study); box-shadow:0 0 6px var(--c-study);}
+  .i-health::before{background:var(--c-health); box-shadow:0 0 6px var(--c-health);}
+  .i-family::before{background:var(--c-family); box-shadow:0 0 6px var(--c-family);}
+  .i-admin::before{background:var(--c-admin); box-shadow:0 0 6px var(--c-admin);}
+
+  /* ================= RHYTHM ================= */
+  .rhythm{display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:4px; overflow:hidden; max-width:960px; margin:36px auto 0;}
+  @media(max-width:760px){.rhythm{grid-template-columns:1fr;}}
+  .r-card{background:var(--bg-card); padding:26px 26px; transition:background .25s;}
+  .r-card:hover{background:var(--bg-card-hover);}
+  .r-day{font-family:var(--font-mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:10px;}
+  .r-card p{margin:0; font-size:14px; color:var(--ink); line-height:1.7;}
+  .r-card p span.dim{color:var(--ink-dim);}
+
+  /* ================= FAILURE MODES ================= */
+  .fails{max-width:960px; margin:36px auto 0; padding:0 28px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media(max-width:760px){.fails{grid-template-columns:1fr;}}
+  .fail{border:1px dashed rgba(192,132,135,0.42); border-radius:4px; background:rgba(192,132,135,0.05); padding:22px 22px;}
+  .fail .f-n{font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; color:var(--red); text-transform:uppercase; display:block; margin-bottom:8px;}
+  .fail h3{font-family:var(--font-display); font-size:17px; font-weight:600; margin:0 0 8px;}
+  .fail p{margin:0; font-size:13.5px; color:var(--ink-dim); line-height:1.65;}
+  .fail p b{color:var(--ink); font-weight:600;}
+
+  /* ================= CTAs / FOOTER ================= */
+  .cta-row{max-width:960px; margin:76px auto 0; padding:0 28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-row a{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; border-radius:3px; padding:16px 26px; transition:background .25s, transform .25s;}
+  .cta-row a.primary{color:var(--gold); border:1px solid rgba(211,163,85,0.45); background:var(--gold-soft);}
+  .cta-row a.primary:hover{background:rgba(211,163,85,0.22); transform:translateY(-2px);}
+  .cta-row a.ghost{color:var(--ink-dim); border:1px solid var(--hairline);}
+  .cta-row a.ghost:hover{color:var(--ink); background:rgba(237,231,217,0.05); transform:translateY(-2px);}
+
+  footer{max-width:640px; margin:0 auto; padding:56px 28px 100px; text-align:center;}
+  footer .rule{width:60px; height:1px; background:var(--hairline); margin:0 auto 24px;}
+  footer p{font-size:15px; color:var(--ink-dim); line-height:1.75; margin:0; font-style:italic; font-family:var(--font-display); font-weight:340;}
+  footer .lead{font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; font-style:normal;}
+
+  @media(prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .month{opacity:1 !important; transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../">
+      <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="52" stroke="#8fa4ba" stroke-opacity="0.5" stroke-width="4"/><path d="M60 22 L67 60 L60 98 L53 60 Z" fill="#d3a355"/><path d="M22 60 L60 53 L98 60 L60 67 Z" fill="#ede7d9" fill-opacity="0.6"/></svg>
+      <span class="brand-name">Voyage <em>2050</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../"><span class="num">01</span>Decade Map</a>
+      <a href="./" class="active"><span class="num">02</span>1-Year Plan</a>
+      <a href="../three-month-plan/"><span class="num">03</span>90-Day Plan</a>
+      <a href="../system/"><span class="num">04</span>Operating System</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Part 02 · The Yearly Map</p>
+    <h1>The 1-Year<br><em>Plan</em></h1>
+    <p class="course-line">Aug 11, <b>2026</b> &nbsp;→&nbsp; Aug <b>2027</b></p>
+    <div class="mission-banner">
+      <b>This year has one job</b>
+      Leave Salmon Arm in July 2027 with the admission letter, <span class="fig">~$48K</span> invested, a trained body, and a pre-studied brain.
+    </div>
+  </header>
+</div>
+
+<!-- ============ NON-NEGOTIABLES ============ -->
+<div class="section-head">
+  <span class="kicker">The Scoreboard</span>
+  <h2>The 6 Non-Negotiables of This Year</h2>
+  <p>Everything else is optional. These six are not. If all six are green by August 2027, the year was a success — regardless of anything else.</p>
+</div>
+
+<div class="wrap">
+  <div class="nn-grid">
+    <div class="nn"><span class="n">01</span><h3>Seafarer Medical passed</h3><span class="due">Due · Sept 2026</span></div>
+    <div class="nn"><span class="n">02</span><h3>Georgian application submitted (international)</h3><span class="due">Due · Oct 2026</span></div>
+    <div class="nn"><span class="n">03</span><h3>~$48,000 total invested in IBKR</h3><span class="due">Due · July 2027</span></div>
+    <div class="nn"><span class="n">04</span><h3>300+ hrs of marine pre-study completed</h3><span class="due">Due · July 2027</span></div>
+    <div class="nn"><span class="n">05</span><h3>Exercise 4×/week — zero broken weeks</h3><span class="due">Ongoing</span></div>
+    <div class="nn"><span class="n">06</span><h3>Relocated to Owen Sound, both employed</h3><span class="due">Due · Aug 2027</span></div>
+  </div>
+</div>
+
+<!-- ============ MONEY CHECKPOINTS ============ -->
+<div class="section-head">
+  <span class="kicker">Wealth Rail</span>
+  <h2>Investment Checkpoints</h2>
+  <p>$3,100/month, same date, no debate. These are the five gates the balance passes through this year.</p>
+</div>
+
+<div class="checkpoints">
+  <div class="cp-rail">
+    <div class="cp"><div class="v">~$21K</div><div class="l">Oct 2026</div></div>
+    <div class="cp"><div class="v">~$27K</div><div class="l">Dec 2026</div></div>
+    <div class="cp"><div class="v">~$36K</div><div class="l">Mar 2027</div></div>
+    <div class="cp"><div class="v">~$45K</div><div class="l">Jun 2027</div></div>
+    <div class="cp"><div class="v">~$48K ✓</div><div class="l">Jul 2027 · Final</div></div>
+  </div>
+</div>
+
+<!-- ============ MONTH BY MONTH ============ -->
+<div class="section-head">
+  <span class="kicker">The Route</span>
+  <h2>Month by Month</h2>
+  <p>Thirteen months, each with a name and a job. Gold-ringed months are the two critical gates: Application and Exit.</p>
+</div>
+
+<main class="months">
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Aug</span><span class="yr">2026</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Ignition</h3>
+      <div class="m-theme">Start everything, perfect nothing</div>
+      <ul class="items">
+        <li class="i-career">📞 Book Seafarer Medical Exam — <strong>this week</strong></li>
+        <li class="i-admin">📋 Create Georgian application checklist (transcripts, English proof, documents)</li>
+        <li class="i-health">🏋 Start Mon–Thu workouts (dumbbells) — track every session</li>
+        <li class="i-study">📚 Start 1 hr/day pre-study: <strong>math refresh</strong> (trigonometry, algebra)</li>
+        <li class="i-health">📱 Begin dopamine reset: delete Instagram reels access, YouTube app off phone</li>
+        <li class="i-wealth">💰 First <span class="fig">$3,100</span> investment of the cycle</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Sep</span><span class="yr">2026</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Clearance</h3>
+      <div class="m-theme">Medical cleared, rituals installed</div>
+      <ul class="items">
+        <li class="i-career">✅ <strong>Pass Seafarer Medical</strong></li>
+        <li class="i-study">📚 Pre-study: physics basics (forces, buoyancy)</li>
+        <li class="i-career">💻 Dev day project: pick 1 community app idea, define scope</li>
+        <li class="i-admin">📓 Start weekly Sunday review ritual (30 min: habits, money, study)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month star">
+    <div class="m-marker"><span class="mo">Oct</span><span class="yr">2026</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Application Month<span class="m-tag key">⭐ Critical gate</span></h3>
+      <div class="m-theme">The single most important admin act of the year</div>
+      <ul class="items">
+        <li class="i-career">🎓 <strong>Submit Georgian College application</strong> (early in month)</li>
+        <li class="i-study">📚 Pre-study: intro to navigation terminology, ship parts, COLREGs overview</li>
+        <li class="i-wealth">💰 Investments on track: <span class="fig">~$21K+</span> total</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Nov</span><span class="yr">2026</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Deep Work Begins</h3>
+      <div class="m-theme">Application in, head down</div>
+      <ul class="items">
+        <li class="i-study">📚 Pre-study: chart basics, compass, latitude/longitude</li>
+        <li class="i-career">💻 Community app: working prototype</li>
+        <li class="i-health">🏋 First fitness benchmark re-test (pushups/squats vs. Aug baseline)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month danger">
+    <div class="m-marker"><span class="mo">Dec</span><span class="yr">2026</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Hold the Line<span class="m-tag warn">⚠ Danger month</span></h3>
+      <div class="m-theme">Holidays, dark, cold — your winter allergy</div>
+      <ul class="items">
+        <li class="i-health"><strong>Rule: no broken habit weeks</strong>, even if reduced volume</li>
+        <li class="i-study">📚 Pre-study continues at 1 hr/day minimum</li>
+        <li class="i-wealth">📊 Year-end money check: target <span class="fig">~$27K invested</span></li>
+        <li class="i-admin">📓 Annual review: write 1 page on what worked</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Jan</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Admission Watch</h3>
+      <div class="m-theme">The offer is coming — be ready</div>
+      <ul class="items">
+        <li class="i-admin">📬 Track Georgian offer; <strong>accept immediately</strong> when received</li>
+        <li class="i-admin">🛂 Check IRCC PR status</li>
+        <li class="i-study">📚 Pre-study: meteorology basics, tides</li>
+        <li class="i-career">💻 Dev: publish community app v1</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Feb</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">PR &amp; Paperwork</h3>
+      <div class="m-theme">Status upgrade + scouting the landing zone</div>
+      <ul class="items">
+        <li class="i-admin">🛂 If PR lands → start <strong>domestic-student conversion</strong> with Georgian registrar</li>
+        <li class="i-admin">🏠 Begin Owen Sound research: rent prices, neighborhoods, part-time job market (for both of you)</li>
+        <li class="i-study">📚 Pre-study: seamanship, safety systems</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Mar</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Fiancée's Track</h3>
+      <div class="m-theme">Two careers move, not one</div>
+      <ul class="items">
+        <li class="i-family">👩 Confirm her <strong>dental hygiene program</strong> application/acceptance at Georgian</li>
+        <li class="i-wealth">💰 Check: <span class="fig">~$36K</span> invested</li>
+        <li class="i-health">🏋 Second fitness benchmark</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Apr</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Logistics Lock</h3>
+      <div class="m-theme">Move from research to commitments</div>
+      <ul class="items">
+        <li class="i-admin">🏠 Shortlist Owen Sound apartments; contact landlords for <strong>Aug 1 lease</strong></li>
+        <li class="i-career">💼 Both: start applying to Owen Sound part-time jobs remotely (security, retail, pharmacy assistant transfer via Walmart?)</li>
+        <li class="i-study">📚 Pre-study: Transport Canada exam structure familiarization</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">May</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Secure the Landing</h3>
+      <div class="m-theme">Ink on paper</div>
+      <ul class="items">
+        <li class="i-admin">🏠 <strong>Sign Owen Sound lease</strong> (target Aug 1 possession)</li>
+        <li class="i-family">💼 Walmart internal transfer inquiry for fiancée</li>
+        <li class="i-study">📚 Pre-study: review + consolidate all notes into one system</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Jun</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Wind-Down Prep</h3>
+      <div class="m-theme">Cut ballast before the crossing</div>
+      <ul class="items">
+        <li class="i-career">🏭 Give notice timeline planned with Valid Manufacturing</li>
+        <li class="i-admin">📦 Declutter apartment — sell/donate what won't move</li>
+        <li class="i-wealth">💰 Check: <span class="fig">~$45K</span> invested</li>
+        <li class="i-career">💻 Dev clients: inform them of continued service (nothing changes for them)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month star">
+    <div class="m-marker"><span class="mo">Jul</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Exit<span class="m-tag key">⭐ Critical gate</span></h3>
+      <div class="m-theme">The clean break</div>
+      <ul class="items">
+        <li class="i-career">🏭 <strong>Last day at Valid Manufacturing</strong></li>
+        <li class="i-wealth">💰 Final <span class="fig">$3,100</span> deposit → <strong>~$48K total invested</strong> ✅</li>
+        <li class="i-admin">📦 Pack, close BC accounts/addresses, car serviced for the drive</li>
+        <li class="i-admin">🚚 <strong>End of July: drive to Owen Sound</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="month">
+    <div class="m-marker"><span class="mo">Aug</span><span class="yr">2027</span></div>
+    <div class="m-card">
+      <h3 class="m-title">Landing</h3>
+      <div class="m-theme">New base, new mode</div>
+      <ul class="items">
+        <li class="i-admin">🏠 Move in, set up dedicated study workspace <strong>before anything else</strong></li>
+        <li class="i-career">💼 Both employed part-time within 30 days</li>
+        <li class="i-study">🎓 Orientation, textbooks, student ID</li>
+        <li class="i-wealth">💰 Switch investing mode: <strong>$1,000/month begins Sept</strong></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ WEEKLY RHYTHM ============ -->
+<div class="section-head">
+  <span class="kicker">The Engine Room</span>
+  <h2>Weekly Operating Rhythm</h2>
+  <p>Aug 2026 – Jul 2027. The week is pre-decided so the days don't have to be.</p>
+</div>
+
+<div class="wrap">
+  <div class="rhythm">
+    <div class="r-card">
+      <span class="r-day">Fri – Sun</span>
+      <p><strong>Valid Manufacturing</strong> (36 hrs)<br><span class="dim">+ 1 hr pre-study</span></p>
+    </div>
+    <div class="r-card">
+      <span class="r-day">Mon – Thu</span>
+      <p>🏋 Workout AM → 📚 1 hr pre-study → 💻 4–5 hrs dev work<br><span class="dim">→ evening free</span></p>
+    </div>
+    <div class="r-card">
+      <span class="r-day">Sunday PM</span>
+      <p><strong>30-min weekly review</strong><br><span class="dim">habits / money / study progress</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FAILURE MODES ============ -->
+<div class="section-head">
+  <span class="kicker">Known Reefs</span>
+  <h2>Failure Modes to Guard</h2>
+  <p>Three ways this year sinks — and the standing rule against each one.</p>
+</div>
+
+<div class="fails">
+  <div class="fail">
+    <span class="f-n">Reef 01</span>
+    <h3>Bed gravity, Mon–Thu</h3>
+    <p><b>Rule:</b> the workout happens <b>before</b> the phone is touched.</p>
+  </div>
+  <div class="fail">
+    <span class="f-n">Reef 02</span>
+    <h3>December collapse</h3>
+    <p><b>Rule:</b> reduced volume allowed, <b>zero skipped weeks</b>.</p>
+  </div>
+  <div class="fail">
+    <span class="f-n">Reef 03</span>
+    <h3>Planning instead of executing</h3>
+    <p>Your named pattern. <b>Rule:</b> the weekly review is the only planning allowed; the rest is execution.</p>
+  </div>
+</div>
+
+<div class="cta-row">
+  <a class="ghost" href="../">← 01 · Decade Map</a>
+  <a class="primary" href="../three-month-plan/">Next → 03 · The 90-Day Plan</a>
+</div>
+
+<footer>
+  <div class="rule"></div>
+  <span class="lead">One job</span>
+  <p>Admission letter. ~$48K invested. A trained body. A pre-studied brain. Everything on this page exists to put those four things in the car that drives to Owen Sound.</p>
+</footer>
+
+<script>
+  const prog = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, {passive:true});
+
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, {threshold:0.1});
+    document.querySelectorAll('.month').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.month').forEach(el => el.classList.add('in-view'));
+  }
+</script>
+
+</body>
+</html>

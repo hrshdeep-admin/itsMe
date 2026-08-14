@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Speech · Operating System · Voyage 2050</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,340;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081420;
+    --bg-deep:#050d16;
+    --bg-panel:#0d1f31;
+    --bg-card:#112539;
+    --ink:#ede7d9;
+    --ink-dim:#8fa4ba;
+    --hairline:rgba(237,231,217,0.13);
+    --hairline-soft:rgba(237,231,217,0.06);
+
+    --gold:#d3a355;
+    --gold-soft:rgba(211,163,85,0.14);
+    --teal:#53a89f;
+    --red:#c08487;
+    --red-soft:rgba(192,132,135,0.14);
+    --green:#7ea179;
+    --blue:#6f97bd;
+
+    --font-display:'Fraunces', serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background-color:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .6s ease;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(192,132,135,0.1), transparent 60%),
+      radial-gradient(ellipse 80% 45% at 50% 105%, rgba(211,163,85,0.05), transparent 60%);
+    transition:opacity .6s ease;
+  }
+
+  /* focus mode dims the world */
+  body.focus{background-color:var(--bg-deep);}
+  body.focus::before{opacity:0.4;}
+  body.focus .nav, body.focus .subnav, body.focus .page-foot, body.focus .cta-row{opacity:0.12; pointer-events:none;}
+  .nav, .subnav, .page-foot, .cta-row{transition:opacity .6s ease;}
+
+  .wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 28px;}
+
+  /* ================= NAV ================= */
+  #progress{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--teal)); z-index:60;}
+  .nav{position:sticky; top:0; z-index:50; background:rgba(8,20,32,0.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--hairline-soft);}
+  .nav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex:none;}
+  .brand svg{width:26px; height:26px;}
+  .brand-name{font-family:var(--font-display); font-weight:600; font-size:16px;}
+  .brand-name em{font-style:italic; color:var(--gold); font-weight:500;}
+  .nav-links{display:flex; align-items:center; gap:4px;}
+  .nav-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:8px 13px; border-radius:3px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; white-space:nowrap;}
+  .nav-links a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .nav-links a.active{color:var(--gold); border-color:rgba(211,163,85,0.4); background:var(--gold-soft);}
+  .nav-links a .num{color:var(--gold); margin-right:5px;}
+  .nav-links a.active .num{color:inherit;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--hairline); border-radius:3px; color:var(--ink); padding:7px 11px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;}
+  @media(max-width:820px){
+    .nav-toggle{display:block;}
+    .nav-links{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:rgba(8,20,32,0.97); border-bottom:1px solid var(--hairline); padding:8px 20px 16px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:13px 10px; border-bottom:1px solid var(--hairline-soft); border-radius:0;}
+    .nav-links a.active{border:none; border-bottom:1px solid rgba(211,163,85,0.4);}
+  }
+
+  /* ================= SUB NAV ================= */
+  .subnav{position:sticky; top:60px; z-index:45; background:rgba(13,31,49,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline-soft);}
+  .subnav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:2px; height:46px; overflow-x:auto; scrollbar-width:none;}
+  .subnav-inner::-webkit-scrollbar{display:none;}
+  .subnav-label{font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-dim); margin-right:14px; flex:none;}
+  .subnav a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:6px 12px; border-radius:3px; transition:color .2s, background .2s; white-space:nowrap; flex:none;}
+  .subnav a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+  .subnav a.here{color:var(--red); background:var(--red-soft);}
+  .subnav a .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:7px; vertical-align:1px;}
+
+  /* ================= HERO ================= */
+  .hero{text-align:center; padding:64px 28px 36px;}
+  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--red); margin:0 0 20px;}
+  .hero h1{font-family:var(--font-display); font-weight:600; font-size:clamp(36px,6vw,58px); line-height:1.05; letter-spacing:-0.015em; margin:0 0 18px;}
+  .hero h1 em{font-style:italic; font-weight:340; color:var(--red);}
+
+  .when-box{
+    max-width:520px; margin:0 auto; padding:18px 26px;
+    border:1px dashed rgba(192,132,135,0.5); border-radius:4px; background:var(--red-soft);
+    font-size:13.5px; color:var(--ink-dim); font-style:italic; line-height:1.7;
+  }
+  .when-box b{display:block; font-family:var(--font-mono); font-style:normal; font-weight:600; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--red); margin-bottom:7px;}
+
+  .focus-btn{
+    display:inline-flex; align-items:center; gap:10px; margin-top:26px; cursor:pointer;
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--red); border:1px solid rgba(192,132,135,0.5); background:var(--red-soft);
+    border-radius:3px; padding:14px 26px; transition:background .25s, transform .25s;
+  }
+  .focus-btn:hover{background:rgba(192,132,135,0.24); transform:translateY(-2px);}
+
+  /* ================= THE SPEECH ================= */
+  .speech{max-width:660px; margin:44px auto 0; padding:0 28px;}
+
+  .passage{
+    font-family:var(--font-display); font-weight:340;
+    font-size:clamp(19px, 2.6vw, 24px); line-height:1.75; color:var(--ink);
+    margin:0 0 40px; opacity:0; transform:translateY(14px);
+    transition:opacity .8s ease, transform .8s ease, font-size .4s ease;
+  }
+  .passage.in-view{opacity:1; transform:translateY(0);}
+  .passage b{font-weight:600; color:var(--gold); font-style:italic;}
+  .passage .callname{font-weight:600; font-style:normal; color:var(--ink);}
+
+  .passage.opener{font-size:clamp(26px, 4vw, 36px); line-height:1.4; text-align:center; color:var(--ink);}
+  .passage.closer{text-align:center; font-size:clamp(24px, 3.5vw, 32px); line-height:1.5;}
+  .passage.closer b{color:var(--red);}
+
+  .sep{width:44px; height:1px; background:rgba(192,132,135,0.4); margin:0 auto 40px; border:none;}
+
+  /* focus mode reading */
+  body.focus .passage{font-size:clamp(22px, 3vw, 28px);}
+  body.focus .passage.opener{font-size:clamp(30px, 4.5vw, 42px);}
+
+  /* stepper (focus mode) */
+  .stepper{
+    position:fixed; bottom:0; left:0; right:0; z-index:55;
+    display:none; justify-content:center; gap:12px; padding:18px 20px 26px;
+    background:linear-gradient(transparent, rgba(5,13,22,0.94) 40%);
+  }
+  body.focus .stepper{display:flex;}
+  .stepper button{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    border-radius:3px; padding:13px 24px; cursor:pointer; transition:background .2s, transform .2s;
+  }
+  .stepper .next-p{color:var(--red); border:1px solid rgba(192,132,135,0.55); background:var(--red-soft);}
+  .stepper .next-p:hover{background:rgba(192,132,135,0.25);}
+  .stepper .exit-f{color:var(--ink-dim); border:1px solid var(--hairline); background:transparent;}
+  .stepper .exit-f:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
+
+  body.focus .passage.dimmed{opacity:0.14;}
+  body.focus .passage.lit{opacity:1;}
+
+  /* ================= FINAL ACTION ================= */
+  .final-action{max-width:660px; margin:20px auto 0; padding:0 28px; text-align:center;}
+  .final-inner{border:1px solid rgba(211,163,85,0.35); border-radius:5px; background:var(--bg-panel); padding:38px 30px;}
+  .final-inner .k{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:14px;}
+  .final-inner p{margin:0 0 22px; font-size:14.5px; color:var(--ink-dim); line-height:1.7;}
+  .final-inner p b{color:var(--ink);}
+
+  .timer-btn{
+    display:inline-flex; align-items:center; gap:12px; cursor:pointer;
+    font-family:var(--font-mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#081420; background:var(--gold); border:1px solid var(--gold);
+    border-radius:3px; padding:16px 32px; font-weight:600; transition:transform .2s, box-shadow .2s;
+  }
+  .timer-btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(211,163,85,0.3);}
+  .timer-display{display:none; font-family:var(--font-mono); font-size:clamp(40px,8vw,64px); font-weight:600; color:var(--gold); letter-spacing:0.05em; margin:6px 0 10px;}
+  .timer-note{display:none; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal);}
+  .final-inner.running .timer-btn{display:none;}
+  .final-inner.running .timer-display{display:block;}
+  .final-inner.running .timer-note{display:block;}
+  .final-inner.done .timer-display{color:var(--teal);}
+
+  /* ================= CTAs / FOOTER ================= */
+  .cta-row{max-width:960px; margin:64px auto 0; padding:0 28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-row a{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; border-radius:3px; padding:16px 26px; transition:background .25s, transform .25s;}
+  .cta-row a.primary{color:var(--gold); border:1px solid rgba(211,163,85,0.45); background:var(--gold-soft);}
+  .cta-row a.primary:hover{background:rgba(211,163,85,0.22); transform:translateY(-2px);}
+  .cta-row a.ghost{color:var(--ink-dim); border:1px solid var(--hairline);}
+  .cta-row a.ghost:hover{color:var(--ink); background:rgba(237,231,217,0.05); transform:translateY(-2px);}
+
+  .page-foot{max-width:640px; margin:0 auto; padding:52px 28px 90px; text-align:center;}
+  .page-foot .rule{width:60px; height:1px; background:var(--hairline); margin:0 auto 22px;}
+  .page-foot p{font-size:14.5px; color:var(--ink-dim); line-height:1.75; margin:0; font-style:italic; font-family:var(--font-display); font-weight:340;}
+  .page-foot .lead{font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--red); margin-bottom:12px; display:block; font-style:normal;}
+
+  @media(prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .passage{opacity:1 !important; transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../../">
+      <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="52" stroke="#8fa4ba" stroke-opacity="0.5" stroke-width="4"/><path d="M60 22 L67 60 L60 98 L53 60 Z" fill="#d3a355"/><path d="M22 60 L60 53 L98 60 L60 67 Z" fill="#ede7d9" fill-opacity="0.6"/></svg>
+      <span class="brand-name">Voyage <em>2050</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../../"><span class="num">01</span>Decade Map</a>
+      <a href="../../yearly-plan/"><span class="num">02</span>1-Year Plan</a>
+      <a href="../../three-month-plan/"><span class="num">03</span>90-Day Plan</a>
+      <a href="../" class="active"><span class="num">04</span>Operating System</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="subnav" aria-label="Operating System sections">
+  <div class="subnav-inner">
+    <span class="subnav-label">System /</span>
+    <a href="../">Hub</a>
+    <a href="../schedule/"><span class="dot" style="background:var(--blue)"></span>Schedule</a>
+    <a href="../diet/"><span class="dot" style="background:var(--green)"></span>Diet</a>
+    <a href="./" class="here"><span class="dot" style="background:var(--red)"></span>Speech</a>
+    <a href="../protocol/"><span class="dot" style="background:var(--gold)"></span>Protocol Book</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">04c · The Operating System</p>
+    <h1>The <em>Speech</em></h1>
+    <div class="when-box">
+      <b>Break glass when</b>
+      You're lying in bed at 10am. The plan feels pointless. The void whispers. Then — read this aloud.
+    </div>
+    <button class="focus-btn" id="focusBtn">🔥 Read Aloud — Focus Mode</button>
+  </header>
+</div>
+
+<!-- ============ THE SPEECH ============ -->
+<main class="speech" id="speech">
+
+  <p class="passage opener"><span class="callname">Harshdeep. Get up.</span></p>
+
+  <hr class="sep">
+
+  <p class="passage">Not because life has a meaning you've finally found. You've stared into that void longer than anyone you know, and you already know the answer: the universe owes you nothing, and it explains nothing. Fine. <b>Then the meaning is the one you build — and you've already chosen it.</b></p>
+
+  <p class="passage">You chose <b>her</b>. The one who picked you when you had nothing, not for money, not for status, but for the inner world you show no one else. Every hour you waste in bed is an hour stolen from the house, the lawn, the life you promised her in 2050.</p>
+
+  <p class="passage">You chose <b>your parents</b>. Farmers in Sangrur who will one day be retired by their son's hands. Not by his plans. His <b>hands</b>.</p>
+
+  <p class="passage">You chose <b>the sea</b>. Six months on, six months off, tax-advantaged, AI-proof, unordinary — everything you demanded of life, it offered you. All it asks back is this year. One year of pre-study, one application, one clean exit from Salmon Arm.</p>
+
+  <p class="passage">You have ADHD. So what — now you know the enemy's name. It was never laziness. It was never weakness. Your brain needs structure, timers, and starts of two minutes — and you have all three written down, taped to your wall.</p>
+
+  <p class="passage">You are not the boy who plans and never executes. That story ends today, because you know exactly what your 16-year-old self needed to hear: <b>a bad schedule executed beats a perfect one ignored.</b></p>
+
+  <p class="passage">The deer doesn't ask why the lion exists. It runs anyway.</p>
+
+  <hr class="sep">
+
+  <p class="passage closer">So run. <b>Two minutes. Start.</b><br>The rest will follow — it always does, once you start.</p>
+
+</main>
+
+<!-- ============ FINAL ACTION ============ -->
+<div class="final-action">
+  <div class="final-inner" id="finalBox">
+    <span class="k">The speech ends in action</span>
+    <p>Don't close this page and think about it. <b>Commit only to starting</b> — momentum does the rest.</p>
+    <button class="timer-btn" id="timerBtn">▸ Start the 2 minutes</button>
+    <div class="timer-display" id="timerDisplay">2:00</div>
+    <div class="timer-note" id="timerNote">Get up. Water. Move. The timer is running.</div>
+  </div>
+</div>
+
+<div class="cta-row">
+  <a class="ghost" href="../diet/">← 04b · The Diet Plan</a>
+  <a class="primary" href="../protocol/">Next → 04d · The Protocol Book</a>
+</div>
+
+<footer class="page-foot">
+  <div class="rule"></div>
+  <span class="lead">The emergency restart button</span>
+  <p>This page asks for nothing except two minutes. Everything else in the system — the schedule, the diet, the protocols — is already waiting on the other side of them.</p>
+</footer>
+
+<script>
+  // Scroll progress
+  const prog = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
+  }, {passive:true});
+
+  // Mobile nav
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Reveal on scroll
+  const passages = Array.from(document.querySelectorAll('.passage'));
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, {threshold:0.15});
+    passages.forEach(el => io.observe(el));
+  } else {
+    passages.forEach(el => el.classList.add('in-view'));
+  }
+
+  // ===== FOCUS MODE (step through, one passage lit at a time) =====
+  const focusBtn = document.getElementById('focusBtn');
+  let focusIdx = -1;
+
+  const stepper = document.createElement('div');
+  stepper.className = 'stepper';
+  stepper.innerHTML = '<button class="next-p" id="nextP">Next ↵ / Space</button><button class="exit-f" id="exitF">Exit · Esc</button>';
+  document.body.appendChild(stepper);
+
+  function enterFocus(){
+    document.body.classList.add('focus');
+    focusIdx = 0;
+    lightPassage();
+  }
+  function exitFocus(){
+    document.body.classList.remove('focus');
+    passages.forEach(p => p.classList.remove('dimmed','lit'));
+    focusIdx = -1;
+  }
+  function lightPassage(){
+    passages.forEach((p,i) => {
+      p.classList.add('in-view');
+      p.classList.toggle('lit', i === focusIdx);
+      p.classList.toggle('dimmed', i !== focusIdx);
+    });
+    passages[focusIdx].scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function nextPassage(){
+    if (focusIdx < passages.length - 1) {
+      focusIdx++;
+      lightPassage();
+    } else {
+      exitFocus();
+      document.getElementById('finalBox').scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  }
+
+  focusBtn.addEventListener('click', enterFocus);
+  document.getElementById('nextP').addEventListener('click', nextPassage);
+  document.getElementById('exitF').addEventListener('click', exitFocus);
+  document.addEventListener('keydown', e => {
+    if (!document.body.classList.contains('focus')) return;
+    if (e.key === 'Escape') exitFocus();
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); nextPassage(); }
+  });
+
+  // ===== 2-MINUTE TIMER =====
+  const finalBox = document.getElementById('finalBox');
+  const timerBtn = document.getElementById('timerBtn');
+  const timerDisplay = document.getElementById('timerDisplay');
+  const timerNote = document.getElementById('timerNote');
+  let remaining = 120, tick = null;
+
+  timerBtn.addEventListener('click', () => {
+    finalBox.classList.add('running');
+    tick = setInterval(() => {
+      remaining--;
+      const m = Math.floor(remaining/60), s = String(remaining%60).padStart(2,'0');
+      timerDisplay.textContent = m + ':' + s;
+      if (remaining <= 0) {
+        clearInterval(tick);
+        finalBox.classList.add('done');
+        timerDisplay.textContent = '✓ Started';
+        timerNote.textContent = "That's it. You've already begun — keep going.";
+      }
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
