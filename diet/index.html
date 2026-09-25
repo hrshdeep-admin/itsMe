@@ -31,6 +31,11 @@
   color-scheme:dark;
 }
 
+.begin-wrap{max-width:1040px;margin:0 auto;padding:16px 20px 0;text-align:center}
+.begin-btn{display:inline-block;background:var(--lens);color:var(--lens-ink);font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:.08em;text-decoration:none;border-radius:999px;padding:12px 36px;box-shadow:0 2px 0 var(--ink);transition:transform .12s ease}
+.begin-btn:hover{transform:translateY(-1px)}
+.begin-btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--ink)}
+
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
@@ -180,6 +185,7 @@ footer{margin-top:56px;color:var(--muted);font-size:14px;max-width:60ch}
 </style>
 </head>
 <body>
+<div class="begin-wrap"><a class="begin-btn" href="game/index.html">BEGIN</a></div>
 <div class="wrap">
 
   <div class="top"><button class="pill-btn" id="theme" type="button">Dark mode</button></div>
