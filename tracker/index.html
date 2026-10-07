@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Daily Quest Log</title>
+
+<style>
+  :root {
+    --bg-1: #0a0718;
+    --bg-2: #161034;
+    --bg-3: #241447;
+
+    --card: rgba(255,255,255,0.09);
+    --card-strong: rgba(255,255,255,0.14);
+    --border: rgba(255,255,255,0.18);
+
+    --text: #fff9f0;
+    --muted: rgba(255,249,240,0.72);
+
+    --gold: #ffd166;
+    --pink: #ff4fd8;
+    --cyan: #32f6ff;
+    --green: #5cff9d;
+    --red: #ff6b6b;
+    --blue: #7c8cff;
+    --purple: #b56cff;
+
+    --shadow: 0 22px 70px rgba(0,0,0,0.42);
+    --radius-xl: 30px;
+    --radius-lg: 22px;
+    --radius-md: 16px;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body {
+    margin: 0;
+    min-height: 100%;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(255,79,216,0.28), transparent 34%),
+      radial-gradient(circle at 90% 8%, rgba(50,246,255,0.22), transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(255,209,102,0.16), transparent 40%),
+      linear-gradient(145deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 18px 16px 120px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .orb {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #fff, var(--cyan) 18%, var(--pink) 55%, #5124ff);
+    box-shadow:
+      0 0 22px rgba(50,246,255,0.55),
+      inset 0 -8px 16px rgba(0,0,0,0.35);
+    animation: floatOrb 3.2s ease-in-out infinite;
+  }
+
+  @keyframes floatOrb {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(8deg); }
+  }
+
+  .title small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .title strong {
+    display: block;
+    font-size: 18px;
+    line-height: 1.05;
+  }
+
+  .clock-pill {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 8px 11px;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    backdrop-filter: blur(12px);
+  }
+
+  .hero-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background:
+      linear-gradient(160deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
+      radial-gradient(circle at 10% 10%, rgba(255,209,102,0.24), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(50,246,255,0.18), transparent 36%);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    min-height: 270px;
+  }
+
+  .hero-card::before {
+    content: "";
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    right: -95px;
+    top: -90px;
+    background: conic-gradient(from 180deg, var(--cyan), var(--pink), var(--gold), var(--cyan));
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: 0.3;
+    animation: spin 9s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .quest-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,0,0,0.24);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(92,255,157,0.7);
+    animation: pulse 1.6s infinite;
+  }
+
+  @keyframes pulse {
+    70% { box-shadow: 0 0 0 10px rgba(92,255,157,0); }
+    100% { box-shadow: 0 0 0 0 rgba(92,255,157,0); }
+  }
+
+  .task-name {
+    position: relative;
+    margin: 22px 0 12px;
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+
+  .task-time {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+
+  .task-time b {
+    color: var(--cyan);
+  }
+
+  .xp-box {
+    position: relative;
+    background: rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+  }
+
+  .xp-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .xp-top b {
+    color: var(--text);
+  }
+
+  .bar {
+    width: 100%;
+    height: 14px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--green), var(--cyan), var(--pink));
+    box-shadow: 0 0 14px rgba(50,246,255,0.6);
+    transition: width 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .saved-banner {
+    display: none;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: rgba(92,255,157,0.12);
+    border: 1px solid rgba(92,255,157,0.3);
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+  }
+
+  .saved-banner.show {
+    display: block;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .choice {
+    width: 100%;
+    border: 0;
+    border-radius: 22px;
+    padding: 17px 16px;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+    cursor: pointer;
+    transform: translateY(0);
+    transition: transform 0.18s ease, filter 0.18s ease;
+  }
+
+  .choice:active {
+    transform: scale(0.98);
+    filter: brightness(1.16);
+  }
+
+  .choice span:last-child {
+    opacity: 0.9;
+    font-size: 22px;
+  }
+
+  .complete {
+    background: linear-gradient(135deg, #00d26a, #22c1c3);
+  }
+
+  .partial {
+    background: linear-gradient(135deg, #ffb703, #fb5607);
+  }
+
+  .none {
+    background: linear-gradient(135deg, #ff4d6d, #8338ec);
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .mini-card {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .mini-card b {
+    display: block;
+    font-size: 22px;
+  }
+
+  .mini-card span {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .timeline {
+    margin-top: 18px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.07);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+  }
+
+  .timeline h2 {
+    margin: 0 0 12px;
+    font-size: 16px;
+  }
+
+  .log-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .log-empty {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .log-item {
+    border-radius: 16px;
+    background: rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 12px;
+  }
+
+  .log-item strong {
+    display: block;
+    font-size: 14px;
+  }
+
+  .log-item small {
+    color: var(--muted);
+    display: block;
+    margin-top: 3px;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    align-items: flex-end;
+    background: rgba(0,0,0,0.62);
+    backdrop-filter: blur(9px);
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255,79,216,0.24), transparent 42%),
+      linear-gradient(160deg, #211247, #100a24);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
+    padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+    animation: slideUp 0.24s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .modal-head h2 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.1;
+  }
+
+  .modal-head p {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .close-btn {
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    border-radius: 14px;
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .field {
+    margin-top: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--cyan);
+  }
+
+  .percent-badge {
+    min-width: 64px;
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(50,246,255,0.14);
+    border: 1px solid rgba(50,246,255,0.32);
+    color: var(--cyan);
+    font-weight: 900;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 92px;
+    resize: vertical;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.22);
+    color: white;
+    padding: 14px;
+    font: inherit;
+    outline: none;
+  }
+
+  textarea::placeholder {
+    color: rgba(255,255,255,0.45);
+  }
+
+  .moods {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
+  }
+
+  .mood {
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.08);
+    border-radius: 18px;
+    font-size: 25px;
+    padding: 11px 4px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .mood.selected {
+    transform: translateY(-3px) scale(1.05);
+    background: rgba(255,209,102,0.18);
+    border-color: rgba(255,209,102,0.7);
+    box-shadow: 0 0 18px rgba(255,209,102,0.22);
+  }
+
+  .save-btn {
+    width: 100%;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 22px;
+    padding: 17px;
+    font-size: 17px;
+    font-weight: 1000;
+    color: #14091f;
+    background: linear-gradient(135deg, var(--gold), var(--green), var(--cyan));
+    box-shadow: 0 14px 30px rgba(50,246,255,0.25);
+    cursor: pointer;
+  }
+
+  .signoff {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 30;
+    max-width: 496px;
+    margin: 0 auto;
+    display: none;
+  }
+
+  .signoff.show {
+    display: block;
+  }
+
+  .signoff button {
+    width: 100%;
+    border: 0;
+    border-radius: 24px;
+    padding: 18px 16px;
+    color: #13081d;
+    font-size: 17px;
+    font-weight: 1000;
+    background: linear-gradient(135deg, #fff, var(--gold), var(--pink));
+    box-shadow:
+      0 18px 45px rgba(0,0,0,0.42),
+      0 0 24px rgba(255,209,102,0.35);
+    cursor: pointer;
+  }
+
+  .toast {
+    position: fixed;
+    z-index: 80;
+    left: 50%;
+    bottom: 92px;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    background: rgba(0,0,0,0.72);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white;
+    border-radius: 999px;
+    padding: 12px 16px;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .confetti {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 90;
+  }
+
+  .confetti i {
+    position: absolute;
+    width: 8px;
+    height: 14px;
+    top: -20px;
+    border-radius: 4px;
+    animation: fall 900ms linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .app {
+      padding-top: 32px;
+    }
+
+    .actions {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .choice {
+      min-height: 92px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="logo">
+        <div class="orb"></div>
+        <div class="title">
+          <small>Daily Quest</small>
+          <strong>Mission Control</strong>
+        </div>
+      </div>
+
+      <div class="clock-pill" id="clockPill">--:--</div>
+    </header>
+
+    <section class="hero-card">
+      <div class="quest-label">
+        <span class="pulse-dot"></span>
+        <span id="modeLabel">Loading Mode</span>
+      </div>
+
+      <h1 class="task-name" id="taskName">Finding current quest…</h1>
+
+      <div class="task-time">
+        ⏳ <span>Time allotted:</span> <b id="taskTime">--</b>
+      </div>
+
+      <div class="xp-box">
+        <div class="xp-top">
+          <span>Today's XP</span>
+          <b id="xpText">0 / 0</b>
+        </div>
+        <div class="bar">
+          <div class="bar-fill" id="xpFill"></div>
+        </div>
+      </div>
+
+      <div class="saved-banner" id="savedBanner"></div>
+    </section>
+
+    <section class="actions">
+      <button class="choice complete" data-status="Completed">
+        <span>Completed</span>
+        <span>🏆</span>
+      </button>
+
+      <button class="choice partial" data-status="Partially Completed">
+        <span>Partially Completed</span>
+        <span>⚔️</span>
+      </button>
+
+      <button class="choice none" data-status="Not Attempted">
+        <span>Not Attempted</span>
+        <span>🛡️</span>
+      </button>
+    </section>
+
+    <section class="mini-grid">
+      <div class="mini-card">
+        <b id="doneCount">0</b>
+        <span>Done</span>
+      </div>
+      <div class="mini-card">
+        <b id="partialCount">0</b>
+        <span>Partial</span>
+      </div>
+      <div class="mini-card">
+        <b id="missedCount">0</b>
+        <span>Missed</span>
+      </div>
+    </section>
+
+    <section class="timeline">
+      <h2>Today’s Saved Quest Logs</h2>
+      <div class="log-list" id="logList"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2 id="modalTitle">Quest Result</h2>
+          <p id="modalSub">Record how this block went.</p>
+        </div>
+        <button class="close-btn" id="closeModal" aria-label="Close">×</button>
+      </div>
+
+      <div class="field">
+        <label for="percentSlider">How much percentage of task completed?</label>
+        <div class="slider-row">
+          <input id="percentSlider" type="range" min="0" max="100" value="50" />
+          <div class="percent-badge" id="percentValue">50%</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="remarks">Remarks</label>
+        <textarea id="remarks" placeholder="What helped? What blocked you? Any quick notes?"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Mood</label>
+        <div class="moods" id="moodButtons">
+          <button class="mood" data-mood="Energized">🔥</button>
+          <button class="mood" data-mood="Focused">🎯</button>
+          <button class="mood" data-mood="Okay">🙂</button>
+          <button class="mood" data-mood="Tired">😴</button>
+          <button class="mood" data-mood="Rough">😵‍💫</button>
+        </div>
+      </div>
+
+      <button class="save-btn" id="saveBtn">Save Quest Result</button>
+    </div>
+  </div>
+
+  <div class="signoff" id="signoff">
+    <button id="signoffBtn">🌙 Sign Off & Download Today’s Data</button>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+  <div class="confetti" id="confetti"></div>
+
+<script>
+/* =========================================================
+   CONFIG
+   ========================================================= */
+
+// Sign Off appears after 8:45 PM.
+// If you literally want 8:45 AM, change this to: 8 * 60 + 45
+const SIGN_OFF_MINUTE = 20 * 60 + 45;
+
+const STORAGE_KEY = "dailyQuestLog.v1";
+
+/* =========================================================
+   SCHEDULE DATA
+   Times are minutes after midnight.
+   ========================================================= */
+
+const scheduleA = [
+  { id: "wake", start: 300, end: 315, title: "Wake → water → no phone" },
+  { id: "workout", start: 315, end: 360, title: "🏋 Workout" },
+  { id: "shower-breakfast", start: 360, end: 405, title: "Shower + 🍳 Breakfast (protein)" },
+  { id: "protocol", start: 405, end: 420, title: "📖 Protocol Book" },
+  { id: "study-morning", start: 420, end: 480, title: "📚 Study: 2 × 25-min blocks" },
+  { id: "coffee-walk", start: 480, end: 495, title: "☕ Coffee #1 + walk outside" },
+  { id: "dev-deep", start: 495, end: 630, title: "💻 Dev work: 4 × 25-min blocks" },
+  { id: "adhoc", start: 630, end: 675, title: "🗂 Ad-Hoc Slot" },
+  { id: "lunch-rest", start: 675, end: 735, title: "🍛 Lunch + rest" },
+  { id: "dev-flex", start: 735, end: 855, title: "💻 Dev/app work: flexible blocks" },
+  { id: "outside", start: 855, end: 915, title: "🚶 Outside — park, walk, errands" },
+  { id: "chores-dinner", start: 915, end: 1035, title: "🏠 Chores + cook dinner" },
+  { id: "fiancee", start: 1035, end: 1215, title: "👩 Fiancée time / genuinely free" },
+  { id: "journal", start: 1215, end: 1245, title: "📓 2-min journal → wind down, screens off" },
+  { id: "pre-sleep", start: 1245, end: 1260, title: "🌙 Prepare for sleep" },
+  { id: "sleep", start: 1260, end: 300, title: "😴 Sleep" }
+];
+
+const scheduleB = [
+  { id: "wake-breakfast", start: 300, end: 330, title: "Wake → water → protein breakfast" },
+  { id: "drive-valid", start: 330, end: 360, title: "🚗 Drive to Valid" },
+  { id: "work", start: 360, end: 1080, title: "🏭 Work" },
+  { id: "drive-home", start: 1080, end: 1110, title: "🚗 Drive home / decompress" },
+  { id: "dinner-shower", start: 1110, end: 1170, title: "🍛 Dinner + shower" },
+  { id: "study-evening", start: 1170, end: 1200, title: "📚 1 study block" },
+  { id: "recovery", start: 1200, end: 1260, title: "🎒 Pack lunch / light recovery" },
+  { id: "sleep", start: 1260, end: 300, title: "😴 Sleep" }
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let currentTask = null;
+let currentStatus = null;
+let selectedMood = null;
+
+const els = {
+  clockPill: document.getElementById("clockPill"),
+  modeLabel: document.getElementById("modeLabel"),
+  taskName: document.getElementById("taskName"),
+  taskTime: document.getElementById("taskTime"),
+  xpText: document.getElementById("xpText"),
+  xpFill: document.getElementById("xpFill"),
+  savedBanner: document.getElementById("savedBanner"),
+  doneCount: document.getElementById("doneCount"),
+  partialCount: document.getElementById("partialCount"),
+  missedCount: document.getElementById("missedCount"),
+  logList: document.getElementById("logList"),
+
+  modalBackdrop: document.getElementById("modalBackdrop"),
+  closeModal: document.getElementById("closeModal"),
+  modalTitle: document.getElementById("modalTitle"),
+  modalSub: document.getElementById("modalSub"),
+  percentSlider: document.getElementById("percentSlider"),
+  percentValue: document.getElementById("percentValue"),
+  remarks: document.getElementById("remarks"),
+  moodButtons: document.getElementById("moodButtons"),
+  saveBtn: document.getElementById("saveBtn"),
+
+  signoff: document.getElementById("signoff"),
+  signoffBtn: document.getElementById("signoffBtn"),
+
+  toast: document.getElementById("toast"),
+  confetti: document.getElementById("confetti")
+};
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+
+function pad(n) {
+  return String(n).padStart(2, "0");
+}
+
+function localDateKey(date = new Date()) {
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function formatClock(date = new Date()) {
+  let h = date.getHours();
+  const m = pad(date.getMinutes());
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  return `${h}:${m} ${ampm}`;
+}
+
+function minutesNow(date = new Date()) {
+  return date.getHours() * 60 + date.getMinutes();
+}
+
+function formatTime(mins) {
+  mins = ((mins % 1440) + 1440) % 1440;
+  let h = Math.floor(mins / 60);
+  const m = pad(mins % 60);
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  return `${h}:${m} ${ampm}`;
+}
+
+function formatRange(start, end) {
+  return `${formatTime(start)} – ${formatTime(end)}`;
+}
+
+function getMode(date = new Date()) {
+  const day = date.getDay();
+  const isA = day >= 1 && day <= 4;
+
+  return {
+    code: isA ? "A" : "B",
+    label: isA ? "Mode A · Dev + Study" : "Mode B · Survival",
+    schedule: isA ? scheduleA : scheduleB
+  };
+}
+
+function isWithin(mins, start, end) {
+  if (start < end) {
+    return mins >= start && mins < end;
+  }
+
+  // Handles sleep blocks crossing midnight.
+  return mins >= start || mins < end;
+}
+
+function getCurrentTask(date = new Date()) {
+  const mode = getMode(date);
+  const mins = minutesNow(date);
+  let task = mode.schedule.find(t => isWithin(mins, t.start, t.end));
+
+  if (!task) {
+    task = {
+      id: "off-rail",
+      start: mins,
+      end: mins,
+      title: "Off the rail — next block will appear on schedule"
+    };
+  }
+
+  // Sunday evening exception.
+  if (date.getDay() === 0 && task.id === "study-evening") {
+    task = {
+      ...task,
+      id: "weekly-review",
+      title: "🧭 Weekly Review: habits, money, study progress"
+    };
+  }
+
+  return {
+    ...task,
+    mode: mode.code,
+    modeLabel: mode.label,
+    timeRange: task.id === "off-rail" ? "No active scheduled block" : formatRange(task.start, task.end)
+  };
+}
+
+function taskKey(task) {
+  return `${task.mode}:${task.id}:${task.start}-${task.end}`;
+}
+
+function loadAll() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveAll(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function getTodayLog() {
+  const all = loadAll();
+  const dateKey = localDateKey();
+
+  if (!all[dateKey]) {
+    all[dateKey] = {
+      date: dateKey,
+      createdAt: new Date().toISOString(),
+      entries: {}
+    };
+    saveAll(all);
+  }
+
+  return all[dateKey];
+}
+
+function saveEntry(task, payload) {
+  const all = loadAll();
+  const dateKey = localDateKey();
+
+  if (!all[dateKey]) {
+    all[dateKey] = {
+      date: dateKey,
+      createdAt: new Date().toISOString(),
+      entries: {}
+    };
+  }
+
+  const key = taskKey(task);
+
+  all[dateKey].entries[key] = {
+    taskId: task.id,
+    title: task.title,
+    mode: task.mode,
+    modeLabel: task.modeLabel,
+    allottedTime: task.timeRange,
+    startMinute: task.start,
+    endMinute: task.end,
+
+    status: payload.status,
+    completionPercent: payload.completionPercent,
+    remarks: payload.remarks,
+    moodEmoji: payload.moodEmoji,
+    moodLabel: payload.moodLabel,
+
+    savedAt: new Date().toISOString()
+  };
+
+  all[dateKey].updatedAt = new Date().toISOString();
+  saveAll(all);
+}
+
+function getEntryForTask(task) {
+  const today = getTodayLog();
+  return today.entries[taskKey(task)] || null;
+}
+
+/* =========================================================
+   UI RENDERING
+   ========================================================= */
+
+function renderMain() {
+  const now = new Date();
+  currentTask = getCurrentTask(now);
+
+  els.clockPill.textContent = formatClock(now);
+  els.modeLabel.textContent = currentTask.modeLabel;
+  els.taskName.textContent = currentTask.title;
+  els.taskTime.textContent = currentTask.timeRange;
+
+  const entry = getEntryForTask(currentTask);
+
+  if (entry) {
+    els.savedBanner.classList.add("show");
+    els.savedBanner.innerHTML = `
+      ✅ Saved as <b>${entry.status}</b> · 
+      ${entry.completionPercent}% · 
+      ${entry.moodEmoji || "No mood"}
+    `;
+  } else {
+    els.savedBanner.classList.remove("show");
+    els.savedBanner.innerHTML = "";
+  }
+
+  renderStats();
+  renderLogList();
+  renderSignoff();
+}
+
+function renderStats() {
+  const today = getTodayLog();
+  const entries = Object.values(today.entries);
+
+  const done = entries.filter(e => e.status === "Completed").length;
+  const partial = entries.filter(e => e.status === "Partially Completed").length;
+  const missed = entries.filter(e => e.status === "Not Attempted").length;
+
+  els.doneCount.textContent = done;
+  els.partialCount.textContent = partial;
+  els.missedCount.textContent = missed;
+
+  const totalPoints = entries.reduce((sum, e) => {
+    if (e.status === "Completed") return sum + 100;
+    if (e.status === "Partially Completed") return sum + Math.round(e.completionPercent || 50);
+    return sum;
+  }, 0);
+
+  const possible = Math.max(entries.length * 100, 100);
+  const percent = Math.min(100, Math.round((totalPoints / possible) * 100));
+
+  els.xpText.textContent = `${totalPoints} / ${possible}`;
+  els.xpFill.style.width = `${percent}%`;
+}
+
+function renderLogList() {
+  const today = getTodayLog();
+  const entries = Object.values(today.entries)
+    .sort((a, b) => a.startMinute - b.startMinute);
+
+  if (!entries.length) {
+    els.logList.innerHTML = `
+      <div class="log-empty">
+        No saved quests yet. Complete the current block to start building today's record.
+      </div>
+    `;
+    return;
+  }
+
+  els.logList.innerHTML = entries.map(e => `
+    <div class="log-item">
+      <strong>${escapeHtml(e.title)}</strong>
+      <small>${escapeHtml(e.allottedTime)} · ${escapeHtml(e.status)} · ${e.completionPercent}% · ${e.moodEmoji || ""} ${escapeHtml(e.moodLabel || "")}</small>
+      ${e.remarks ? `<small>“${escapeHtml(e.remarks)}”</small>` : ""}
+    </div>
+  `).join("");
+}
+
+function renderSignoff() {
+  const mins = minutesNow();
+  if (mins >= SIGN_OFF_MINUTE) {
+    els.signoff.classList.add("show");
+  } else {
+    els.signoff.classList.remove("show");
+  }
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function openModal(status) {
+  currentStatus = status;
+  selectedMood = null;
+
+  const existing = getEntryForTask(currentTask);
+
+  els.modalTitle.textContent = status;
+  els.modalSub.textContent = currentTask.title;
+
+  let defaultPercent = 50;
+  if (status === "Completed") defaultPercent = 100;
+  if (status === "Partially Completed") defaultPercent = 50;
+  if (status === "Not Attempted") defaultPercent = 0;
+
+  els.percentSlider.value = existing?.completionPercent ?? defaultPercent;
+  els.percentValue.textContent = `${els.percentSlider.value}%`;
+  els.remarks.value = existing?.remarks ?? "";
+
+  document.querySelectorAll(".mood").forEach(btn => {
+    btn.classList.remove("selected");
+
+    if (existing && btn.dataset.mood === existing.moodLabel) {
+      btn.classList.add("selected");
+      selectedMood = {
+        emoji: btn.textContent.trim(),
+        label: btn.dataset.mood
+      };
+    }
+  });
+
+  els.modalBackdrop.classList.add("open");
+}
+
+function closeModal() {
+  els.modalBackdrop.classList.remove("open");
+}
+
+function saveModalData() {
+  if (!selectedMood) {
+    showToast("Pick a mood first");
+    return;
+  }
+
+  saveEntry(currentTask, {
+    status: currentStatus,
+    completionPercent: Number(els.percentSlider.value),
+    remarks: els.remarks.value.trim(),
+    moodEmoji: selectedMood.emoji,
+    moodLabel: selectedMood.label
+  });
+
+  closeModal();
+  renderMain();
+  showToast("Quest saved locally");
+
+  if (currentStatus === "Completed") {
+    burstConfetti();
+  }
+}
+
+/* =========================================================
+   DOWNLOAD SIGN OFF
+   ========================================================= */
+
+function downloadTodayData() {
+  const all = loadAll();
+  const dateKey = localDateKey();
+  const today = all[dateKey] || {
+    date: dateKey,
+    entries: {}
+  };
+
+  const output = {
+    date: dateKey,
+    signedOffAt: new Date().toISOString(),
+    deviceStorageKey: STORAGE_KEY,
+    summary: buildSummary(today),
+    entries: today.entries
+  };
+
+  const blob = new Blob([JSON.stringify(output, null, 2)], {
+    type: "application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = `daily-quest-log-${dateKey}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+  showToast("Downloaded today’s quest log");
+}
+
+function buildSummary(today) {
+  const entries = Object.values(today.entries || {});
+
+  return {
+    totalSavedBlocks: entries.length,
+    completed: entries.filter(e => e.status === "Completed").length,
+    partiallyCompleted: entries.filter(e => e.status === "Partially Completed").length,
+    notAttempted: entries.filter(e => e.status === "Not Attempted").length,
+    averageCompletionPercent: entries.length
+      ? Math.round(entries.reduce((sum, e) => sum + Number(e.completionPercent || 0), 0) / entries.length)
+      : 0
+  };
+}
+
+/* =========================================================
+   EFFECTS
+   ========================================================= */
+
+function showToast(message) {
+  els.toast.textContent = message;
+  els.toast.classList.add("show");
+
+  setTimeout(() => {
+    els.toast.classList.remove("show");
+  }, 1700);
+}
+
+function burstConfetti() {
+  const colors = ["#ffd166", "#ff4fd8", "#32f6ff", "#5cff9d", "#ffffff"];
+
+  for (let i = 0; i < 34; i++) {
+    const piece = document.createElement("i");
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = `${Math.random() * 180}ms`;
+    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+    els.confetti.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 1200);
+  }
+}
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+
+document.querySelectorAll(".choice").forEach(btn => {
+  btn.addEventListener("click", () => {
+    openModal(btn.dataset.status);
+  });
+});
+
+els.closeModal.addEventListener("click", closeModal);
+
+els.modalBackdrop.addEventListener("click", event => {
+  if (event.target === els.modalBackdrop) {
+    closeModal();
+  }
+});
+
+els.percentSlider.addEventListener("input", () => {
+  els.percentValue.textContent = `${els.percentSlider.value}%`;
+});
+
+els.moodButtons.addEventListener("click", event => {
+  const btn = event.target.closest(".mood");
+  if (!btn) return;
+
+  document.querySelectorAll(".mood").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+
+  selectedMood = {
+    emoji: btn.textContent.trim(),
+    label: btn.dataset.mood
+  };
+});
+
+els.saveBtn.addEventListener("click", saveModalData);
+els.signoffBtn.addEventListener("click", downloadTodayData);
+
+/* =========================================================
+   START
+   ========================================================= */
+
+renderMain();
+
+// Refresh display every 20 seconds so the current block changes automatically.
+setInterval(renderMain, 20000);
+</script>
+</body>
+</html>
