@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1022">
+<title>Workout | Mr. Manager</title>
+<style>
+:root{color-scheme:dark;--bg:#0a1022;--card:#151e35;--line:#ffffff1d;--text:#f4f7ff;--sub:#9eacc9;--mint:#72efca;--blue:#82b6ff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}body{background:radial-gradient(ellipse at 75% 0%,#324d8a64,transparent 55%),radial-gradient(ellipse at 10% 85%,#176a6240,transparent 45%),var(--bg);background-attachment:fixed}.app{max-width:600px;margin:auto;padding:18px 16px calc(112px + env(safe-area-inset-bottom))}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.kicker{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--mint);font-weight:800;margin:2px 0 4px}h1{font-size:clamp(26px,6vw,34px);line-height:1.1;letter-spacing:-.04em;margin:0}h2{font-size:20px;letter-spacing:-.025em;margin:0}.level-group{display:flex;flex-direction:column;align-items:flex-end;gap:5px}.top-actions{display:flex;align-items:flex-start;gap:9px}.signoff{border:1px solid #72efca99;border-radius:12px;padding:11px 12px;background:#1c5148;color:#c4ffea;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap}.signoff:active{transform:scale(.97)}.level-group label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--sub);font-weight:750}select{appearance:none;background:#192743;color:white;border:1px solid #6886b475;border-radius:12px;padding:11px 27px 11px 12px;font-size:13px;font-weight:750;max-width:130px;background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23b4d5ff" stroke-width="3"%3E%3Cpath d="m6 9 6 6 6-6"/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 8px center}.intro{color:var(--sub);font-size:13px;line-height:1.55;margin:16px 0 20px}.days{display:grid;gap:12px;margin-top:28px}.day{position:relative;display:flex;align-items:center;justify-content:space-between;text-align:left;width:100%;padding:20px 18px;min-height:92px;background:linear-gradient(125deg,#213455,#141d33);border:1px solid #729ed94d;color:var(--text);border-radius:19px;font-size:20px;font-weight:800;letter-spacing:-.025em;box-shadow:0 12px 24px #03091755;cursor:pointer;-webkit-tap-highlight-color:transparent}.day:nth-child(2){background:linear-gradient(125deg,#21483f,#141d33);border-color:#66ccaa51}.day:nth-child(3){background:linear-gradient(125deg,#493561,#141d33);border-color:#c19ef557}.day span{color:var(--mint);font-size:25px}.day:active,.back:active,.set:active,.action:active{transform:scale(.98)}.hidden{display:none!important}.heading-row{display:flex;align-items:center;gap:12px;margin:25px 0 8px}.back{background:#1b2b47;border:1px solid #ffffff26;border-radius:11px;padding:9px 12px;color:var(--text);font-size:14px;cursor:pointer}.detail{font-size:12px;color:var(--sub);margin:0 0 16px}.exercise-list{display:grid;gap:10px}.exercise{background:linear-gradient(135deg,#192641ed,#131d32f5);border:1px solid var(--line);border-radius:16px;padding:13px 14px}.ex-row{display:flex;gap:10px;align-items:start;justify-content:space-between}.ex-name{font-size:15px;font-weight:750;line-height:1.35}.ex-num{color:var(--mint);font-size:11px;letter-spacing:.08em;font-weight:850;margin-right:6px}.ex-note{color:var(--sub);font-size:11px;margin:5px 0 10px;line-height:1.4}.reps{font-size:12px;color:#c4dcff;font-weight:800;white-space:nowrap;margin-top:1px}.sets{display:grid;grid-template-columns:1fr 1fr;gap:9px}.set{border:1px solid #6588ba54;border-radius:11px;background:#24345176;color:#bdccec;padding:11px 8px;min-height:43px;font-weight:750;font-size:12px;cursor:pointer;transition:.15s}.set.done{background:#145344b8;color:#a4ffe1;border-color:#51d9aa}.footer{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#0b1428f5;backdrop-filter:blur(18px);border-top:1px solid #92b8ef42;padding:10px 12px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px #0006}.footer-inner{max-width:600px;margin:auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;align-items:stretch}.time{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#172741;border:1px solid #6384ab4d;border-radius:13px;font-weight:850;font-size:clamp(19px,5.2vw,27px);font-variant-numeric:tabular-nums;letter-spacing:-.035em}.time small{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--sub);font-weight:750;margin-bottom:2px}.action{min-height:59px;border:0;border-radius:13px;font-size:15px;font-weight:850;color:#082019;background:var(--mint);cursor:pointer}.action.stop{background:#e3a1ad;color:#361119}.action.reset{background:#2b3b58;color:#dbe6ff;border:1px solid #7792c048}.action:disabled{opacity:.45;cursor:default}.wake-line{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:14px 1px 0;font-size:12px;color:var(--sub)}.wake-control{border:1px solid #6c98cb73;border-radius:9px;background:#1e3150;color:#e9f5ff;padding:8px 10px;font-size:11px;font-weight:750;cursor:pointer}.wake-control.on{color:#8df3d2;border-color:#54d8a5}.progress{margin:0 0 12px;color:#a4f2d7;font-size:12px;font-weight:700}@media(max-height:550px){.app{padding-top:12px}.days{margin-top:15px;gap:8px}.day{min-height:65px;padding:12px 16px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="top">
+    <div><p class="kicker">Mr. Manager / Training</p><h1>Workout</h1></div>
+    <div class="top-actions"><button type="button" class="signoff" id="signoff">Sign Off ↓</button><div class="level-group"><label for="level">Hardness</label><select id="level"><option value="0">Rookie</option><option value="1">Private</option><option value="2">Sergeant</option><option value="3">General</option><option value="4">Veteran</option></select></div></div>
+  </div>
+  <section id="chooser"><p class="intro">Choose your mission. 13 exercises per day, 2 sets each. Just you and your two dumbbells.</p><div class="days"><button class="day" data-day="upper">Upper Body Day <span>↗</span></button><button class="day" data-day="lower">Lower Body Day <span>↗</span></button><button class="day" data-day="mixed">Mixed Day <span>↗</span></button></div></section>
+  <section id="routine" class="hidden"><div class="heading-row"><button id="back" class="back" aria-label="Choose another workout">← Days</button><h2 id="day-title"></h2></div><p class="detail">Do each set with control. Rest as needed between sets. Reps adjust with hardness.</p><p class="progress" id="progress">0 / 26 sets complete</p><div class="exercise-list" id="exercise-list"></div></section>
+  <div class="wake-line"><span id="wake-status">Screen awake: Off</span><button id="wake-toggle" class="wake-control" type="button" aria-pressed="false">Keep screen awake</button></div>
+</main>
+<footer class="footer" aria-label="Stopwatch controls"><div class="footer-inner"><div class="time"><small>Stopwatch</small><span id="clock">00:00.0</span></div><button class="action" id="start">Start</button><button class="action stop" id="stop">Stop</button></div></footer>
+<script>
+'use strict';
+// Rep values below are for Sergeant. The five levels scale them; pushups stay within a 7-rep max.
+// Hold lengths are in seconds rather than repetitions.
+const plans = {
+  upper: [
+    ['Wall Push-ups',12,'Bodyweight'],['Knee Push-ups',6,'Bodyweight'],['Standard Push-ups',4,'Bodyweight; maximum 7 per set'],
+    ['Dumbbell Floor Press',10,'Two dumbbells'],['One-arm Dumbbell Row',10,'Each side'],
+    ['Dumbbell Shoulder Press',8,'Two dumbbells'],['Dumbbell Biceps Curl',10,'Two dumbbells'],
+    ['Hammer Curl',10,'Two dumbbells'],['Overhead Triceps Extension',10,'One dumbbell'],
+    ['Dumbbell Lateral Raise',8,'Two light dumbbells'],['Bent-over Reverse Fly',8,'Two light dumbbells'],
+    ['Dumbbell Front Raise',8,'Two light dumbbells'],['Forearm Plank',25,'Hold', 'sec']
+  ],
+  lower: [
+    ['Bodyweight Squat',14,'Bodyweight'],['Goblet Squat',10,'One dumbbell'],['Reverse Lunge',8,'Each leg'],
+    ['Dumbbell Romanian Deadlift',10,'Two dumbbells'],['Glute Bridge',14,'Bodyweight'],
+    ['Sumo Squat',12,'Hold one dumbbell'],['Standing Calf Raise',16,'Bodyweight or dumbbells'],
+    ['Single-leg Calf Raise',8,'Each leg'],['Step-back Split Squat',8,'Each leg'],
+    ['Side Lunge',8,'Each side'],['Wall Sit',25,'Hold','sec'],
+    ['Standing Hip Abduction',12,'Each side; bodyweight'],['Dead Bug',10,'Each side']
+  ],
+  mixed: [
+    ['Standard Push-ups',4,'Bodyweight; maximum 7 per set'],['Goblet Squat',10,'One dumbbell'],
+    ['One-arm Dumbbell Row',10,'Each arm'],['Reverse Lunge',8,'Each leg'],
+    ['Dumbbell Floor Press',10,'Two dumbbells'],['Dumbbell Romanian Deadlift',10,'Two dumbbells'],
+    ['Dumbbell Shoulder Press',8,'Two dumbbells'],['Glute Bridge',14,'Bodyweight'],
+    ['Hammer Curl',10,'Two dumbbells'],['Standing Calf Raise',16,'Bodyweight'],
+    ['Overhead Triceps Extension',10,'One dumbbell'],['Dead Bug',10,'Each side'],
+    ['Forearm Plank',25,'Hold','sec']
+  ]
+};
+const titles={upper:'Upper Body Day',lower:'Lower Body Day',mixed:'Mixed Day'};
+const factors=[.65,.82,1,1.12,1.25];
+const level=document.getElementById('level'),chooser=document.getElementById('chooser'),routine=document.getElementById('routine'),list=document.getElementById('exercise-list');
+let selected=null;
+const checked={upper:new Map(),lower:new Map(),mixed:new Map()};
+function repCount(ex){const [name,base]=ex;let n=Math.max(1,Math.round(base*factors[+level.value]));if(name==='Standard Push-ups')n=Math.min(7,n);return n;}
+function repsFor(ex){return `${repCount(ex)} ${ex[3]==='sec'?'sec':'reps'}`;}
+function render(){if(!selected)return;document.getElementById('day-title').textContent=titles[selected];list.replaceChildren();plans[selected].forEach((ex,i)=>{const card=document.createElement('article');card.className='exercise';const head=document.createElement('div');head.className='ex-row';const name=document.createElement('div');name.className='ex-name';const num=document.createElement('span');num.className='ex-num';num.textContent=String(i+1).padStart(2,'0');name.append(num,document.createTextNode(ex[0]));const reps=document.createElement('div');reps.className='reps';reps.textContent=repsFor(ex)+' × 2';head.append(name,reps);const note=document.createElement('p');note.className='ex-note';note.textContent=ex[2];const sets=document.createElement('div');sets.className='sets';for(let s=1;s<=2;s++){const key=`${i}-${s}`;const btn=document.createElement('button');btn.type='button';btn.className='set'+(checked[selected].has(key)?' done':'');btn.textContent=`${checked[selected].has(key)?'✓ ':''}Set ${s} · ${checked[selected].has(key)?`${checked[selected].get(key).count} ${checked[selected].get(key).unit==='seconds'?'sec':'reps'}`:repsFor(ex)}`;btn.setAttribute('aria-pressed',checked[selected].has(key));btn.addEventListener('click',()=>{if(checked[selected].has(key))checked[selected].delete(key);else checked[selected].set(key,{count:repCount(ex),unit:ex[3]==='sec'?'seconds':'reps',level:level.options[level.selectedIndex].text});render();});sets.append(btn)}card.append(head,note,sets);list.append(card)});document.getElementById('progress').textContent=`${checked[selected].size} / 26 sets complete`;}
+document.querySelectorAll('[data-day]').forEach(btn=>btn.addEventListener('click',()=>{selected=btn.dataset.day;chooser.classList.add('hidden');routine.classList.remove('hidden');render();window.scrollTo(0,0)}));document.getElementById('back').addEventListener('click',()=>{selected=null;routine.classList.add('hidden');chooser.classList.remove('hidden');window.scrollTo(0,0)});level.addEventListener('change',render);
+// Timestamp-based timer continues accurately even when Android throttles background rendering.
+let elapsed=0,startedAt=0,ticking=null,state='idle';const clock=document.getElementById('clock'),start=document.getElementById('start'),stop=document.getElementById('stop');
+function format(ms){const tenths=Math.floor(ms/100)%10,seconds=Math.floor(ms/1000)%60,minutes=Math.floor(ms/60000);return `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}.${tenths}`;}
+function drawTimer(){clock.textContent=format(elapsed+(state==='running'?performance.now()-startedAt:0));start.textContent=state==='running'?'Running':state==='stopped'?'Resume':'Start';start.disabled=state==='running';stop.textContent=state==='stopped'?'Reset':'Stop';stop.classList.toggle('reset',state==='stopped');stop.classList.toggle('stop',state!=='stopped');}
+start.addEventListener('click',()=>{if(state==='running')return;startedAt=performance.now();state='running';clearInterval(ticking);ticking=setInterval(drawTimer,90);drawTimer();});
+stop.addEventListener('click',()=>{if(state==='running'){elapsed+=performance.now()-startedAt;state='stopped';clearInterval(ticking);}else{elapsed=0;state='idle';clearInterval(ticking);}drawTimer();});drawTimer();
+// Wake Lock API requires HTTPS and a user gesture, and may be unavailable with low battery.
+let wakeLock=null,wakeWanted=false;const wakeButton=document.getElementById('wake-toggle'),wakeStatus=document.getElementById('wake-status');
+function wakeUI(message){wakeStatus.textContent=message||('Screen awake: '+(wakeLock?'On':'Off'));wakeButton.textContent=wakeWanted?'Allow screen to sleep':'Keep screen awake';wakeButton.classList.toggle('on',!!wakeLock);wakeButton.setAttribute('aria-pressed',String(wakeWanted));}
+async function requestWake(){if(!('wakeLock' in navigator)){wakeWanted=false;wakeUI('Screen awake: Not supported by this browser');return;}try{const lock=await navigator.wakeLock.request('screen');wakeLock=lock;lock.addEventListener('release',()=>{if(wakeLock===lock){wakeLock=null;wakeUI();}});wakeUI();}catch(e){wakeLock=null;wakeWanted=false;wakeUI('Screen awake: Unavailable (check HTTPS / battery)');}}
+wakeButton.addEventListener('click',async()=>{wakeWanted=!wakeWanted;if(wakeWanted)await requestWake();else{const lock=wakeLock;wakeLock=null;if(lock)await lock.release();wakeUI();}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&wakeWanted&&!wakeLock)requestWake();});
+
+// Export all completed workout data as a plain JSON key-value document.
+function workoutReport(){
+  const days={};let totalSets=0,totalReps=0,totalHoldSeconds=0;
+  for(const [day,exercises] of Object.entries(plans)){
+    const stats={};
+    exercises.forEach((exercise,index)=>{
+      const completed=[];
+      for(let setNumber=1;setNumber<=2;setNumber++){
+        const data=checked[day].get(`${index}-${setNumber}`);
+        if(data)completed.push({set:setNumber,...data});
+      }
+      if(!completed.length) return;
+      const quantity=completed.reduce((sum,set)=>sum+set.count,0);
+      totalSets+=completed.length;
+      if(completed[0].unit==='seconds')totalHoldSeconds+=quantity;
+      else totalReps+=quantity;
+      stats[exercise[0]]={completed_sets:completed.length,quantity,unit:completed[0].unit,sets:completed};
+    });
+    if(Object.keys(stats).length)days[day]={name:titles[day],exercises:stats};
+  }
+  const elapsedMs=elapsed+(state==='running'?performance.now()-startedAt:0);
+  return {date:new Date().toLocaleDateString('en-CA'),exported_at:new Date().toISOString(),selected_level:level.options[level.selectedIndex].text,active_day:selected?titles[selected]:null,stopwatch_seconds:Math.round(elapsedMs/1000),total_completed_sets:totalSets,total_reps:totalReps,total_hold_seconds:totalHoldSeconds,days};
+}
+document.getElementById('signoff').addEventListener('click',()=>{
+  const report=workoutReport();
+  const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const anchor=document.createElement('a');
+  anchor.href=url;
+  anchor.download=`workout-${report.date}.json`;
+  document.body.appendChild(anchor);
+  anchor.click();anchor.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Virtual Engineering Lab: Project Curriculum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f7;--grid:#d7dfeb;--card:#fff;--ink:#0f1b2d;--mute:#56657d;--line:#cfd8e6;--acc:#1d4ed8;--hi:#fde68a;--soft:#e4ebf8;
+--head:'Bricolage Grotesque','Trebuchet MS',sans-serif;--body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#0c1a31;--grid:#16294a;--card:#112345;--ink:#e8eefb;--mute:#9db0cf;--line:#24396400;--line:#243964;--acc:#7aa2ff;--hi:#5b4a0a;--soft:#162b52}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--body);
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px}
+a{color:var(--acc)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 28px}
+h1{font:800 clamp(2.2rem,6vw,3.6rem)/1.05 var(--head);margin:0 0 14px;letter-spacing:-.02em}
+.lede{max-width:56ch;color:var(--mute);font-size:1.1rem;margin:0 0 22px}
+.hero{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+@media(min-width:760px){.hero{grid-template-columns:1.3fr 1fr}}
+.hero svg{width:100%;height:auto;max-width:340px;justify-self:center}
+.rule{background:var(--hi);padding:2px 8px;border-radius:4px;font-weight:600}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+nav .wrap{display:flex;gap:8px;overflow-x:auto;padding:10px 20px;scrollbar-width:thin}
+nav a{flex:none;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem;padding:5px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
+nav a:hover,nav a:focus-visible{border-color:var(--acc);color:var(--acc);outline:none}
+h2{font:800 1.9rem/1.15 var(--head);margin:0 0 6px;letter-spacing:-.01em}
+h3{font:600 1.1rem var(--head);margin:26px 0 10px}
+section{padding:44px 0 6px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:16px}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.tool b{display:block;font-family:var(--head);font-size:1.05rem}
+.tool span{color:var(--mute);font-size:.9rem}
+.tablebox{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--soft)}
+tr:last-child td{border-bottom:0}
+td a{font-weight:600;text-decoration:none}
+.stars{color:var(--acc);letter-spacing:1px;white-space:nowrap}
+.pill{display:inline-block;background:var(--soft);border-radius:99px;padding:2px 12px;font-size:.85rem;margin:0 6px 6px 0}
+.meta{color:var(--mute);margin:0 0 14px;font-size:.95rem}
+.num{font:800 .95rem var(--head);color:var(--acc);display:block;margin-bottom:2px}
+.mission{background:var(--card);border-left:5px solid var(--acc);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+.mission p{margin:0}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;gap:12px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-left:auto;color:var(--acc);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"\2212"}
+summary:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:10px}
+.sn{color:var(--acc);font-family:var(--head);min-width:1.6em}
+details .body{padding:0 16px 14px 52px;color:var(--ink)}
+details .body p{margin:0}
+.grad{background:var(--ink);color:var(--bg);border-radius:12px;padding:18px 22px;margin-top:18px}
+.grad h3{margin:0 0 6px;color:var(--bg)}
+.grad p{margin:0}
+.crit{list-style:none;padding:0;margin:0}
+.crit li{margin:4px 0}
+.crit label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.crit input{margin-top:6px;accent-color:var(--acc);width:16px;height:16px}
+.crit input:checked+span{text-decoration:line-through;color:var(--mute)}
+.note{color:var(--mute);font-size:.9rem}
+footer{padding:50px 0 70px;color:var(--mute);font-size:.9rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap hero">
+<div>
+<h1>Virtual Engineering Lab</h1>
+<p class="lede">A 13-project engineering curriculum, built in simulation. This page covers the first seven projects, from a two-wheel rover to a warehouse robot.</p>
+<p><span class="rule">Rule for all seven: do not buy hardware.</span></p>
+<p><strong>Predict → Test → Explain.</strong> Do this for every experiment, and write the prediction down before you run it.</p>
+</div>
+<svg viewBox="0 0 340 300" role="img" aria-label="Top-down rover driving a square path">
+<rect x="50" y="40" width="240" height="220" rx="4" fill="none" stroke="var(--acc)" stroke-width="2" stroke-dasharray="7 7"/>
+<g transform="translate(130 150)">
+<rect x="-6" y="-34" width="12" height="22" rx="2" fill="var(--ink)" transform="translate(-44 4)"/>
+<rect x="-6" y="-34" width="12" height="22" rx="2" fill="var(--ink)" transform="translate(44 4)"/>
+<rect x="-38" y="-48" width="76" height="86" rx="8" fill="var(--hi)" stroke="var(--ink)" stroke-width="2.5"/>
+<circle cx="0" cy="48" r="5" fill="var(--ink)"/>
+<path d="M0 -26 L9 -10 H-9Z" fill="var(--acc)"/>
+</g>
+<circle cx="50" cy="40" r="4" fill="var(--acc)"/><circle cx="290" cy="40" r="4" fill="var(--acc)"/><circle cx="290" cy="260" r="4" fill="var(--acc)"/><circle cx="50" cy="260" r="4" fill="var(--acc)"/>
+</svg>
+</div></header>
+<nav aria-label="Projects"><div class="wrap" id="nav"><a href="#tools">Tools</a><a href="#overview">Overview</a></div></nav>
+<main class="wrap">
+<section id="tools"><h2>Tools</h2>
+<p class="meta">Standardise on one main simulator so no hobby time is lost installing new ecosystems.</p>
+<div class="tools">
+<div class="tool"><b><a href="https://cyberbotics.com">Webots</a></b><span>Main robotics simulator. Open source, with sensors, motors, cameras, physics and example worlds.</span></div>
+<div class="tool"><b><a href="https://www.freecad.org/downloads.php">FreeCAD</a></b><span>Default CAD. Free, local files, native on Apple Silicon and Windows.</span></div>
+<div class="tool"><b><a href="https://wokwi.com">Wokwi</a></b><span>Later: simulate Arduino and ESP32, sensors, LEDs and servos.</span></div>
+<div class="tool"><b><a href="https://www.onshape.com/en/education/plans">Onshape Education</a></b><span>Browser CAD alternative if you are eligible.</span></div>
+</div></section>
+
+<section id="overview"><h2>The first seven projects</h2>
+<div class="tablebox"><table><thead><tr><th>#</th><th>Project</th><th>Main skill</th><th>Software</th><th>Difficulty</th><th>Time</th></tr></thead><tbody id="ov"></tbody></table></div></section>
+<div id="projects"></div>
+</main>
+<footer><div class="wrap">Ticked criteria are saved in this browser only. Notes are laboratory documentation, so keep them plain.<br>Project 7 is unfinished in the source notes; add routes and graduation when ready.</div></footer>
+
+<script>
+const P=[
+{n:1,t:"Two-Wheel Rover",skill:"Mechanics + differential drive",sw:"Webots + FreeCAD",s:1,time:"8–12 h",
+mission:"Start, drive 5 m, stop, turn 90°, drive again, and return approximately to the start. This is your robotics equivalent of making fire.",
+learn:["Chassis geometry","Wheels and joints","Motors","Friction and mass","Centre of gravity","Wheelbase","Turning","Basic control"],
+crit:["Drive straight for 5 m","Stop accurately","Perform a 90° turn","Complete a square path","Test three wheel sizes","Test three centre-of-mass positions","Record results","Save final design"],
+ses:[
+["Install the laboratory","Install Webots and FreeCAD on the Mac mini M2. Create the folder Virtual Engineering Lab/01 Two Wheel Rover/ with CAD, Webots, Results, Screenshots and Notes. Add a PROJECT.md with the mission and success criteria."],
+["Learn Webots without building","Run Help → Guided Tour for 45–60 minutes at most. Learn only: camera movement, scene tree, start/pause/reset, selecting objects, translation, rotation, basic physics, and how a Robot holds motors and joints."],
+["Steal a robot","Run a simple wheeled sample world. Equal wheel speeds go straight, a slower left wheel curves left, and opposite wheel directions pivot on the spot. Write three observations. You have met differential drive."],
+["Understand the geometry","Two powered wheels and one passive caster. Starting dimensions: chassis 250 × 180 × 50 mm, wheel Ø80 mm × 25 mm wide, wheel centres 180 mm apart. They are not sacred; they give you something plausible to abuse."],
+["CAD the rover","In FreeCAD, make a rectangular chassis, a cylinder wheel (Ø80, 25 wide) and a simple assembly with one wheel each side. Export screenshots. Skip screws and bearings; this model is conceptual."],
+["Build it in Webots","Use Robot → Chassis, then a HingeJoint with RotationalMotor and wheel for each side, plus a rear support. The idea to hold on to is Body → Joint → Motor → Wheel."],
+["First movement","Run both motors at the same speed, around 1 m/s or slower. If it spins, flips and launches, that is robotics. Check wheel orientation, axis direction, collision geometry, chassis mass, motor speed and friction."],
+["Straight-line experiment","Build a 5 m runway and record distance and time over three trials at 80 mm. Repeat with 60, 80 and 100 mm wheels at constant motor speed. Predict how linear speed changes with radius before you Google it."],
+["Turning","Try a gentle turn (left 4, right 6), a tight turn (left 1, right 6) and a pivot (−4 / +4). Record the time or wheel rotation for 90°, then chain four turns into a square. Values are illustrative."],
+["Centre of gravity torture test","Compare A: mass low and centred, B: mass high, C: mass offset to one side. Run identical turns and watch stability, slip, tipping and accuracy. Write best, worst, and why you think so."]],
+grad:"Travel 5 m, stop, rotate about 90°, drive a square, survive different wheel sizes and centre-of-mass setups. Save one screen recording. Finish with final wheel diameter, spacing, chassis size, mass, max stable speed, best discovery, biggest failure, what surprised you, and three things you would change if built physically."},
+{n:2,t:"Obstacle-Avoiding Rover",skill:"Sensors + decision logic",sw:"Webots",s:2,time:"8–12 h",
+mission:"Now Rover gets eyes. It must drive through an arena autonomously without hitting anything. Target: 5 minutes of autonomous movement with zero collisions.",
+learn:["Distance sensors","Sensor calibration","Reflex logic","Failure logs","System optimisation"],
+crit:["Two angled distance sensors working","Sensor distance table recorded","Rover survives the 4 × 4 m arena","Sensor angle experiment done","Survive an unfamiliar arena for 5 minutes"],
+ses:[
+["Copy Rover","Do not start again. Duplicate Project 1 into 02 Obstacle Avoid Rover/. Your finished Rover becomes Rover Mk II. Real engineering evolves designs."],
+["Give Rover two eyes","Add left-front and right-front distance sensors, angled slightly outward. Enable sensor-ray visualisation and confirm both sensors see objects."],
+["Understand sensor readings","Put a wall ahead and record both sensors at 100, 75, 50, 25 and 10 cm. A sensor does not say \"37.2 cm\"; it gives a measurement your controller must interpret."],
+["First reflex","Far: drive straight. Left obstacle: turn right. Right obstacle: turn left. Both: reverse briefly, rotate, continue. No AI, no mapping. Roughly the intelligence of a startled beetle."],
+["Build the arena","Make a 4 × 4 m arena with 8–12 obstacles: blocks, narrow passages, angled walls and one dead end. Run it, then log every failure with a cause and a change. Keep the Failure Log for every future project."],
+["Sensor-angle experiment","Run 3 minutes each at 10°, 20°, 30° and 45° outward. Record collisions per run. You are now optimising a system."],
+["Add side awareness","Compare 2 sensors with 4 sensors. Does twice the sensors make the robot twice as good? Engineering answers are usually annoyingly rude."],
+["Speed experiment","Run slow, medium and fast. Measure collisions, average intervention, and ability to pass narrow spaces. Going faster makes stupid decisions arrive faster."],
+["Unknown arena challenge","Build a second environment and do not tune for it. If it only works in the first, you built an obstacle-avoiding memoriser."]],
+grad:"Survive an unfamiliar arena for 5 continuous minutes with zero collisions, or as close as the design reasonably gets. Document best sensor configuration, angle and speed, the worst failure case, and what you would change physically."},
+{n:3,t:"Line-Following Robot",skill:"Feedback / control",sw:"Webots",s:2,time:"10–14 h",
+mission:"Make Rover follow a dark track autonomously: straight, curves, S-turn and a sharp corner without leaving the line. This is your first real control-system problem.",
+learn:["Floor-colour sensing","Calibration and thresholds","Control dynamics","Proportional control"],
+crit:["Calibrated thresholds","Sensor spacing results table","Survives broad, tight and S curves","Proportional gain K tuned","3 clean laps on the torture track"],
+ses:[
+["Build the track","Light floor, dark line, 30–50 mm wide. Start with a straight line, then add curves. Keep dimensions consistent."],
+["Add downward sensors","Install three floor sensors (left, centre, right) pointing down, built from distance-sensor-style devices, to tell dark line from light floor."],
+["Calibrate","Record all three sensors over white floor, then over the black line. Pick a threshold between the two. Rover can now answer: am I above line or floor?"],
+["Primitive controller","Centre sees line: straight. Left sees line: steer left. Right sees line: steer right. It will wobble, and the wobble is the lesson."],
+["Tune sensor spacing","Try 10, 20, 30 and 40 mm. Measure line losses, average wobble and curve performance in a results table."],
+["Tune speed","Try slow, medium and fast. A controller stable when slow becomes terrible when fast. That is control dynamics."],
+["Curved track","Test a broad curve, a tight curve and an S curve. Note which fails, then change the wheel speed difference or sensor placement until it survives."],
+["Proportional control","Steering correction = K × error, where error is desired position minus measured position. Low K is lazy, very high K oscillates violently, good K is smooth. Do not turn this into a maths course."],
+["K experiment","Test small, medium and large K. Measure lap time and line losses and plot K against performance, in a spreadsheet if you like."],
+["Torture track","One track with a straight, gentle curve, tight curve, S-turn and roughly 90° corner. Goal: 3 clean laps."]],
+grad:"Record the fastest successful lap and the most reliable controller; they may not be the same. Note sensor spacing, threshold, best speed, best K, biggest failure and most useful experiment."},
+{n:4,t:"Robotic Arm",skill:"Joints + kinematics",sw:"FreeCAD + Webots",s:3,time:"15–20 h",
+mission:"Design a 3-DOF or 4-DOF arm that can reach objects inside a defined workspace. Mechanical design in FreeCAD, joints, motors and physics in Webots.",
+learn:["Revolute joints","Degrees of freedom","Link length","Torque and payload","Workspace","Joint limits","Forward and inverse kinematics"],
+crit:["Arm designed in FreeCAD","Short/thick vs long/slender compared","Payload tests at 50, 100, 250, 500 g","Reachable workspace sketched","Reach five predefined positions"],
+ses:[
+["Compare configurations","Test short, thick links against long, slender links."],
+["Payload tests","Try 50 g, 100 g, 250 g and 500 g. Where can the arm reach, and where does it become unstable?"],
+["Map the workspace","Make a top-down sketch of its reachable workspace."]],
+grad:"Move the end-effector to five predefined positions without self-collision or exceeding joint limits."},
+{n:5,t:"Pick-and-Place Cell",skill:"Automation + sequencing",sw:"Webots",s:3,time:"15–20 h",
+mission:"Project 4 gets a job: object pile → robot arm → pickup → move → drop into container, using a simulated gripper.",
+learn:["Sequence control","Timing","End-effectors","Repeatability","Collision avoidance","Cycle time"],
+crit:["Gripper working","Three object and three destination locations","Objects per minute measured","20 consecutive objects moved cleanly"],
+ses:[
+["Add a gripper","Create three object locations and three destination locations."],
+["Measure and optimise","Measure objects moved per minute. The goal is not \"it works\"; it is \"can I make it faster without becoming unreliable?\""]],
+grad:"Move 20 objects consecutively without dropping one, colliding, or missing the destination."},
+{n:6,t:"Self-Balancing Robot",skill:"PID + dynamic stability",sw:"Webots",s:4,time:"20–30 h",
+mission:"Two wheels, tall body, must stay upright. Here comes useful pain: inertial sensing, feedback and PID control, using Webots' inverted-pendulum-style examples as a starting point.",
+learn:["P reacts to present error","I reacts to accumulated error","D reacts to rate of change","Inertial sensing"],
+crit:["Balance 10 s","Balance 30 s","Balance 2 minutes","Recover from small and medium pushes","Cope with added mass and a changed centre of gravity"],
+ses:[
+["Balance in stages","Hold upright for 10 seconds, then 30 seconds, then 2 minutes."],
+["Apply disturbances","Small push, medium push, added mass, changed centre of gravity."]],
+grad:"Remain upright for 2 minutes and recover from a moderate simulated disturbance."},
+{n:7,t:"Warehouse Robot",skill:"Navigation + systems design",sw:"Webots + FreeCAD",s:4,time:"20–30 h",
+mission:"Your first proper systems project: an autonomous mobile robot that receives a destination, travels through a warehouse, collects or delivers a virtual payload and returns.",
+learn:["Systems engineering","Navigation","Reusing Project 2 sensors","Reusing Project 3 control"],
+crit:["Warehouse built","Robot reaches a given destination","Payload collected or delivered","Returns to start"],
+ses:[
+["Build the environment","Shelves, aisles, a loading station, a delivery point, obstacles and intersections. Layout: two rows of shelves with an aisle between, START and DROP along the bottom."],
+["Investigate routes","Route A: shortest. (The source notes end here; add further routes and the graduation test.)"]],
+grad:"To be defined."}
+];
+const $=id=>document.getElementById(id);
+const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+$("nav").insertAdjacentHTML("beforeend",P.map(p=>`<a href="#p${p.n}">P${p.n}</a>`).join(""));
+$("ov").innerHTML=P.map(p=>`<tr><td>${p.n}</td><td><a href="#p${p.n}">${p.t}</a></td><td>${p.skill}</td><td>${p.sw}</td><td class="stars" aria-label="${p.s} of 5">${stars(p.s)}</td><td>${p.time}</td></tr>`).join("");
+$("projects").innerHTML=P.map(p=>`<section id="p${p.n}">
+<span class="num">Project ${p.n}</span><h2>${p.t}</h2>
+<p class="meta">${p.skill} · ${p.sw} · <span class="stars">${stars(p.s)}</span> · ${p.time}</p>
+<div class="mission"><p>${p.mission}</p></div>
+<div>${p.learn.map(l=>`<span class="pill">${l}</span>`).join("")}</div>
+<h3>Success criteria</h3>
+<ul class="crit">${p.crit.map((c,i)=>`<li><label><input type="checkbox" data-k="vel-${p.n}-${i}"><span>${c}</span></label></li>`).join("")}</ul>
+<h3>${p.n<4?"Sessions":"Plan"}</h3>
+${p.ses.map((s,i)=>`<details><summary><span class="sn">${i+1}</span>${s[0]}</summary><div class="body"><p>${s[1]}</p></div></details>`).join("")}
+<div class="grad"><h3>Graduation test</h3><p>${p.grad}</p></div>
+</section>`).join("");
+document.querySelectorAll('input[data-k]').forEach(b=>{b.checked=store.get(b.dataset.k)==="1";b.addEventListener("change",()=>store.set(b.dataset.k,b.checked?"1":"0"))});
+</script>
+</body>
+</html>
