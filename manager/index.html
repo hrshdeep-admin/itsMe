@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#080d20" />
+  <title>Mr. Manager</title>
+  <style>
+    :root { color-scheme: dark; --ink: #eef3ff; --muted: #a8b6d9; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #080d20; overflow: hidden; }
+    body::before { content: ""; position: fixed; inset: -35%; z-index: -2; background: radial-gradient(ellipse at 28% 22%, #3046a877, transparent 39%), radial-gradient(ellipse at 80% 75%, #0eacb64d, transparent 40%), radial-gradient(ellipse at 78% 20%, #ae4abb38, transparent 35%); animation: floatGlow 16s ease-in-out infinite alternate; pointer-events: none; }
+    body::after { content: ""; position: fixed; inset: 0; z-index: -1; opacity: .26; background-image: radial-gradient(#b1d6ff 0.65px, transparent 0.8px); background-size: 24px 24px; mask-image: linear-gradient(to bottom, #0006, transparent 95%); pointer-events: none; }
+    @keyframes floatGlow { from { transform: translate(-3%, -2%) rotate(-5deg) scale(1); } to { transform: translate(3%, 3%) rotate(6deg) scale(1.08); } }
+    .app { height: 100vh; height: 100dvh; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: clamp(12px, 2.4dvh, 24px); padding: max(12px, env(safe-area-inset-top)) 18px max(12px, env(safe-area-inset-bottom)); }
+    header { flex: 0 0 auto; width: min(100%, 430px); text-align: center; padding: clamp(11px, 2dvh, 22px) 14px; border: 1px solid #b8d5ff31; border-radius: 22px; background: linear-gradient(135deg, #ffffff13, #ffffff05); box-shadow: 0 18px 45px #0005, inset 0 1px #ffffff24; backdrop-filter: blur(14px); position: relative; overflow: hidden; }
+    header::before { content: ""; position: absolute; inset: -80% auto -80% -60%; width: 35%; transform: rotate(25deg); background: linear-gradient(90deg, transparent, #ffffff20, transparent); animation: shimmer 6s ease-in-out infinite; pointer-events: none; }
+    @keyframes shimmer { 0%, 45% { left: -60%; } 75%, 100% { left: 130%; } }
+    .eyebrow { margin: 0 0 3px; letter-spacing: .32em; text-transform: uppercase; font-size: clamp(8px, 1.3dvh, 11px); font-weight: 700; color: #93eee9; }
+    h1 { margin: 0; font-size: clamp(30px, 5.7dvh, 49px); line-height: 1.08; font-weight: 850; letter-spacing: -.055em; background: linear-gradient(105deg, #fff 18%, #9dddff 55%, #c3b0ff 90%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 3px 12px #76bcff36); }
+    nav { flex: 1 1 auto; min-height: 0; width: min(100%, 430px); display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); gap: clamp(7px, 1.25dvh, 13px); }
+    .menu-item { --accent: #8bc9ff; position: relative; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 0; isolation: isolate; overflow: hidden; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: clamp(13px, 2.2dvh, 20px); background: linear-gradient(110deg, color-mix(in srgb, var(--accent) 14%, #12192d), #12192dda 72%); box-shadow: 0 7px 20px #0003, inset 0 1px #ffffff13; color: #f8faff; text-decoration: none; text-align: center; font-weight: 740; font-size: clamp(14px, 2.25dvh, 20px); letter-spacing: .01em; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    .menu-item::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 4px; background: var(--accent); box-shadow: 0 0 20px var(--accent); }
+    .menu-item::after { content: "↗"; position: absolute; right: 16px; font-weight: 400; font-size: .95em; color: var(--accent); opacity: .7; }
+    .menu-item:hover, .menu-item:focus-visible { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 10px 28px #0006, 0 0 25px color-mix(in srgb, var(--accent) 20%, transparent); outline: none; }
+    .menu-item:active { transform: scale(.975); }
+    .menu-item:nth-child(1) { --accent: #ff947a; }
+    .menu-item:nth-child(2) { --accent: #78b9ff; }
+    .menu-item:nth-child(3) { --accent: #bc93ff; }
+    .menu-item:nth-child(4) { --accent: #f0c76e; }
+    .menu-item:nth-child(5) { --accent: #75e0bb; }
+    .menu-item:nth-child(6) { --accent: #f59cc9; }
+    .menu-item:nth-child(7) { --accent: #a3b4ff; }
+    .ripple { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 38%, white); transform: translate(-50%, -50%) scale(0); pointer-events: none; z-index: -1; animation: ripple .65s ease-out forwards; }
+    @keyframes ripple { to { transform: translate(-50%, -50%) scale(35); opacity: 0; } }
+    @media (max-height: 570px) { .app { gap: 8px; padding-top: max(6px, env(safe-area-inset-top)); padding-bottom: max(6px, env(safe-area-inset-bottom)); } header { padding: 7px 12px; border-radius: 15px; } h1 { font-size: 27px; } .eyebrow { font-size: 8px; } nav { gap: 5px; } .menu-item { font-size: 13px; border-radius: 10px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header aria-label="Mr. Manager">
+      <p class="eyebrow">Your command center</p>
+      <h1>Mr. Manager</h1>
+    </header>
+    <nav aria-label="Main navigation">
+      <a class="menu-item" href="workout/index.html">Workout</a>
+      <a class="menu-item" href="marinestudies/index.html">Marine Wizard</a>
+      <a class="menu-item" href="robotic/index.html">Roboticana</a>
+      <a class="menu-item" href="business/index.html">Businessman</a>
+      <a class="menu-item" href="softskills/index.html">Skill Miner</a>
+      <a class="menu-item" href="chores/index.html">House vs Me</a>
+      <a class="menu-item" href="adhoc/index.html">Adhoc Sloth</a>
+    </nav>
+  </main>
+  <script>
+    document.querySelectorAll('.menu-item').forEach(link => {
+      link.addEventListener('pointerdown', event => {
+        const rect = link.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = `${event.clientX - rect.left}px`;
+        ripple.style.top = `${event.clientY - rect.top}px`;
+        link.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+      });
+    });
+  </script>
+</body>
+</html>
 
