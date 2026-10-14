@@ -1,0 +1,21 @@
+{
+  "examTitle": "Wisdom Quiz",
+  "examDescription": "Sample general knowledge examination",
+  "questions": [
+    {"id": 1, "question": "Which planet is known as the Red Planet?", "options": ["Venus", "Mars", "Jupiter", "Mercury"], "correctAnswer": 1},
+    {"id": 2, "question": "What is the chemical symbol for gold?", "options": ["Ag", "Fe", "Au", "Gd"], "correctAnswer": 2},
+    {"id": 3, "question": "Which ocean is the largest?", "options": ["Atlantic", "Indian", "Arctic", "Pacific"], "correctAnswer": 3},
+    {"id": 4, "question": "How many sides does a hexagon have?", "options": ["Five", "Six", "Seven", "Eight"], "correctAnswer": 1},
+    {"id": 5, "question": "What is the capital of Japan?", "options": ["Kyoto", "Osaka", "Tokyo", "Nagoya"], "correctAnswer": 2},
+    {"id": 6, "question": "Which gas do plants absorb during photosynthesis?", "options": ["Oxygen", "Nitrogen", "Hydrogen", "Carbon dioxide"], "correctAnswer": 3},
+    {"id": 7, "question": "Who wrote the play Romeo and Juliet?", "options": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"], "correctAnswer": 0},
+    {"id": 8, "question": "What is 12 multiplied by 8?", "options": ["88", "96", "104", "108"], "correctAnswer": 1},
+    {"id": 9, "question": "Which organ pumps blood through the human body?", "options": ["Liver", "Lungs", "Heart", "Kidneys"], "correctAnswer": 2},
+    {"id": 10, "question": "What is the freezing point of pure water at standard atmospheric pressure?", "options": ["0°C", "10°C", "32°C", "100°C"], "correctAnswer": 0},
+    {"id": 11, "question": "Which continent is Egypt located in?", "options": ["Europe", "Asia", "South America", "Africa"], "correctAnswer": 3},
+    {"id": 12, "question": "What does CPU stand for in computing?", "options": ["Central Processing Unit", "Computer Power Utility", "Core Program Upload", "Central Program User"], "correctAnswer": 0},
+    {"id": 13, "question": "Which instrument measures atmospheric pressure?", "options": ["Thermometer", "Barometer", "Hygrometer", "Anemometer"], "correctAnswer": 1},
+    {"id": 14, "question": "What is the square root of 144?", "options": ["10", "11", "12", "14"], "correctAnswer": 2},
+    {"id": 15, "question": "Which language is primarily used to style web pages?", "options": ["HTML", "Python", "SQL", "CSS"], "correctAnswer": 3}
+  ]
+}
