@@ -164,6 +164,97 @@ body.dialog-open{overflow:hidden}
 @media(min-width:750px){.masthead{padding:42px 0 30px}.dashboard{grid-template-columns:minmax(0,1.65fr) minmax(280px,1fr)}.active-card{min-height:316px;padding:28px}.side-stack{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:15px}.side-card{padding:23px}.side-card strong{font-size:23px}.preview-list{grid-template-columns:repeat(3,minmax(0,1fr))}.preview-task{grid-template-columns:42px 1fr}.preview-task .status-mark{grid-column:2}.action-grid{grid-template-columns:1.4fr 1fr 1fr}.action-btn.completed{grid-column:auto}.action-btn{min-height:74px}.metrics{gap:14px}.metric{padding:20px}.section{margin-top:37px}.glance-body{padding:26px 27px}.glance-top{padding:15px 27px}}
 @media(max-width:365px){.container{width:calc(100% - 28px)}.top-action{padding:0 10px}.brand-name{font-size:20px}.active-title{font-size:27px}.glance-chip{font-size:8px;padding:4px}.glance-summary{gap:8px}.glance-icon{width:33px;height:33px}.glance-body{padding:16px 11px}.date-picker{width:110px}.glance-top{padding:13px 11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Compact control-first layout. Current task and check-in remain within thumb reach. */
+.location-chip{display:inline-flex;align-items:center;vertical-align:middle;border:1px solid #c4fc8252;border-radius:99px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.02em;background:#c4fc8212;color:#d4fac4}
+.location-chip[hidden]{display:none}
+.location-chip[data-place="transit"]{color:#ffda9e;border-color:#f8ca8370;background:#f8ca8312}
+.location-chip[data-place="home"]{color:#cbd9fb;border-color:#a5bffd65;background:#a5bffd12}
+@media(max-width:749px){
+  body{padding-bottom:calc(108px + env(safe-area-inset-bottom))}
+  .container{width:calc(100% - 24px)}
+  .topbar-inner{height:54px}
+  .brand-mark{height:32px;width:32px;font-size:20px;border-radius:10px}
+  .brand-name{font-size:20px}
+  .brand-name small{font-size:7px;letter-spacing:.12em;margin-top:2px}
+  .top-action{height:36px;min-height:36px;padding:0 11px;border-radius:10px}
+  .top-action.icon-only{width:36px}
+  .masthead{padding:11px 0 10px}
+  .masthead-top,.hero-title{display:none}
+  .date-line{margin:0;justify-content:space-between;font-size:12px}
+  .date-line .dot{display:none}
+  .mode-pill{font-size:9px;padding:5px 7px}
+  .dashboard{gap:9px}
+  .active-card{min-height:unset;padding:15px 15px 14px;border-radius:18px}
+  .card-topline{gap:6px}
+  .live-badge{font-size:9px;letter-spacing:.11em}
+  .sequence{font-size:10px}
+  .active-icon{display:inline-grid;vertical-align:middle;margin:12px 8px 0 0;height:34px;width:34px;border-radius:10px;font-size:18px}
+  .location-chip{margin-top:12px}
+  .active-title{font-size:clamp(24px,7vw,31px);line-height:1.1;margin:10px 0 0;clear:both;max-width:100%;letter-spacing:-.05em}
+  .active-note{font-size:11px;line-height:1.4;margin-top:6px;color:#cadbd5;max-height:2.8em;overflow:hidden}
+  .time-strip{margin-top:11px;font-size:11px}
+  .time-bar{margin-top:6px;height:5px}
+  .saved-label{margin-top:9px;font-size:10px;padding:6px 8px}
+  .side-stack{grid-template-columns:1fr 1fr;gap:8px}
+  .side-card{padding:11px 12px;min-height:80px;border-radius:14px}
+  .side-card .eyebrow{font-size:8px;letter-spacing:.09em}
+  .side-card strong{font-size:15px;margin-top:5px;line-height:1.25}
+  .side-card p{font-size:10px;margin-top:3px}
+  .side-card .progress-value{font-size:23px}
+  .side-card .tiny-bar{margin-top:6px}
+  .action-section{position:fixed;bottom:0;left:0;right:0;z-index:30;margin:0;padding:9px 12px calc(10px + env(safe-area-inset-bottom));background:#0b1018fa;backdrop-filter:blur(18px);border-top:1px solid #455369;box-shadow:0 -8px 28px #0008}
+  .action-section .section-heading{margin-bottom:7px}
+  .action-section .section-heading h2{font-size:12px;letter-spacing:0}
+  .action-section .section-heading p{font-size:10px}
+  .action-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .action-btn,.action-btn.completed{grid-column:auto;min-height:45px;border-radius:12px;padding:7px 4px;justify-content:center;text-align:center;font-size:12px;letter-spacing:0}
+  .action-btn .arrow{display:none}
+  .desktop-check{display:none}
+  .section{margin-top:21px}
+  .section-heading{margin-bottom:9px}
+  .section-heading h2{font-size:15px}
+  .metrics{gap:7px}
+  .metric{padding:11px;border-radius:12px}
+  .metric strong{font-size:23px}
+  .metric span{font-size:9px}
+  .preview-list{gap:7px}
+  .preview-task{padding:9px;border-radius:12px;grid-template-columns:34px 1fr auto;gap:9px}
+  .preview-icon{width:34px;height:34px;border-radius:9px;font-size:16px}
+  .preview-task b{font-size:12px}
+  .bottom{margin:25px auto 8px;line-height:1.4}
+  .signoff{bottom:calc(113px + env(safe-area-inset-bottom));left:12px;right:12px;max-width:none;z-index:28}
+  .signoff button{min-height:42px;font-size:12px;border-radius:11px}
+  .sheet{max-height:94dvh;border-radius:19px 19px 0 0;padding:16px 16px calc(17px + env(safe-area-inset-bottom))}
+  .sheet-handle{margin:-5px auto 14px}
+  .sheet-header h2{font-size:20px}
+  .form-row{margin-top:14px}
+  .sheet-actions{position:sticky;bottom:0;background:#182330;padding-top:10px;margin-top:13px;z-index:1}
+  .glance-intro{padding:13px;margin-bottom:13px}
+  .glance-intro h2{font-size:20px}
+  .glance-body{padding:14px 12px}
+  .glance-summary{min-height:59px;padding:9px}
+  .glance-item{border-radius:12px}
+  .glance-icon{width:33px;height:33px;font-size:17px}
+  .glance-text strong{font-size:12px}
+}
+@media(max-width:365px){
+  .container{width:calc(100% - 20px)}
+  .brand-name{font-size:18px}
+  .active-card{padding:12px}
+  .side-card{padding:10px}
+  .side-card strong{font-size:13px}
+  .action-section{padding-left:8px;padding-right:8px}
+  .action-grid{gap:5px}
+  .action-btn,.action-btn.completed{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Sign off belongs in document flow; it must never cover the check-in controls. */
+.signoff,.signoff.show{position:static;bottom:auto;left:auto;right:auto;z-index:auto;width:min(100%,490px);max-width:490px;margin:14px auto 0;box-shadow:none}
+.signoff button{min-height:46px;font-size:12px}
+@media(min-width:750px){.masthead{padding:23px 0 20px}.hero-title{font-size:clamp(34px,5vw,48px)}}
+@media(max-width:749px){.signoff,.signoff.show{position:static;bottom:auto;left:auto;right:auto;width:100%;max-width:100%;margin:9px auto 0}.signoff button{min-height:39px;font-size:11px}}
 </style>
 </head>
 <body>
@@ -176,41 +267,41 @@ body.dialog-open{overflow:hidden}
 </div></nav>
 <main id="top" class="container">
   <header class="masthead">
-    <div class="masthead-top"><span class="overline">YOUR DAY / UNDER CONTROL</span><span class="live-clock" id="liveClock">--:--</span></div>
-    <h1 class="hero-title">Make today<br><span>count.</span></h1>
+    <div class="masthead-top"><span class="overline">DAY PLAN</span><span class="live-clock" id="liveClock">--:--</span></div>
+    <h1 class="hero-title">Your day<span>.</span></h1>
     <div class="date-line"><strong id="dateLabel">Loading date…</strong><span class="dot"></span><span class="mode-pill" id="modePill">Build day</span></div>
   </header>
   <div class="dashboard">
     <section class="active-card" aria-label="Current activity">
       <div class="card-topline"><span class="live-badge"><i aria-hidden="true"></i><span id="liveState">Right now</span></span><span class="sequence" id="blockIndex">-- / --</span></div>
-      <div class="active-icon" id="activeIcon" aria-hidden="true">◎</div>
-      <h2 class="active-title" id="activeTitle">Finding your current block…</h2>
-      <p class="active-note" id="activeNote">Your plan is loading.</p>
+      <div class="active-icon" id="activeIcon" aria-hidden="true">◎</div><span class="location-chip" id="activeLocation" hidden></span>
+      <h2 class="active-title" id="activeTitle">Loading current task…</h2>
+      <p class="active-note" id="activeNote"></p>
       <div class="time-strip"><span id="activeTime">--:-- → --:--</span><span id="remainingTime">-- min left</span></div>
       <div class="time-bar"><div id="timeFill"></div></div>
       <div class="saved-label" id="savedLabel"></div>
     </section>
     <div class="side-stack">
-      <section class="side-card" aria-label="Next activity"><div class="eyebrow">↗ UPCOMING / NEXT STOP</div><strong id="nextTitle">—</strong><p id="nextTime">—</p></section>
-      <section class="side-card" aria-label="Daily progress"><div class="eyebrow">◉ TODAY'S PROGRESS</div><strong class="progress-value" id="progressValue">0%</strong><p id="progressCaption">0 blocks logged</p><div class="tiny-bar"><div id="progressFill"></div></div></section>
+      <section class="side-card" aria-label="Next activity"><div class="eyebrow">↗ UP NEXT</div><strong id="nextTitle">—</strong><p id="nextTime">—</p></section>
+      <section class="side-card" aria-label="Daily progress"><div class="eyebrow">◉ TODAY</div><strong class="progress-value" id="progressValue">0%</strong><p id="progressCaption">0 blocks logged</p><div class="tiny-bar"><div id="progressFill"></div></div></section>
     </div>
   </div>
+  <div class="signoff" id="signoff"><button type="button" id="signoffBtn">↗ &nbsp; Sign off &amp; download today's log</button></div>
   <section class="action-section" aria-label="Log current activity">
-    <div class="section-heading"><h2>Log this block</h2><p>Tap a result to record it</p></div>
+    <div class="section-heading"><h2>Check in</h2><p>Record how it went</p></div>
     <div class="action-grid">
-      <button type="button" class="action-btn completed" data-status="Completed"><span>✓ &nbsp; Completed</span><span class="arrow">↗</span></button>
-      <button type="button" class="action-btn partial" data-status="Partially Completed"><span>◐ &nbsp; Partially done</span><span class="arrow">↗</span></button>
-      <button type="button" class="action-btn skipped" data-status="Not Attempted"><span>○ &nbsp; Not attempted</span><span class="arrow">↗</span></button>
+      <button type="button" class="action-btn completed" data-status="Completed"><span><span class="desktop-check">✓ &nbsp;</span>Done</span><span class="arrow">↗</span></button>
+      <button type="button" class="action-btn partial" data-status="Partially Completed"><span><span class="desktop-check">◐ &nbsp;</span>Partial</span><span class="arrow">↗</span></button>
+      <button type="button" class="action-btn skipped" data-status="Not Attempted"><span><span class="desktop-check">○ &nbsp;</span>Missed</span><span class="arrow">↗</span></button>
     </div>
   </section>
-  <section class="section" aria-label="Daily stats"><div class="section-heading"><h2>The scoreboard</h2><p id="scoreCaption">Based on this day's schedule</p></div>
+  <section class="section" aria-label="Daily stats"><div class="section-heading"><h2>Daily totals</h2><p id="scoreCaption">Based on this day's schedule</p></div>
     <div class="metrics"><div class="metric"><strong id="countDone">0</strong><span>Completed</span></div><div class="metric"><strong id="countPartial">0</strong><span>Partially done</span></div><div class="metric"><strong id="countSkipped">0</strong><span>Not attempted</span></div></div>
   </section>
-  <section class="section"><div class="section-heading"><h2>Today's flight path</h2><button type="button" class="text-button" id="viewAll">See all blocks ↗</button></div><div class="preview-list" id="previewList"></div></section>
-  <section class="section"><div class="section-heading"><h2>Recent check-ins</h2><button type="button" class="text-button" id="editCheckins">Edit in Glance ↗</button></div><div class="recent-list" id="recentList"></div></section>
-  <footer class="bottom">JAVLIN · BUILT TO ADAPT, NOT TO NAG. &nbsp;✳&nbsp; SAVED ON THIS DEVICE.</footer>
+  <section class="section"><div class="section-heading"><h2>Coming up</h2><button type="button" class="text-button" id="viewAll">See all blocks ↗</button></div><div class="preview-list" id="previewList"></div></section>
+  <section class="section"><div class="section-heading"><h2>Recent results</h2><button type="button" class="text-button" id="editCheckins">Edit in Glance ↗</button></div><div class="recent-list" id="recentList"></div></section>
+  <footer class="bottom">JAVLIN · Stored on this device · Use Download to back up your results.</footer>
 </main>
-<div class="signoff" id="signoff"><button type="button" id="signoffBtn">↗ &nbsp; Sign off &amp; download today's log</button></div>
 <!-- quick result editor -->
 <div class="backdrop" id="resultBackdrop" role="presentation"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
   <div class="sheet-handle"></div><div class="sheet-header"><div><span class="eyebrow">BLOCK CHECK-IN</span><h2 id="resultHeading">Record a result</h2><p id="resultSub">—</p></div><button type="button" class="close-btn" id="closeResult" aria-label="Close">×</button></div>
@@ -223,7 +314,7 @@ body.dialog-open{overflow:hidden}
 <section class="glance-overlay" id="glanceOverlay" role="dialog" aria-modal="true" aria-label="Full day schedule and editor" aria-hidden="true"><div class="glance-pane">
   <div class="glance-top"><button type="button" class="glance-back" id="closeGlance" aria-label="Close Glance">←</button><div class="glance-heading"><b>Glance</b><span>FULL DAY / EDITABLE PLAN</span></div><input type="date" class="date-picker" id="glanceDate" aria-label="Choose schedule date"></div>
   <div class="glance-body">
-    <div class="glance-intro"><span class="eyebrow" id="glanceMode">BUILD DAY</span><h2 id="glanceDayTitle">Your whole day.</h2><p>Every block in one place. Tap any block to change its time, name, plan, completion, mood, or remarks. Nothing is applied until you save.</p><div class="glance-numbers"><span><b id="glanceBlockCount">0</b> blocks</span><span><b id="glanceLoggedCount">0</b> logged</span><span><b id="glanceProgress">0%</b> completion</span></div></div>
+    <div class="glance-intro"><span class="eyebrow" id="glanceMode">BUILD DAY</span><h2 id="glanceDayTitle">Your whole day.</h2><p>Tap any block to edit its time, location, notes, or results. Changes are saved only when you press Save.</p><div class="glance-numbers"><span><b id="glanceBlockCount">0</b> blocks</span><span><b id="glanceLoggedCount">0</b> logged</span><span><b id="glanceProgress">0%</b> completion</span></div></div>
     <div class="glance-bar"><h3>Today's timeline</h3><span id="glanceDirty">No unsaved changes</span></div>
     <div class="glance-list" id="glanceList"></div>
     <button class="add-block" id="addBlock" type="button">＋ Add a custom block</button>
@@ -233,13 +324,12 @@ body.dialog-open{overflow:hidden}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 'use strict';
-// Schedule copied from the updated index.html source (19 Build Day / 6 Work Day blocks).
-const DEFAULT_SCHEDULES = {"A":[{"id":"A-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Sit upright. Start slow. No demand to perform yet.","details":"Wake gently, make tea, sit upright and listen to Japji Sahib. This block is intentionally unproductive."},{"id":"A-02","start":390,"end":405,"icon":"🤸","title":"Warm-up","note":"Wake the joints before loading them.","details":"Mobility and movement preparation. The goal is to arrive at the workout ready, not tired."},{"id":"A-03","start":405,"end":450,"icon":"🏋️","title":"Workout","note":"45 focused minutes. Finish while you still have energy.","details":"Keep the workout bounded. The schedule benefits more from consistency than from extending sessions because one exercise felt heroic."},{"id":"A-04","start":450,"end":495,"icon":"🚿","title":"Bath + Breakfast","note":"Reset, eat, then enter the first study block.","details":"A proper transition out of training. Breakfast is part of the schedule, not a thing squeezed between tasks."},{"id":"A-05","start":495,"end":555,"icon":"📚","title":"Study Session 1","note":"Fresh-brain study. One clean hour.","details":"Use this for the hardest academic material of the day. Stop at 09:15 even if momentum is good; the rail is more valuable than squeezing out fifteen more minutes."},{"id":"A-06","start":555,"end":575,"icon":"☕","title":"Coffee #1","note":"A real break, not study with a mug.","details":"Stand up, change the scene, have coffee. If weather cooperates, stepping outside makes this an even better reset."},{"id":"A-07","start":575,"end":645,"icon":"💼","title":"Business Development","note":"Hobby 1 · build, research, outreach, strategy.","details":"A bounded business-building window. Decide the deliverable before the block starts so “business development” does not become wandering around the internet wearing a tie."},{"id":"A-08","start":645,"end":675,"icon":"🧩","title":"Ad-Hoc Slot","note":"Catch-up buffer first. Occasional tasks second.","details":"Use this to absorb morning drift or handle an occasional task. If neither exists, it becomes free time. Do not manufacture work just because a rectangle exists on the page."},{"id":"A-09","start":675,"end":735,"icon":"📖","title":"Study Session 2","note":"Second focused academic pass.","details":"Use this for continuation, practice, review, or the second priority subject. Keep the endpoint hard at 12:15."},{"id":"A-10","start":735,"end":775,"icon":"🍛","title":"Lunch","note":"Eat + come down. Forty minutes is enough.","details":"This remains a break. Shorter than before, but not converted into a productivity block."},{"id":"A-11","start":775,"end":835,"icon":"🎓","title":"Skill Development Class","note":"Mon Finance · Tue Mental Health · Wed Communication · Thu Sales & Relationship","details":"Monday: Finance. Tuesday: Mental Health. Wednesday: Communication. Thursday: Sales & Relationship."},{"id":"A-12","start":835,"end":895,"icon":"🤖","title":"Robotics","note":"Hobby 2 · build the machine, not just the plan.","details":"One hour for hands-on robotics: code, electronics, mechanics, tests, or documentation. A small finished experiment beats a huge conceptual detour."},{"id":"A-13","start":895,"end":985,"icon":"🧹","title":"Chores + Cooking","note":"House reset and dinner prep.","details":"Physical tasks belong here. Music or audio is welcome; the goal is to finish the practical stuff before the evening opens up."},{"id":"A-14","start":985,"end":1015,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Short errand window + record the day so far.","details":"Walmart when needed; otherwise use the slot for a quick outside errand or walk. Record the voice journal while parked or walking, not while actively driving."},{"id":"A-15","start":1015,"end":1020,"icon":"·","title":"Tiny Buffer","note":"Five minutes of glorious nothing.","details":"A deliberately empty seam between the working day and movie time."},{"id":"A-16","start":1020,"end":1140,"icon":"🎬","title":"Movie Time","note":"Actual leisure. No productivity tax attached.","details":"This block is intentionally protected. Watch a movie, relax, and let the day stop feeling like a checklist."},{"id":"A-17","start":1140,"end":1200,"icon":"🍽️","title":"Dinner","note":"Fixed evening anchor.","details":"Dinner stays fixed at 19:00. No need to optimize this hour into something else."},{"id":"A-18","start":1200,"end":1260,"icon":"📚","title":"Fiction + Dim Lights + Clothes Ready","note":"The final hour stays quiet and predictable.","details":"Read fiction, dim the room, prepare tomorrow morning's clothes, and let stimulation drop. This is the runway into sleep."},{"id":"A-19","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Fixed. The rest of the system leans on this.","details":"No bargaining with the clock. Sleep is the load-bearing wall."}],"B":[{"id":"B-01","start":300,"end":330,"icon":"🌅","title":"Wake + Water + Protein Breakfast","note":"Fuel before the long shift.","details":"No skipped fuel before a 12-hour day."},{"id":"B-02","start":330,"end":360,"icon":"🚗","title":"Drive to Valid","note":"Commute.","details":"Get there. No bonus mission."},{"id":"B-03","start":360,"end":1080,"icon":"🏭","title":"Work","note":"12-hour shift. Eat packed lunch + snacks.","details":"The bar stays deliberately low outside work. Survival mode is valid."},{"id":"B-04","start":1110,"end":1170,"icon":"🍛","title":"Dinner + Shower","note":"Recover first.","details":"No productivity theatre after a 12-hour standing shift."},{"id":"B-05","start":1170,"end":1200,"icon":"📚","title":"One Study Block","note":"25 minutes. The only obligation.","details":"On Sunday, the 30-minute weekly review may replace this block."},{"id":"B-06","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Keystone habit.","details":"The workday ends. Sleep wins."}]};
+// Weekday outside-first plan (22 blocks). The original Friday–Sunday template is preserved (6 blocks).
+const DEFAULT_SCHEDULES = {"A":[{"id":"A3-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Wake calmly with tea and Japji Sahib.","location":"Home","details":"Stay away from the bed once awake; take a seat at the table."},{"id":"A3-02","start":390,"end":420,"icon":"🧘","title":"Yoga","note":"30 minutes of gentle movement.","location":"Home","details":"Keep the routine simple and repeatable. Yoga is separate from the later workout."},{"id":"A3-03","start":420,"end":450,"icon":"🥣","title":"Breakfast","note":"Eat before the morning work.","location":"Home","details":"Breakfast at the table. Prepare what you need for the first trip outside."},{"id":"A3-04","start":450,"end":510,"icon":"💼","title":"Business Development","note":"Exactly one hour. Choose one useful result.","location":"Home","details":"Use the hour for real outreach, client work, or a specific business deliverable. Stop on time."},{"id":"A3-05","start":510,"end":525,"icon":"🚶","title":"Travel to study location","note":"Leave home for the first outside session.","location":"Transit","details":"15-minute planning allowance. Adjust this day in Glance if your commute differs."},{"id":"A3-06","start":525,"end":585,"icon":"📚","title":"Study Session 1","note":"Focused study away from the bedroom.","location":"Outside","details":"Library, café, or another suitable study space. Pick the hardest subject first."},{"id":"A3-07","start":585,"end":600,"icon":"☕","title":"Coffee #1","note":"15-minute break, then back to study.","location":"Outside","details":"A real coffee break. Stand up, walk a little, or enjoy some fresh air."},{"id":"A3-08","start":600,"end":660,"icon":"📖","title":"Study Session 2","note":"Another focused hour out of the house.","location":"Outside","details":"Continue the most important study work or switch to practice and review."},{"id":"A3-09","start":660,"end":675,"icon":"🚶","title":"Travel home","note":"Head back for exercise.","location":"Transit","details":"Leave the study location on time. Allow 15 minutes for the return trip."},{"id":"A3-10","start":675,"end":705,"icon":"🏋️","title":"Workout","note":"30 minutes at home, before noon.","location":"Home","details":"Beginner-friendly workout with your available dumbbells and bodyweight. Consistency wins."},{"id":"A3-11","start":705,"end":735,"icon":"🚿","title":"Bath","note":"Shower immediately after exercise.","location":"Home","details":"A clean break between workout and lunch."},{"id":"A3-12","start":735,"end":775,"icon":"🍛","title":"Lunch","note":"Eat and reset before heading out again.","location":"Home","details":"Finish lunch and pack anything needed for the afternoon session."},{"id":"A3-13","start":775,"end":790,"icon":"🚶","title":"Travel outside","note":"Second trip away from home.","location":"Transit","details":"Aim to be out the door at 12:55 PM. Allow 15 minutes for travel."},{"id":"A3-14","start":790,"end":850,"icon":"🎓","title":"Active Learning Module","note":"One focused learning module.","location":"Outside","details":"No rotating daily subjects. Work on your active learning module in a suitable place outside home."},{"id":"A3-15","start":850,"end":910,"icon":"🤖","title":"Robotics","note":"A focused hour of robotics work.","location":"Outside","details":"Portable coding, design, theory, planning, or electronics at a suitable workspace. Hardware that cannot travel can be planned here."},{"id":"A3-16","start":910,"end":940,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Errands, a walk, and a quick voice log.","location":"Outside","details":"Use Walmart only when needed. Otherwise walk outside. Record the journal when stationary or on foot, not while driving."},{"id":"A3-17","start":940,"end":1035,"icon":"🌿","title":"Free Time","note":"Enjoy being outside. No productivity requirement.","location":"Outside","details":"Walk, enjoy the sky, rest by the water, meet someone, read, or relax away from the bed."},{"id":"A3-18","start":1035,"end":1050,"icon":"🚶","title":"Travel home","note":"Return home for the evening.","location":"Transit","details":"Leave by 5:15 PM; arrive around 5:30 PM."},{"id":"A3-19","start":1050,"end":1140,"icon":"🧹","title":"Chores + Cooking","note":"Get the household tasks and cooking done.","location":"Home","details":"The 90-minute household window stays together."},{"id":"A3-20","start":1140,"end":1200,"icon":"🍽️","title":"Dinner","note":"A full hour for dinner.","location":"Home","details":"Relax and eat. Keep this as a dependable anchor."},{"id":"A3-21","start":1200,"end":1260,"icon":"📖","title":"Fiction + Bed Preparation","note":"Read, dim the lights, prepare clothes.","location":"Home","details":"Quiet reading and simple preparation for tomorrow. Keep screens low-stimulation."},{"id":"A3-22","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"9:00 PM until the next morning at 6:00 AM.","location":"Home","details":"Protect the bedtime. The overnight block continues into the next morning."}],"B":[{"id":"B-01","start":300,"end":330,"icon":"🌅","title":"Wake + Water + Protein Breakfast","note":"Fuel before the long shift.","details":"No skipped fuel before a 12-hour day."},{"id":"B-02","start":330,"end":360,"icon":"🚗","title":"Drive to Valid","note":"Commute.","details":"Get there. No bonus mission."},{"id":"B-03","start":360,"end":1080,"icon":"🏭","title":"Work","note":"12-hour shift. Eat packed lunch + snacks.","details":"The bar stays deliberately low outside work. Survival mode is valid."},{"id":"B-04","start":1110,"end":1170,"icon":"🍛","title":"Dinner + Shower","note":"Recover first.","details":"No productivity theatre after a 12-hour standing shift."},{"id":"B-05","start":1170,"end":1200,"icon":"📚","title":"One Study Block","note":"25 minutes. The only obligation.","details":"On Sunday, the 30-minute weekly review may replace this block."},{"id":"B-06","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Keystone habit.","details":"The workday ends. Sleep wins."}]};
 const STORAGE_KEY = 'javlin.daily.v2';
 const LEGACY_STORAGE_KEY = 'dailyQuestLog.v1';
 const SIGN_OFF_MINUTE = 20 * 60 + 45;
 const MOODS = {Energized:'🔥',Focused:'🎯',Okay:'🙂',Tired:'😴',Rough:'😵‍💫'};
-const DAY_SKILLS = {1:'Finance',2:'Mental Health',3:'Communication',4:'Sales & Relationship'};
 const $ = id => document.getElementById(id);
 const clone = obj => JSON.parse(JSON.stringify(obj));
 const pad = n => String(n).padStart(2,'0');
@@ -267,10 +357,6 @@ function dayRecord(key){return store.days[key]||{};}
 function getSchedule(key){
   const saved=dayRecord(key).schedule;
   const schedule=Array.isArray(saved)?clone(saved):clone(DEFAULT_SCHEDULES[modeOf(key)]);
-  if(!Array.isArray(saved)&&DAY_SKILLS[dateFromKey(key).getDay()]){
-    const skill=schedule.find(t=>t.id==='A-11');
-    if(skill) skill.note=`${dateFromKey(key).toLocaleDateString('en-US',{weekday:'long'})} · ${DAY_SKILLS[dateFromKey(key).getDay()]}`;
-  }
   return schedule.sort((a,b)=>a.start-b.start);
 }
 function getEntries(key){return clone(dayRecord(key).entries||{});}
@@ -286,16 +372,20 @@ function formattedDate(key,long=false){return dateFromKey(key).toLocaleDateStrin
 function nowMinute(){const d=new Date();return d.getHours()*60+d.getMinutes();}
 function findCurrent(key,now=nowMinute()){
   const schedule=getSchedule(key);
-  const current=schedule.find(t=>now>=t.start && (now<t.end||t.end<=t.start));
+  const current=schedule.find(t=>now>=t.start && (now<t.end||t.end<=t.start||(t.title.toLowerCase()==='sleep'&&t.end===1439)));
   if(current) return {task:current,schedule,index:schedule.indexOf(current),beforeWake:false};
   const first=schedule[0];
   if(first&&now<first.start){
-    const sleep=schedule.find(t=>t.title.toLowerCase()==='sleep'&&t.start>=1200);
-    if(sleep) return {task:sleep,schedule,index:schedule.indexOf(sleep),beforeWake:true};
+    // Use the PREVIOUS evening's bedtime, so overnight times work across days.
+    const lastNight=getSchedule(addDays(key,-1)).find(t=>t.title.toLowerCase()==='sleep');
+    if(lastNight) return {task:lastNight,schedule,index:-1,beforeWake:true};
   }
   return {task:null,schedule,index:-1,beforeWake:false};
 }
+
 let activeTask=null;
+let editingTask=null;
+let editingDate=null;
 let activeDate=todayKey();
 let selectedStatus='';
 let selectedMood='';
@@ -321,25 +411,32 @@ function mainRender(){
   $('liveClock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
   $('dateLabel').textContent=formattedDate(key);
   $('modePill').textContent=modeText(key);
-  $('blockIndex').textContent=ctx.task?`${pad(ctx.index+1)} / ${pad(ctx.schedule.length)}`:`— / ${pad(ctx.schedule.length)}`;
+  $('blockIndex').textContent=ctx.task&&!ctx.beforeWake?`${pad(ctx.index+1)} / ${pad(ctx.schedule.length)}`:`— / ${pad(ctx.schedule.length)}`;
   $('scoreCaption').textContent=`Out of ${ctx.schedule.length} planned blocks`;
   $('activeIcon').textContent=ctx.task?.icon||'↗';
   $('activeTitle').textContent=ctx.task?.title||'A moment between blocks';
-  $('activeNote').textContent=ctx.task?.note||'No block is scheduled right now. Your next stop is below.';
+  $('activeNote').textContent=ctx.task?.note||'Nothing is scheduled at this moment.';
+  $('activeLocation').textContent=ctx.task?.location||'';
+  $('activeLocation').hidden=!ctx.task?.location;
+  $('activeLocation').dataset.place=(ctx.task?.location||'').toLowerCase();
   $('liveState').textContent=ctx.task?(ctx.beforeWake?'Overnight reset':'Current mission'):'Open window';
-  $('activeTime').textContent=ctx.task?rangeOf(ctx.task):'Unscheduled time';
+  $('activeTime').textContent=ctx.beforeWake?'Until morning':(ctx.task?rangeOf(ctx.task):'Open time');
   const next=getNext(key,ctx,minute);
   $('nextTitle').textContent=next.task?.title||'Day complete';
   $('nextTime').textContent=next.task?`${next.tomorrow?'Tomorrow · ':''}${clockFromMinutes(next.task.start)}`:'No more blocks today';
   let ratio=0,remaining='—';
   if(ctx.task){
-    const start=ctx.task.start;
-    let end=ctx.task.end;
-    let pos=minute;
-    if(ctx.task.title.toLowerCase()==='sleep'&&(ctx.beforeWake||end===1439)){
-      end=1440+getSchedule(addDays(key,1))[0].start;
-      if(ctx.beforeWake){pos+=1440;end=1440+ctx.schedule[0].start;}
-    }else if(end<=start){end+=1440;if(pos<start)pos+=1440;}
+    let start=ctx.task.start, end=ctx.task.end, pos=minute;
+    if(ctx.beforeWake){
+      // Timeline runs from yesterday's bedtime to today's wake-up.
+      start-=1440;
+      end=ctx.schedule[0]?.start??end;
+    }else if(ctx.task.title.toLowerCase()==='sleep'&&end===1439){
+      end=1440+(getSchedule(addDays(key,1))[0]?.start??0);
+    }else if(end<=start){
+      end+=1440;
+      if(pos<start)pos+=1440;
+    }
     ratio=Math.max(0,Math.min(100,((pos-start)/Math.max(1,end-start))*100));
     remaining=`${Math.max(0,end-pos)} min left`;
   }
@@ -367,7 +464,7 @@ function renderPreview(key,ctx,entries,minute){
   $('previewList').innerHTML=relevant.map(t=>{
     const e=entries[t.id];const current=ctx.task?.id===t.id&&!ctx.beforeWake;
     const status=e?.status==='Completed'?'✓':e?.status==='Partially Completed'?'◐':e?.status==='Not Attempted'?'○':current?'NOW':'↗';
-    return `<div class="preview-task ${current?'now':''}"><div class="preview-icon">${escapeHTML(t.icon)}</div><div><b>${escapeHTML(t.title)}</b><small>${escapeHTML(rangeOf(t))}</small></div><span class="status-mark">${status}</span></div>`;
+    return `<div class="preview-task ${current?'now':''}"><div class="preview-icon">${escapeHTML(t.icon)}</div><div><b>${escapeHTML(t.title)}</b><small>${escapeHTML(rangeOf(t))}${t.location?' · '+escapeHTML(t.location):''}</small></div><span class="status-mark">${status}</span></div>`;
   }).join('');
 }
 function renderRecent(schedule,entries){
@@ -381,11 +478,13 @@ function renderRecent(schedule,entries){
 // Quick result flow. Single active block is edited without opening Glance.
 function openResult(status){
   if(!activeTask)return;
+  editingTask=clone(activeTask);
+  editingDate=activeDate;
   selectedStatus=status;
-  const existing=getEntries(activeDate)[activeTask.id];
+  const existing=getEntries(editingDate)[editingTask.id];
   selectedMood=existing?.moodLabel||'';
   $('resultHeading').textContent=status==='Not Attempted'?'Not attempted':status==='Partially Completed'?'Partially done':'Completed';
-  $('resultSub').textContent=`${activeTask.title} · ${rangeOf(activeTask)}`;
+  $('resultSub').textContent=`${editingTask.title} · ${rangeOf(editingTask)}`;
   $('resultPercent').value=existing?.status===status?Number(existing.completionPercent):(status==='Completed'?100:status==='Partially Completed'?50:0);
   $('resultPercentDisplay').textContent=`${$('resultPercent').value}%`;
   $('resultRemarks').value=existing?.remarks||'';
@@ -395,14 +494,15 @@ function openResult(status){
 }
 function closeResult(){
   $('resultBackdrop').classList.remove('open');
+  editingTask=null;editingDate=null;
   if(!$('glanceOverlay').classList.contains('open'))document.body.classList.remove('dialog-open');
   mainRender();
 }
 function saveResult(){
-  if(!activeTask)return;
-  const date=activeDate,day=dayRecord(date);
+  if(!editingTask||!editingDate)return;
+  const date=editingDate,day=dayRecord(date);
   const entries=getEntries(date);
-  entries[activeTask.id]={status:selectedStatus,completionPercent:Number($('resultPercent').value),remarks:$('resultRemarks').value.trim(),moodLabel:selectedMood,savedAt:new Date().toISOString()};
+  entries[editingTask.id]={status:selectedStatus,completionPercent:Number($('resultPercent').value),remarks:$('resultRemarks').value.trim(),moodLabel:selectedMood,savedAt:new Date().toISOString()};
   const old=store.days[date];
   store.days[date]={...day,entries,updatedAt:new Date().toISOString()};
   if(!persist()){if(old)store.days[date]=old;else delete store.days[date];return;}
@@ -460,7 +560,7 @@ function glanceMarkup(t,i){
   return `<article class="glance-item ${expandedId===t.id?'expanded':''}" data-id="${escapeHTML(t.id)}">
     <button type="button" class="glance-summary" data-action="toggle" aria-expanded="${expandedId===t.id}">
       <div class="glance-icon" data-view="icon">${escapeHTML(t.icon)}</div>
-      <div class="glance-text"><strong data-view="title">${escapeHTML(t.title)}</strong><span data-view="time">${escapeHTML(rangeOf(t))}</span></div>
+      <div class="glance-text"><strong data-view="title">${escapeHTML(t.title)}</strong><span data-view="time">${escapeHTML(rangeOf(t))}${t.location?' · '+escapeHTML(t.location):''}</span></div>
       <span class="glance-chip ${statusClass(status)}" data-view="status">${statusShort(status)}</span><span class="glance-chevron">⌄</span>
     </button>
     <div class="editor"><div class="editor-grid">
@@ -468,6 +568,9 @@ function glanceMarkup(t,i){
       <div><label class="form-label">Start time</label><input class="field" type="time" data-field="start" value="${shortClock(t.start)}" aria-label="Start time"></div>
       <div><label class="form-label">End time</label><input class="field" type="time" data-field="end" value="${shortClock(t.end)}" aria-label="End time"></div>
       <div><label class="form-label">Icon / emoji</label><input class="field" data-field="icon" maxlength="12" value="${escapeHTML(t.icon)}" aria-label="Icon or emoji"></div>
+      <div><label class="form-label">Place</label><select class="field" data-field="location" aria-label="Place">
+        ${option('','Not specified',t.location||'')}${option('Home','Home',t.location||'')}${option('Outside','Outside',t.location||'')}${option('Transit','Transit',t.location||'')}${option('Work','Work',t.location||'')}
+      </select></div>
       <div><label class="form-label">Completion (%)</label><input class="field" type="number" min="0" max="100" step="1" data-field="completionPercent" value="${Number(e.completionPercent)||0}" aria-label="Completion percentage"></div>
       <div class="wide"><label class="form-label">Plan / short note</label><textarea class="field" data-field="note" aria-label="Plan and short note">${escapeHTML(t.note||'')}</textarea></div>
       <div class="wide"><label class="form-label">Details / instructions</label><textarea class="field" data-field="details" aria-label="Task details">${escapeHTML(t.details||'')}</textarea></div>
@@ -486,7 +589,7 @@ function glanceMarkup(t,i){
 function updateRowHeader(row,task,entry){
   row.querySelector('[data-view="icon"]').textContent=task.icon||'□';
   row.querySelector('[data-view="title"]').textContent=task.title||'Untitled block';
-  row.querySelector('[data-view="time"]').textContent=rangeOf(task);
+  row.querySelector('[data-view="time"]').textContent=rangeOf(task)+(task.location?' · '+task.location:'');
   const chip=row.querySelector('[data-view="status"]');chip.textContent=statusShort(entry?.status);chip.className=`glance-chip ${statusClass(entry?.status)}`;
 }
 function updateGlanceField(event){
@@ -496,7 +599,7 @@ function updateGlanceField(event){
   const id=row?.dataset.id;
   const task=glanceDraft.schedule.find(t=>t.id===id);
   if(!task)return;
-  if(['title','icon','note','details','start','end'].includes(field)){
+  if(['title','icon','note','details','start','end','location'].includes(field)){
     task[field]=['start','end'].includes(field)?clockToMinutes(event.target.value):event.target.value;
   }else{
     const entry=glanceDraft.entries[id]||(glanceDraft.entries[id]={status:'',completionPercent:0,remarks:'',moodLabel:''});
@@ -571,10 +674,11 @@ function downloadDay(key=todayKey(),signOff=false){
     ...(signOff?{signedOffAt:new Date().toISOString()}:{}),
     storageKey:STORAGE_KEY,summary:getStats(schedule,entries),schedule,
     entries:Object.fromEntries(schedule.map(t=>[t.id,{taskTitle:t.title,plannedStart:shortClock(t.start),plannedEnd:shortClock(t.end),status:entries[t.id]?.status||'Not logged',completionPercent:Number(entries[t.id]?.completionPercent)||0,remarks:entries[t.id]?.remarks||'',mood:entries[t.id]?.moodLabel||''}])),
+    archivedEntries:Object.fromEntries(Object.entries(entries).filter(([id])=>!schedule.some(t=>t.id===id))),
     legacyQuestLogEntries:legacyFor(key)};
   const blob=new Blob([JSON.stringify(result,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`javlin-${key}.json`;
-  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
   showToast(signOff?'Signed off · JSON downloaded':'Day data downloaded');
 }
 // UI wiring.
