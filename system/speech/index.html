@@ -1,385 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Speech · Operating System · Voyage 2050</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,340;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#081420;
-    --bg-deep:#050d16;
-    --bg-panel:#0d1f31;
-    --bg-card:#112539;
-    --ink:#ede7d9;
-    --ink-dim:#8fa4ba;
-    --hairline:rgba(237,231,217,0.13);
-    --hairline-soft:rgba(237,231,217,0.06);
-
-    --gold:#d3a355;
-    --gold-soft:rgba(211,163,85,0.14);
-    --teal:#53a89f;
-    --red:#c08487;
-    --red-soft:rgba(192,132,135,0.14);
-    --green:#7ea179;
-    --blue:#6f97bd;
-
-    --font-display:'Fraunces', serif;
-    --font-body:'IBM Plex Sans', sans-serif;
-    --font-mono:'IBM Plex Mono', monospace;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-
-  body{
-    margin:0;
-    background-color:var(--bg);
-    color:var(--ink);
-    font-family:var(--font-body);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    transition:background-color .6s ease;
-  }
-  body::before{
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:
-      radial-gradient(ellipse 90% 50% at 50% -5%, rgba(192,132,135,0.1), transparent 60%),
-      radial-gradient(ellipse 80% 45% at 50% 105%, rgba(211,163,85,0.05), transparent 60%);
-    transition:opacity .6s ease;
-  }
-
-  /* focus mode dims the world */
-  body.focus{background-color:var(--bg-deep);}
-  body.focus::before{opacity:0.4;}
-  body.focus .nav, body.focus .subnav, body.focus .page-foot, body.focus .cta-row{opacity:0.12; pointer-events:none;}
-  .nav, .subnav, .page-foot, .cta-row{transition:opacity .6s ease;}
-
-  .wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 28px;}
-
-  /* ================= NAV ================= */
-  #progress{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--teal)); z-index:60;}
-  .nav{position:sticky; top:0; z-index:50; background:rgba(8,20,32,0.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--hairline-soft);}
-  .nav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px;}
-  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex:none;}
-  .brand svg{width:26px; height:26px;}
-  .brand-name{font-family:var(--font-display); font-weight:600; font-size:16px;}
-  .brand-name em{font-style:italic; color:var(--gold); font-weight:500;}
-  .nav-links{display:flex; align-items:center; gap:4px;}
-  .nav-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:8px 13px; border-radius:3px; border:1px solid transparent; transition:color .2s, background .2s, border-color .2s; white-space:nowrap;}
-  .nav-links a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
-  .nav-links a.active{color:var(--gold); border-color:rgba(211,163,85,0.4); background:var(--gold-soft);}
-  .nav-links a .num{color:var(--gold); margin-right:5px;}
-  .nav-links a.active .num{color:inherit;}
-  .nav-toggle{display:none; background:none; border:1px solid var(--hairline); border-radius:3px; color:var(--ink); padding:7px 11px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;}
-  @media(max-width:820px){
-    .nav-toggle{display:block;}
-    .nav-links{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:rgba(8,20,32,0.97); border-bottom:1px solid var(--hairline); padding:8px 20px 16px;}
-    .nav-links.open{display:flex;}
-    .nav-links a{padding:13px 10px; border-bottom:1px solid var(--hairline-soft); border-radius:0;}
-    .nav-links a.active{border:none; border-bottom:1px solid rgba(211,163,85,0.4);}
-  }
-
-  /* ================= SUB NAV ================= */
-  .subnav{position:sticky; top:60px; z-index:45; background:rgba(13,31,49,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline-soft);}
-  .subnav-inner{max-width:960px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:2px; height:46px; overflow-x:auto; scrollbar-width:none;}
-  .subnav-inner::-webkit-scrollbar{display:none;}
-  .subnav-label{font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-dim); margin-right:14px; flex:none;}
-  .subnav a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); text-decoration:none; padding:6px 12px; border-radius:3px; transition:color .2s, background .2s; white-space:nowrap; flex:none;}
-  .subnav a:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
-  .subnav a.here{color:var(--red); background:var(--red-soft);}
-  .subnav a .dot{display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:7px; vertical-align:1px;}
-
-  /* ================= HERO ================= */
-  .hero{text-align:center; padding:64px 28px 36px;}
-  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--red); margin:0 0 20px;}
-  .hero h1{font-family:var(--font-display); font-weight:600; font-size:clamp(36px,6vw,58px); line-height:1.05; letter-spacing:-0.015em; margin:0 0 18px;}
-  .hero h1 em{font-style:italic; font-weight:340; color:var(--red);}
-
-  .when-box{
-    max-width:520px; margin:0 auto; padding:18px 26px;
-    border:1px dashed rgba(192,132,135,0.5); border-radius:4px; background:var(--red-soft);
-    font-size:13.5px; color:var(--ink-dim); font-style:italic; line-height:1.7;
-  }
-  .when-box b{display:block; font-family:var(--font-mono); font-style:normal; font-weight:600; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--red); margin-bottom:7px;}
-
-  .focus-btn{
-    display:inline-flex; align-items:center; gap:10px; margin-top:26px; cursor:pointer;
-    font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--red); border:1px solid rgba(192,132,135,0.5); background:var(--red-soft);
-    border-radius:3px; padding:14px 26px; transition:background .25s, transform .25s;
-  }
-  .focus-btn:hover{background:rgba(192,132,135,0.24); transform:translateY(-2px);}
-
-  /* ================= THE SPEECH ================= */
-  .speech{max-width:660px; margin:44px auto 0; padding:0 28px;}
-
-  .passage{
-    font-family:var(--font-display); font-weight:340;
-    font-size:clamp(19px, 2.6vw, 24px); line-height:1.75; color:var(--ink);
-    margin:0 0 40px; opacity:0; transform:translateY(14px);
-    transition:opacity .8s ease, transform .8s ease, font-size .4s ease;
-  }
-  .passage.in-view{opacity:1; transform:translateY(0);}
-  .passage b{font-weight:600; color:var(--gold); font-style:italic;}
-  .passage .callname{font-weight:600; font-style:normal; color:var(--ink);}
-
-  .passage.opener{font-size:clamp(26px, 4vw, 36px); line-height:1.4; text-align:center; color:var(--ink);}
-  .passage.closer{text-align:center; font-size:clamp(24px, 3.5vw, 32px); line-height:1.5;}
-  .passage.closer b{color:var(--red);}
-
-  .sep{width:44px; height:1px; background:rgba(192,132,135,0.4); margin:0 auto 40px; border:none;}
-
-  /* focus mode reading */
-  body.focus .passage{font-size:clamp(22px, 3vw, 28px);}
-  body.focus .passage.opener{font-size:clamp(30px, 4.5vw, 42px);}
-
-  /* stepper (focus mode) */
-  .stepper{
-    position:fixed; bottom:0; left:0; right:0; z-index:55;
-    display:none; justify-content:center; gap:12px; padding:18px 20px 26px;
-    background:linear-gradient(transparent, rgba(5,13,22,0.94) 40%);
-  }
-  body.focus .stepper{display:flex;}
-  .stepper button{
-    font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    border-radius:3px; padding:13px 24px; cursor:pointer; transition:background .2s, transform .2s;
-  }
-  .stepper .next-p{color:var(--red); border:1px solid rgba(192,132,135,0.55); background:var(--red-soft);}
-  .stepper .next-p:hover{background:rgba(192,132,135,0.25);}
-  .stepper .exit-f{color:var(--ink-dim); border:1px solid var(--hairline); background:transparent;}
-  .stepper .exit-f:hover{color:var(--ink); background:rgba(237,231,217,0.05);}
-
-  body.focus .passage.dimmed{opacity:0.14;}
-  body.focus .passage.lit{opacity:1;}
-
-  /* ================= FINAL ACTION ================= */
-  .final-action{max-width:660px; margin:20px auto 0; padding:0 28px; text-align:center;}
-  .final-inner{border:1px solid rgba(211,163,85,0.35); border-radius:5px; background:var(--bg-panel); padding:38px 30px;}
-  .final-inner .k{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:14px;}
-  .final-inner p{margin:0 0 22px; font-size:14.5px; color:var(--ink-dim); line-height:1.7;}
-  .final-inner p b{color:var(--ink);}
-
-  .timer-btn{
-    display:inline-flex; align-items:center; gap:12px; cursor:pointer;
-    font-family:var(--font-mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
-    color:#081420; background:var(--gold); border:1px solid var(--gold);
-    border-radius:3px; padding:16px 32px; font-weight:600; transition:transform .2s, box-shadow .2s;
-  }
-  .timer-btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(211,163,85,0.3);}
-  .timer-display{display:none; font-family:var(--font-mono); font-size:clamp(40px,8vw,64px); font-weight:600; color:var(--gold); letter-spacing:0.05em; margin:6px 0 10px;}
-  .timer-note{display:none; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal);}
-  .final-inner.running .timer-btn{display:none;}
-  .final-inner.running .timer-display{display:block;}
-  .final-inner.running .timer-note{display:block;}
-  .final-inner.done .timer-display{color:var(--teal);}
-
-  /* ================= CTAs / FOOTER ================= */
-  .cta-row{max-width:960px; margin:64px auto 0; padding:0 28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
-  .cta-row a{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; border-radius:3px; padding:16px 26px; transition:background .25s, transform .25s;}
-  .cta-row a.primary{color:var(--gold); border:1px solid rgba(211,163,85,0.45); background:var(--gold-soft);}
-  .cta-row a.primary:hover{background:rgba(211,163,85,0.22); transform:translateY(-2px);}
-  .cta-row a.ghost{color:var(--ink-dim); border:1px solid var(--hairline);}
-  .cta-row a.ghost:hover{color:var(--ink); background:rgba(237,231,217,0.05); transform:translateY(-2px);}
-
-  .page-foot{max-width:640px; margin:0 auto; padding:52px 28px 90px; text-align:center;}
-  .page-foot .rule{width:60px; height:1px; background:var(--hairline); margin:0 auto 22px;}
-  .page-foot p{font-size:14.5px; color:var(--ink-dim); line-height:1.75; margin:0; font-style:italic; font-family:var(--font-display); font-weight:340;}
-  .page-foot .lead{font-family:var(--font-mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--red); margin-bottom:12px; display:block; font-style:normal;}
-
-  @media(prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-    .passage{opacity:1 !important; transform:none !important;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07131e">
+  <meta name="description" content="The Art of Being Alive — a personal daily reading with audio-synchronised RSVP and optimal recognition point.">
+  <title>The Art of Being Alive · Voyage 2050</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400,0,0;0,9..144,500,0,0;0,9..144,600,0,0;1,9..144,400,0,0&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#07131e;--deep:#040c14;--panel:#0d2030;--ink:#f3ecde;--muted:#9babb8;
+      --dim:#677c8e;--gold:#e2b56d;--coral:#e4a2a0;--teal:#8ac5bc;
+      --line:rgba(241,231,214,.14);--soft-line:rgba(241,231,214,.08);
+      --serif:'Fraunces',Georgia,serif;--sans:'DM Sans',system-ui,-apple-system,sans-serif;
+      --mono:'IBM Plex Mono',monospace;
+    }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); }
+    body { margin:0; min-height:100vh; color:var(--ink); background:var(--bg); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:focus-visible,input:focus-visible,a:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
+    [hidden] { display:none!important; }
+    a { color:inherit; }
+    .landing { min-height:100dvh; position:relative; overflow:hidden; }
+    .landing::before { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 65% 45% at 50% 17%,rgba(222,159,119,.12),transparent 80%),radial-gradient(ellipse 57% 50% at 88% 85%,rgba(74,152,153,.07),transparent 80%); }
+    .landing::after { content:""; position:absolute; width:600px;height:600px;left:50%;top:3%;transform:translateX(-50%);border:1px solid rgba(226,181,109,.09);border-radius:50%;pointer-events:none;box-shadow:0 0 0 75px rgba(226,181,109,.022),0 0 0 160px rgba(226,181,109,.012); }
+    .topbar { position:relative;z-index:1;max-width:1160px;margin:auto;padding:27px 36px;display:flex;align-items:center;justify-content:space-between;gap:16px; }
+    .brand { text-decoration:none;display:inline-flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.03em;font-size:14px; }
+    .brand-mark { color:var(--gold);font-family:var(--serif);font-size:28px;font-weight:400;line-height:1; }
+    .brand small { display:block;color:var(--dim);font:10px var(--mono);letter-spacing:.14em;margin-top:4px; }
+    .home-link { text-decoration:none;color:var(--muted);font:11px var(--mono);letter-spacing:.06em;padding:10px 0;transition:color .2s; }
+    .home-link:hover { color:var(--gold); }
+    .hero { position:relative;z-index:1;max-width:980px;margin:0 auto;padding:clamp(58px,10vh,120px) 28px 60px;text-align:center; }
+    .eyebrow { display:inline-flex;align-items:center;gap:14px;color:var(--gold);font:11px var(--mono);letter-spacing:.22em;text-transform:uppercase; }
+    .eyebrow:before,.eyebrow:after { content:"";width:30px;height:1px;background:rgba(226,181,109,.48); }
+    h1 { font:400 clamp(52px,8.5vw,104px)/1.07 var(--serif);letter-spacing:-.053em;margin:30px auto 23px;max-width:920px; }
+    h1 em { color:var(--gold);font-weight:400; }
+    .hero-copy { margin:0 auto;max-width:550px;font:400 clamp(17px,2vw,21px)/1.75 var(--serif);color:#c6c2bb; }
+    .hero-copy strong { color:var(--ink);font-weight:500; }
+    .theme-row { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:740px;margin:50px auto 34px; }
+    .theme { text-align:left;border:1px solid var(--line);background:rgba(13,32,48,.55);padding:19px 20px;min-height:112px;border-radius:8px; }
+    .theme-number { color:var(--gold);font:10px var(--mono);letter-spacing:.1em; }
+    .theme-title { font:400 20px var(--serif);margin:8px 0 4px; }
+    .theme-hint { font-size:12px;color:var(--muted);line-height:1.5; }
+    .primary { border:1px solid var(--gold);background:var(--gold);color:#0a1520;padding:18px 34px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-width:278px;font-weight:700;font-size:14px;transition:transform .2s,box-shadow .2s; }
+    .primary:hover { transform:translateY(-2px);box-shadow:0 14px 35px rgba(226,181,109,.18); }
+    .primary .arrow { font-size:20px;font-weight:400;line-height:0; }
+    .small-actions { display:flex;align-items:center;justify-content:center;gap:17px;margin-top:20px;flex-wrap:wrap; }
+    .text-link { padding:5px;background:none;border:0;color:var(--muted);font-size:13px;text-decoration:underline;text-decoration-color:rgba(155,171,184,.4);text-underline-offset:5px; }
+    .text-link:hover { color:var(--ink); }
+    .sep-dot { color:var(--dim);font-size:10px; }
+    .file-hint { max-width:650px;margin:46px auto 0;padding-top:18px;border-top:1px solid var(--soft-line);font:11px/1.75 var(--mono);color:var(--dim); }
+    .file-hint code { color:var(--teal); }
+    /* Reading stage */
+    .reader { position:fixed;z-index:10;inset:0;display:flex;flex-direction:column;background:radial-gradient(ellipse 58% 60% at 50% 42%,#0e2332 0%,#06121d 74%,#030a11 100%);overflow:hidden; }
+    .reader-top { display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px clamp(18px,3vw,45px) 18px;min-height:86px; }
+    .reader-kicker { text-transform:uppercase;font:10px var(--mono);letter-spacing:.22em;color:var(--gold);margin-bottom:7px; }
+    .reader-section { font:400 clamp(16px,2vw,23px) var(--serif);color:var(--ink); }
+    .icon-button { flex:0 0 auto;color:var(--muted);border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.025);padding:10px 14px;font-size:12px; }
+    .icon-button:hover { color:var(--ink);border-color:rgba(226,181,109,.5); }
+    .top-progress { position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.05); }
+    .top-progress > div { height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .15s linear; }
+    .stage { flex:1;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 18px 4px; }
+    .stage-prompt { min-height:22px;margin:0 0 12px;color:var(--dim);font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;text-align:center; }
+    .orp-shell { display:flex;align-items:center;justify-content:center;width:100%;max-width:1300px;position:relative;height:clamp(110px,22vh,240px); }
+    .orp-shell:before,.orp-shell:after { position:absolute;content:"";height:18px;width:1px;background:rgba(226,181,109,.55);left:50%;transform:translateX(-50%);pointer-events:none; }
+    .orp-shell:before { top:12px; }
+    .orp-shell:after { bottom:12px; }
+    .word { width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:baseline;font:500 clamp(38px,7.3vw,90px)/1.35 var(--sans);letter-spacing:-.052em;white-space:nowrap; }
+    .before { text-align:right;overflow:hidden; }
+    .pivot { color:var(--coral); }
+    .after { text-align:left;overflow:hidden; }
+    .word.muted { color:var(--muted);font-family:var(--serif);font-weight:400;letter-spacing:-.02em;font-size:clamp(29px,5.5vw,58px); }
+    .word.muted .pivot { color:var(--gold); }
+    .stage-note { min-height:34px;color:var(--dim);font:11px/1.6 var(--mono);text-align:center;margin-top:10px; }
+    .reader-bottom { width:100%;border-top:1px solid var(--soft-line);background:rgba(4,12,20,.7);padding:18px clamp(18px,3vw,46px) max(19px,env(safe-area-inset-bottom)); }
+    .transport { max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:11px; }
+    .timecode { font:12px var(--mono);color:var(--muted);min-width:45px;font-variant-numeric:tabular-nums; }
+    .timeline { appearance:none;-webkit-appearance:none;flex:1;max-width:560px;height:4px;border-radius:20px;background:rgba(241,231,214,.19);outline:none;cursor:pointer;accent-color:var(--gold); }
+    input[type=range]::-webkit-slider-thumb { appearance:none;-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--gold);border:3px solid var(--deep);box-shadow:0 0 0 1px var(--gold); }
+    input[type=range]::-moz-range-thumb { width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--deep); }
+    .play { width:52px;height:52px;border-radius:50%;background:var(--gold);color:#091725;border:0;font-size:20px;flex:none;display:grid;place-items:center; }
+    .play:hover { background:#f3c88a; }
+    .reader-tools { max-width:1000px;margin:18px auto 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px; }
+    .sync-left { display:flex;align-items:center;gap:11px; }
+    .control-label { font:10px var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--muted);white-space:nowrap; }
+    .sync-slider { width:clamp(100px,13vw,190px);accent-color:var(--gold); }
+    .sync-value { font:11px var(--mono);min-width:38px;color:var(--gold); }
+    .nudge { display:flex;gap:8px;justify-content:center; }
+    .small-button { border:1px solid var(--line);border-radius:4px;padding:10px 12px;background:rgba(255,255,255,.025);color:var(--muted);font:11px var(--mono);white-space:nowrap; }
+    .small-button:hover { color:var(--ink);border-color:rgba(226,181,109,.5); }
+    .reader-actions { justify-self:end;display:flex;align-items:center;gap:9px; }
+    .reader-legend { text-align:center;font:10px/1.6 var(--mono);color:var(--dim);margin:13px 0 0; }
+    .reader-legend strong { color:var(--muted);font-weight:400; }
+    .error { position:absolute;left:50%;top:106px;transform:translateX(-50%);width:min(90vw,540px);z-index:20;border:1px solid rgba(228,162,160,.4);border-radius:7px;background:#2b1720;padding:13px 18px;color:#ffd6d1;text-align:center;font:12px/1.6 var(--sans); }
+    /* transcript dialog */
+    .transcript { position:fixed;inset:0;z-index:30;background:rgba(2,8,14,.91);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:22px; }
+    .transcript-panel { width:min(760px,100%);max-height:min(88dvh,960px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:10px;background:#0c1e2d;padding:clamp(23px,4vw,46px);box-shadow:0 30px 100px #0008; }
+    .transcript-header { display:flex;gap:20px;align-items:start;justify-content:space-between;margin-bottom:30px; }
+    .transcript-header h2 { font:400 clamp(29px,4vw,42px) var(--serif);margin:8px 0 0; }
+    .transcript-copy h3 { font:400 26px var(--serif);color:var(--gold);margin:38px 0 15px; }
+    .transcript-copy h3:first-child { margin-top:0; }
+    .transcript-copy p { font:400 17px/1.9 var(--serif);margin:0 0 17px;color:#e6e0d5; }
+    .transcript-copy p:nth-of-type(6n) { color:var(--gold); }
+    .transcript-footer { font:11px/1.8 var(--mono);color:var(--dim);margin-top:30px;border-top:1px solid var(--line);padding-top:18px; }
+    @media(max-width:760px) {
+      .topbar { padding:22px 22px; }
+      .hero { padding-top:48px; }
+      .theme-row { gap:9px; }
+      .theme { padding:14px 12px;min-height:105px; }
+      .theme-title { font-size:17px; }
+      .theme-hint { font-size:11px; }
+      .reader-tools { grid-template-columns:1fr;gap:12px; }
+      .sync-left,.nudge,.reader-actions { justify-content:center;justify-self:center; }
+      .reader-actions { flex-wrap:wrap; }
+      .reader-legend { display:none; }
+      .reader-top { min-height:75px; }
+      .reader-bottom { padding-top:13px; }
+      .stage { min-height:100px; }
+      .orp-shell { height:150px; }
+    }
+    @media(max-width:480px) {
+      h1 { font-size:clamp(46px,12vw,65px); }
+      .eyebrow { font-size:9px;letter-spacing:.16em; }
+      .theme-row { grid-template-columns:1fr;gap:9px;margin:30px auto 27px; }
+      .theme { min-height:0;padding:12px 16px;display:grid;grid-template-columns:28px 1fr;gap:0 8px;align-items:center; }
+      .theme-number { grid-row:1/3; }
+      .theme-title { margin:0; }
+      .theme-hint { margin-top:2px; }
+      .file-hint { margin-top:30px; }
+      .reader-top { padding:15px 16px; }
+      .reader-section { font-size:18px; }
+      .reader-bottom { padding:14px 14px max(16px,env(safe-area-inset-bottom)); }
+      .transport { gap:8px; }
+      .timecode { font-size:10px;min-width:35px; }
+      .play { width:46px;height:46px; }
+      .word { font-size:clamp(36px,9vw,44px); }
+      .stage-note { font-size:10px; }
+      .small-button { padding:9px 11px; }
+      .sync-left { gap:8px; }
+      .control-label { font-size:9px; }
+      .sync-slider { width:min(38vw,165px); }
+    }
+    @media(max-height:680px) {
+      .reader-top { min-height:58px;padding-top:12px;padding-bottom:8px; }
+      .reader-bottom { padding-top:8px;padding-bottom:9px; }
+      .reader-tools { margin-top:8px; }
+      .orp-shell { height:clamp(92px,20vh,160px); }
+      .reader-legend { display:none; }
+    }
+    @media(prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important;animation:none!important;transition:none!important; } }
+  </style>
 </head>
 <body>
+  <div class="landing" id="landing">
+    <header class="topbar">
+      <a class="brand" href="../../" aria-label="Voyage 2050 home"><span class="brand-mark">✳</span><span>VOYAGE 2050<small>THE OPERATING SYSTEM</small></span></a>
+      <a class="home-link" href="../">← SYSTEM HUB</a>
+    </header>
+    <main class="hero">
+      <div class="eyebrow">A daily promise to myself</div>
+      <h1>The Art of<br><em>Being Alive.</em></h1>
+      <p class="hero-copy">Not a burst of motivation. A steadier kind of fire.<br><strong>Thirteen minutes to remember what makes life worth living.</strong></p>
+      <div class="theme-row" aria-label="Three parts of the reading">
+        <div class="theme"><div class="theme-number">I.</div><div class="theme-title">Make peace.</div><div class="theme-hint">Life doesn't need all its answers today.</div></div>
+        <div class="theme"><div class="theme-number">II.</div><div class="theme-title">Dream freely.</div><div class="theme-hint">Beauty, abundance, love, and choice.</div></div>
+        <div class="theme"><div class="theme-number">III.</div><div class="theme-title">Return to work.</div><div class="theme-hint">Quiet discipline, one ordinary day.</div></div>
+      </div>
+      <button class="primary" id="startButton" type="button">BEGIN TODAY'S READING <span class="arrow">↗</span></button>
+      <div class="small-actions"><button class="text-link" id="previewButton" type="button">Read the complete script</button><span class="sep-dot">◆</span><span style="color:var(--muted);font:12px var(--mono);">13:30 audio · starts speaking at 0:05</span></div>
+      <p class="file-hint">Place <code>index.html</code> and <code>final.mp3</code> in the same folder. The recognition point stays fixed; you can adjust the text pace if the recording and words drift apart.</p>
+    </main>
+  </div>
 
-<div id="progress"></div>
+  <section class="reader" id="reader" aria-label="RSVP reading experience" hidden>
+    <div class="top-progress"><div id="readingProgress"></div></div>
+    <header class="reader-top">
+      <div><div class="reader-kicker" id="partNumber">PART I OF III</div><div class="reader-section" id="partTitle">A Letter to Myself</div></div>
+      <button class="icon-button" type="button" id="exitButton">✕ &nbsp; Exit</button>
+    </header>
+    <main class="stage">
+      <p class="stage-prompt" id="stagePrompt">Focus on the highlighted letter</p>
+      <div class="orp-shell">
+        <div class="word" id="rsvpWord" role="status" aria-live="off" aria-label="Current reading word">
+          <span class="before" id="wordBefore"></span><span class="pivot" id="wordPivot">●</span><span class="after" id="wordAfter"></span>
+        </div>
+      </div>
+      <div class="stage-note" id="stageNote">Keep your eyes in the center. Let the audio guide you.</div>
+    </main>
+    <div class="error" id="errorBox" role="alert" hidden></div>
+    <footer class="reader-bottom">
+      <div class="transport">
+        <button class="play" id="playButton" type="button" aria-label="Pause audio">Ⅱ</button>
+        <span class="timecode" id="elapsed">0:00</span>
+        <input class="timeline" id="seekBar" type="range" min="0" max="810" value="0" step="0.1" aria-label="Audio position">
+        <span class="timecode" id="duration">13:30</span>
+      </div>
+      <div class="reader-tools">
+        <div class="sync-left"><label class="control-label" for="paceSlider">Text pace</label><input id="paceSlider" class="sync-slider" type="range" min="65" max="145" step="1" value="100" aria-label="Text speed relative to audio"><output class="sync-value" id="paceValue" for="paceSlider">100%</output></div>
+        <div class="nudge"><button class="small-button" id="backWords" type="button" title="Text five words back (Left arrow)">← 5 words</button><button class="small-button" id="forwardWords" type="button" title="Text five words forward (Right arrow)">5 words →</button></div>
+        <div class="reader-actions"><button class="small-button" id="resetSync" type="button">Reset sync</button><button class="small-button" id="scriptButton" type="button">Full text ↗</button></div>
+      </div>
+      <p class="reader-legend"><strong>Space</strong> play / pause &nbsp;·&nbsp; <strong>← →</strong> move five words &nbsp;·&nbsp; <strong>Esc</strong> exit &nbsp;·&nbsp; Text pace changes words, not voice speed</p>
+    </footer>
+  </section>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="../../">
-      <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="52" stroke="#8fa4ba" stroke-opacity="0.5" stroke-width="4"/><path d="M60 22 L67 60 L60 98 L53 60 Z" fill="#d3a355"/><path d="M22 60 L60 53 L98 60 L60 67 Z" fill="#ede7d9" fill-opacity="0.6"/></svg>
-      <span class="brand-name">Voyage <em>2050</em></span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">Menu</button>
-    <div class="nav-links" id="navLinks">
-      <a href="../../"><span class="num">01</span>Decade Map</a>
-      <a href="../../yearly-plan/"><span class="num">02</span>1-Year Plan</a>
-      <a href="../../three-month-plan/"><span class="num">03</span>90-Day Plan</a>
-      <a href="../" class="active"><span class="num">04</span>Operating System</a>
+  <div class="transcript" id="transcript" role="dialog" aria-modal="true" aria-labelledby="transcriptTitle" hidden>
+    <div class="transcript-panel" id="transcriptPanel">
+      <header class="transcript-header"><div><div class="reader-kicker">THE COMPLETE READING</div><h2 id="transcriptTitle">The Art of Being Alive</h2></div><button class="icon-button" type="button" id="closeTranscript">✕ Close</button></header>
+      <div class="transcript-copy" id="transcriptCopy"></div>
+      <div class="transcript-footer">This is the complete script, kept in the same order as the recording. The RSVP reader uses this exact text.</div>
     </div>
   </div>
-</nav>
+  <audio id="narration" src="./final.mp3" preload="metadata"></audio>
 
-<nav class="subnav" aria-label="Operating System sections">
-  <div class="subnav-inner">
-    <span class="subnav-label">System /</span>
-    <a href="../">Hub</a>
-    <a href="../schedule/"><span class="dot" style="background:var(--blue)"></span>Schedule</a>
-    <a href="../diet/"><span class="dot" style="background:var(--green)"></span>Diet</a>
-    <a href="./" class="here"><span class="dot" style="background:var(--red)"></span>Speech</a>
-    <a href="../protocol/"><span class="dot" style="background:var(--gold)"></span>Protocol Book</a>
-  </div>
-</nav>
+  <script>
+    'use strict';
 
-<div class="wrap">
-  <header class="hero">
-    <p class="eyebrow">04c · The Operating System</p>
-    <h1>The <em>Speech</em></h1>
-    <div class="when-box">
-      <b>Break glass when</b>
-      You're lying in bed at 10am. The plan feels pointless. The void whispers. Then — read this aloud.
-    </div>
-    <button class="focus-btn" id="focusBtn">🔥 Read Aloud — Focus Mode</button>
-  </header>
-</div>
-
-<!-- ============ THE SPEECH ============ -->
-<main class="speech" id="speech">
-
-  <p class="passage opener"><span class="callname">Harshdeep. Get up.</span></p>
-
-  <hr class="sep">
-
-  <p class="passage">Not because life has a meaning you've finally found. You've stared into that void longer than anyone you know, and you already know the answer: the universe owes you nothing, and it explains nothing. Fine. <b>Then the meaning is the one you build — and you've already chosen it.</b></p>
-
-  <p class="passage">You chose <b>her</b>. The one who picked you when you had nothing, not for money, not for status, but for the inner world you show no one else. Every hour you waste in bed is an hour stolen from the house, the lawn, the life you promised her in 2050.</p>
-
-  <p class="passage">You chose <b>your parents</b>. Farmers in Sangrur who will one day be retired by their son's hands. Not by his plans. His <b>hands</b>.</p>
-
-  <p class="passage">You chose <b>the sea</b>. Six months on, six months off, tax-advantaged, AI-proof, unordinary — everything you demanded of life, it offered you. All it asks back is this year. One year of pre-study, one application, one clean exit from Salmon Arm.</p>
-
-  <p class="passage">You have ADHD. So what — now you know the enemy's name. It was never laziness. It was never weakness. Your brain needs structure, timers, and starts of two minutes — and you have all three written down, taped to your wall.</p>
-
-  <p class="passage">You are not the boy who plans and never executes. That story ends today, because you know exactly what your 16-year-old self needed to hear: <b>a bad schedule executed beats a perfect one ignored.</b></p>
-
-  <p class="passage">The deer doesn't ask why the lion exists. It runs anyway.</p>
-
-  <hr class="sep">
-
-  <p class="passage closer">So run. <b>Two minutes. Start.</b><br>The rest will follow — it always does, once you start.</p>
-
-</main>
-
-<!-- ============ FINAL ACTION ============ -->
-<div class="final-action">
-  <div class="final-inner" id="finalBox">
-    <span class="k">The speech ends in action</span>
-    <p>Don't close this page and think about it. <b>Commit only to starting</b> — momentum does the rest.</p>
-    <button class="timer-btn" id="timerBtn">▸ Start the 2 minutes</button>
-    <div class="timer-display" id="timerDisplay">2:00</div>
-    <div class="timer-note" id="timerNote">Get up. Water. Move. The timer is running.</div>
-  </div>
-</div>
-
-<div class="cta-row">
-  <a class="ghost" href="../diet/">← 04b · The Diet Plan</a>
-  <a class="primary" href="../protocol/">Next → 04d · The Protocol Book</a>
-</div>
-
-<footer class="page-foot">
-  <div class="rule"></div>
-  <span class="lead">The emergency restart button</span>
-  <p>This page asks for nothing except two minutes. Everything else in the system — the schedule, the diet, the protocols — is already waiting on the other side of them.</p>
-</footer>
-
-<script>
-  // Scroll progress
-  const prog = document.getElementById('progress');
-  addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const max = h.scrollHeight - h.clientHeight;
-    prog.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
-  }, {passive:true});
-
-  // Mobile nav
-  document.getElementById('navToggle').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
-
-  // Reveal on scroll
-  const passages = Array.from(document.querySelectorAll('.passage'));
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
-    }, {threshold:0.15});
-    passages.forEach(el => io.observe(el));
-  } else {
-    passages.forEach(el => el.classList.add('in-view'));
-  }
-
-  // ===== FOCUS MODE (step through, one passage lit at a time) =====
-  const focusBtn = document.getElementById('focusBtn');
-  let focusIdx = -1;
-
-  const stepper = document.createElement('div');
-  stepper.className = 'stepper';
-  stepper.innerHTML = '<button class="next-p" id="nextP">Next ↵ / Space</button><button class="exit-f" id="exitF">Exit · Esc</button>';
-  document.body.appendChild(stepper);
-
-  function enterFocus(){
-    document.body.classList.add('focus');
-    focusIdx = 0;
-    lightPassage();
-  }
-  function exitFocus(){
-    document.body.classList.remove('focus');
-    passages.forEach(p => p.classList.remove('dimmed','lit'));
-    focusIdx = -1;
-  }
-  function lightPassage(){
-    passages.forEach((p,i) => {
-      p.classList.add('in-view');
-      p.classList.toggle('lit', i === focusIdx);
-      p.classList.toggle('dimmed', i !== focusIdx);
-    });
-    passages[focusIdx].scrollIntoView({behavior:'smooth', block:'center'});
-  }
-  function nextPassage(){
-    if (focusIdx < passages.length - 1) {
-      focusIdx++;
-      lightPassage();
-    } else {
-      exitFocus();
-      document.getElementById('finalBox').scrollIntoView({behavior:'smooth', block:'center'});
-    }
-  }
-
-  focusBtn.addEventListener('click', enterFocus);
-  document.getElementById('nextP').addEventListener('click', nextPassage);
-  document.getElementById('exitF').addEventListener('click', exitFocus);
-  document.addEventListener('keydown', e => {
-    if (!document.body.classList.contains('focus')) return;
-    if (e.key === 'Escape') exitFocus();
-    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); nextPassage(); }
-  });
-
-  // ===== 2-MINUTE TIMER =====
-  const finalBox = document.getElementById('finalBox');
-  const timerBtn = document.getElementById('timerBtn');
-  const timerDisplay = document.getElementById('timerDisplay');
-  const timerNote = document.getElementById('timerNote');
-  let remaining = 120, tick = null;
-
-  timerBtn.addEventListener('click', () => {
-    finalBox.classList.add('running');
-    tick = setInterval(() => {
-      remaining--;
-      const m = Math.floor(remaining/60), s = String(remaining%60).padStart(2,'0');
-      timerDisplay.textContent = m + ':' + s;
-      if (remaining <= 0) {
-        clearInterval(tick);
-        finalBox.classList.add('done');
-        timerDisplay.textContent = '✓ Started';
-        timerNote.textContent = "That's it. You've already begun — keep going.";
+    // This text is the final user-approved manuscript. Line breaks are kept intentionally.
+    // The section titles in the UI are not part of the audio transcript.
+    const PARTS = [
+      {
+        title: 'A Letter to Myself',
+        text: `Good morning, my friend.
+Here I am. Alive. Breathing. Given another day on this strange, beautiful planet.
+Before I ask anything of myself today, I want to remember something.
+I am not running out of time to understand life. I am living it.
+I have spent countless hours wondering why I exist. What is the meaning of all this? Why was I born? What happens when I die?
+And the truth is, I don't know.
+And I am allowed not to know.
+Did Siddhartha Gautama arrive in this world with all the answers? No. Buddha's awakening came through years of living, questioning, and searching. Mahavira, too, followed a long journey toward understanding.
+Why, then, must I demand all the answers from myself before I have even properly experienced life?
+Perhaps meaning will find me at thirty. Perhaps at sixty. Perhaps while watching the sunset in a garden, with my family laughing behind me.
+Or perhaps there is no single grand answer.
+I do not need to understand the universe to appreciate being alive.
+The universe has existed for billions of years. I can give myself a little time.
+Until then, I can live. Love. Explore. And build a little heaven for myself and the people I love.
+I remember where I came from.
+A village. A family. Parents who spent years working, sacrificing, and making do with what life gave them.
+I cannot return their youth or erase their difficult days.
+But I can make a sincere effort to give them beautiful years ahead.
+I imagine them waking without financial worries. Travelling, laughing, enjoying good food and sunshine, discovering places they never thought they would see.
+Not because they demand it.
+But because their happiness would make me happy.
+And then there is her.
+The woman who loved me before any of these dreams became real.
+I imagine our life together. Morning tea. A beautiful home. Spontaneous holidays. Laughing about foolish things. Growing older without regretting that we forgot to enjoy being young.
+I want money, comfort, beauty, and abundance.
+But I never want to become so busy collecting life's rewards that I forget to experience life itself.
+Because one truth remains.
+Nobody is permanent here.
+Not my parents. Not my wife. Not even me.
+And that doesn't have to be terrifying.
+A flower is not worthless because it eventually falls. A sunset is not meaningless because it ends.
+And a human life does not need to last forever to be magnificent.
+I am here now. They are here now. That is already a reason to celebrate.`
+      },
+      {
+        title: 'The Life I Could Live',
+        text: `Beauty. Wealth. Freedom. Possibility.
+Now, let me dream.
+Not because my present life is worthless, but because this world contains extraordinary things, and I would love to experience them.
+Imagine a Saturday morning in my future.
+Sunlight enters through enormous windows. Outside, a garden full of flowers moves gently in the breeze.
+My home is beautiful. Warm wood, natural stone, high ceilings, fresh air, and peace.
+No alarm demanding that I rush somewhere.
+I wake up rested, step into the garden with a cup of coffee, and simply admire the life around me.
+This is wealth. The freedom to enjoy a Tuesday as much as a Saturday.
+I get dressed.
+Perhaps a Loro Piana cashmere sweater, a tailored Brioni jacket, elegant Italian leather shoes.
+On my wrist, a Rolex Day-Date or a Patek Philippe.
+Not because strangers need to notice.
+But because I appreciate craftsmanship, beauty, and the pleasure of owning something extraordinary.
+I walk into a boutique. I see something beautiful. I try it on. I love it.
+And I buy it.
+No nervous calculations. No fear of the price tag. No financial anxiety waiting at home.
+Imagine a Porsche 911 in my driveway. Perhaps an Aston Martin for peaceful evening drives.
+An empty road, beautiful music, and nowhere I urgently need to be.
+Imagine calling my parents one morning.
+"Pack your bags. We're going somewhere beautiful."
+Business-class seats. Comfortable flights. A luxurious hotel overlooking the Swiss Alps.
+We ride a scenic train through mountains and little villages. I watch them discover places they once knew only from photographs.
+Their happiness would be a luxury no watch could ever replace.
+Another month, my wife and I are in Italy.
+We wander through Florence, enjoy beautiful food beside the water, and stay in a Venetian hotel overlooking the Grand Canal.
+Perhaps I see a Cartier necklace that would look beautiful on her.
+I buy it, simply because I want to see her smile.
+Sometimes love itself is the occasion.
+Another morning, we wake in a private villa above the turquoise waters of the Maldives.
+Warm sunlight. Fresh fruit. Waves beneath the floor.
+An entire afternoon with nothing urgent to accomplish.
+And then, perhaps one summer...
+The Mediterranean.
+A beautiful yacht floating near the Greek islands.
+My parents are relaxing in the shade. My wife is laughing. Good food on the table, music in the background, the sea stretching endlessly around us.
+I walk toward the railing and smile.
+Because somewhere in my past, a younger version of me imagined this exact feeling.
+Not the yacht itself. The feeling.
+Having enough.
+Enough money to choose. Enough time to enjoy. Enough health to participate. Enough love to make it worthwhile.
+I am not ashamed to dream of a rich life.
+There is nothing noble about unnecessary suffering, and nothing shameful about wanting to protect my family from financial hardship.
+If life gives me the chance, I would rather see my family laughing on a yacht than spend our limited years struggling with avoidable poverty.
+Money cannot buy immortality, genuine love, or guaranteed happiness.
+But it can buy freedom, comfort, extraordinary experiences, and relief from many worries.
+And I would love to have those things.
+Perhaps I will own that yacht. Perhaps I will charter one. Perhaps my dreams will change.
+That's fine.
+The goal is not to collect expensive objects. It is to have the freedom to choose the life I genuinely enjoy.
+Imagine having days entirely under my control.
+Learning something fascinating in the morning. Exploring a new city in the afternoon. Sharing dinner with loved ones in the evening.
+Travelling, reading, creating, discovering, or sitting beneath a tree doing absolutely nothing.
+What an extraordinary game life could be when I am free to play it with genuine interest.
+I do not need fame. I do not need a statue. I do not need my name engraved in history.
+One day, the world will forget almost everyone alive today.
+Why sacrifice the joy of existence merely to leave a permanent mark on a planet that is itself impermanent?
+I am not here to win the approval of history. I am here to experience existence while I have the chance.
+To love. To explore. To laugh. To build. To discover.
+Perhaps meaning will find me somewhere along the journey.
+Until then, I can make the journey beautiful.`
+      },
+      {
+        title: 'The Quiet Warrior',
+        text: `Discipline. Courage. Continuity.
+Now, I return to today.
+Everything I imagined is possible.
+But none of it is promised.
+The universe has not signed a contract guaranteeing me wealth, happiness, or even tomorrow.
+I cannot control the outcome. But I can give myself a genuine chance.
+I don't need to believe every dream will come true.
+I only need to believe that trying is worthwhile.
+I am not waiting for a guaranteed fountain of wine in some afterlife.
+I don't know what comes after death.
+But I know this life is here, right now.
+So I will make a sincere attempt to build heaven here.
+For myself. For my family. For the people who make existence precious.
+A warrior does not become strong by fighting every minute.
+He becomes strong by knowing his purpose, protecting his energy, and returning to his responsibilities.
+I do not need to destroy myself with hard work.
+I need to become dependable.
+Someone who keeps his promises even when the excitement fades.
+Someone who works with patience, rests without guilt, and enjoys the present without forgetting the future.
+A thousand ordinary days can build an extraordinary life.
+And when I feel overwhelmed, I will remember:
+I do not need to build the whole kingdom today. I only need to lay today's bricks.
+There will always be someone richer, smarter, or further ahead.
+Let them live their lives.
+I have my own people to love, my own possibilities to explore, and my own promises to keep.
+I will not measure my worth by how much I accomplish before sunset.
+But I will take my opportunities seriously.
+Because this is not a rehearsal.
+I am already inside the game.
+The clock is moving.
+And I want to participate.
+Not desperately. Not fearfully.
+But wholeheartedly.
+I want to work hard without becoming bitter.
+To become wealthy without becoming empty.
+To enjoy luxury without depending on it.
+To accept uncertainty without surrendering ambition.
+To love deeply, live generously, and remain curious until the end.
+And I don't have to become that person overnight.
+Today, I will care for my body. Give my mind something worthwhile to learn. Complete the work I reasonably can.
+And when it is time to rest, I will rest.
+Tomorrow, I will return.
+Because discipline is not a dramatic act of suffering.
+Discipline is how I quietly show respect for the life I want to live.
+So here I am.
+Alive. Loved. Unfinished. Full of possibilities.
+I don't know exactly where this journey leads.
+But I know what I can do today.
+Live with interest.
+Work with patience.
+Love without holding back.
+Build without demanding guarantees.
+And make this ordinary day a little more beautiful than it would have been if I had given up.
+I do not need to conquer life.
+I want to participate in it.
+Enough dreaming for the moment.
+The world is waiting.
+One day. One honest effort. And a life worth living.`
       }
-    }, 1000);
-  });
-</script>
+    ];
 
+    const $ = id => document.getElementById(id);
+    const audio = $('narration');
+    const INITIAL_SILENCE = 5; // audio voice starts at 00:05
+    const EXPECTED_DURATION = 810; // 13 minutes 30 seconds
+    let duration = EXPECTED_DURATION;
+    let pace = 1;
+    let anchorTime = INITIAL_SILENCE;
+    let anchorWeight = 0;
+    let lastIndex = -2;
+    let lastPart = -1;
+    let raf = 0;
+    let started = false;
+    let seeking = false;
+    let transcriptWasPlaying = false;
+    let transcriptReturnFocus = null;
+    let toastTimer = 0;
+
+    // Words are assigned estimated durations, with extra weight for natural pauses.
+    // This is NOT a time-coded transcript. Audio time drives the display, and the user
+    // can correct pacing with Text pace and ±5 words without changing playback speed.
+    const words = [];
+    const boundaries = [0];
+    let accumulated = 0;
+    PARTS.forEach((part, partIndex) => {
+      const lines = part.text.split('\n');
+      lines.forEach((line) => {
+        const tokens = line.trim().split(/\s+/).filter(Boolean);
+        tokens.forEach((token, tokenIndex) => {
+          let weight = 1;
+          if (/[.!?]["'”’)]*$/.test(token)) weight += 0.75;
+          else if (/[,;:]["'”’)]*$/.test(token)) weight += 0.32;
+          if (/\.{3,}|…/.test(token)) weight += 0.9;
+          if (tokenIndex === tokens.length - 1) weight += 0.20;
+          words.push({ text: token, part: partIndex });
+          accumulated += weight;
+          boundaries.push(accumulated);
+        });
+      });
+    });
+    const TOTAL_WEIGHT = accumulated;
+    const unitsPerSecond = () => TOTAL_WEIGHT / Math.max(1, duration - INITIAL_SILENCE);
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+    const fmt = time => {
+      const t = Math.max(0, Math.floor(time));
+      return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+    };
+
+    function weightAt(time) {
+      if (time < INITIAL_SILENCE) return 0;
+      return clamp(anchorWeight + (time - anchorTime) * unitsPerSecond() * pace, 0, TOTAL_WEIGHT);
+    }
+    function indexForWeight(weight) {
+      let lo = 0, hi = words.length;
+      while (lo < hi) {
+        const mid = (lo + hi) >>> 1;
+        if (boundaries[mid + 1] <= weight) lo = mid + 1;
+        else hi = mid;
+      }
+      return clamp(lo, 0, words.length - 1);
+    }
+    function syncAnchorToCurrent(time = audio.currentTime) {
+      anchorWeight = weightAt(time);
+      anchorTime = Math.max(INITIAL_SILENCE, time);
+    }
+    function resetMapping(time = audio.currentTime) {
+      anchorTime = Math.max(INITIAL_SILENCE, time);
+      anchorWeight = clamp((time - INITIAL_SILENCE) * unitsPerSecond(), 0, TOTAL_WEIGHT);
+      lastIndex = -2;
+      render();
+    }
+    function nudge(count) {
+      if (audio.currentTime < INITIAL_SILENCE) return;
+      const idx = indexForWeight(weightAt(audio.currentTime));
+      anchorTime = audio.currentTime;
+      anchorWeight = boundaries[clamp(idx + count, 0, words.length - 1)];
+      lastIndex = -2;
+      render();
+    }
+
+    function splitAtOrp(token) {
+      const chars = Array.from(token);
+      const letters = chars.map((c, i) => /[\p{L}\p{N}]/u.test(c) ? i : -1).filter(i => i >= 0);
+      if (!letters.length) return [token, '', ''];
+      const n = letters.length;
+      // Widely used RSVP pivot heuristic: mark the first/second/third/... letter.
+      const letterIndex = n === 1 ? 0 : n <= 5 ? 1 : n <= 9 ? 2 : n <= 13 ? 3 : 4;
+      const actual = letters[Math.min(letterIndex, letters.length - 1)];
+      return [chars.slice(0, actual).join(''), chars[actual], chars.slice(actual + 1).join('')];
+    }
+    function showWord(token, muted = false) {
+      const [before, pivot, after] = splitAtOrp(token);
+      $('wordBefore').textContent = before;
+      $('wordPivot').textContent = pivot || ' ';
+      $('wordAfter').textContent = after;
+      $('rsvpWord').classList.toggle('muted', muted);
+    }
+    function render() {
+      if (!started || $('reader').hidden) return;
+      const t = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+      $('elapsed').textContent = fmt(t);
+      $('duration').textContent = fmt(duration);
+      $('readingProgress').style.width = `${clamp(t / duration * 100, 0, 100)}%`;
+      if (!seeking) $('seekBar').value = String(clamp(t, 0, duration));
+      $('playButton').textContent = audio.paused ? '▶' : 'Ⅱ';
+      $('playButton').setAttribute('aria-label', audio.paused ? 'Play audio' : 'Pause audio');
+      if (t < INITIAL_SILENCE) {
+        if (lastIndex !== -1) {
+          showWord('Begin', true);
+          $('stagePrompt').textContent = 'A moment of stillness';
+          lastIndex = -1;
+        }
+        $('stageNote').textContent = `Your reading begins in ${Math.ceil(INITIAL_SILENCE - t)}…`;
+        return;
+      }
+      if (audio.ended) {
+        showWord('Complete', true);
+        $('stagePrompt').textContent = 'Your promise for today';
+        $('stageNote').textContent = 'One day. One honest effort. And a life worth living.';
+        return;
+      }
+      const index = indexForWeight(weightAt(t));
+      if (index !== lastIndex) {
+        const data = words[index];
+        showWord(data.text);
+        lastIndex = index;
+        if (data.part !== lastPart) {
+          lastPart = data.part;
+          $('partNumber').textContent = `PART ${['I','II','III'][data.part]} OF III`;
+          $('partTitle').textContent = PARTS[data.part].title;
+        }
+        $('stagePrompt').textContent = 'Focus on the highlighted letter';
+        $('stageNote').textContent = `Word ${index + 1} of ${words.length} · Let the audio set the rhythm`;
+      }
+    }
+    function animationLoop() {
+      render();
+      if (!audio.paused && !$('reader').hidden) raf = requestAnimationFrame(animationLoop);
+    }
+    function startAnimation() {
+      cancelAnimationFrame(raf);
+      if (!$('reader').hidden && !audio.paused) raf = requestAnimationFrame(animationLoop);
+      render();
+    }
+    function showError(message) {
+      $('errorBox').textContent = message;
+      $('errorBox').hidden = false;
+    }
+    function hideError() { $('errorBox').hidden = true; }
+    async function playAudio() {
+      try {
+        await audio.play();
+        hideError();
+        startAnimation();
+      } catch (e) {
+        showError('Could not play final.mp3. Confirm the file is named exactly "final.mp3" and is next to index.html.');
+        render();
+      }
+    }
+    async function enterReader() {
+      closeTranscript(true);
+      $('landing').hidden = true;
+      $('reader').hidden = false;
+      document.body.style.overflow = 'hidden';
+      if (!started) {
+        started = true;
+        audio.currentTime = 0;
+        pace = Number($('paceSlider').value) / 100;
+      }
+      resetMapping(audio.currentTime);
+      $('exitButton').focus({ preventScroll: true });
+      await playAudio();
+    }
+    function exitReader() {
+      audio.pause();
+      cancelAnimationFrame(raf);
+      $('reader').hidden = true;
+      $('landing').hidden = false;
+      document.body.style.overflow = '';
+      hideError();
+      $('startButton').focus({ preventScroll: true });
+    }
+    function togglePlayback() {
+      if (audio.paused) {
+        if (audio.ended || audio.currentTime >= duration - 0.15) {
+          audio.currentTime = 0;
+          resetMapping(0);
+        }
+        playAudio();
+      } else {
+        audio.pause();
+        cancelAnimationFrame(raf);
+        render();
+      }
+    }
+    function buildTranscript() {
+      const fragment = document.createDocumentFragment();
+      PARTS.forEach((part, index) => {
+        const heading = document.createElement('h3');
+        heading.textContent = `${['I','II','III'][index]}. ${part.title}`;
+        fragment.appendChild(heading);
+        part.text.split('\n').forEach(line => {
+          const para = document.createElement('p');
+          para.textContent = line;
+          fragment.appendChild(para);
+        });
+      });
+      $('transcriptCopy').appendChild(fragment);
+    }
+    function openTranscript() {
+      transcriptWasPlaying = !$('reader').hidden && !audio.paused;
+      transcriptReturnFocus = document.activeElement;
+      if (transcriptWasPlaying) audio.pause();
+      cancelAnimationFrame(raf);
+      $('transcript').hidden = false;
+      $('transcriptPanel').scrollTop = 0;
+      $('closeTranscript').focus();
+      render();
+    }
+    function closeTranscript(silent = false) {
+      if ($('transcript').hidden) return;
+      $('transcript').hidden = true;
+      if (!silent && transcriptReturnFocus && document.contains(transcriptReturnFocus)) transcriptReturnFocus.focus();
+      if (!silent && transcriptWasPlaying && !$('reader').hidden) playAudio();
+      transcriptWasPlaying = false;
+    }
+
+    $('startButton').addEventListener('click', enterReader);
+    $('exitButton').addEventListener('click', exitReader);
+    $('playButton').addEventListener('click', togglePlayback);
+    $('backWords').addEventListener('click', () => nudge(-5));
+    $('forwardWords').addEventListener('click', () => nudge(5));
+    $('resetSync').addEventListener('click', () => resetMapping());
+    $('paceSlider').addEventListener('input', event => {
+      syncAnchorToCurrent();
+      pace = Number(event.target.value) / 100;
+      $('paceValue').textContent = `${Math.round(pace * 100)}%`;
+      render();
+    });
+    $('seekBar').addEventListener('pointerdown', () => { seeking = true; });
+    $('seekBar').addEventListener('input', event => {
+      seeking = true;
+      const seekTo = clamp(Number(event.target.value), 0, duration);
+      audio.currentTime = seekTo;
+      resetMapping(seekTo);
+      render();
+    });
+    $('seekBar').addEventListener('change', () => { seeking = false; render(); });
+    window.addEventListener('pointerup', () => { seeking = false; });
+    audio.addEventListener('loadedmetadata', () => {
+      if (Number.isFinite(audio.duration) && audio.duration > INITIAL_SILENCE) {
+        duration = audio.duration;
+        $('seekBar').max = String(duration);
+        $('duration').textContent = fmt(duration);
+        if (started) resetMapping();
+      }
+    });
+    audio.addEventListener('error', () => {
+      if (started && !$('reader').hidden) showError('Audio file missing or unreadable. Add final.mp3 beside index.html and reload the page.');
+    });
+    audio.addEventListener('play', startAnimation);
+    audio.addEventListener('pause', () => { cancelAnimationFrame(raf);render(); });
+    audio.addEventListener('ended', () => { cancelAnimationFrame(raf);render(); });
+    audio.addEventListener('seeked', render);
+    $('previewButton').addEventListener('click', openTranscript);
+    $('scriptButton').addEventListener('click', openTranscript);
+    $('closeTranscript').addEventListener('click', () => closeTranscript());
+    $('transcript').addEventListener('click', event => {
+      if (event.target === $('transcript')) closeTranscript();
+    });
+    document.addEventListener('keydown', event => {
+      if (!$('transcript').hidden) {
+        if (event.key === 'Escape') { event.preventDefault();closeTranscript(); }
+        // Keep keyboard focus inside the open transcript.
+        if (event.key === 'Tab') {
+          event.preventDefault();$('closeTranscript').focus();
+        }
+        return;
+      }
+      if ($('reader').hidden) return;
+      if (event.target instanceof HTMLInputElement) {
+        if (event.key === 'Escape') exitReader();
+        return;
+      }
+      if (event.code === 'Space') { event.preventDefault();togglePlayback(); }
+      else if (event.key === 'ArrowLeft') { event.preventDefault();nudge(-5); }
+      else if (event.key === 'ArrowRight') { event.preventDefault();nudge(5); }
+      else if (event.key === 'Escape') { event.preventDefault();exitReader(); }
+    });
+
+    buildTranscript();
+    showWord('Begin', true);
+    // A missing final.mp3 is expected during setup; show a clear error only upon starting.
+  </script>
 </body>
 </html>
