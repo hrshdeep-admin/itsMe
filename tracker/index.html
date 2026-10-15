@@ -255,12 +255,62 @@ body.dialog-open{overflow:hidden}
 .signoff button{min-height:46px;font-size:12px}
 @media(min-width:750px){.masthead{padding:23px 0 20px}.hero-title{font-size:clamp(34px,5vw,48px)}}
 @media(max-width:749px){.signoff,.signoff.show{position:static;bottom:auto;left:auto;right:auto;width:100%;max-width:100%;margin:9px auto 0}.signoff button{min-height:39px;font-size:11px}}
+
+/* DAYFLOW — colorful glass / soft daylight */
+:root{--bg:#111b2b;--surface:#202d42;--surface2:#273a51;--line:#42526a;--text:#f5f5f5;--quiet:#b2c3d3;--low:#91a9c2;--lime:#baff9c;--mint:#a5e9df;--amber:#ffd2a6;--rose:#ffafb9;--blue:#b8c7ff;--shadow:0 17px 38px #050c2042}
+html[data-theme="day"]{color-scheme:light;--bg:#f0ede3;--surface:#fff9ed;--surface2:#e7e9df;--line:#d6d2c7;--text:#243347;--quiet:#5d6f7b;--low:#657a85;--lime:#36785a;--mint:#147d7b;--amber:#9a591b;--rose:#af4d62;--blue:#4d659c;--shadow:0 15px 40px #66715b1c}
+body{background:var(--bg);color:var(--text)}
+body::before{background:radial-gradient(ellipse at 95% 0%,#5d7ec64a,transparent 53%),radial-gradient(ellipse at 4% 42%,#267d6950,transparent 50%)}
+html[data-theme="day"] body::before{background:radial-gradient(ellipse at 90% 0%,#f6c69e78,transparent 50%),radial-gradient(ellipse at 3% 55%,#b2d6b17b,transparent 53%)}
+.topbar{background:var(--surface);border-color:var(--line)}
+.top-action,.side-card,.metric,.glance-item,.preview-task{background:var(--surface);color:var(--text);border-color:var(--line)}
+.top-action.glance-trigger{background:#a4dcca;color:#183d40;border-color:#a4dcca}
+.brand-name{letter-spacing:-.06em;font-size:20px;color:var(--text)}
+.brand-name small{color:var(--quiet)}
+.active-card{background:linear-gradient(130deg,#294f53,#253e64 64%,#37446e);border-color:#779eaa80;box-shadow:var(--shadow)}
+html[data-theme="day"] .active-card{background:linear-gradient(130deg,#d7ebe0,#b7d5e5 60%,#d8cee7);border-color:#8bb5b1}
+html[data-theme="day"] .active-card .active-title,html[data-theme="day"] .active-card .active-note,html[data-theme="day"] .active-card .time-strip,html[data-theme="day"] .active-card .live-badge,html[data-theme="day"] .active-card .sequence{color:#1e4145}
+html[data-theme="day"] .live-badge i{background:#3e7d63}
+.side-card:nth-child(1){background:linear-gradient(135deg,#2e4861,#32445a)}
+.side-card:nth-child(2){background:linear-gradient(135deg,#293d48,#2a514a)}
+html[data-theme="day"] .side-card:nth-child(1){background:#eadff3}
+html[data-theme="day"] .side-card:nth-child(2){background:#d3e8d6}
+html[data-theme="day"] .side-card .progress-value{color:#277a59}
+.side-card .eyebrow,.side-card p,.metric span,.section-heading p,.glance-text span,.recent-content small{color:var(--quiet)}
+html[data-theme="day"] .side-card .eyebrow,html[data-theme="day"] .side-card p{color:#596779}
+.action-section{background:var(--bg)}
+.action-btn.completed{background:#a9e5b5;color:#183b31;border-color:#90cfa7}
+.action-btn.partial{background:#ffe5bd;color:#6b4820;border-color:#d7a96c}
+.action-btn.skipped{background:#f5bdcb;color:#6e334c;border-color:#df99ad}
+.metric:nth-child(1){background:linear-gradient(140deg,#28483e,var(--surface))}
+.metric:nth-child(2){background:linear-gradient(140deg,#594332,var(--surface))}
+.metric:nth-child(3){background:linear-gradient(140deg,#51394a,var(--surface))}
+html[data-theme="day"] .metric:nth-child(1){background:#d6ebd9}html[data-theme="day"] .metric:nth-child(2){background:#ffead5}html[data-theme="day"] .metric:nth-child(3){background:#f5dce4}
+html[data-theme="day"] .metric:nth-child(1) strong{color:#237653}html[data-theme="day"] .metric:nth-child(2) strong{color:#aa6921}html[data-theme="day"] .metric:nth-child(3) strong{color:#a24965}
+.glance-overlay{background:var(--bg)}.glance-pane{background:var(--bg);box-shadow:none;border:0}.glance-top{background:var(--surface);border-color:var(--line)}.glance-back{background:var(--surface2);color:var(--text)}
+.glance-intro{background:linear-gradient(120deg,#2b514d,#304960);border-color:#7eafa290}
+html[data-theme="day"] .glance-intro{background:linear-gradient(120deg,#d1e7d5,#d5e2f5);border-color:#a9c6ab}
+html[data-theme="day"] .glance-intro p,html[data-theme="day"] .glance-intro .eyebrow,html[data-theme="day"] .glance-numbers,html[data-theme="day"] .glance-numbers b{color:#315d51}
+.glance-item.expanded{background:var(--surface2);border-color:var(--mint)}.glance-summary{color:var(--text)}.glance-icon{background:var(--surface2);border-color:var(--line)}.glance-chip{color:var(--quiet);background:var(--surface2)}
+.editor{padding:13px 16px 18px;border-color:var(--line)}
+.tag,.mini-tag{display:inline-flex;border-radius:8px;padding:2px 8px;font-size:10px;font-weight:850;background:#e5ddff;color:#4e477e;letter-spacing:.03em}
+.tag.outside{background:#e5efd7;color:#346b4f}.tag.home{background:#dbe9ff;color:#3b5b8d}
+.mini-tag{padding:2px 5px;font-size:9px;margin-left:4px}
+.task-info{margin-top:12px;font-size:12px;color:var(--text);line-height:1.6}.task-info p{margin:8px 0 10px}.record-info{color:var(--quiet);font-size:11px}
+.active-details{margin-top:11px}.active-details details{border-top:1px solid #ffffff2b;padding-top:10px}.active-details summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;color:#e6f5ee;font-size:12px;font-weight:800}.active-details .task-info{color:#f4f9f6}
+html[data-theme="day"] .active-details details{border-color:#4a797b4d}html[data-theme="day"] .active-details summary,html[data-theme="day"] .active-details .task-info{color:#234d4b}
+.packing{margin-top:13px;border-radius:13px;background:#ffffff13;padding:12px}.packing b{display:block;font-size:12px;margin-bottom:9px}.pack-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:12px}.pack-row input{width:17px;height:17px;accent-color:#80bba5}.pack-row input:disabled{opacity:.8}
+html[data-theme="day"] .packing{background:#ffffff80}
+#totalsSection{margin-top:17px}
+.side-card:first-child strong{font-size:23px}.side-card:first-child{min-height:105px}
+html[data-theme="day"] .action-section{border-color:var(--line);box-shadow:0 -6px 20px #5b675026}
+@media(max-width:749px){.brand-name{font-size:19px}.top-actions{gap:6px}.top-action{padding:0 9px;font-size:11px}.active-card{padding:17px}.side-card:first-child{min-height:95px}.side-card:first-child strong{font-size:19px}.action-section{background:var(--bg)}#totalsSection{margin-top:15px}.glance-pane{padding-bottom:24px}.glance-body{padding-top:11px}.glance-summary{min-height:67px}.glance-text strong{font-size:13px}}
 </style>
 </head>
 <body>
 <nav class="topbar" aria-label="Main navigation"><div class="container topbar-inner">
-  <a class="brand" href="#top" aria-label="Javlin top"><span class="brand-mark" aria-hidden="true"><span>↗</span></span><span class="brand-name">javlin<small>DAILY COMMAND</small></span></a>
-  <div class="top-actions">
+  <a class="brand" href="#top" aria-label="Javlin top"><span class="brand-name">DAYFLOW<small>YOUR DAILY RHYTHM</small></span></a>
+  <div class="top-actions"><button type="button" class="top-action theme-switch" id="themeSwitch" aria-label="Switch color theme">☀ Day</button>
     <button type="button" class="top-action icon-only" id="downloadBtn" title="Download today's data" aria-label="Download today's data"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></button>
     <button type="button" class="top-action glance-trigger" id="openGlance"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Glance</button>
   </div>
@@ -271,6 +321,9 @@ body.dialog-open{overflow:hidden}
     <h1 class="hero-title">Your day<span>.</span></h1>
     <div class="date-line"><strong id="dateLabel">Loading date…</strong><span class="dot"></span><span class="mode-pill" id="modePill">Build day</span></div>
   </header>
+  <section class="section" aria-label="Daily stats" id="totalsSection"><div class="section-heading"><h2>Daily totals</h2><p id="scoreCaption">Based on this day's schedule</p></div>
+    <div class="metrics"><div class="metric"><strong id="countDone">0</strong><span>Completed</span></div><div class="metric"><strong id="countPartial">0</strong><span>Partially done</span></div><div class="metric"><strong id="countSkipped">0</strong><span>Not attempted</span></div></div>
+  </section>
   <div class="dashboard">
     <section class="active-card" aria-label="Current activity">
       <div class="card-topline"><span class="live-badge"><i aria-hidden="true"></i><span id="liveState">Right now</span></span><span class="sequence" id="blockIndex">-- / --</span></div>
@@ -278,7 +331,7 @@ body.dialog-open{overflow:hidden}
       <h2 class="active-title" id="activeTitle">Loading current task…</h2>
       <p class="active-note" id="activeNote"></p>
       <div class="time-strip"><span id="activeTime">--:-- → --:--</span><span id="remainingTime">-- min left</span></div>
-      <div class="time-bar"><div id="timeFill"></div></div>
+      <div class="time-bar"><div id="timeFill"></div></div><div class="active-details" id="activeDetails"></div>
       <div class="saved-label" id="savedLabel"></div>
     </section>
     <div class="side-stack">
@@ -295,11 +348,9 @@ body.dialog-open{overflow:hidden}
       <button type="button" class="action-btn skipped" data-status="Not Attempted"><span><span class="desktop-check">○ &nbsp;</span>Missed</span><span class="arrow">↗</span></button>
     </div>
   </section>
-  <section class="section" aria-label="Daily stats"><div class="section-heading"><h2>Daily totals</h2><p id="scoreCaption">Based on this day's schedule</p></div>
-    <div class="metrics"><div class="metric"><strong id="countDone">0</strong><span>Completed</span></div><div class="metric"><strong id="countPartial">0</strong><span>Partially done</span></div><div class="metric"><strong id="countSkipped">0</strong><span>Not attempted</span></div></div>
-  </section>
-  <section class="section"><div class="section-heading"><h2>Coming up</h2><button type="button" class="text-button" id="viewAll">See all blocks ↗</button></div><div class="preview-list" id="previewList"></div></section>
-  <section class="section"><div class="section-heading"><h2>Recent results</h2><button type="button" class="text-button" id="editCheckins">Edit in Glance ↗</button></div><div class="recent-list" id="recentList"></div></section>
+
+  
+  <section class="section"><div class="section-heading"><h2>Recent results</h2></div><div class="recent-list" id="recentList"></div></section>
   <footer class="bottom">JAVLIN · Stored on this device · Use Download to back up your results.</footer>
 </main>
 <!-- quick result editor -->
@@ -312,20 +363,20 @@ body.dialog-open{overflow:hidden}
 </div></div>
 <!-- full-day schedule editor -->
 <section class="glance-overlay" id="glanceOverlay" role="dialog" aria-modal="true" aria-label="Full day schedule and editor" aria-hidden="true"><div class="glance-pane">
-  <div class="glance-top"><button type="button" class="glance-back" id="closeGlance" aria-label="Close Glance">←</button><div class="glance-heading"><b>Glance</b><span>FULL DAY / EDITABLE PLAN</span></div><input type="date" class="date-picker" id="glanceDate" aria-label="Choose schedule date"></div>
+  <div class="glance-top"><button type="button" class="glance-back" id="closeGlance" aria-label="Close Glance">←</button><div class="glance-heading"><b>Glance</b><span>FIXED DAILY TIMELINE</span></div></div>
   <div class="glance-body">
-    <div class="glance-intro"><span class="eyebrow" id="glanceMode">BUILD DAY</span><h2 id="glanceDayTitle">Your whole day.</h2><p>Tap any block to edit its time, location, notes, or results. Changes are saved only when you press Save.</p><div class="glance-numbers"><span><b id="glanceBlockCount">0</b> blocks</span><span><b id="glanceLoggedCount">0</b> logged</span><span><b id="glanceProgress">0%</b> completion</span></div></div>
-    <div class="glance-bar"><h3>Today's timeline</h3><span id="glanceDirty">No unsaved changes</span></div>
+    <div class="glance-intro"><span class="eyebrow" id="glanceMode">BUILD DAY</span><h2 id="glanceDayTitle">Your whole day.</h2><p>Tap a block to see its instructions. Your schedule is fixed, and past check-ins are locked.</p><div class="glance-numbers"><span><b id="glanceBlockCount">0</b> blocks</span><span><b id="glanceLoggedCount">0</b> logged</span><span><b id="glanceProgress">0%</b> completion</span></div></div>
+    <div class="glance-bar"><h3>Today's timeline</h3><span>Read only</span></div>
     <div class="glance-list" id="glanceList"></div>
-    <button class="add-block" id="addBlock" type="button">＋ Add a custom block</button>
-    <p class="glance-note">Changes apply only to the selected date. Your regular weekly template stays unchanged.</p>
+    
+    
   </div>
-</div><div class="glance-footer"><button type="button" class="btn secondary" id="discardGlance">Close</button><button type="button" class="btn primary" id="saveGlance">Save changes ↗</button></div></section>
+</div></section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 'use strict';
 // Weekday outside-first plan (22 blocks). The original Friday–Sunday template is preserved (6 blocks).
-const DEFAULT_SCHEDULES = {"A":[{"id":"A3-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Wake calmly with tea and Japji Sahib.","location":"Home","details":"Stay away from the bed once awake; take a seat at the table."},{"id":"A3-02","start":390,"end":420,"icon":"🧘","title":"Yoga","note":"30 minutes of gentle movement.","location":"Home","details":"Keep the routine simple and repeatable. Yoga is separate from the later workout."},{"id":"A3-03","start":420,"end":450,"icon":"🥣","title":"Breakfast","note":"Eat before the morning work.","location":"Home","details":"Breakfast at the table. Prepare what you need for the first trip outside."},{"id":"A3-04","start":450,"end":510,"icon":"💼","title":"Business Development","note":"Exactly one hour. Choose one useful result.","location":"Home","details":"Use the hour for real outreach, client work, or a specific business deliverable. Stop on time."},{"id":"A3-05","start":510,"end":525,"icon":"🚶","title":"Travel to study location","note":"Leave home for the first outside session.","location":"Transit","details":"15-minute planning allowance. Adjust this day in Glance if your commute differs."},{"id":"A3-06","start":525,"end":585,"icon":"📚","title":"Study Session 1","note":"Focused study away from the bedroom.","location":"Outside","details":"Library, café, or another suitable study space. Pick the hardest subject first."},{"id":"A3-07","start":585,"end":600,"icon":"☕","title":"Coffee #1","note":"15-minute break, then back to study.","location":"Outside","details":"A real coffee break. Stand up, walk a little, or enjoy some fresh air."},{"id":"A3-08","start":600,"end":660,"icon":"📖","title":"Study Session 2","note":"Another focused hour out of the house.","location":"Outside","details":"Continue the most important study work or switch to practice and review."},{"id":"A3-09","start":660,"end":675,"icon":"🚶","title":"Travel home","note":"Head back for exercise.","location":"Transit","details":"Leave the study location on time. Allow 15 minutes for the return trip."},{"id":"A3-10","start":675,"end":705,"icon":"🏋️","title":"Workout","note":"30 minutes at home, before noon.","location":"Home","details":"Beginner-friendly workout with your available dumbbells and bodyweight. Consistency wins."},{"id":"A3-11","start":705,"end":735,"icon":"🚿","title":"Bath","note":"Shower immediately after exercise.","location":"Home","details":"A clean break between workout and lunch."},{"id":"A3-12","start":735,"end":775,"icon":"🍛","title":"Lunch","note":"Eat and reset before heading out again.","location":"Home","details":"Finish lunch and pack anything needed for the afternoon session."},{"id":"A3-13","start":775,"end":790,"icon":"🚶","title":"Travel outside","note":"Second trip away from home.","location":"Transit","details":"Aim to be out the door at 12:55 PM. Allow 15 minutes for travel."},{"id":"A3-14","start":790,"end":850,"icon":"🎓","title":"Active Learning Module","note":"One focused learning module.","location":"Outside","details":"No rotating daily subjects. Work on your active learning module in a suitable place outside home."},{"id":"A3-15","start":850,"end":910,"icon":"🤖","title":"Robotics","note":"A focused hour of robotics work.","location":"Outside","details":"Portable coding, design, theory, planning, or electronics at a suitable workspace. Hardware that cannot travel can be planned here."},{"id":"A3-16","start":910,"end":940,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Errands, a walk, and a quick voice log.","location":"Outside","details":"Use Walmart only when needed. Otherwise walk outside. Record the journal when stationary or on foot, not while driving."},{"id":"A3-17","start":940,"end":1035,"icon":"🌿","title":"Free Time","note":"Enjoy being outside. No productivity requirement.","location":"Outside","details":"Walk, enjoy the sky, rest by the water, meet someone, read, or relax away from the bed."},{"id":"A3-18","start":1035,"end":1050,"icon":"🚶","title":"Travel home","note":"Return home for the evening.","location":"Transit","details":"Leave by 5:15 PM; arrive around 5:30 PM."},{"id":"A3-19","start":1050,"end":1140,"icon":"🧹","title":"Chores + Cooking","note":"Get the household tasks and cooking done.","location":"Home","details":"The 90-minute household window stays together."},{"id":"A3-20","start":1140,"end":1200,"icon":"🍽️","title":"Dinner","note":"A full hour for dinner.","location":"Home","details":"Relax and eat. Keep this as a dependable anchor."},{"id":"A3-21","start":1200,"end":1260,"icon":"📖","title":"Fiction + Bed Preparation","note":"Read, dim the lights, prepare clothes.","location":"Home","details":"Quiet reading and simple preparation for tomorrow. Keep screens low-stimulation."},{"id":"A3-22","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"9:00 PM until the next morning at 6:00 AM.","location":"Home","details":"Protect the bedtime. The overnight block continues into the next morning."}],"B":[{"id":"B-01","start":300,"end":330,"icon":"🌅","title":"Wake + Water + Protein Breakfast","note":"Fuel before the long shift.","details":"No skipped fuel before a 12-hour day."},{"id":"B-02","start":330,"end":360,"icon":"🚗","title":"Drive to Valid","note":"Commute.","details":"Get there. No bonus mission."},{"id":"B-03","start":360,"end":1080,"icon":"🏭","title":"Work","note":"12-hour shift. Eat packed lunch + snacks.","details":"The bar stays deliberately low outside work. Survival mode is valid."},{"id":"B-04","start":1110,"end":1170,"icon":"🍛","title":"Dinner + Shower","note":"Recover first.","details":"No productivity theatre after a 12-hour standing shift."},{"id":"B-05","start":1170,"end":1200,"icon":"📚","title":"One Study Block","note":"25 minutes. The only obligation.","details":"On Sunday, the 30-minute weekly review may replace this block."},{"id":"B-06","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Keystone habit.","details":"The workday ends. Sleep wins."}]};
+const DEFAULT_SCHEDULES = {"A":[{"id":"A3-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Wake calmly with tea and Japji Sahib.","location":"Home","details":"Stay away from the bed once awake; take a seat at the table.","tag":"H"},{"id":"A3-02","start":390,"end":420,"icon":"🧘","title":"Yoga","note":"30 minutes of gentle movement.","location":"Home","details":"Keep the routine simple and repeatable. Yoga is separate from the later workout.","tag":"H"},{"id":"A3-03","start":420,"end":450,"icon":"🥣","title":"Breakfast","note":"Eat before the morning work.","location":"Home","details":"Breakfast at the table. Prepare what you need for the first trip outside.","tag":"H"},{"id":"A3-04","start":450,"end":510,"icon":"📚","title":"Study Session 1","note":"Focused study before heading outside.","location":"Home","details":"Spend one focused hour on the most demanding subject. Keep the phone away.","tag":"H"},{"id":"A3-05","start":510,"end":540,"icon":"🚶","title":"Travel to other location","note":"Pack your bag, then travel to your study spot.","location":"Transit","details":"Pack these five essentials before leaving. Check them off in the task details.","packing":["A Water Bottle","Snack 1","Macbook","Headphones","Tablet"],"tag":"O"},{"id":"A3-06","start":540,"end":600,"icon":"💼","title":"Business Development","note":"One hour for client work and business progress.","location":"Outside","details":"Work on outreach, follow-ups, delivering websites or one measurable result.","tag":"O"},{"id":"A3-07","start":600,"end":615,"icon":"☕","title":"Coffee #1","note":"15-minute break, then back to study.","location":"Outside","details":"A real coffee break. Stand up, walk a little, or enjoy some fresh air.","tag":"O"},{"id":"A3-08","start":615,"end":675,"icon":"📖","title":"Study Session 2","note":"Another focused hour out of the house.","location":"Outside","details":"Continue the most important study work or switch to practice and review.","tag":"O"},{"id":"A3-09","start":675,"end":690,"icon":"🚶","title":"Travel home","note":"Head back for exercise.","location":"Transit","details":"Leave on time. Allow 15 minutes for the return trip.","tag":"O"},{"id":"A3-10","start":690,"end":720,"icon":"🏋️","title":"Workout","note":"30 minutes at home, before noon.","location":"Home","details":"Beginner-friendly workout with your available dumbbells and bodyweight. Consistency wins.","tag":"H"},{"id":"A3-11","start":720,"end":750,"icon":"🚿","title":"Bath","note":"Shower immediately after exercise.","location":"Home","details":"A clean break between workout and lunch.","tag":"H"},{"id":"A3-12","start":750,"end":790,"icon":"🍛","title":"Lunch","note":"Eat and reset before heading out again.","location":"Home","details":"Finish lunch and pack anything needed for the afternoon session.","tag":"H"},{"id":"A3-13","start":790,"end":805,"icon":"🚶","title":"Travel outside","note":"Second trip away from home.","location":"Transit","details":"Leave on schedule. Allow 15 minutes for travel.","tag":"O"},{"id":"A3-14","start":805,"end":865,"icon":"🎓","title":"Active Learning Module","note":"One focused learning module.","location":"Outside","details":"No rotating daily subjects. Work on your active learning module in a suitable place outside home.","tag":"O"},{"id":"A3-15","start":865,"end":925,"icon":"🤖","title":"Robotics","note":"A focused hour of robotics work.","location":"Outside","details":"Portable coding, design, theory, planning, or electronics at a suitable workspace. Hardware that cannot travel can be planned here.","tag":"O"},{"id":"A3-16","start":925,"end":955,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Errands, a walk, and a quick voice log.","location":"Outside","details":"Use Walmart only when needed. Otherwise walk outside. Record the journal when stationary or on foot, not while driving.","tag":"O"},{"id":"A3-17","start":955,"end":1050,"icon":"🌿","title":"Free Time","note":"Enjoy being outside. No productivity requirement.","location":"Outside","details":"Walk, enjoy the sky, rest by the water, meet someone, read, or relax away from the bed.","tag":"O"},{"id":"A3-18","start":1050,"end":1065,"icon":"🚶","title":"Travel home","note":"Return home for the evening.","location":"Transit","details":"Leave at your scheduled time and return home for the evening.","tag":"O"},{"id":"A3-19","start":1065,"end":1155,"icon":"🧹","title":"Chores + Cooking","note":"Get the household tasks and cooking done.","location":"Home","details":"Keep household chores and cooking together.","tag":"H"},{"id":"A3-20","start":1155,"end":1215,"icon":"🍽️","title":"Dinner","note":"A full hour for dinner.","location":"Home","details":"Relax and eat. Keep this as a dependable anchor.","tag":"H"},{"id":"A3-21","start":1215,"end":1275,"icon":"📖","title":"Fiction + Bed Preparation","note":"Read, dim the lights, prepare clothes.","location":"Home","details":"Quiet reading and simple preparation for tomorrow. Keep screens low-stimulation.","tag":"H"},{"id":"A3-22","start":1275,"end":1439,"icon":"😴","title":"Sleep","note":"Protect your bedtime and sleep through the night.","location":"Home","details":"Protect the bedtime. The overnight block continues into the next morning.","tag":"H"}],"B":[{"id":"B-01","start":300,"end":330,"icon":"🌅","title":"Wake + Water + Protein Breakfast","note":"Fuel before the long shift.","details":"No skipped fuel before a 12-hour day.","tag":"H"},{"id":"B-02","start":330,"end":360,"icon":"🚗","title":"Drive to Valid","note":"Commute.","details":"Get there. No bonus mission.","tag":"O"},{"id":"B-03","start":360,"end":1080,"icon":"🏭","title":"Work","note":"12-hour shift. Eat packed lunch + snacks.","details":"The bar stays deliberately low outside work. Survival mode is valid.","tag":"O"},{"id":"B-04","start":1110,"end":1170,"icon":"🍛","title":"Dinner + Shower","note":"Recover first.","details":"No productivity theatre after a 12-hour standing shift.","tag":"H"},{"id":"B-05","start":1170,"end":1200,"icon":"📚","title":"One Study Block","note":"25 minutes. The only obligation.","details":"On Sunday, the 30-minute weekly review may replace this block.","tag":"H"},{"id":"B-06","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Keystone habit.","details":"The workday ends. Sleep wins.","tag":"H"}]};
 const STORAGE_KEY = 'javlin.daily.v2';
 const LEGACY_STORAGE_KEY = 'dailyQuestLog.v1';
 const SIGN_OFF_MINUTE = 20 * 60 + 45;
@@ -355,8 +406,7 @@ function persist(){
 }
 function dayRecord(key){return store.days[key]||{};}
 function getSchedule(key){
-  const saved=dayRecord(key).schedule;
-  const schedule=Array.isArray(saved)?clone(saved):clone(DEFAULT_SCHEDULES[modeOf(key)]);
+  const schedule=clone(DEFAULT_SCHEDULES[modeOf(key)]);
   return schedule.sort((a,b)=>a.start-b.start);
 }
 function getEntries(key){return clone(dayRecord(key).entries||{});}
@@ -403,6 +453,21 @@ function getNext(key,ctx,now){
   next=getSchedule(futureKey)[0];
   return {task:next,tomorrow:true};
 }
+
+function tagOf(t){return t.tag||(t.location==='Home'?'H':'O');}
+function packingMarkup(t,key,interactive=true){
+ if(!t?.packing?.length)return '';
+ const pack=dayRecord(key).packing?.[t.id]||{};
+ return `<div class="packing"><b>🎒 Before you leave</b>${t.packing.map((item,i)=>`<label class="pack-row"><input type="checkbox" data-pack="${escapeHTML(t.id)}" data-item="${i}" ${pack[i]?'checked':''} ${!interactive?'disabled':''}><span>${escapeHTML(item)}</span></label>`).join('')}</div>`;
+}
+function detailsMarkup(t,key,interactive=false){return `<div class="task-info"><span class="tag ${tagOf(t)==='H'?'home':'outside'}">${tagOf(t)} · ${tagOf(t)==='H'?'Home':'Outside'}</span><p>${escapeHTML(t.details||t.note||'Follow your plan.')}</p>${packingMarkup(t,key,interactive)}</div>`;}
+function showCurrentDetails(key,task){const wasOpen=$('activeDetails').querySelector('details')?.open; $('activeDetails').innerHTML=task?`<details><summary>Task details <span>⌄</span></summary>${detailsMarkup(task,key,true)}</details>`:'';if(wasOpen&&$('activeDetails').querySelector('details'))$('activeDetails').querySelector('details').open=true;}
+function savePacking(taskId,index,checked){
+ const key=todayKey();const task=getSchedule(key).find(t=>t.id===taskId);
+ if(!task||!task.packing?.[index]||nowMinute()<task.start||nowMinute()>=task.end)return showToast('Packing checklist is only active during its task.');
+ const day=dayRecord(key);const packing=clone(day.packing||{});packing[taskId]={...(packing[taskId]||{}),[index]:checked};store.days[key]={...day,packing};persist();
+}
+
 function mainRender(){
   const d=new Date(),key=todayKey(d),minute=nowMinute();activeDate=key;
   const ctx=findCurrent(key,minute);
@@ -416,6 +481,7 @@ function mainRender(){
   $('activeIcon').textContent=ctx.task?.icon||'↗';
   $('activeTitle').textContent=ctx.task?.title||'A moment between blocks';
   $('activeNote').textContent=ctx.task?.note||'Nothing is scheduled at this moment.';
+  showCurrentDetails(key,ctx.task);
   $('activeLocation').textContent=ctx.task?.location||'';
   $('activeLocation').hidden=!ctx.task?.location;
   $('activeLocation').dataset.place=(ctx.task?.location||'').toLowerCase();
@@ -445,7 +511,7 @@ function mainRender(){
   const saved=ctx.task?entries[ctx.task.id]:null;
   $('savedLabel').classList.toggle('show',!!saved&&!!saved.status);
   $('savedLabel').textContent=saved?.status?`✓ Saved · ${saved.status} · ${saved.completionPercent}% ${MOODS[saved.moodLabel]||''}`:'';
-  document.querySelectorAll('.action-btn').forEach(btn=>btn.disabled=!ctx.task);
+  document.querySelectorAll('.action-btn').forEach(btn=>btn.disabled=!ctx.task||ctx.beforeWake||minute>=ctx.task.end||!!saved?.status);
   $('countDone').textContent=stats.completed;
   $('countPartial').textContent=stats.partial;
   $('countSkipped').textContent=stats.skipped;
@@ -453,19 +519,8 @@ function mainRender(){
   $('progressCaption').textContent=`${stats.logged} of ${stats.total} blocks logged`;
   $('progressFill').style.width=`${stats.completion}%`;
   $('signoff').classList.toggle('show',minute>=SIGN_OFF_MINUTE&&!$('glanceOverlay').classList.contains('open')&&!$('resultBackdrop').classList.contains('open'));
-  renderPreview(key,ctx,entries,minute);
+
   renderRecent(ctx.schedule,entries);
-}
-function renderPreview(key,ctx,entries,minute){
-  let relevant=ctx.schedule.filter(t=>t.start>=minute).slice(0,3);
-  if(ctx.task&&!relevant.some(t=>t.id===ctx.task.id)) relevant=[ctx.task,...relevant].slice(0,3);
-  if(ctx.beforeWake)relevant=ctx.schedule.slice(0,3);
-  if(!relevant.length) relevant=ctx.schedule.slice(-3);
-  $('previewList').innerHTML=relevant.map(t=>{
-    const e=entries[t.id];const current=ctx.task?.id===t.id&&!ctx.beforeWake;
-    const status=e?.status==='Completed'?'✓':e?.status==='Partially Completed'?'◐':e?.status==='Not Attempted'?'○':current?'NOW':'↗';
-    return `<div class="preview-task ${current?'now':''}"><div class="preview-icon">${escapeHTML(t.icon)}</div><div><b>${escapeHTML(t.title)}</b><small>${escapeHTML(rangeOf(t))}${t.location?' · '+escapeHTML(t.location):''}</small></div><span class="status-mark">${status}</span></div>`;
-  }).join('');
 }
 function renderRecent(schedule,entries){
   const rows=schedule.filter(t=>entries[t.id]?.status).reverse().slice(0,4);
@@ -477,7 +532,7 @@ function renderRecent(schedule,entries){
 }
 // Quick result flow. Single active block is edited without opening Glance.
 function openResult(status){
-  if(!activeTask)return;
+  if(!activeTask||editingDate||nowMinute()<activeTask.start||nowMinute()>=activeTask.end||getEntries(activeDate)[activeTask.id]?.status){showToast('This check-in is closed.');return;}
   editingTask=clone(activeTask);
   editingDate=activeDate;
   selectedStatus=status;
@@ -500,6 +555,7 @@ function closeResult(){
 }
 function saveResult(){
   if(!editingTask||!editingDate)return;
+  if(editingDate!==todayKey()||nowMinute()<editingTask.start||nowMinute()>=editingTask.end||getEntries(editingDate)[editingTask.id]?.status){closeResult();showToast('This check-in is closed.');return;}
   const date=editingDate,day=dayRecord(date);
   const entries=getEntries(date);
   entries[editingTask.id]={status:selectedStatus,completionPercent:Number($('resultPercent').value),remarks:$('resultRemarks').value.trim(),moodLabel:selectedMood,savedAt:new Date().toISOString()};
@@ -511,16 +567,14 @@ function saveResult(){
 // Glance: all edits are local drafts until Save changes is pressed.
 function isGlanceDirty(){return !!glanceDraft && JSON.stringify(glanceDraft)!==originalSnapshot;}
 function updateDirty(){
-  $('glanceDirty').textContent=isGlanceDirty()?'● Unsaved edits':'No unsaved changes';
-  $('glanceDirty').style.color=isGlanceDirty()?'var(--amber)':'';
-  const stat=getStats(glanceDraft.schedule,glanceDraft.entries);
-  $('glanceBlockCount').textContent=stat.total;
-  $('glanceLoggedCount').textContent=stat.logged;
-  $('glanceProgress').textContent=`${stat.completion}%`;
+ const stat=getStats(glanceDraft.schedule,glanceDraft.entries);
+ $('glanceBlockCount').textContent=stat.total;
+ $('glanceLoggedCount').textContent=stat.logged;
+ $('glanceProgress').textContent=`${stat.completion}%`;
 }
 function openGlance(date=todayKey()){
   glanceDate=date;
-  $('glanceDate').value=date;
+
   const day=dayRecord(date);
   glanceDraft={schedule:getSchedule(date),entries:getEntries(date)};
   originalSnapshot=JSON.stringify(glanceDraft);
@@ -533,17 +587,10 @@ function openGlance(date=todayKey()){
   renderGlance();
 }
 function closeGlance(){
-  if(isGlanceDirty()&&!confirm('Discard your unsaved Glance changes?'))return;
+
   $('glanceOverlay').classList.remove('open');$('glanceOverlay').setAttribute('aria-hidden','true');
   document.body.classList.remove('dialog-open');
   glanceDraft=null;expandedId=null;mainRender();
-}
-function selectGlanceDate(date){
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){ $('glanceDate').value=glanceDate;return; }
-  if(isGlanceDirty()&&!confirm('Discard unsaved changes to switch dates?')){
-    $('glanceDate').value=glanceDate;return;
-  }
-  openGlance(date);
 }
 function renderGlance(){
   $('glanceMode').textContent=`${modeText(glanceDate).toUpperCase()} · ${modeOf(glanceDate)==='A'?'MON–THU':'FRI–SUN'}`;
@@ -556,112 +603,21 @@ function statusShort(status){return status==='Completed'?'Done':status==='Partia
 function option(value,label,actual){return `<option value="${escapeHTML(value)}" ${value===actual?'selected':''}>${escapeHTML(label)}</option>`;}
 function glanceMarkup(t,i){
   const e=glanceDraft.entries[t.id]||{};
-  const status=e.status||'';
+  const status=e.status||(glanceDate===todayKey()&&nowMinute()>=t.end?'Expired':'Pending');
   return `<article class="glance-item ${expandedId===t.id?'expanded':''}" data-id="${escapeHTML(t.id)}">
     <button type="button" class="glance-summary" data-action="toggle" aria-expanded="${expandedId===t.id}">
-      <div class="glance-icon" data-view="icon">${escapeHTML(t.icon)}</div>
-      <div class="glance-text"><strong data-view="title">${escapeHTML(t.title)}</strong><span data-view="time">${escapeHTML(rangeOf(t))}${t.location?' · '+escapeHTML(t.location):''}</span></div>
-      <span class="glance-chip ${statusClass(status)}" data-view="status">${statusShort(status)}</span><span class="glance-chevron">⌄</span>
-    </button>
-    <div class="editor"><div class="editor-grid">
-      <div class="wide"><label class="form-label">Task name</label><input class="field" data-field="title" maxlength="150" value="${escapeHTML(t.title)}" aria-label="Task name"></div>
-      <div><label class="form-label">Start time</label><input class="field" type="time" data-field="start" value="${shortClock(t.start)}" aria-label="Start time"></div>
-      <div><label class="form-label">End time</label><input class="field" type="time" data-field="end" value="${shortClock(t.end)}" aria-label="End time"></div>
-      <div><label class="form-label">Icon / emoji</label><input class="field" data-field="icon" maxlength="12" value="${escapeHTML(t.icon)}" aria-label="Icon or emoji"></div>
-      <div><label class="form-label">Place</label><select class="field" data-field="location" aria-label="Place">
-        ${option('','Not specified',t.location||'')}${option('Home','Home',t.location||'')}${option('Outside','Outside',t.location||'')}${option('Transit','Transit',t.location||'')}${option('Work','Work',t.location||'')}
-      </select></div>
-      <div><label class="form-label">Completion (%)</label><input class="field" type="number" min="0" max="100" step="1" data-field="completionPercent" value="${Number(e.completionPercent)||0}" aria-label="Completion percentage"></div>
-      <div class="wide"><label class="form-label">Plan / short note</label><textarea class="field" data-field="note" aria-label="Plan and short note">${escapeHTML(t.note||'')}</textarea></div>
-      <div class="wide"><label class="form-label">Details / instructions</label><textarea class="field" data-field="details" aria-label="Task details">${escapeHTML(t.details||'')}</textarea></div>
-    </div><div class="section-mini">THE ACTUAL RESULT</div><div class="editor-grid">
-      <div><label class="form-label">Status</label><select class="field" data-field="status" aria-label="Completion status">
-        ${option('','Not logged',status)}${option('Completed','Completed',status)}${option('Partially Completed','Partially done',status)}${option('Not Attempted','Not attempted',status)}
-      </select></div>
-      <div><label class="form-label">Mood</label><select class="field" data-field="moodLabel" aria-label="Mood">
-        ${option('','No mood',e.moodLabel||'')}${Object.keys(MOODS).map(m=>option(m,`${MOODS[m]} ${m}`,e.moodLabel||'')).join('')}
-      </select></div>
-      <div class="wide"><label class="form-label">Remarks / what actually happened</label><textarea class="field" data-field="remarks" placeholder="Manually edit your entry here…" aria-label="Remarks">${escapeHTML(e.remarks||'')}</textarea></div>
-    </div><div class="remove-row"><button type="button" class="remove-btn" data-action="remove">Remove this block</button></div>
-    </div>
+      <div class="glance-icon">${escapeHTML(t.icon)}</div>
+      <div class="glance-text"><strong>${escapeHTML(t.title)} <span class="mini-tag">${tagOf(t)}</span></strong><span>${escapeHTML(rangeOf(t))}</span></div>
+      <span class="glance-chip ${statusClass(e.status)}">${status==='Expired'?'Closed':statusShort(e.status)}</span><span class="glance-chevron">⌄</span>
+    </button><div class="editor">${detailsMarkup(t,glanceDate,false)}${e.status?`<p class="record-info">${escapeHTML(e.status)} · ${Number(e.completionPercent)||0}%${e.remarks?' · '+escapeHTML(e.remarks):''}</p>`:''}</div>
   </article>`;
 }
-function updateRowHeader(row,task,entry){
-  row.querySelector('[data-view="icon"]').textContent=task.icon||'□';
-  row.querySelector('[data-view="title"]').textContent=task.title||'Untitled block';
-  row.querySelector('[data-view="time"]').textContent=rangeOf(task)+(task.location?' · '+task.location:'');
-  const chip=row.querySelector('[data-view="status"]');chip.textContent=statusShort(entry?.status);chip.className=`glance-chip ${statusClass(entry?.status)}`;
-}
-function updateGlanceField(event){
-  const field=event.target.dataset.field;
-  if(!field||!glanceDraft)return;
-  const row=event.target.closest('.glance-item');
-  const id=row?.dataset.id;
-  const task=glanceDraft.schedule.find(t=>t.id===id);
-  if(!task)return;
-  if(['title','icon','note','details','start','end','location'].includes(field)){
-    task[field]=['start','end'].includes(field)?clockToMinutes(event.target.value):event.target.value;
-  }else{
-    const entry=glanceDraft.entries[id]||(glanceDraft.entries[id]={status:'',completionPercent:0,remarks:'',moodLabel:''});
-    if(field==='completionPercent')entry[field]=Math.min(100,Math.max(0,Number(event.target.value)||0));
-    else if(field==='status'){
-      entry.status=event.target.value;
-      const selected=entry.status==='Completed'?100:entry.status==='Partially Completed'?50:entry.status==='Not Attempted'?0:null;
-      if(selected!==null){entry.completionPercent=selected;row.querySelector('[data-field="completionPercent"]').value=selected;}
-    }else entry[field]=event.target.value;
-    if(!entry.status&&!entry.remarks&&!entry.moodLabel&&!entry.completionPercent)delete glanceDraft.entries[id];
-  }
-  updateRowHeader(row,task,glanceDraft.entries[id]);
-  updateDirty();
-}
 function onGlanceListClick(event){
-  const btn=event.target.closest('button[data-action]');if(!btn||!glanceDraft)return;
-  const row=btn.closest('.glance-item');if(!row)return;
-  const id=row.dataset.id;
-  if(btn.dataset.action==='toggle'){
-    if(expandedId&&expandedId!==id){const old=$('glanceList').querySelector('.glance-item.expanded');if(old){old.classList.remove('expanded');old.querySelector('.glance-summary').setAttribute('aria-expanded','false');}}
-    expandedId=expandedId===id?null:id;
-    row.classList.toggle('expanded',expandedId===id);
-    btn.setAttribute('aria-expanded',String(expandedId===id));
-  }else if(btn.dataset.action==='remove'){
-    if(!confirm('Remove this block from this day? The change will take effect after Save.'))return;
-    glanceDraft.schedule=glanceDraft.schedule.filter(t=>t.id!==id);
-    delete glanceDraft.entries[id];
-    if(expandedId===id)expandedId=null;
-    renderGlance();
-  }
-}
-function addBlock(){
-  if(!glanceDraft)return;
-  const id=`custom-${Date.now()}-${Math.random().toString(36).slice(2,7)}`;
-  const task={id,title:'New custom block',icon:'✳',start:720,end:750,note:'',details:''};
-  glanceDraft.schedule.push(task);
-  glanceDraft.schedule.sort((a,b)=>a.start-b.start);
-  expandedId=id;renderGlance();
-  const row=Array.from($('glanceList').children).find(x=>x.dataset.id===id);
-  row?.scrollIntoView({behavior:'smooth',block:'center'});
-  row?.querySelector('[data-field="title"]')?.focus({preventScroll:true});
-}
-function saveGlance(){
-  if(!glanceDraft)return;
-  for(const t of glanceDraft.schedule){
-    if(!t.title.trim()){showToast('Each block needs a name.');return;}
-    if(!Number.isInteger(t.start)||!Number.isInteger(t.end)||t.start<0||t.end>1439||t.start>1439||t.end<0||t.start===t.end){showToast(`Check start/end times for ${t.title}.`);return;}
-  }
-  const key=glanceDate;
-  const old=store.days[key];
-  const schedule=clone(glanceDraft.schedule).sort((a,b)=>a.start-b.start);
-  const entries=clone(glanceDraft.entries);
-  for(const entry of Object.values(entries)){
-    entry.completionPercent=Math.min(100,Math.max(0,Number(entry.completionPercent)||0));
-    entry.remarks=String(entry.remarks||'').trim();
-    entry.savedAt=new Date().toISOString();
-  }
-  store.days[key]={...dayRecord(key),mode:modeOf(key),schedule,entries,updatedAt:new Date().toISOString()};
-  if(!persist()){if(old)store.days[key]=old;else delete store.days[key];return;}
-  glanceDraft={schedule:getSchedule(key),entries:getEntries(key)};
-  originalSnapshot=JSON.stringify(glanceDraft);
-  expandedId=null;renderGlance();mainRender();showToast('Full-day changes saved ✓');
+ const btn=event.target.closest('button[data-action]');if(!btn||!glanceDraft)return;
+ const row=btn.closest('.glance-item');if(!row)return;
+ const id=row.dataset.id;
+ expandedId=expandedId===id?null:id;
+ renderGlance();
 }
 // The original Quest Log data is never overwritten; it remains available in each download.
 function legacyFor(key){
@@ -693,16 +649,20 @@ $('closeResult').addEventListener('click',closeResult);
 $('cancelResult').addEventListener('click',closeResult);
 $('resultBackdrop').addEventListener('click',e=>{if(e.target===$('resultBackdrop'))closeResult();});
 $('saveResult').addEventListener('click',saveResult);
-for(const id of ['openGlance','viewAll','editCheckins'])$(id).addEventListener('click',()=>openGlance());
+for(const id of ['openGlance'])$(id).addEventListener('click',()=>openGlance());
 $('closeGlance').addEventListener('click',closeGlance);
-$('discardGlance').addEventListener('click',closeGlance);
-$('glanceDate').addEventListener('change',e=>selectGlanceDate(e.target.value));
+
+
 $('glanceList').addEventListener('click',onGlanceListClick);
-$('glanceList').addEventListener('input',updateGlanceField);
-$('glanceList').addEventListener('change',updateGlanceField);
-$('addBlock').addEventListener('click',addBlock);
-$('saveGlance').addEventListener('click',saveGlance);
+
+
+
+
 $('downloadBtn').addEventListener('click',()=>downloadDay());
+$('activeDetails').addEventListener('change',e=>{if(e.target.matches('[data-pack]'))savePacking(e.target.dataset.pack,Number(e.target.dataset.item),e.target.checked);});
+$('themeSwitch').addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='day'?'night':'day'));
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem('javlin.theme',theme);$('themeSwitch').textContent=theme==='day'?'☾ Night':'☀ Day';}
+setTheme(localStorage.getItem('javlin.theme')||'night');
 $('signoffBtn').addEventListener('click',()=>downloadDay(todayKey(),true));
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape')return;
