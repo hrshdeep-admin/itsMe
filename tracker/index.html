@@ -1,676 +1,529 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0d121b">
-<meta name="description" content="Javlin · a private, mobile-first daily schedule and progress tracker.">
-<title>Javlin — Daily Command</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#182239">
+<meta name="description" content="Dayflow — your private, fixed daily rhythm and check-in tracker.">
+<title>Dayflow · Daily Rhythm</title>
 <style>
-:root {
-  color-scheme:dark;
-  --bg:#0b1018;--surface:#141c29;--surface2:#192331;--line:#2b3646;
-  --text:#f2f4f2;--quiet:#95a4b5;--low:#697a8e;--lime:#c4fc82;
-  --mint:#70dfc9;--amber:#f8ca83;--rose:#f2a1a7;--blue:#a5bffd;
-  --radius:23px;--shadow:0 28px 65px #0005;
-  --display:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+:root{
+  --bg:#142035;--shell:#1c2c44;--card:#233750;--card2:#263f52;
+  --line:#455770;--ink:#f4f4f7;--muted:#bdc8d8;--accent:#a6eee0;
+  --mint:#b9ebcf;--peach:#ffc8ad;--violet:#d5c4ff;--red:#ffb8bf;
+  --nav:#1a2a40ee;--control:#293950;--shadow:0 18px 45px #060f253a;
+  --hero1:#275768;--hero2:#444671;--hero3:#625079;
+  --ink-on-accent:#113e43;--topline:#ffffff24;
+}
+html[data-theme="day"]{
+  color-scheme:light;
+  --bg:#eee9df;--shell:#faf4e9;--card:#fff9ef;--card2:#eee6e8;
+  --line:#d8d0c5;--ink:#2b354a;--muted:#5d6b7b;--accent:#356d68;
+  --mint:#3b7b62;--peach:#a76142;--violet:#685a96;--red:#b25469;
+  --nav:#f9f3e9ee;--control:#f3ebdf;--shadow:0 12px 32px #7d77641b;
+  --hero1:#b4ded9;--hero2:#d7d6f0;--hero3:#f0ced0;
+  --ink-on-accent:#fbfff8;--topline:#ffffff88;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:400 14px/1.48 var(--display);min-height:100dvh;overflow-x:hidden}
-button,input,select,textarea{font:inherit}
+body{margin:0;min-height:100dvh;font:400 14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+body:before{content:"";position:fixed;z-index:-1;pointer-events:none;inset:0;background:radial-gradient(ellipse 62% 33% at 100% 5%,#ac8cc834,transparent 75%),radial-gradient(ellipse 78% 40% at 0% 75%,#5db8a529,transparent 80%)}
+button,input,textarea{font:inherit}
 button{cursor:pointer;-webkit-tap-highlight-color:transparent}
-button:disabled{opacity:.4;cursor:not-allowed}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
-body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse 75% 35% at 95% 0%,#3153424f,transparent),radial-gradient(ellipse 80% 65% at 0% 42%,#182c4140,transparent)}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.23;background-image:linear-gradient(#e3f1ee09 1px,transparent 1px),linear-gradient(90deg,#e3f1ee09 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
-button,input,textarea,select{touch-action:manipulation}
-.container{width:min(100% - 36px,1000px);margin-inline:auto}
-.topbar{position:sticky;top:0;z-index:20;background:#0b1018e8;backdrop-filter:blur(20px);border-bottom:1px solid #ffffff0c}
-.topbar-inner{height:73px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;min-width:0}
-.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--lime);display:grid;place-items:center;color:#142015;font-size:24px;font-weight:900;transform:rotate(-9deg);box-shadow:0 0 27px #bdfb7a2a}
-.brand-mark span{transform:rotate(9deg)}
-.brand-name{font-weight:900;letter-spacing:-.07em;font-size:22px;line-height:1}.brand-name small{display:block;font-weight:650;font-size:8px;letter-spacing:.23em;color:var(--quiet);line-height:1.8;margin-top:4px}
-.top-actions{display:flex;align-items:center;gap:8px}
-.top-action{min-height:39px;padding:0 13px;border-radius:12px;border:1px solid var(--line);background:#ffffff08;color:#dbe3e9;font-size:12px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-.top-action svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.top-action.glance-trigger{background:var(--lime);border-color:var(--lime);color:#172218;box-shadow:0 5px 22px #b9f46d21}
-.top-action.icon-only{width:39px;padding:0}
-.masthead{padding:29px 0 21px}
-.masthead-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.overline,.mono{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-.overline{color:var(--mint)}
-.live-clock{color:var(--quiet);font-variant-numeric:tabular-nums;font-size:11px;letter-spacing:.04em}
-.hero-title{font-size:clamp(42px,10.4vw,78px);line-height:.99;letter-spacing:-.074em;font-weight:870;margin:12px 0 0}
-.hero-title span{color:var(--lime)}
-.date-line{display:flex;align-items:center;gap:9px;color:var(--quiet);font-size:13px;margin-top:13px}
-.date-line .dot{width:5px;height:5px;border-radius:50%;background:var(--mint)}
-.date-line strong{font-weight:700;color:#d4dee5}
-.mode-pill{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);border:1px solid #c4fc8252;background:#c4fc8210;padding:6px 9px;border-radius:9px}
-.dashboard{display:grid;gap:15px}
-.active-card{position:relative;overflow:hidden;padding:22px;border:1px solid #617e6559;border-radius:26px;background:linear-gradient(142deg,#20382f 0%,#162b30 49%,#15232c 100%);box-shadow:var(--shadow);min-height:278px;isolation:isolate}
-.active-card::before{content:"";width:195px;height:195px;position:absolute;right:-72px;top:-74px;border:1px solid #bbf88129;border-radius:50%;box-shadow:0 0 0 31px #bbf88106,0 0 0 68px #bbf88104;pointer-events:none;z-index:-1}
-.card-topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.live-badge{display:inline-flex;gap:8px;align-items:center;color:var(--lime);font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
-.live-badge i{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px #c4fc8219;animation:breathe 2.4s ease-in-out infinite}
-.sequence{font-size:11px;font-weight:700;color:#a1b3b6;font-variant-numeric:tabular-nums}
-.active-icon{margin:22px 0 10px;display:inline-grid;place-items:center;height:45px;width:45px;border-radius:14px;background:#ffffff12;border:1px solid #ffffff17;font-size:23px}
-.active-title{font-size:clamp(29px,7vw,42px);letter-spacing:-.055em;line-height:1.13;margin:0;max-width:580px;overflow-wrap:anywhere}
-.active-note{color:#b3c4c3;margin:10px 0 0;line-height:1.56;font-size:13px;max-width:480px}
-.time-strip{margin-top:27px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;font-weight:750;color:#e3ece6;font-variant-numeric:tabular-nums}
-.time-bar{height:6px;background:#ffffff24;border-radius:9px;overflow:hidden;margin-top:9px}
-.time-bar div{height:100%;width:0;background:linear-gradient(90deg,#8cddb7,var(--lime));border-radius:inherit;transition:width .5s ease}
-.saved-label{display:none;margin-top:16px;font-size:12px;color:#dcfbe2;background:#8fe0a619;border:1px solid #8fe0a632;padding:9px 12px;border-radius:11px}
-.saved-label.show{display:block}
-.side-stack{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.side-card{border:1px solid var(--line);border-radius:20px;padding:16px;background:linear-gradient(150deg,#1c2633,#151e2b);min-width:0}
-.side-card .eyebrow{color:var(--quiet);font-size:9px;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
-.side-card strong{display:block;margin-top:10px;font-size:18px;font-weight:800;line-height:1.25;letter-spacing:-.035em;overflow-wrap:anywhere}
-.side-card p{color:var(--quiet);margin:7px 0 0;font-size:11px}
-.side-card .progress-value{font-size:32px;color:var(--lime);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
-.side-card .tiny-bar{margin-top:12px;height:4px;background:#ffffff12;border-radius:99px;overflow:hidden}
-.side-card .tiny-bar>div{height:100%;background:var(--lime);width:0;transition:width .5s}
-.action-section{margin-top:26px}
-.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:13px}
-.section-heading h2{margin:0;font-size:18px;font-weight:850;letter-spacing:-.045em}.section-heading p,.section-heading a{margin:0;color:var(--quiet);font-size:11px}
-.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.action-btn{min-height:64px;border-radius:17px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:17px 16px;text-align:left;border:1px solid var(--line);font-size:14px;font-weight:850;letter-spacing:-.025em;transition:transform .15s ease,border-color .15s ease}
-.action-btn:active,.top-action:active,.text-button:active{transform:scale(.98)}
-.action-btn .arrow{font-size:19px;font-weight:400;opacity:.65}
-.action-btn.completed{grid-column:1/-1;background:var(--lime);color:#1a2819;border-color:var(--lime)}
-.action-btn.partial{background:#f8ca831a;border-color:#f8ca8344;color:#ffd69b}
-.action-btn.skipped{background:#f2a1a713;border-color:#f2a1a72d;color:#f5b7be}
-.section{margin-top:30px}
-.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-.metric{border:1px solid var(--line);border-radius:17px;padding:14px 11px;background:#111b27}
-.metric strong{display:block;font-size:29px;line-height:1;letter-spacing:-.075em;font-weight:850;font-variant-numeric:tabular-nums}
-.metric span{display:block;color:var(--quiet);font-size:10px;margin-top:7px}.metric:nth-child(1) strong{color:var(--lime)}.metric:nth-child(2) strong{color:var(--amber)}.metric:nth-child(3) strong{color:var(--rose)}
-.preview-list{display:grid;gap:8px}
-.preview-task{border:1px solid var(--line);border-radius:15px;background:#121c28;display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:11px;padding:12px}
-.preview-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#ffffff0c;font-size:19px}
-.preview-task b{font-size:13px;line-height:1.3;display:block;overflow-wrap:anywhere}.preview-task small{display:block;font-size:10px;color:var(--quiet);margin-top:3px;font-variant-numeric:tabular-nums}
-.preview-task .status-mark{font-size:10px;font-weight:800;color:var(--quiet)}
-.preview-task.now{border-color:#c4fc8265;background:#1b2a2a}
-.text-button{border:0;background:transparent;color:var(--lime);font-size:11px;font-weight:800;padding:8px 0}
-.empty-state{color:var(--quiet);padding:16px;border:1px dashed var(--line);border-radius:15px;font-size:12px}
-.recent-list{display:grid;gap:9px}
-.recent-item{display:flex;gap:10px;border-bottom:1px solid #ffffff0c;padding:7px 0 12px}
-.recent-marker{width:9px;height:9px;flex:0 0 auto;border-radius:50%;margin-top:6px;background:var(--blue)}.recent-marker.complete{background:var(--lime)}.recent-marker.partial{background:var(--amber)}.recent-marker.skip{background:var(--rose)}
-.recent-content{min-width:0;flex:1}.recent-content strong{display:block;font-size:12px}.recent-content small{color:var(--quiet);font-size:11px;line-height:1.5}.recent-content .remark{color:#d4dde6;margin-top:3px;overflow-wrap:anywhere}
-.bottom{margin:36px auto 24px;text-align:center;color:#6a7b8e;font-size:10px;letter-spacing:.035em}
-.signoff{display:none;position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));left:18px;right:18px;z-index:15;max-width:490px;margin:auto;box-shadow:0 18px 60px #0009}
-.signoff.show{display:block}.signoff button{width:100%;min-height:55px;border:1px solid #c4fc82;border-radius:16px;background:var(--lime);color:#1b281d;font-weight:900}
-/* Result editor */
-.backdrop{position:fixed;inset:0;z-index:50;background:#05080bbc;display:none;align-items:flex-end;backdrop-filter:blur(7px)}
+button:disabled{cursor:not-allowed;opacity:.45}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+button:active:not(:disabled){transform:scale(.985)}
+.container{width:min(calc(100% - 36px),880px);margin-inline:auto}
+.topbar{position:sticky;top:0;z-index:15;background:var(--nav);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.topbar-in{height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.identity{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-icon{height:34px;width:34px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#94e8c8,#c7c7ff);color:#224553;font-size:25px;line-height:1;box-shadow:0 5px 20px #46b9a128}
+.identity b{font-size:19px;letter-spacing:-.075em;line-height:1}.identity small{display:block;margin-top:4px;font-size:8px;letter-spacing:.19em;color:var(--muted);font-weight:800}
+.header-actions{display:flex;align-items:center;gap:7px}
+.icon-button,.glance-button{height:37px;border:1px solid var(--line);border-radius:11px;background:var(--control);color:var(--ink);display:grid;place-items:center}
+.icon-button{width:38px;font-size:17px}.icon-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.glance-button{padding:0 14px;background:var(--accent);border-color:transparent;color:var(--ink-on-accent);font-weight:850;font-size:12px}
+.datebar{padding:19px 0 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.18em;font-weight:850;color:var(--muted)}
+.datebar h1{margin:3px 0 0;font-size:clamp(23px,4.5vw,36px);line-height:1.1;letter-spacing:-.055em}
+.daytype{padding:7px 10px;border:1px solid var(--line);border-radius:99px;background:var(--shell);font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:10px}
+.section-title h2{font-size:14px;margin:0;letter-spacing:-.025em;font-weight:900}
+.section-title span{font-size:10px;color:var(--muted)}
+.scorestrip{margin-bottom:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.score{min-width:0;padding:11px 14px 12px;border:1px solid var(--line);border-radius:17px;background:var(--shell);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.score:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--mint)}
+.score.fail:before{background:var(--red)}.score.pending:before{background:var(--violet)}
+.score .number{display:block;font-size:27px;line-height:1.05;font-weight:900;letter-spacing:-.07em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.score .label{display:block;font-size:10px;margin-top:7px;color:var(--muted);font-weight:650}
+.score.done .number{color:var(--mint)}.score.fail .number{color:var(--red)}.score.pending .number{color:var(--violet)}
+.dashboard{display:grid;gap:11px}
+.focus{isolation:isolate;overflow:hidden;position:relative;border-radius:25px;padding:22px;border:1px solid #b3d7e176;background:linear-gradient(127deg,var(--hero1) 2%,var(--hero2) 60%,var(--hero3));box-shadow:var(--shadow)}
+.focus:before{content:"";position:absolute;z-index:-1;right:-75px;top:-70px;width:230px;height:230px;border:1px solid #ffffff52;border-radius:50%;box-shadow:0 0 0 30px #ffffff0c,0 0 0 68px #ffffff08}
+html[data-theme="day"] .focus{color:#263d4f;border-color:#aabdc8}
+.focus-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.focus-label{display:inline-flex;align-items:center;gap:8px;letter-spacing:.14em;font-size:10px;text-transform:uppercase;font-weight:900;color:#d5fff4}
+.focus-label:before{content:"";height:7px;width:7px;border-radius:50%;background:#a8ffcf;box-shadow:0 0 0 4px #a8ffcf30}
+html[data-theme="day"] .focus-label{color:#30635b}html[data-theme="day"] .focus-label:before{background:#448b77;box-shadow:0 0 0 4px #448b7720}
+.sequence{font-weight:800;font-size:11px;color:#d8e3eb;font-variant-numeric:tabular-nums}html[data-theme="day"] .sequence{color:#43606d}
+.focus-icon{display:grid;place-items:center;width:44px;height:44px;margin-top:20px;border-radius:14px;background:#ffffff32;border:1px solid #ffffff3b;font-size:24px}
+.focus h2{margin:10px 0 7px;font-size:clamp(28px,5vw,42px);line-height:1.09;letter-spacing:-.055em;font-weight:900;overflow-wrap:anywhere}
+.focus .note{margin:0;max-width:580px;font-size:12px;color:#e1e8ef}html[data-theme="day"] .focus .note{color:#435363}
+.meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tag{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:4px 9px;font-size:10px;font-weight:900;letter-spacing:.02em;background:#d5e5ff;color:#3a5285}
+.tag.outside{background:#cbeddf;color:#28624d}.tag.home{background:#d9e1ff;color:#475c8e}
+.meta .tag{border:1px solid #ffffff88}
+.clockrow{margin-top:19px;display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}
+.progress-track{margin-top:8px;height:7px;border-radius:99px;background:#ffffff50;overflow:hidden}
+.progress-track i{display:block;height:100%;width:0;background:#b5ffde;border-radius:inherit;transition:width .25s ease}
+html[data-theme="day"] .progress-track{background:#ffffff9e}html[data-theme="day"] .progress-track i{background:#337d6b}
+.focus-details{margin-top:14px}
+.focus-details details{border-top:1px solid var(--topline);padding-top:10px}
+.focus-details summary{cursor:pointer;font-weight:850;font-size:12px;display:flex;justify-content:space-between;align-items:center;list-style:none}
+.focus-details summary::-webkit-details-marker{display:none}
+.details-body{font-size:12px;line-height:1.65;margin-top:10px}
+.details-body p{margin:0 0 9px}
+.details-body .tag{margin-bottom:8px}
+.packing{padding:12px;border-radius:13px;background:#ffffff2a;margin-top:10px;border:1px solid #ffffff2f}
+.packing strong{display:block;font-size:12px;margin-bottom:6px}.packrow{display:flex;gap:9px;align-items:center;padding:6px 0;font-size:12px}
+.packrow input{width:17px;height:17px;accent-color:#3e8675;margin:0;flex-shrink:0}
+.packrow input:disabled{opacity:.65}
+.logged{display:none;margin-top:13px;border-radius:10px;background:#ffffff35;border:1px solid #ffffff42;padding:10px;font-size:12px;font-weight:800}
+.logged.show{display:block}
+html[data-theme="day"] .logged,html[data-theme="day"] .packing{background:#ffffff7c}
+.side-row{display:grid;grid-template-columns:1.1fr .9fr;gap:11px}
+.mini-card{border-radius:18px;border:1px solid var(--line);background:var(--shell);padding:14px;min-width:0;box-shadow:var(--shadow)}
+.mini-card.next{background:linear-gradient(133deg,#343961,#3b5367);border-color:#6f738f;color:#f8f5fc}
+html[data-theme="day"] .mini-card.next{background:#e6ddf5;border-color:#d4c7e2;color:#38415d}
+.mini-eyebrow{display:block;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.13em;opacity:.75}
+.mini-card strong{font-size:20px;display:block;line-height:1.18;letter-spacing:-.045em;margin:11px 0 5px;overflow-wrap:anywhere}
+.mini-card small{font-size:11px;opacity:.78}
+.mini-card .percent{font-size:32px;color:var(--mint);font-variant-numeric:tabular-nums}
+.mini-card .tiny-track{height:5px;background:#ffffff27;border-radius:99px;margin-top:11px;overflow:hidden}
+.mini-card .tiny-track div{background:#94e7cb;height:100%;width:0}
+.record-section{margin-top:22px;margin-bottom:8px}
+.record-list{display:grid;gap:8px}
+.record-item{display:grid;grid-template-columns:9px minmax(0,1fr) auto;gap:11px;align-items:start;border-radius:14px;border:1px solid var(--line);padding:12px;background:var(--shell)}
+.record-dot{margin-top:5px;width:9px;height:9px;border-radius:99px;background:var(--mint)}.record-dot.not-done{background:var(--red)}
+.record-name{font-size:12px;font-weight:850}.record-meta{font-size:10px;color:var(--muted);margin-top:3px}.record-remarks{font-size:11px;overflow-wrap:anywhere;margin-top:5px}
+.result-pill{border-radius:99px;padding:4px 7px;background:var(--control);font-size:9px;font-weight:900;white-space:nowrap}
+.footer{margin:28px 0 20px;text-align:center;font-size:10px;color:var(--muted)}
+.action-bar{margin-top:16px;border:1px solid var(--line);border-radius:18px;background:var(--shell);padding:13px}
+.action-heading{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:9px}
+.action-heading strong{font-size:13px;letter-spacing:-.02em}.action-heading span{font-size:10px;color:var(--muted)}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.action-btn{width:100%;min-height:55px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;font-size:15px;font-weight:900}
+.action-btn.done{color:#1e5146;background:#b8f0d5}.action-btn.notdone{color:#6f3447;background:#ffccd0}
+.action-btn i{font-style:normal;font-size:17px}
+.signoff{display:none;margin:14px 0 0;text-align:center}.signoff.show{display:block}
+.signoff button{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--shell);color:var(--ink);padding:13px;font-weight:800}
+/* Check-in sheet */
+.backdrop{display:none;position:fixed;inset:0;background:#080f23bd;z-index:40;align-items:flex-end;justify-content:center;backdrop-filter:blur(7px)}
 .backdrop.open{display:flex}
-.sheet{width:100%;max-width:530px;margin:auto;background:#182330;border:1px solid #526076;border-radius:24px 24px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom));max-height:95dvh;overflow:auto;animation:slideup .2s ease-out}
-.sheet-handle{width:38px;height:4px;border-radius:9px;background:#536174;margin:-8px auto 21px}
-.sheet-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-.sheet-header .eyebrow{color:var(--lime);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:900}
-.sheet-header h2{font-size:23px;letter-spacing:-.04em;margin:7px 0 3px;line-height:1.15}
-.sheet-header p{color:var(--quiet);font-size:12px;margin:5px 0}
-.close-btn{background:#ffffff0c;color:#e5edf2;border:1px solid var(--line);border-radius:11px;width:36px;height:36px;font-size:21px;flex:0 0 auto}
-.form-label{display:block;font-size:11px;font-weight:800;color:#b8c7d0;margin-bottom:8px}
-.form-row{margin-top:21px}
-.range-top{display:flex;justify-content:space-between;gap:12px}.range-value{color:var(--lime);font-weight:850;font-size:16px}
-input[type=range]{width:100%;accent-color:var(--lime);margin:10px 0}
-.field{width:100%;color:var(--text);background:#101924;border:1px solid #344256;border-radius:12px;padding:12px 13px;min-height:43px;outline:0;font-size:13px}
-.field::placeholder{color:#6f8296}textarea.field{resize:vertical;min-height:90px}
-.mood-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.mood-choice{padding:9px 4px 7px;background:#ffffff08;border:1px solid #ffffff14;color:var(--text);border-radius:12px;display:grid;place-items:center;gap:2px;font-size:23px;min-width:0}
-.mood-choice span{font-size:8px;color:var(--quiet)}.mood-choice.selected{border-color:var(--lime);background:#c4fc8219;box-shadow:0 0 0 1px #c4fc8235 inset}.mood-choice.selected span{color:var(--lime)}
-.sheet-actions{display:flex;gap:10px;margin-top:23px}.btn{border:1px solid var(--line);border-radius:13px;padding:13px 16px;font-weight:850;font-size:13px;min-height:47px}.btn.primary{background:var(--lime);color:#1a291a;border-color:var(--lime)}.btn.secondary{background:#ffffff0a;color:var(--text)}.sheet-actions .primary{flex:1}
-/* Full-screen Glance editor */
-.glance-overlay{position:fixed;inset:0;z-index:40;background:#080d14ec;backdrop-filter:blur(18px);display:none;overflow-y:auto;overscroll-behavior:contain}
-.glance-overlay.open{display:block}
-body.dialog-open{overflow:hidden}
-.glance-pane{min-height:100dvh;width:min(100%,760px);margin:auto;background:#101925;border-left:1px solid #ffffff0e;border-right:1px solid #ffffff0e;padding-bottom:calc(98px + env(safe-area-inset-bottom));box-shadow:0 0 80px #0006}
-.glance-top{position:sticky;top:0;z-index:2;background:#121d29f5;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:15px 17px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.glance-back{border:1px solid var(--line);border-radius:11px;background:#ffffff09;color:var(--text);width:38px;height:38px;font-size:19px}
-.glance-heading{flex:1;min-width:0}.glance-heading b{font-size:17px;font-weight:900;letter-spacing:-.045em}.glance-heading span{display:block;color:var(--quiet);font-size:10px;margin-top:1px}
-.date-picker{background:#1c2a38;color:var(--text);border:1px solid var(--line);border-radius:11px;font-size:11px;padding:8px 7px;width:125px;max-width:33vw;min-height:38px;color-scheme:dark}
+.sheet{width:min(100%,510px);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;background:var(--shell);border:1px solid var(--line);border-radius:23px 23px 0 0;padding:18px 19px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -14px 58px #060c214a;animation:rise .18s ease-out}
+.handle{width:34px;height:4px;background:var(--line);border-radius:99px;margin:-5px auto 17px}
+.sheet-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.sheet-head h2{margin:3px 0 5px;font-size:25px;letter-spacing:-.052em;line-height:1.1}
+.sheet-head p{margin:0;font-size:11px;color:var(--muted)}
+.close{border:1px solid var(--line);background:var(--control);color:var(--ink);border-radius:10px;width:36px;height:36px;font-size:22px}
+.fieldlabel{display:block;font-weight:850;margin:18px 0 8px;font-size:12px}
+.percent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.percent-choice{border:1px solid var(--line);border-radius:13px;background:var(--control);color:var(--ink);padding:11px 4px;font-size:22px;font-weight:900;font-variant-numeric:tabular-nums}
+.percent-choice small{display:block;font-size:9px;letter-spacing:.06em;margin-top:2px;font-weight:750;color:var(--muted)}
+.percent-choice.selected{background:#b8f0d5;color:#204b45;border-color:#70bf9d;box-shadow:0 0 0 2px #77cda349 inset}
+.percent-choice.selected small{color:#356e61}
+textarea{width:100%;resize:vertical;min-height:93px;max-height:210px;border:1px solid var(--line);border-radius:13px;padding:13px;background:var(--control);color:var(--ink);font-size:13px;outline:none}
+textarea::placeholder{color:var(--muted)}
+.save-btn{width:100%;min-height:49px;border:0;border-radius:12px;background:var(--accent);color:var(--ink-on-accent);font-weight:900;font-size:14px;margin-top:16px}
+.sheet-hint{font-size:10px;color:var(--muted);margin:11px 0 0}
+/* Read-only glance */
+.glance-overlay{display:none;position:fixed;inset:0;z-index:30;background:var(--bg);overflow:auto;overscroll-behavior:contain}
+.glance-overlay.open{display:block}body.dialog-open{overflow:hidden}
+.glance-pane{min-height:100dvh;max-width:740px;margin:auto;padding-bottom:25px}
+.glance-top{display:flex;align-items:center;gap:13px;position:sticky;top:0;z-index:2;background:var(--nav);border-bottom:1px solid var(--line);padding:14px max(17px,calc((100vw - 680px)/2));backdrop-filter:blur(16px)}
+.glance-top button{height:37px;width:37px;border:1px solid var(--line);border-radius:11px;background:var(--control);color:var(--ink);font-size:20px}
+.glance-top strong{display:block;font-size:18px;line-height:1.2;letter-spacing:-.03em}.glance-top small{display:block;color:var(--muted);font-size:9px;letter-spacing:.1em;margin-top:3px}
 .glance-body{padding:20px 17px}
-.glance-intro{padding:20px;border:1px solid #c4fc8235;border-radius:20px;background:linear-gradient(120deg,#20352f,#18282d);margin-bottom:20px}
-.glance-intro .eyebrow{color:var(--lime);font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
-.glance-intro h2{margin:8px 0 7px;font-size:27px;letter-spacing:-.055em;line-height:1.1}
-.glance-intro p{color:#bacac8;font-size:12px;margin:0;line-height:1.55}
-.glance-numbers{display:flex;gap:12px;flex-wrap:wrap;border-top:1px solid #ffffff1c;margin-top:17px;padding-top:13px;font-size:10px;color:#b4c7be}.glance-numbers b{color:var(--lime);font-size:12px;margin-right:3px}
-.glance-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:17px 0 13px}
-.glance-bar h3{margin:0;font-size:15px;letter-spacing:-.03em}.glance-bar span{color:var(--quiet);font-size:11px}
+.glance-intro{padding:21px;border-radius:20px;background:linear-gradient(130deg,#3d555f,#514b75);color:#fcfbff;border:1px solid #8b94ad60}
+html[data-theme="day"] .glance-intro{background:linear-gradient(130deg,#c8e2d6,#d8d5f0);color:#2d4057;border-color:#aebfbf}
+.glance-intro h2{margin:8px 0;font-size:25px;line-height:1.14;letter-spacing:-.05em}.glance-intro p{margin:0;font-size:12px;opacity:.82}
+.glance-numbers{display:flex;gap:14px;flex-wrap:wrap;margin-top:15px;padding-top:12px;border-top:1px solid #ffffff3a;font-size:11px}.glance-numbers b{margin-right:3px}
+.glance-sub{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:19px 1px 11px}.glance-sub strong{font-size:15px}.glance-sub small{font-size:10px;color:var(--muted)}
 .glance-list{display:grid;gap:9px}
-.glance-item{border:1px solid #334152;border-radius:15px;background:#162130;overflow:hidden;transition:border-color .15s}
-.glance-item.expanded{border-color:#a8dc9473;background:#192634}
-.glance-summary{display:flex;align-items:center;gap:11px;background:transparent;border:0;color:inherit;padding:13px;width:100%;text-align:left;min-height:74px}
-.glance-icon{width:39px;height:39px;flex:0 0 auto;border:1px solid #ffffff16;background:#ffffff0b;border-radius:12px;display:grid;place-items:center;font-size:19px}
-.glance-text{min-width:0;flex:1}.glance-text strong{font-size:12.5px;font-weight:800;letter-spacing:-.014em;display:block;overflow-wrap:anywhere;line-height:1.35}.glance-text span{font-size:10px;color:var(--quiet);display:block;margin-top:4px;font-variant-numeric:tabular-nums}
-.glance-chip{flex:0 0 auto;border-radius:8px;font-size:9px;font-weight:800;padding:5px 7px;background:#ffffff10;color:var(--quiet)}
-.glance-chip.done{background:#c4fc8218;color:var(--lime)}.glance-chip.part{background:#f8ca831b;color:var(--amber)}.glance-chip.miss{background:#f2a1a715;color:var(--rose)}
-.glance-chevron{color:#7d91a4;flex:0 0 auto;transform:rotate(0);transition:transform .15s}.expanded .glance-chevron{transform:rotate(180deg)}
-.editor{display:none;border-top:1px solid #ffffff12;padding:16px 13px 18px}.expanded .editor{display:block}
-.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.editor-grid .wide{grid-column:1/-1}
-.editor .form-label{font-size:10px;margin-bottom:5px}.editor .field{padding:10px 11px;min-height:40px;font-size:12px}
-.editor textarea.field{min-height:63px}
-.editor .section-mini{font-size:9px;letter-spacing:.17em;font-weight:850;text-transform:uppercase;color:var(--lime);margin:16px 0 11px;padding-top:12px;border-top:1px solid #ffffff10}
-.remove-row{display:flex;justify-content:flex-end;margin-top:14px}.remove-btn{border:1px solid #f2a1a740;color:#f3aeb7;background:#f2a1a70d;border-radius:9px;padding:8px 10px;font-size:10px;font-weight:750}
-.add-block{width:100%;margin:13px 0 0;padding:13px;border:1px dashed #8aaf8b81;background:#c4fc8209;color:var(--lime);border-radius:13px;font-size:12px;font-weight:850}
-.glance-footer{position:fixed;bottom:0;left:0;right:0;z-index:4;background:#101925f4;backdrop-filter:blur(17px);border-top:1px solid var(--line);padding:11px 17px calc(11px + env(safe-area-inset-bottom));display:none;align-items:center;justify-content:center;gap:10px}
-.glance-overlay.open .glance-footer{display:flex}
-.glance-footer button{max-width:370px}.glance-footer .primary{flex:1}.glance-footer .secondary{flex:0 0 auto}
-.glance-note{font-size:11px;color:#8197ab;margin-top:14px;text-align:center}
-.toast{position:fixed;left:50%;bottom:82px;transform:translate(-50%,16px);opacity:0;z-index:90;background:#e9f6dd;color:#172315;border-radius:12px;padding:11px 16px;font-size:12px;font-weight:850;pointer-events:none;max-width:90vw;transition:.2s;box-shadow:0 12px 38px #0008;text-align:center}
+.glance-item{background:var(--shell);border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.glance-item[open]{border-color:var(--accent)}
+.glance-item summary{display:grid;grid-template-columns:39px minmax(0,1fr) auto 14px;align-items:center;gap:10px;list-style:none;padding:12px;cursor:pointer;min-height:66px}
+.glance-item summary::-webkit-details-marker{display:none}
+.glance-icon{display:grid;place-items:center;border-radius:11px;background:var(--control);width:39px;height:39px;font-size:19px}
+.glance-name{font-size:12px;font-weight:850;line-height:1.3}.glance-timing{font-size:10px;color:var(--muted);margin-top:4px}
+.mini-tag{font-size:9px;border-radius:6px;padding:1px 5px;background:var(--control);color:var(--muted);font-weight:900;margin-left:3px}
+.glance-chip{border-radius:7px;padding:5px 6px;font-size:9px;font-weight:850;color:var(--muted);background:var(--control);white-space:nowrap}
+.glance-chip.done{color:#246b51;background:#caeedc}.glance-chip.miss{color:#97495e;background:#ffe0e2}
+.chevron{color:var(--muted);font-size:15px;transition:transform .2s}.glance-item[open] .chevron{transform:rotate(180deg)}
+.glance-detail{padding:0 13px 14px 62px;border-top:1px solid var(--line)}
+.glance-detail .details-body{margin-top:12px;color:var(--ink)}.glance-detail .packing{background:var(--control)}
+.glance-record{font-size:11px;color:var(--muted);margin-top:11px;overflow-wrap:anywhere}
+.empty{border:1px dashed var(--line);border-radius:13px;padding:17px;color:var(--muted);font-size:12px}
+.toast{position:fixed;z-index:70;bottom:calc(100px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;padding:10px 14px;border-radius:12px;background:#e7f4e5;color:#24534b;box-shadow:0 12px 36px #05102040;font-weight:850;font-size:11px;text-align:center;max-width:90vw}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-@keyframes breathe{50%{opacity:.56;transform:scale(.7)}}@keyframes slideup{from{transform:translateY(35px);opacity:.5}to{transform:translateY(0);opacity:1}}
-@media(min-width:750px){.masthead{padding:42px 0 30px}.dashboard{grid-template-columns:minmax(0,1.65fr) minmax(280px,1fr)}.active-card{min-height:316px;padding:28px}.side-stack{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:15px}.side-card{padding:23px}.side-card strong{font-size:23px}.preview-list{grid-template-columns:repeat(3,minmax(0,1fr))}.preview-task{grid-template-columns:42px 1fr}.preview-task .status-mark{grid-column:2}.action-grid{grid-template-columns:1.4fr 1fr 1fr}.action-btn.completed{grid-column:auto}.action-btn{min-height:74px}.metrics{gap:14px}.metric{padding:20px}.section{margin-top:37px}.glance-body{padding:26px 27px}.glance-top{padding:15px 27px}}
-@media(max-width:365px){.container{width:calc(100% - 28px)}.top-action{padding:0 10px}.brand-name{font-size:20px}.active-title{font-size:27px}.glance-chip{font-size:8px;padding:4px}.glance-summary{gap:8px}.glance-icon{width:33px;height:33px}.glance-body{padding:16px 11px}.date-picker{width:110px}.glance-top{padding:13px 11px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-
-/* Compact control-first layout. Current task and check-in remain within thumb reach. */
-.location-chip{display:inline-flex;align-items:center;vertical-align:middle;border:1px solid #c4fc8252;border-radius:99px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.02em;background:#c4fc8212;color:#d4fac4}
-.location-chip[hidden]{display:none}
-.location-chip[data-place="transit"]{color:#ffda9e;border-color:#f8ca8370;background:#f8ca8312}
-.location-chip[data-place="home"]{color:#cbd9fb;border-color:#a5bffd65;background:#a5bffd12}
+@keyframes rise{from{transform:translateY(25px);opacity:.5}to{transform:translateY(0);opacity:1}}
+@media(min-width:750px){.dashboard{grid-template-columns:minmax(0,1.6fr) minmax(240px,1fr)}.side-row{grid-template-columns:1fr;grid-template-rows:1fr 1fr}.focus{padding:28px;min-height:320px}.mini-card{padding:22px}.mini-card strong{font-size:25px}.score{padding:18px}.score .number{font-size:37px}.action-bar{max-width:680px;margin:18px auto 0}}
 @media(max-width:749px){
-  body{padding-bottom:calc(108px + env(safe-area-inset-bottom))}
-  .container{width:calc(100% - 24px)}
-  .topbar-inner{height:54px}
-  .brand-mark{height:32px;width:32px;font-size:20px;border-radius:10px}
-  .brand-name{font-size:20px}
-  .brand-name small{font-size:7px;letter-spacing:.12em;margin-top:2px}
-  .top-action{height:36px;min-height:36px;padding:0 11px;border-radius:10px}
-  .top-action.icon-only{width:36px}
-  .masthead{padding:11px 0 10px}
-  .masthead-top,.hero-title{display:none}
-  .date-line{margin:0;justify-content:space-between;font-size:12px}
-  .date-line .dot{display:none}
-  .mode-pill{font-size:9px;padding:5px 7px}
-  .dashboard{gap:9px}
-  .active-card{min-height:unset;padding:15px 15px 14px;border-radius:18px}
-  .card-topline{gap:6px}
-  .live-badge{font-size:9px;letter-spacing:.11em}
-  .sequence{font-size:10px}
-  .active-icon{display:inline-grid;vertical-align:middle;margin:12px 8px 0 0;height:34px;width:34px;border-radius:10px;font-size:18px}
-  .location-chip{margin-top:12px}
-  .active-title{font-size:clamp(24px,7vw,31px);line-height:1.1;margin:10px 0 0;clear:both;max-width:100%;letter-spacing:-.05em}
-  .active-note{font-size:11px;line-height:1.4;margin-top:6px;color:#cadbd5;max-height:2.8em;overflow:hidden}
-  .time-strip{margin-top:11px;font-size:11px}
-  .time-bar{margin-top:6px;height:5px}
-  .saved-label{margin-top:9px;font-size:10px;padding:6px 8px}
-  .side-stack{grid-template-columns:1fr 1fr;gap:8px}
-  .side-card{padding:11px 12px;min-height:80px;border-radius:14px}
-  .side-card .eyebrow{font-size:8px;letter-spacing:.09em}
-  .side-card strong{font-size:15px;margin-top:5px;line-height:1.25}
-  .side-card p{font-size:10px;margin-top:3px}
-  .side-card .progress-value{font-size:23px}
-  .side-card .tiny-bar{margin-top:6px}
-  .action-section{position:fixed;bottom:0;left:0;right:0;z-index:30;margin:0;padding:9px 12px calc(10px + env(safe-area-inset-bottom));background:#0b1018fa;backdrop-filter:blur(18px);border-top:1px solid #455369;box-shadow:0 -8px 28px #0008}
-  .action-section .section-heading{margin-bottom:7px}
-  .action-section .section-heading h2{font-size:12px;letter-spacing:0}
-  .action-section .section-heading p{font-size:10px}
-  .action-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-  .action-btn,.action-btn.completed{grid-column:auto;min-height:45px;border-radius:12px;padding:7px 4px;justify-content:center;text-align:center;font-size:12px;letter-spacing:0}
-  .action-btn .arrow{display:none}
-  .desktop-check{display:none}
-  .section{margin-top:21px}
-  .section-heading{margin-bottom:9px}
-  .section-heading h2{font-size:15px}
-  .metrics{gap:7px}
-  .metric{padding:11px;border-radius:12px}
-  .metric strong{font-size:23px}
-  .metric span{font-size:9px}
-  .preview-list{gap:7px}
-  .preview-task{padding:9px;border-radius:12px;grid-template-columns:34px 1fr auto;gap:9px}
-  .preview-icon{width:34px;height:34px;border-radius:9px;font-size:16px}
-  .preview-task b{font-size:12px}
-  .bottom{margin:25px auto 8px;line-height:1.4}
-  .signoff{bottom:calc(113px + env(safe-area-inset-bottom));left:12px;right:12px;max-width:none;z-index:28}
-  .signoff button{min-height:42px;font-size:12px;border-radius:11px}
-  .sheet{max-height:94dvh;border-radius:19px 19px 0 0;padding:16px 16px calc(17px + env(safe-area-inset-bottom))}
-  .sheet-handle{margin:-5px auto 14px}
-  .sheet-header h2{font-size:20px}
-  .form-row{margin-top:14px}
-  .sheet-actions{position:sticky;bottom:0;background:#182330;padding-top:10px;margin-top:13px;z-index:1}
-  .glance-intro{padding:13px;margin-bottom:13px}
-  .glance-intro h2{font-size:20px}
-  .glance-body{padding:14px 12px}
-  .glance-summary{min-height:59px;padding:9px}
-  .glance-item{border-radius:12px}
-  .glance-icon{width:33px;height:33px;font-size:17px}
-  .glance-text strong{font-size:12px}
+  body{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+  .container{width:calc(100% - 24px)}.topbar-in{height:56px}
+  .identity b{font-size:18px}.identity small{font-size:7px}.brand-icon{width:30px;height:30px;font-size:22px;border-radius:10px}
+  .icon-button,.glance-button{height:34px}.icon-button{width:33px}.glance-button{padding:0 10px;font-size:11px}
+  .datebar{padding:13px 0}.datebar h1{font-size:23px}.daytype{font-size:9px}
+  .scorestrip{gap:7px;margin-bottom:11px}.score{padding:9px 11px 10px;border-radius:13px}.score .number{font-size:23px}.score .label{font-size:9px;margin-top:5px}
+  .focus{padding:17px;border-radius:19px}.focus h2{font-size:clamp(25px,6.5vw,33px)}.focus-icon{width:38px;height:38px;margin-top:13px;font-size:21px}.clockrow{margin-top:14px}
+  .side-row{gap:8px}.mini-card{padding:12px;border-radius:15px}.mini-card strong{font-size:17px;margin:7px 0 4px}.mini-card .percent{font-size:25px}.mini-eyebrow{font-size:9px}
+  .action-bar{position:fixed;bottom:0;left:0;right:0;z-index:20;border-radius:17px 17px 0 0;border-width:1px 0 0;margin:0;padding:9px 12px calc(12px + env(safe-area-inset-bottom));background:var(--nav);backdrop-filter:blur(20px);box-shadow:0 -7px 30px #07152b2d}
+  .action-heading{margin-bottom:7px}.action-heading strong{font-size:12px}.action-grid{gap:8px}.action-btn{min-height:49px;font-size:14px}
+  .record-section{margin-top:20px}.footer{margin:23px auto 0}.sheet{padding:15px 16px calc(16px + env(safe-area-inset-bottom))}
+  .glance-body{padding:14px 12px}.glance-intro{padding:16px}.glance-intro h2{font-size:21px}.glance-item summary{grid-template-columns:35px minmax(0,1fr) auto 12px;gap:7px;padding:10px}.glance-icon{height:35px;width:35px;font-size:17px}.glance-detail{padding-left:12px}
 }
-@media(max-width:365px){
-  .container{width:calc(100% - 20px)}
-  .brand-name{font-size:18px}
-  .active-card{padding:12px}
-  .side-card{padding:10px}
-  .side-card strong{font-size:13px}
-  .action-section{padding-left:8px;padding-right:8px}
-  .action-grid{gap:5px}
-  .action-btn,.action-btn.completed{font-size:11px}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-/* Sign off belongs in document flow; it must never cover the check-in controls. */
-.signoff,.signoff.show{position:static;bottom:auto;left:auto;right:auto;z-index:auto;width:min(100%,490px);max-width:490px;margin:14px auto 0;box-shadow:none}
-.signoff button{min-height:46px;font-size:12px}
-@media(min-width:750px){.masthead{padding:23px 0 20px}.hero-title{font-size:clamp(34px,5vw,48px)}}
-@media(max-width:749px){.signoff,.signoff.show{position:static;bottom:auto;left:auto;right:auto;width:100%;max-width:100%;margin:9px auto 0}.signoff button{min-height:39px;font-size:11px}}
-
-/* DAYFLOW — colorful glass / soft daylight */
-:root{--bg:#111b2b;--surface:#202d42;--surface2:#273a51;--line:#42526a;--text:#f5f5f5;--quiet:#b2c3d3;--low:#91a9c2;--lime:#baff9c;--mint:#a5e9df;--amber:#ffd2a6;--rose:#ffafb9;--blue:#b8c7ff;--shadow:0 17px 38px #050c2042}
-html[data-theme="day"]{color-scheme:light;--bg:#f0ede3;--surface:#fff9ed;--surface2:#e7e9df;--line:#d6d2c7;--text:#243347;--quiet:#5d6f7b;--low:#657a85;--lime:#36785a;--mint:#147d7b;--amber:#9a591b;--rose:#af4d62;--blue:#4d659c;--shadow:0 15px 40px #66715b1c}
-body{background:var(--bg);color:var(--text)}
-body::before{background:radial-gradient(ellipse at 95% 0%,#5d7ec64a,transparent 53%),radial-gradient(ellipse at 4% 42%,#267d6950,transparent 50%)}
-html[data-theme="day"] body::before{background:radial-gradient(ellipse at 90% 0%,#f6c69e78,transparent 50%),radial-gradient(ellipse at 3% 55%,#b2d6b17b,transparent 53%)}
-.topbar{background:var(--surface);border-color:var(--line)}
-.top-action,.side-card,.metric,.glance-item,.preview-task{background:var(--surface);color:var(--text);border-color:var(--line)}
-.top-action.glance-trigger{background:#a4dcca;color:#183d40;border-color:#a4dcca}
-.brand-name{letter-spacing:-.06em;font-size:20px;color:var(--text)}
-.brand-name small{color:var(--quiet)}
-.active-card{background:linear-gradient(130deg,#294f53,#253e64 64%,#37446e);border-color:#779eaa80;box-shadow:var(--shadow)}
-html[data-theme="day"] .active-card{background:linear-gradient(130deg,#d7ebe0,#b7d5e5 60%,#d8cee7);border-color:#8bb5b1}
-html[data-theme="day"] .active-card .active-title,html[data-theme="day"] .active-card .active-note,html[data-theme="day"] .active-card .time-strip,html[data-theme="day"] .active-card .live-badge,html[data-theme="day"] .active-card .sequence{color:#1e4145}
-html[data-theme="day"] .live-badge i{background:#3e7d63}
-.side-card:nth-child(1){background:linear-gradient(135deg,#2e4861,#32445a)}
-.side-card:nth-child(2){background:linear-gradient(135deg,#293d48,#2a514a)}
-html[data-theme="day"] .side-card:nth-child(1){background:#eadff3}
-html[data-theme="day"] .side-card:nth-child(2){background:#d3e8d6}
-html[data-theme="day"] .side-card .progress-value{color:#277a59}
-.side-card .eyebrow,.side-card p,.metric span,.section-heading p,.glance-text span,.recent-content small{color:var(--quiet)}
-html[data-theme="day"] .side-card .eyebrow,html[data-theme="day"] .side-card p{color:#596779}
-.action-section{background:var(--bg)}
-.action-btn.completed{background:#a9e5b5;color:#183b31;border-color:#90cfa7}
-.action-btn.partial{background:#ffe5bd;color:#6b4820;border-color:#d7a96c}
-.action-btn.skipped{background:#f5bdcb;color:#6e334c;border-color:#df99ad}
-.metric:nth-child(1){background:linear-gradient(140deg,#28483e,var(--surface))}
-.metric:nth-child(2){background:linear-gradient(140deg,#594332,var(--surface))}
-.metric:nth-child(3){background:linear-gradient(140deg,#51394a,var(--surface))}
-html[data-theme="day"] .metric:nth-child(1){background:#d6ebd9}html[data-theme="day"] .metric:nth-child(2){background:#ffead5}html[data-theme="day"] .metric:nth-child(3){background:#f5dce4}
-html[data-theme="day"] .metric:nth-child(1) strong{color:#237653}html[data-theme="day"] .metric:nth-child(2) strong{color:#aa6921}html[data-theme="day"] .metric:nth-child(3) strong{color:#a24965}
-.glance-overlay{background:var(--bg)}.glance-pane{background:var(--bg);box-shadow:none;border:0}.glance-top{background:var(--surface);border-color:var(--line)}.glance-back{background:var(--surface2);color:var(--text)}
-.glance-intro{background:linear-gradient(120deg,#2b514d,#304960);border-color:#7eafa290}
-html[data-theme="day"] .glance-intro{background:linear-gradient(120deg,#d1e7d5,#d5e2f5);border-color:#a9c6ab}
-html[data-theme="day"] .glance-intro p,html[data-theme="day"] .glance-intro .eyebrow,html[data-theme="day"] .glance-numbers,html[data-theme="day"] .glance-numbers b{color:#315d51}
-.glance-item.expanded{background:var(--surface2);border-color:var(--mint)}.glance-summary{color:var(--text)}.glance-icon{background:var(--surface2);border-color:var(--line)}.glance-chip{color:var(--quiet);background:var(--surface2)}
-.editor{padding:13px 16px 18px;border-color:var(--line)}
-.tag,.mini-tag{display:inline-flex;border-radius:8px;padding:2px 8px;font-size:10px;font-weight:850;background:#e5ddff;color:#4e477e;letter-spacing:.03em}
-.tag.outside{background:#e5efd7;color:#346b4f}.tag.home{background:#dbe9ff;color:#3b5b8d}
-.mini-tag{padding:2px 5px;font-size:9px;margin-left:4px}
-.task-info{margin-top:12px;font-size:12px;color:var(--text);line-height:1.6}.task-info p{margin:8px 0 10px}.record-info{color:var(--quiet);font-size:11px}
-.active-details{margin-top:11px}.active-details details{border-top:1px solid #ffffff2b;padding-top:10px}.active-details summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;color:#e6f5ee;font-size:12px;font-weight:800}.active-details .task-info{color:#f4f9f6}
-html[data-theme="day"] .active-details details{border-color:#4a797b4d}html[data-theme="day"] .active-details summary,html[data-theme="day"] .active-details .task-info{color:#234d4b}
-.packing{margin-top:13px;border-radius:13px;background:#ffffff13;padding:12px}.packing b{display:block;font-size:12px;margin-bottom:9px}.pack-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:12px}.pack-row input{width:17px;height:17px;accent-color:#80bba5}.pack-row input:disabled{opacity:.8}
-html[data-theme="day"] .packing{background:#ffffff80}
-#totalsSection{margin-top:17px}
-.side-card:first-child strong{font-size:23px}.side-card:first-child{min-height:105px}
-html[data-theme="day"] .action-section{border-color:var(--line);box-shadow:0 -6px 20px #5b675026}
-@media(max-width:749px){.brand-name{font-size:19px}.top-actions{gap:6px}.top-action{padding:0 9px;font-size:11px}.active-card{padding:17px}.side-card:first-child{min-height:95px}.side-card:first-child strong{font-size:19px}.action-section{background:var(--bg)}#totalsSection{margin-top:15px}.glance-pane{padding-bottom:24px}.glance-body{padding-top:11px}.glance-summary{min-height:67px}.glance-text strong{font-size:13px}}
+@media(max-width:365px){.container{width:calc(100% - 18px)}.identity small{letter-spacing:.11em}.icon-button{width:30px}.glance-button{padding:0 8px}.datebar h1{font-size:20px}.score .number{font-size:21px}.score{padding:8px}.score .label{font-size:8px}.glance-chip{font-size:8px;padding:4px}.glance-item summary{gap:5px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<nav class="topbar" aria-label="Main navigation"><div class="container topbar-inner">
-  <a class="brand" href="#top" aria-label="Javlin top"><span class="brand-name">DAYFLOW<small>YOUR DAILY RHYTHM</small></span></a>
-  <div class="top-actions"><button type="button" class="top-action theme-switch" id="themeSwitch" aria-label="Switch color theme">☀ Day</button>
-    <button type="button" class="top-action icon-only" id="downloadBtn" title="Download today's data" aria-label="Download today's data"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></button>
-    <button type="button" class="top-action glance-trigger" id="openGlance"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Glance</button>
+<nav class="topbar" aria-label="Main navigation"><div class="container topbar-in">
+  <div class="identity"><div class="brand-icon" aria-hidden="true">✳</div><div><b>dayflow</b><small>MAKE TODAY COUNT</small></div></div>
+  <div class="header-actions">
+    <button type="button" class="icon-button" id="themeSwitch" title="Toggle day/night colors" aria-label="Toggle day/night colors">☼</button>
+    <button type="button" class="icon-button" id="downloadBtn" title="Download today's JSON" aria-label="Download today's JSON"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></button>
+    <button type="button" class="glance-button" id="openGlance">▦ &nbsp; Glance</button>
   </div>
 </div></nav>
-<main id="top" class="container">
-  <header class="masthead">
-    <div class="masthead-top"><span class="overline">DAY PLAN</span><span class="live-clock" id="liveClock">--:--</span></div>
-    <h1 class="hero-title">Your day<span>.</span></h1>
-    <div class="date-line"><strong id="dateLabel">Loading date…</strong><span class="dot"></span><span class="mode-pill" id="modePill">Build day</span></div>
-  </header>
-  <section class="section" aria-label="Daily stats" id="totalsSection"><div class="section-heading"><h2>Daily totals</h2><p id="scoreCaption">Based on this day's schedule</p></div>
-    <div class="metrics"><div class="metric"><strong id="countDone">0</strong><span>Completed</span></div><div class="metric"><strong id="countPartial">0</strong><span>Partially done</span></div><div class="metric"><strong id="countSkipped">0</strong><span>Not attempted</span></div></div>
+<main class="container">
+  <header class="datebar"><div><div class="kicker">A NEW DAY · A FRESH RHYTHM</div><h1 id="dateLabel">Loading…</h1></div><span class="daytype" id="dayType">Build day</span></header>
+  <div class="section-title"><h2>Daily totals</h2><span id="totalsLabel">Today's fixed plan</span></div>
+  <section class="scorestrip" aria-label="Daily totals">
+    <div class="score done"><strong id="countDone" class="number">0</strong><span class="label">Done</span></div>
+    <div class="score fail"><strong id="countNotDone" class="number">0</strong><span class="label">Not done</span></div>
+    <div class="score pending"><strong id="countRemaining" class="number">0</strong><span class="label">Remaining</span></div>
   </section>
   <div class="dashboard">
-    <section class="active-card" aria-label="Current activity">
-      <div class="card-topline"><span class="live-badge"><i aria-hidden="true"></i><span id="liveState">Right now</span></span><span class="sequence" id="blockIndex">-- / --</span></div>
-      <div class="active-icon" id="activeIcon" aria-hidden="true">◎</div><span class="location-chip" id="activeLocation" hidden></span>
-      <h2 class="active-title" id="activeTitle">Loading current task…</h2>
-      <p class="active-note" id="activeNote"></p>
-      <div class="time-strip"><span id="activeTime">--:-- → --:--</span><span id="remainingTime">-- min left</span></div>
-      <div class="time-bar"><div id="timeFill"></div></div><div class="active-details" id="activeDetails"></div>
-      <div class="saved-label" id="savedLabel"></div>
+    <section class="focus" aria-label="Current scheduled activity">
+      <div class="focus-head"><span class="focus-label" id="liveState">CURRENT FOCUS</span><span id="blockIndex" class="sequence">— / —</span></div>
+      <span class="focus-icon" aria-hidden="true" id="activeIcon">✦</span>
+      <h2 id="activeTitle">Loading task…</h2>
+      <p class="note" id="activeNote"></p>
+      <div class="meta" id="activeMeta"></div>
+      <div class="clockrow"><span id="activeTime">—</span><span id="remainingTime">—</span></div>
+      <div class="progress-track"><i id="timeFill"></i></div>
+      <div class="focus-details" id="activeDetails"></div>
+      <div class="logged" id="savedLabel"></div>
     </section>
-    <div class="side-stack">
-      <section class="side-card" aria-label="Next activity"><div class="eyebrow">↗ UP NEXT</div><strong id="nextTitle">—</strong><p id="nextTime">—</p></section>
-      <section class="side-card" aria-label="Daily progress"><div class="eyebrow">◉ TODAY</div><strong class="progress-value" id="progressValue">0%</strong><p id="progressCaption">0 blocks logged</p><div class="tiny-bar"><div id="progressFill"></div></div></section>
+    <div class="side-row">
+      <section class="mini-card next"><span class="mini-eyebrow">↗ UP NEXT</span><strong id="nextTitle">—</strong><small id="nextTime">—</small></section>
+      <section class="mini-card"><span class="mini-eyebrow">◉ DAY SCORE</span><strong id="progressValue" class="percent">0%</strong><small id="progressCaption">0 of 0 recorded</small><div class="tiny-track"><div id="progressFill"></div></div></section>
     </div>
   </div>
-  <div class="signoff" id="signoff"><button type="button" id="signoffBtn">↗ &nbsp; Sign off &amp; download today's log</button></div>
-  <section class="action-section" aria-label="Log current activity">
-    <div class="section-heading"><h2>Check in</h2><p>Record how it went</p></div>
+  <section class="action-bar" aria-label="Check in to the current task">
+    <div class="action-heading"><strong>Check in</strong><span id="checkinHint">Select a result</span></div>
     <div class="action-grid">
-      <button type="button" class="action-btn completed" data-status="Completed"><span><span class="desktop-check">✓ &nbsp;</span>Done</span><span class="arrow">↗</span></button>
-      <button type="button" class="action-btn partial" data-status="Partially Completed"><span><span class="desktop-check">◐ &nbsp;</span>Partial</span><span class="arrow">↗</span></button>
-      <button type="button" class="action-btn skipped" data-status="Not Attempted"><span><span class="desktop-check">○ &nbsp;</span>Missed</span><span class="arrow">↗</span></button>
+      <button type="button" class="action-btn done" id="doneBtn" data-status="Done"><i aria-hidden="true">✓</i> Done</button>
+      <button type="button" class="action-btn notdone" id="notDoneBtn" data-status="Not Done"><i aria-hidden="true">×</i> Not Done</button>
     </div>
   </section>
-
-  
-  <section class="section"><div class="section-heading"><h2>Recent results</h2></div><div class="recent-list" id="recentList"></div></section>
-  <footer class="bottom">JAVLIN · Stored on this device · Use Download to back up your results.</footer>
+  <div class="signoff" id="signoff"><button type="button" id="signoffBtn">↧ &nbsp; Sign off · Download today's JSON</button></div>
+  <section class="record-section" aria-label="Recent check-ins"><div class="section-title"><h2>Today's record</h2><span>Saved automatically on this device</span></div><div class="record-list" id="recentList"></div></section>
+  <footer class="footer">DAYFLOW · One task, one window, one decision.</footer>
 </main>
-<!-- quick result editor -->
-<div class="backdrop" id="resultBackdrop" role="presentation"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
-  <div class="sheet-handle"></div><div class="sheet-header"><div><span class="eyebrow">BLOCK CHECK-IN</span><h2 id="resultHeading">Record a result</h2><p id="resultSub">—</p></div><button type="button" class="close-btn" id="closeResult" aria-label="Close">×</button></div>
-  <div class="form-row"><div class="range-top"><label class="form-label" for="resultPercent">Completion</label><span class="range-value" id="resultPercentDisplay">50%</span></div><input id="resultPercent" type="range" min="0" max="100" step="5" value="50"></div>
-  <div class="form-row"><label class="form-label" for="resultRemarks">Remarks / what happened</label><textarea class="field" id="resultRemarks" placeholder="A win, a blocker, or a useful note…"></textarea></div>
-  <div class="form-row"><span class="form-label">Mood (optional)</span><div class="mood-grid" id="resultMoods"><button class="mood-choice" type="button" data-mood="Energized">🔥<span>Energized</span></button><button class="mood-choice" type="button" data-mood="Focused">🎯<span>Focused</span></button><button class="mood-choice" type="button" data-mood="Okay">🙂<span>Okay</span></button><button class="mood-choice" type="button" data-mood="Tired">😴<span>Tired</span></button><button class="mood-choice" type="button" data-mood="Rough">😵‍💫<span>Rough</span></button></div></div>
-  <div class="sheet-actions"><button type="button" class="btn secondary" id="cancelResult">Cancel</button><button type="button" class="btn primary" id="saveResult">Save result ↗</button></div>
+<!-- Check-in modal: closes without submission record Not Done. -->
+<div class="backdrop" id="resultBackdrop"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
+  <div class="handle"></div>
+  <div class="sheet-head"><div><span class="kicker">TASK CHECK-IN</span><h2 id="resultHeading">Done</h2><p id="resultSub">—</p></div><button type="button" class="close" id="closeResult" aria-label="Close check-in and mark Not Done">×</button></div>
+  <div id="doneChoices"><label class="fieldlabel">How much did you finish?</label><div class="percent-grid" id="percentChoices" role="group" aria-label="Choose completion percentage">
+    <button type="button" class="percent-choice" data-percent="100" aria-pressed="false">100%<small>Complete</small></button>
+    <button type="button" class="percent-choice" data-percent="70" aria-pressed="false">70%<small>Most done</small></button>
+    <button type="button" class="percent-choice" data-percent="30" aria-pressed="false">30%<small>Started</small></button>
+  </div></div>
+  <label class="fieldlabel" for="resultRemarks">Remarks <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+  <textarea id="resultRemarks" placeholder="What happened? Anything to remember…"></textarea>
+  <button type="button" class="save-btn" id="saveResult">Save check-in ↗</button>
+  <p class="sheet-hint">Closing without saving will automatically record <b>Not Done</b>. You cannot change a submitted result.</p>
 </div></div>
-<!-- full-day schedule editor -->
-<section class="glance-overlay" id="glanceOverlay" role="dialog" aria-modal="true" aria-label="Full day schedule and editor" aria-hidden="true"><div class="glance-pane">
-  <div class="glance-top"><button type="button" class="glance-back" id="closeGlance" aria-label="Close Glance">←</button><div class="glance-heading"><b>Glance</b><span>FIXED DAILY TIMELINE</span></div></div>
+<!-- Fixed daily schedule overview -->
+<section class="glance-overlay" id="glanceOverlay" role="dialog" aria-modal="true" aria-label="Read-only daily schedule" aria-hidden="true">
+ <div class="glance-pane">
+  <div class="glance-top"><button type="button" id="closeGlance" aria-label="Return to main page">←</button><div><strong>Glance</strong><small>TODAY'S FIXED TIMELINE</small></div></div>
   <div class="glance-body">
-    <div class="glance-intro"><span class="eyebrow" id="glanceMode">BUILD DAY</span><h2 id="glanceDayTitle">Your whole day.</h2><p>Tap a block to see its instructions. Your schedule is fixed, and past check-ins are locked.</p><div class="glance-numbers"><span><b id="glanceBlockCount">0</b> blocks</span><span><b id="glanceLoggedCount">0</b> logged</span><span><b id="glanceProgress">0%</b> completion</span></div></div>
-    <div class="glance-bar"><h3>Today's timeline</h3><span>Read only</span></div>
-    <div class="glance-list" id="glanceList"></div>
-    
-    
+   <div class="glance-intro"><span class="kicker" id="glanceMode">BUILD DAY</span><h2 id="glanceDayTitle">Your whole day.</h2><p>Tap a task for details. Every time slot is fixed. Results lock as soon as they are saved or time expires.</p><div class="glance-numbers"><span><b id="glanceBlockCount">0</b> tasks</span><span><b id="glanceLoggedCount">0</b> recorded</span><span><b id="glanceProgress">0%</b> score</span></div></div>
+   <div class="glance-sub"><strong>Today's timeline</strong><small>View only · no edits</small></div>
+   <div class="glance-list" id="glanceList"></div>
   </div>
-</div></section>
+ </div>
+</section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 'use strict';
-// Weekday outside-first plan (22 blocks). The original Friday–Sunday template is preserved (6 blocks).
-const DEFAULT_SCHEDULES = {"A":[{"id":"A3-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Wake calmly with tea and Japji Sahib.","location":"Home","details":"Stay away from the bed once awake; take a seat at the table.","tag":"H"},{"id":"A3-02","start":390,"end":420,"icon":"🧘","title":"Yoga","note":"30 minutes of gentle movement.","location":"Home","details":"Keep the routine simple and repeatable. Yoga is separate from the later workout.","tag":"H"},{"id":"A3-03","start":420,"end":450,"icon":"🥣","title":"Breakfast","note":"Eat before the morning work.","location":"Home","details":"Breakfast at the table. Prepare what you need for the first trip outside.","tag":"H"},{"id":"A3-04","start":450,"end":510,"icon":"📚","title":"Study Session 1","note":"Focused study before heading outside.","location":"Home","details":"Spend one focused hour on the most demanding subject. Keep the phone away.","tag":"H"},{"id":"A3-05","start":510,"end":540,"icon":"🚶","title":"Travel to other location","note":"Pack your bag, then travel to your study spot.","location":"Transit","details":"Pack these five essentials before leaving. Check them off in the task details.","packing":["A Water Bottle","Snack 1","Macbook","Headphones","Tablet"],"tag":"O"},{"id":"A3-06","start":540,"end":600,"icon":"💼","title":"Business Development","note":"One hour for client work and business progress.","location":"Outside","details":"Work on outreach, follow-ups, delivering websites or one measurable result.","tag":"O"},{"id":"A3-07","start":600,"end":615,"icon":"☕","title":"Coffee #1","note":"15-minute break, then back to study.","location":"Outside","details":"A real coffee break. Stand up, walk a little, or enjoy some fresh air.","tag":"O"},{"id":"A3-08","start":615,"end":675,"icon":"📖","title":"Study Session 2","note":"Another focused hour out of the house.","location":"Outside","details":"Continue the most important study work or switch to practice and review.","tag":"O"},{"id":"A3-09","start":675,"end":690,"icon":"🚶","title":"Travel home","note":"Head back for exercise.","location":"Transit","details":"Leave on time. Allow 15 minutes for the return trip.","tag":"O"},{"id":"A3-10","start":690,"end":720,"icon":"🏋️","title":"Workout","note":"30 minutes at home, before noon.","location":"Home","details":"Beginner-friendly workout with your available dumbbells and bodyweight. Consistency wins.","tag":"H"},{"id":"A3-11","start":720,"end":750,"icon":"🚿","title":"Bath","note":"Shower immediately after exercise.","location":"Home","details":"A clean break between workout and lunch.","tag":"H"},{"id":"A3-12","start":750,"end":790,"icon":"🍛","title":"Lunch","note":"Eat and reset before heading out again.","location":"Home","details":"Finish lunch and pack anything needed for the afternoon session.","tag":"H"},{"id":"A3-13","start":790,"end":805,"icon":"🚶","title":"Travel outside","note":"Second trip away from home.","location":"Transit","details":"Leave on schedule. Allow 15 minutes for travel.","tag":"O"},{"id":"A3-14","start":805,"end":865,"icon":"🎓","title":"Active Learning Module","note":"One focused learning module.","location":"Outside","details":"No rotating daily subjects. Work on your active learning module in a suitable place outside home.","tag":"O"},{"id":"A3-15","start":865,"end":925,"icon":"🤖","title":"Robotics","note":"A focused hour of robotics work.","location":"Outside","details":"Portable coding, design, theory, planning, or electronics at a suitable workspace. Hardware that cannot travel can be planned here.","tag":"O"},{"id":"A3-16","start":925,"end":955,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Errands, a walk, and a quick voice log.","location":"Outside","details":"Use Walmart only when needed. Otherwise walk outside. Record the journal when stationary or on foot, not while driving.","tag":"O"},{"id":"A3-17","start":955,"end":1050,"icon":"🌿","title":"Free Time","note":"Enjoy being outside. No productivity requirement.","location":"Outside","details":"Walk, enjoy the sky, rest by the water, meet someone, read, or relax away from the bed.","tag":"O"},{"id":"A3-18","start":1050,"end":1065,"icon":"🚶","title":"Travel home","note":"Return home for the evening.","location":"Transit","details":"Leave at your scheduled time and return home for the evening.","tag":"O"},{"id":"A3-19","start":1065,"end":1155,"icon":"🧹","title":"Chores + Cooking","note":"Get the household tasks and cooking done.","location":"Home","details":"Keep household chores and cooking together.","tag":"H"},{"id":"A3-20","start":1155,"end":1215,"icon":"🍽️","title":"Dinner","note":"A full hour for dinner.","location":"Home","details":"Relax and eat. Keep this as a dependable anchor.","tag":"H"},{"id":"A3-21","start":1215,"end":1275,"icon":"📖","title":"Fiction + Bed Preparation","note":"Read, dim the lights, prepare clothes.","location":"Home","details":"Quiet reading and simple preparation for tomorrow. Keep screens low-stimulation.","tag":"H"},{"id":"A3-22","start":1275,"end":1439,"icon":"😴","title":"Sleep","note":"Protect your bedtime and sleep through the night.","location":"Home","details":"Protect the bedtime. The overnight block continues into the next morning.","tag":"H"}],"B":[{"id":"B-01","start":300,"end":330,"icon":"🌅","title":"Wake + Water + Protein Breakfast","note":"Fuel before the long shift.","details":"No skipped fuel before a 12-hour day.","tag":"H"},{"id":"B-02","start":330,"end":360,"icon":"🚗","title":"Drive to Valid","note":"Commute.","details":"Get there. No bonus mission.","tag":"O"},{"id":"B-03","start":360,"end":1080,"icon":"🏭","title":"Work","note":"12-hour shift. Eat packed lunch + snacks.","details":"The bar stays deliberately low outside work. Survival mode is valid.","tag":"O"},{"id":"B-04","start":1110,"end":1170,"icon":"🍛","title":"Dinner + Shower","note":"Recover first.","details":"No productivity theatre after a 12-hour standing shift.","tag":"H"},{"id":"B-05","start":1170,"end":1200,"icon":"📚","title":"One Study Block","note":"25 minutes. The only obligation.","details":"On Sunday, the 30-minute weekly review may replace this block.","tag":"H"},{"id":"B-06","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Keystone habit.","details":"The workday ends. Sleep wins.","tag":"H"}]};
-const STORAGE_KEY = 'javlin.daily.v2';
-const LEGACY_STORAGE_KEY = 'dailyQuestLog.v1';
-const SIGN_OFF_MINUTE = 20 * 60 + 45;
-const MOODS = {Energized:'🔥',Focused:'🎯',Okay:'🙂',Tired:'😴',Rough:'😵‍💫'};
-const $ = id => document.getElementById(id);
-const clone = obj => JSON.parse(JSON.stringify(obj));
-const pad = n => String(n).padStart(2,'0');
-const todayKey = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const dateFromKey = key => new Date(`${key}T12:00:00`);
-const addDays = (key, num) => {const d = dateFromKey(key);d.setDate(d.getDate()+num);return todayKey(d);};
-const modeOf = key => {const d=dateFromKey(key).getDay();return d>=1&&d<=4?'A':'B';};
-const modeText = key => modeOf(key)==='A'?'Build Day':'Work Day';
-const clockFromMinutes = mins => {const m=((mins%1440)+1440)%1440;const h=Math.floor(m/60);return `${h%12||12}:${pad(m%60)} ${h>=12?'PM':'AM'}`;};
-const shortClock = mins => {const m=((mins%1440)+1440)%1440;return `${pad(Math.floor(m/60))}:${pad(m%60)}`;};
-const clockToMinutes = value => {const x=/^(\d{2}):(\d{2})$/.exec(value||'');return x?Number(x[1])*60+Number(x[2]):NaN;};
-const rangeOf = t => t.end<=t.start ? `${clockFromMinutes(t.start)} → next day` :
-  (t.title.toLowerCase()==='sleep' && t.end===1439 ? `${clockFromMinutes(t.start)} → overnight` : `${clockFromMinutes(t.start)} – ${clockFromMinutes(t.end)}`);
-const escapeHTML = value => String(value??'').replace(/[&<>"']/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+const DEFAULT_SCHEDULES={"A":[{"id":"A3-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Wake calmly with tea and Japji Sahib.","location":"Home","details":"Stay away from the bed once awake; take a seat at the table.","tag":"H"},{"id":"A3-02","start":390,"end":420,"icon":"🧘","title":"Yoga","note":"30 minutes of gentle movement.","location":"Home","details":"Keep the routine simple and repeatable. Yoga is separate from the later workout.","tag":"H"},{"id":"A3-03","start":420,"end":450,"icon":"🥣","title":"Breakfast","note":"Eat before the morning work.","location":"Home","details":"Breakfast at the table. Prepare what you need for the first trip outside.","tag":"H"},{"id":"A3-04","start":450,"end":510,"icon":"📚","title":"Study Session 1","note":"Focused study before heading outside.","location":"Home","details":"Spend one focused hour on the most demanding subject. Keep the phone away.","tag":"H"},{"id":"A3-05","start":510,"end":540,"icon":"🚶","title":"Travel to other location","note":"Pack your bag, then travel to your study spot.","location":"Transit","details":"Pack these five essentials before leaving. Check them off in the task details.","packing":["A Water Bottle","Snack 1","Macbook","Headphones","Tablet"],"tag":"O"},{"id":"A3-06","start":540,"end":600,"icon":"💼","title":"Business Development","note":"One hour for client work and business progress.","location":"Outside","details":"Work on outreach, follow-ups, delivering websites or one measurable result.","tag":"O"},{"id":"A3-07","start":600,"end":615,"icon":"☕","title":"Coffee #1","note":"15-minute break, then back to study.","location":"Outside","details":"A real coffee break. Stand up, walk a little, or enjoy some fresh air.","tag":"O"},{"id":"A3-08","start":615,"end":675,"icon":"📖","title":"Study Session 2","note":"Another focused hour out of the house.","location":"Outside","details":"Continue the most important study work or switch to practice and review.","tag":"O"},{"id":"A3-09","start":675,"end":690,"icon":"🚶","title":"Travel home","note":"Head back for exercise.","location":"Transit","details":"Leave on time. Allow 15 minutes for the return trip.","tag":"O"},{"id":"A3-10","start":690,"end":720,"icon":"🏋️","title":"Workout","note":"30 minutes at home, before noon.","location":"Home","details":"Beginner-friendly workout with your available dumbbells and bodyweight. Consistency wins.","tag":"H"},{"id":"A3-11","start":720,"end":750,"icon":"🚿","title":"Bath","note":"Shower immediately after exercise.","location":"Home","details":"A clean break between workout and lunch.","tag":"H"},{"id":"A3-12","start":750,"end":790,"icon":"🍛","title":"Lunch","note":"Eat and reset before heading out again.","location":"Home","details":"Finish lunch and pack anything needed for the afternoon session.","tag":"H"},{"id":"A3-13","start":790,"end":805,"icon":"🚶","title":"Travel outside","note":"Second trip away from home.","location":"Transit","details":"Leave on schedule. Allow 15 minutes for travel.","tag":"O"},{"id":"A3-14","start":805,"end":865,"icon":"🎓","title":"Active Learning Module","note":"One focused learning module.","location":"Outside","details":"No rotating daily subjects. Work on your active learning module in a suitable place outside home.","tag":"O"},{"id":"A3-15","start":865,"end":925,"icon":"🤖","title":"Robotics","note":"A focused hour of robotics work.","location":"Outside","details":"Portable coding, design, theory, planning, or electronics at a suitable workspace. Hardware that cannot travel can be planned here.","tag":"O"},{"id":"A3-16","start":925,"end":955,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Errands, a walk, and a quick voice log.","location":"Outside","details":"Use Walmart only when needed. Otherwise walk outside. Record the journal when stationary or on foot, not while driving.","tag":"O"},{"id":"A3-17","start":955,"end":1050,"icon":"🌿","title":"Free Time","note":"Enjoy being outside. No productivity requirement.","location":"Outside","details":"Walk, enjoy the sky, rest by the water, meet someone, read, or relax away from the bed.","tag":"O"},{"id":"A3-18","start":1050,"end":1065,"icon":"🚶","title":"Travel home","note":"Return home for the evening.","location":"Transit","details":"Leave at your scheduled time and return home for the evening.","tag":"O"},{"id":"A3-19","start":1065,"end":1155,"icon":"🧹","title":"Chores + Cooking","note":"Get the household tasks and cooking done.","location":"Home","details":"Keep household chores and cooking together.","tag":"H"},{"id":"A3-20","start":1155,"end":1215,"icon":"🍽️","title":"Dinner","note":"A full hour for dinner.","location":"Home","details":"Relax and eat. Keep this as a dependable anchor.","tag":"H"},{"id":"A3-21","start":1215,"end":1275,"icon":"📖","title":"Fiction + Bed Preparation","note":"Read, dim the lights, prepare clothes.","location":"Home","details":"Quiet reading and simple preparation for tomorrow. Keep screens low-stimulation.","tag":"H"},{"id":"A3-22","start":1275,"end":1439,"icon":"😴","title":"Sleep","note":"Protect your bedtime and sleep through the night.","location":"Home","details":"Protect the bedtime. The overnight block continues into the next morning.","tag":"H"}],"B":[{"id":"B-01","start":300,"end":330,"icon":"🌅","title":"Wake + Water + Protein Breakfast","note":"Fuel before the long shift.","details":"No skipped fuel before a 12-hour day.","tag":"H"},{"id":"B-02","start":330,"end":360,"icon":"🚗","title":"Drive to Valid","note":"Commute.","details":"Get there. No bonus mission.","tag":"O"},{"id":"B-03","start":360,"end":1080,"icon":"🏭","title":"Work","note":"12-hour shift. Eat packed lunch + snacks.","details":"The bar stays deliberately low outside work. Survival mode is valid.","tag":"O"},{"id":"B-04","start":1110,"end":1170,"icon":"🍛","title":"Dinner + Shower","note":"Recover first.","details":"No productivity theatre after a 12-hour standing shift.","tag":"H"},{"id":"B-05","start":1170,"end":1200,"icon":"📚","title":"One Study Block","note":"25 minutes. The only obligation.","details":"On Sunday, the 30-minute weekly review may replace this block.","tag":"H"},{"id":"B-06","start":1260,"end":1439,"icon":"😴","title":"Sleep","note":"Keystone habit.","details":"The workday ends. Sleep wins.","tag":"H"}]};
+const STORAGE_KEY='javlin.daily.v2'; // Reuse previous device data without losing earlier check-ins.
+const THEME_KEY='javlin.theme';
+const SIGN_OFF_MINUTE=20*60+45;
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const todayKey=(d=new Date())=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const dateFromKey=key=>new Date(`${key}T12:00:00`);
+const addDays=(key,num)=>{const d=dateFromKey(key);d.setDate(d.getDate()+num);return todayKey(d)};
+const modeOf=key=>{const d=dateFromKey(key).getDay();return d>=1&&d<=4?'A':'B'};
+const modeText=key=>modeOf(key)==='A'?'Build day':'Work day';
+const getSchedule=key=>DEFAULT_SCHEDULES[modeOf(key)];
+const timeString=m=>{const h=Math.floor(m/60)%24;return `${h%12||12}:${pad(m%60)} ${h<12?'AM':'PM'}`};
+const time24=m=>`${pad(Math.floor(m/60)%24)}:${pad(m%60)}`;
+const rangeOf=t=>`${timeString(t.start)} – ${t.title==='Sleep'?'next morning':timeString(t.end)}`;
+const safe=str=>String(str??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tagOf=t=>t.tag||(t.location==='Home'?'H':'O');
+const tagMarkup=t=>`<span class="tag ${tagOf(t)==='H'?'home':'outside'}">${tagOf(t)} · ${tagOf(t)==='H'?'Home':'Outside'}</span>`;
+function deadlineFor(key,t){
+  if(t.title==='Sleep'){
+    const next=addDays(key,1),first=getSchedule(next)[0];
+    return localDateAt(next,first?.start??360);
+  }
+  return localDateAt(t.end<=t.start?addDays(key,1):key,t.end);
+}
+function localDateAt(key,minute){const d=new Date(`${key}T00:00:00`);d.setMinutes(minute);return d}
+function startFor(key,t){return localDateAt(key,t.start)}
+function roundPrevious(percent){const n=Number(percent);return !Number.isFinite(n)?70:n>=85?100:n>=50?70:30}
+function normalizeEntry(entry){
+  if(!entry||typeof entry!=='object')return null;
+  const state=entry.status;
+  if(!['Done','Not Done','Completed','Partially Completed','Not Attempted'].includes(state))return null;
+  const done=state==='Done'||state==='Completed'||state==='Partially Completed';
+  return {...(done?{status:'Done',completionPercent:roundPrevious(entry.completionPercent)}:{status:'Not Done'}),remarks:String(entry.remarks||''),savedAt:entry.savedAt||new Date().toISOString()};
+}
 function loadStore(){
-  try {const obj=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');return obj&&typeof obj==='object'&&obj.days&&typeof obj.days==='object'?obj:{version:2,days:{}};}
-  catch {return {version:2,days:{}};}
+ try{
+  const raw=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+  if(!raw||typeof raw!=='object'||!raw.days||typeof raw.days!=='object')return {version:3,days:{}};
+  const migrated={version:3,days:{}};
+  for(const [date,day] of Object.entries(raw.days)){
+    if(!day||typeof day!=='object')continue;
+    const entries={};
+    for(const [id,entry] of Object.entries(day.entries||{})){
+      const clean=normalizeEntry(entry);if(clean)entries[id]=clean;
+    }
+    migrated.days[date]={entries,packing:day.packing||{}};
+  }
+  return migrated;
+ }catch{return {version:3,days:{}}}
 }
 let store=loadStore();
-function persist(){
-  try {localStorage.setItem(STORAGE_KEY,JSON.stringify(store));return true;}
-  catch {showToast('Storage blocked or full. Changes not saved.');return false;}
-}
-function dayRecord(key){return store.days[key]||{};}
-function getSchedule(key){
-  const schedule=clone(DEFAULT_SCHEDULES[modeOf(key)]);
-  return schedule.sort((a,b)=>a.start-b.start);
-}
-function getEntries(key){return clone(dayRecord(key).entries||{});}
-function getStats(schedule,entries){
-  const applicable=schedule.map(t=>entries[t.id]).filter(e=>e&&e.status);
-  const completed=applicable.filter(e=>e.status==='Completed').length;
-  const partial=applicable.filter(e=>e.status==='Partially Completed').length;
-  const skipped=applicable.filter(e=>e.status==='Not Attempted').length;
-  const pointTotal=applicable.reduce((n,e)=>n+Math.min(100,Math.max(0,Number(e.completionPercent)||0)),0);
-  return {completed,partial,skipped,logged:applicable.length,total:schedule.length,completion:schedule.length?Math.round(pointTotal/schedule.length):0};
-}
-function formattedDate(key,long=false){return dateFromKey(key).toLocaleDateString('en-US',long?{weekday:'long',month:'long',day:'numeric',year:'numeric'}:{weekday:'long',month:'short',day:'numeric'});}
-function nowMinute(){const d=new Date();return d.getHours()*60+d.getMinutes();}
-function findCurrent(key,now=nowMinute()){
-  const schedule=getSchedule(key);
-  const current=schedule.find(t=>now>=t.start && (now<t.end||t.end<=t.start||(t.title.toLowerCase()==='sleep'&&t.end===1439)));
-  if(current) return {task:current,schedule,index:schedule.indexOf(current),beforeWake:false};
-  const first=schedule[0];
-  if(first&&now<first.start){
-    // Use the PREVIOUS evening's bedtime, so overnight times work across days.
-    const lastNight=getSchedule(addDays(key,-1)).find(t=>t.title.toLowerCase()==='sleep');
-    if(lastNight) return {task:lastNight,schedule,index:-1,beforeWake:true};
-  }
-  return {task:null,schedule,index:-1,beforeWake:false};
-}
-
-let activeTask=null;
-let editingTask=null;
-let editingDate=null;
-let activeDate=todayKey();
-let selectedStatus='';
-let selectedMood='';
-let glanceDraft=null;
-let glanceDate=todayKey();
-let originalSnapshot='';
-let expandedId=null;
-let toastTimeout;
-function showToast(message){const node=$('toast');node.textContent=message;node.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>node.classList.remove('show'),2300);}
-function getNext(key,ctx,now){
-  if(ctx.beforeWake) return {task:ctx.schedule[0],tomorrow:false};
-  let next=ctx.schedule.find(t=>t.start>now);
-  if(next) return {task:next,tomorrow:false};
-  const futureKey=addDays(key,1);
-  next=getSchedule(futureKey)[0];
-  return {task:next,tomorrow:true};
-}
-
-function tagOf(t){return t.tag||(t.location==='Home'?'H':'O');}
-function packingMarkup(t,key,interactive=true){
- if(!t?.packing?.length)return '';
- const pack=dayRecord(key).packing?.[t.id]||{};
- return `<div class="packing"><b>🎒 Before you leave</b>${t.packing.map((item,i)=>`<label class="pack-row"><input type="checkbox" data-pack="${escapeHTML(t.id)}" data-item="${i}" ${pack[i]?'checked':''} ${!interactive?'disabled':''}><span>${escapeHTML(item)}</span></label>`).join('')}</div>`;
-}
-function detailsMarkup(t,key,interactive=false){return `<div class="task-info"><span class="tag ${tagOf(t)==='H'?'home':'outside'}">${tagOf(t)} · ${tagOf(t)==='H'?'Home':'Outside'}</span><p>${escapeHTML(t.details||t.note||'Follow your plan.')}</p>${packingMarkup(t,key,interactive)}</div>`;}
-function showCurrentDetails(key,task){const wasOpen=$('activeDetails').querySelector('details')?.open; $('activeDetails').innerHTML=task?`<details><summary>Task details <span>⌄</span></summary>${detailsMarkup(task,key,true)}</details>`:'';if(wasOpen&&$('activeDetails').querySelector('details'))$('activeDetails').querySelector('details').open=true;}
-function savePacking(taskId,index,checked){
- const key=todayKey();const task=getSchedule(key).find(t=>t.id===taskId);
- if(!task||!task.packing?.[index]||nowMinute()<task.start||nowMinute()>=task.end)return showToast('Packing checklist is only active during its task.');
- const day=dayRecord(key);const packing=clone(day.packing||{});packing[taskId]={...(packing[taskId]||{}),[index]:checked};store.days[key]={...day,packing};persist();
-}
-
-function mainRender(){
-  const d=new Date(),key=todayKey(d),minute=nowMinute();activeDate=key;
-  const ctx=findCurrent(key,minute);
-  const entries=getEntries(key),stats=getStats(ctx.schedule,entries);
-  activeTask=ctx.task;
-  $('liveClock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-  $('dateLabel').textContent=formattedDate(key);
-  $('modePill').textContent=modeText(key);
-  $('blockIndex').textContent=ctx.task&&!ctx.beforeWake?`${pad(ctx.index+1)} / ${pad(ctx.schedule.length)}`:`— / ${pad(ctx.schedule.length)}`;
-  $('scoreCaption').textContent=`Out of ${ctx.schedule.length} planned blocks`;
-  $('activeIcon').textContent=ctx.task?.icon||'↗';
-  $('activeTitle').textContent=ctx.task?.title||'A moment between blocks';
-  $('activeNote').textContent=ctx.task?.note||'Nothing is scheduled at this moment.';
-  showCurrentDetails(key,ctx.task);
-  $('activeLocation').textContent=ctx.task?.location||'';
-  $('activeLocation').hidden=!ctx.task?.location;
-  $('activeLocation').dataset.place=(ctx.task?.location||'').toLowerCase();
-  $('liveState').textContent=ctx.task?(ctx.beforeWake?'Overnight reset':'Current mission'):'Open window';
-  $('activeTime').textContent=ctx.beforeWake?'Until morning':(ctx.task?rangeOf(ctx.task):'Open time');
-  const next=getNext(key,ctx,minute);
-  $('nextTitle').textContent=next.task?.title||'Day complete';
-  $('nextTime').textContent=next.task?`${next.tomorrow?'Tomorrow · ':''}${clockFromMinutes(next.task.start)}`:'No more blocks today';
-  let ratio=0,remaining='—';
-  if(ctx.task){
-    let start=ctx.task.start, end=ctx.task.end, pos=minute;
-    if(ctx.beforeWake){
-      // Timeline runs from yesterday's bedtime to today's wake-up.
-      start-=1440;
-      end=ctx.schedule[0]?.start??end;
-    }else if(ctx.task.title.toLowerCase()==='sleep'&&end===1439){
-      end=1440+(getSchedule(addDays(key,1))[0]?.start??0);
-    }else if(end<=start){
-      end+=1440;
-      if(pos<start)pos+=1440;
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(store));return true}catch{showToast('Device storage unavailable. Cannot save.');return false}}
+function dayRecord(key){return store.days[key]||{entries:{},packing:{}}}
+function getEntries(key){return dayRecord(key).entries||{}}
+function autoCloseExpired(now=new Date()){
+  // Backfill the previous day as well so yesterday's overnight Sleep locks at wake-up.
+  const today=todayKey(now),keys=[addDays(today,-1),today];let changed=false;
+  for(const key of keys){
+    const day=dayRecord(key),entries={...(day.entries||{})};let newOnes=false;
+    for(const t of getSchedule(key)){
+      if(!entries[t.id]&&now>=deadlineFor(key,t)){
+        entries[t.id]={status:'Not Done',remarks:'',savedAt:now.toISOString()};newOnes=true;
+      }
     }
-    ratio=Math.max(0,Math.min(100,((pos-start)/Math.max(1,end-start))*100));
-    remaining=`${Math.max(0,end-pos)} min left`;
+    if(newOnes){store.days[key]={...day,entries};changed=true}
   }
-  $('remainingTime').textContent=remaining;
+  if(changed)persist();
+}
+function statsFor(schedule,entries){
+  let done=0,notDone=0,points=0,levels={100:0,70:0,30:0};
+  for(const task of schedule){const e=entries[task.id];if(e?.status==='Done'){done++;points+=e.completionPercent;levels[e.completionPercent]=(levels[e.completionPercent]||0)+1}else if(e?.status==='Not Done')notDone++}
+  const total=schedule.length;
+  return {done,notDone,remaining:total-done-notDone,recorded:done+notDone,total,scorePercent:total?Math.round(points/total):0,doneLevels:levels};
+}
+function activeContext(now=new Date()){
+  const today=todayKey(now),minute=now.getHours()*60+now.getMinutes();const schedule=getSchedule(today);
+  const current=schedule.find(t=>now>=startFor(today,t)&&now<deadlineFor(today,t));
+  if(current)return {key:today,task:current,index:schedule.indexOf(current),overnight:false};
+  if(minute<schedule[0].start){const prev=addDays(today,-1);const sleep=getSchedule(prev).find(t=>t.title==='Sleep');if(sleep&&now>=startFor(prev,sleep)&&now<deadlineFor(prev,sleep))return {key:prev,task:sleep,index:getSchedule(prev).indexOf(sleep),overnight:true}}
+  return {key:today,task:null,index:-1,overnight:false};
+}
+function nextContext(now,context){
+  const today=todayKey(now),schedule=getSchedule(today);
+  const next=schedule.find(t=>now<startFor(today,t));
+  if(next)return {task:next,key:today};
+  const tomorrow=addDays(today,1);return {task:getSchedule(tomorrow)[0],key:tomorrow};
+}
+function showToast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(showToast.timeout);showToast.timeout=setTimeout(()=>el.classList.remove('show'),2400)}
+let editing=null;let selectedPercent=null;let prevCurrentId=null;let prevDetailsEditable=null;
+function packMarkup(key,task,editable){
+  if(!task?.packing?.length)return '';
+  const state=dayRecord(key).packing?.[task.id]||{};
+  return `<div class="packing"><strong>🎒 Pack before leaving</strong>${task.packing.map((item,i)=>`<label class="packrow"><input type="checkbox" data-pack="${safe(task.id)}" data-index="${i}" ${state[i]?'checked':''} ${!editable?'disabled':''}><span>${safe(item)}</span></label>`).join('')}</div>`;
+}
+function detailsMarkup(key,task,editable=false){return `<div class="details-body">${tagMarkup(task)}<p>${safe(task.details||task.note||'Follow the scheduled plan.')}</p>${packMarkup(key,task,editable)}</div>`}
+function renderActiveDetails(key,task,allowPack){
+  const elem=$('activeDetails');const oldKey=elem.dataset.task;
+  const open=oldKey===`${key}/${task?.id}`&&elem.querySelector('details')?.open;
+  elem.dataset.task=`${key}/${task?.id}`;
+  elem.innerHTML=task?`<details ${open?'open':''}><summary>Task details <span>⌄</span></summary>${detailsMarkup(key,task,allowPack)}</details>`:'';
+}
+function savePacking(input){
+  const taskId=input.dataset.pack,index=Number(input.dataset.index),key=todayKey();
+  const t=getSchedule(key).find(t=>t.id===taskId);
+  if(!t||!t.packing?.[index]||getEntries(key)[taskId]||new Date()<startFor(key,t)||new Date()>=deadlineFor(key,t)){
+    input.checked=!input.checked;showToast('Checklist locked outside this task window.');return;
+  }
+  const day=dayRecord(key),packing={...(day.packing||{})};packing[taskId]={...(packing[taskId]||{}),[index]:input.checked};
+  store.days[key]={...day,packing};persist();
+}
+function renderMain(){
+  const now=new Date(),today=todayKey(now);
+  autoCloseExpired(now);
+  const schedule=getSchedule(today),entries=getEntries(today),stat=statsFor(schedule,entries);
+  const ctx=activeContext(now),task=ctx.task;
+  $('dateLabel').textContent=dateFromKey(today).toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+  $('dayType').textContent=`${modeText(today)} · ${modeOf(today)==='A'?'MON–THU':'FRI–SUN'}`;
+  $('totalsLabel').textContent=`${schedule.length} scheduled tasks`;
+  $('countDone').textContent=stat.done;$('countNotDone').textContent=stat.notDone;$('countRemaining').textContent=stat.remaining;
+  $('progressValue').textContent=`${stat.scorePercent}%`;
+  $('progressCaption').textContent=`${stat.recorded} of ${stat.total} recorded`;
+  $('progressFill').style.width=`${stat.scorePercent}%`;
+  const currentEntry=task?getEntries(ctx.key)[task.id]:null;
+  const canCheck=!!task&&!currentEntry&&now>=startFor(ctx.key,task)&&now<deadlineFor(ctx.key,task);
+  $('doneBtn').disabled=!canCheck;$('notDoneBtn').disabled=!canCheck;
+  $('checkinHint').textContent=canCheck?'Available until this task ends':currentEntry?'Recorded · locked':'No open check-in';
+  $('liveState').textContent=task?(ctx.overnight?'OVERNIGHT RESET':'CURRENT FOCUS'):'BETWEEN TASKS';
+  $('blockIndex').textContent=task?`${pad(ctx.index+1)} / ${pad(getSchedule(ctx.key).length)}`:`— / ${pad(schedule.length)}`;
+  $('activeIcon').textContent=task?.icon||'✦';
+  $('activeTitle').textContent=task?.title||'Time to reset';
+  $('activeNote').textContent=task?.note||'There is no task scheduled right now. Your next one is below.';
+  $('activeMeta').innerHTML=task?tagMarkup(task):'';
+  $('activeTime').textContent=task?rangeOf(task):'Free window';
+  let ratio=0;
+  if(task){
+    const start=startFor(ctx.key,task),end=deadlineFor(ctx.key,task);
+    ratio=Math.max(0,Math.min(100,100*(now-start)/(end-start)));
+    $('remainingTime').textContent=`${Math.ceil((end-now)/60000)} min left`;
+  }else $('remainingTime').textContent='—';
   $('timeFill').style.width=`${ratio}%`;
-  const saved=ctx.task?entries[ctx.task.id]:null;
-  $('savedLabel').classList.toggle('show',!!saved&&!!saved.status);
-  $('savedLabel').textContent=saved?.status?`✓ Saved · ${saved.status} · ${saved.completionPercent}% ${MOODS[saved.moodLabel]||''}`:'';
-  document.querySelectorAll('.action-btn').forEach(btn=>btn.disabled=!ctx.task||ctx.beforeWake||minute>=ctx.task.end||!!saved?.status);
-  $('countDone').textContent=stats.completed;
-  $('countPartial').textContent=stats.partial;
-  $('countSkipped').textContent=stats.skipped;
-  $('progressValue').textContent=`${stats.completion}%`;
-  $('progressCaption').textContent=`${stats.logged} of ${stats.total} blocks logged`;
-  $('progressFill').style.width=`${stats.completion}%`;
-  $('signoff').classList.toggle('show',minute>=SIGN_OFF_MINUTE&&!$('glanceOverlay').classList.contains('open')&&!$('resultBackdrop').classList.contains('open'));
-
-  renderRecent(ctx.schedule,entries);
+  const identifier=task?`${ctx.key}/${task.id}`:null;
+  if(prevCurrentId!==identifier||prevDetailsEditable!==canCheck){prevCurrentId=identifier;prevDetailsEditable=canCheck;renderActiveDetails(ctx.key,task,canCheck)}
+  const label=$('savedLabel');label.classList.toggle('show',!!currentEntry);
+  label.textContent=currentEntry?`${currentEntry.status==='Done'?'✓':'×'} ${currentEntry.status}${currentEntry.status==='Done'?' · '+currentEntry.completionPercent+'%':''} · Locked`:'';
+  const next=nextContext(now,ctx);
+  $('nextTitle').textContent=next.task?.title||'No more tasks';
+  $('nextTime').textContent=next.task?`${next.key!==today?'Tomorrow · ':''}${timeString(next.task.start)}`:'—';
+  $('signoff').classList.toggle('show',now.getHours()*60+now.getMinutes()>=SIGN_OFF_MINUTE&&!$('resultBackdrop').classList.contains('open')&&!$('glanceOverlay').classList.contains('open'));
+  renderRecent(schedule,entries);
+  if($('glanceOverlay').classList.contains('open'))renderGlance();
+  // Time may elapse while a modal is open; do not allow a late Done result.
+  if(editing&&(new Date()>=deadlineFor(editing.key,editing.task)||getEntries(editing.key)[editing.task.id]))abandonResult(false);
 }
 function renderRecent(schedule,entries){
-  const rows=schedule.filter(t=>entries[t.id]?.status).reverse().slice(0,4);
-  if(!rows.length){$('recentList').innerHTML='<div class="empty-state">Nothing recorded yet. Your first check-in starts the story.</div>';return;}
-  $('recentList').innerHTML=rows.map(t=>{
-    const e=entries[t.id];const type=e.status==='Completed'?'complete':e.status==='Partially Completed'?'partial':'skip';
-    return `<div class="recent-item"><i class="recent-marker ${type}"></i><div class="recent-content"><strong>${escapeHTML(t.title)}</strong><small>${escapeHTML(e.status)} · ${Number(e.completionPercent)||0}% · ${escapeHTML(MOODS[e.moodLabel]||'')} ${escapeHTML(rangeOf(t))}</small>${e.remarks?`<small class="remark">${escapeHTML(e.remarks)}</small>`:''}</div></div>`;
-  }).join('');
+  const tasks=schedule.filter(t=>entries[t.id]?.status).slice(-5).reverse();
+  $('recentList').innerHTML=tasks.length?tasks.map(t=>{
+    const e=entries[t.id],done=e.status==='Done';
+    return `<div class="record-item"><i class="record-dot ${done?'':'not-done'}"></i><div><div class="record-name">${safe(t.title)}</div><div class="record-meta">${safe(rangeOf(t))}${e.remarks?' · Remarks below':''}</div>${e.remarks?`<div class="record-remarks">${safe(e.remarks)}</div>`:''}</div><span class="result-pill">${done?'Done '+e.completionPercent+'%':'Not Done'}</span></div>`;
+  }).join(''):'<div class="empty">No check-ins yet. Each finished time window will be recorded automatically.</div>';
 }
-// Quick result flow. Single active block is edited without opening Glance.
 function openResult(status){
-  if(!activeTask||editingDate||nowMinute()<activeTask.start||nowMinute()>=activeTask.end||getEntries(activeDate)[activeTask.id]?.status){showToast('This check-in is closed.');return;}
-  editingTask=clone(activeTask);
-  editingDate=activeDate;
-  selectedStatus=status;
-  const existing=getEntries(editingDate)[editingTask.id];
-  selectedMood=existing?.moodLabel||'';
-  $('resultHeading').textContent=status==='Not Attempted'?'Not attempted':status==='Partially Completed'?'Partially done':'Completed';
-  $('resultSub').textContent=`${editingTask.title} · ${rangeOf(editingTask)}`;
-  $('resultPercent').value=existing?.status===status?Number(existing.completionPercent):(status==='Completed'?100:status==='Partially Completed'?50:0);
-  $('resultPercentDisplay').textContent=`${$('resultPercent').value}%`;
-  $('resultRemarks').value=existing?.remarks||'';
-  document.querySelectorAll('.mood-choice').forEach(b=>b.classList.toggle('selected',b.dataset.mood===selectedMood));
+  const now=new Date(),ctx=activeContext(now),t=ctx.task;
+  if(!t||editing||getEntries(ctx.key)[t.id]||now<startFor(ctx.key,t)||now>=deadlineFor(ctx.key,t)){
+    showToast('This task is already closed.');return;
+  }
+  editing={key:ctx.key,task:t,status};selectedPercent=null;
+  $('resultHeading').textContent=status==='Done'?'Mark as Done':'Mark as Not Done';
+  $('resultSub').textContent=`${t.title} · ${rangeOf(t)}`;
+  $('doneChoices').hidden=status!=='Done';
+  $('resultRemarks').value='';
+  document.querySelectorAll('.percent-choice').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false')});
   $('resultBackdrop').classList.add('open');document.body.classList.add('dialog-open');
   $('signoff').classList.remove('show');
 }
-function closeResult(){
-  $('resultBackdrop').classList.remove('open');
-  editingTask=null;editingDate=null;
-  if(!$('glanceOverlay').classList.contains('open'))document.body.classList.remove('dialog-open');
-  mainRender();
+function saveEntry(key,task,entry){
+  if(getEntries(key)[task.id])return false;
+  const old=store.days[key];const day=dayRecord(key);
+  store.days[key]={...day,entries:{...(day.entries||{}),[task.id]:{status:entry.status,...(entry.status==='Done'?{completionPercent:entry.completionPercent}:{}),remarks:entry.remarks||'',savedAt:new Date().toISOString()}}};
+  if(!persist()){if(old)store.days[key]=old;else delete store.days[key];return false}
+  return true;
 }
-function saveResult(){
-  if(!editingTask||!editingDate)return;
-  if(editingDate!==todayKey()||nowMinute()<editingTask.start||nowMinute()>=editingTask.end||getEntries(editingDate)[editingTask.id]?.status){closeResult();showToast('This check-in is closed.');return;}
-  const date=editingDate,day=dayRecord(date);
-  const entries=getEntries(date);
-  entries[editingTask.id]={status:selectedStatus,completionPercent:Number($('resultPercent').value),remarks:$('resultRemarks').value.trim(),moodLabel:selectedMood,savedAt:new Date().toISOString()};
-  const old=store.days[date];
-  store.days[date]={...day,entries,updatedAt:new Date().toISOString()};
-  if(!persist()){if(old)store.days[date]=old;else delete store.days[date];return;}
-  closeResult();showToast('Result saved on this device ✓');
+function closeResultUI(){editing=null;selectedPercent=null;$('resultBackdrop').classList.remove('open');document.body.classList.remove('dialog-open');renderMain()}
+function abandonResult(notify=true){
+  if(!editing)return;
+  const {key,task}=editing;
+  // Explicitly treat an abandoned window (with or without typed text) as Not Done.
+  const saved=saveEntry(key,task,{status:'Not Done',remarks:$('resultRemarks').value.trim()});
+  closeResultUI();
+  if(notify&&saved)showToast('Check-in closed · Marked Not Done');
 }
-// Glance: all edits are local drafts until Save changes is pressed.
-function isGlanceDirty(){return !!glanceDraft && JSON.stringify(glanceDraft)!==originalSnapshot;}
-function updateDirty(){
- const stat=getStats(glanceDraft.schedule,glanceDraft.entries);
- $('glanceBlockCount').textContent=stat.total;
- $('glanceLoggedCount').textContent=stat.logged;
- $('glanceProgress').textContent=`${stat.completion}%`;
-}
-function openGlance(date=todayKey()){
-  glanceDate=date;
-
-  const day=dayRecord(date);
-  glanceDraft={schedule:getSchedule(date),entries:getEntries(date)};
-  originalSnapshot=JSON.stringify(glanceDraft);
-  expandedId=null;
-  $('glanceOverlay').classList.add('open');
-  $('glanceOverlay').setAttribute('aria-hidden','false');
-  document.body.classList.add('dialog-open');
-  $('signoff').classList.remove('show');
-  $('glanceOverlay').scrollTop=0;
-  renderGlance();
-}
-function closeGlance(){
-
-  $('glanceOverlay').classList.remove('open');$('glanceOverlay').setAttribute('aria-hidden','true');
-  document.body.classList.remove('dialog-open');
-  glanceDraft=null;expandedId=null;mainRender();
+function submitResult(){
+  if(!editing)return;
+  const {key,task,status}=editing;
+  if(new Date()>=deadlineFor(key,task)){
+    abandonResult();showToast('Time expired · Marked Not Done');return;
+  }
+  if(status==='Done'&&![100,70,30].includes(selectedPercent)){
+    showToast('Choose 100%, 70%, or 30% first.');return;
+  }
+  const entry={status,...(status==='Done'?{completionPercent:selectedPercent}:{}),remarks:$('resultRemarks').value.trim()};
+  if(saveEntry(key,task,entry)){
+    closeResultUI();showToast(`${status}${status==='Done'?' · '+selectedPercent+'%':''} recorded ✓`);
+  }
 }
 function renderGlance(){
-  $('glanceMode').textContent=`${modeText(glanceDate).toUpperCase()} · ${modeOf(glanceDate)==='A'?'MON–THU':'FRI–SUN'}`;
-  $('glanceDayTitle').textContent=formattedDate(glanceDate,true);
-  $('glanceList').innerHTML=glanceDraft.schedule.map((t,i)=>glanceMarkup(t,i)).join('');
-  updateDirty();
+  const key=todayKey(),schedule=getSchedule(key),entries=getEntries(key),stat=statsFor(schedule,entries),now=new Date();
+  $('glanceMode').textContent=`${modeText(key).toUpperCase()} · ${modeOf(key)==='A'?'MON–THU':'FRI–SUN'}`;
+  $('glanceDayTitle').textContent=dateFromKey(key).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  $('glanceBlockCount').textContent=stat.total;
+  $('glanceLoggedCount').textContent=stat.recorded;
+  $('glanceProgress').textContent=`${stat.scorePercent}%`;
+  const expanded=new Set([...$('glanceList').querySelectorAll('.glance-item[open]')].map(el=>el.dataset.id));
+  $('glanceList').innerHTML=schedule.map(t=>{
+    const e=entries[t.id],isDone=e?.status==='Done',isMiss=e?.status==='Not Done';
+    const label=isDone?`Done ${e.completionPercent}%`:isMiss?'Not Done':now>=startFor(key,t)&&now<deadlineFor(key,t)?'Now':'Upcoming';
+    return `<details class="glance-item" data-id="${safe(t.id)}" ${expanded.has(t.id)?'open':''}><summary><div class="glance-icon">${safe(t.icon)}</div><div><div class="glance-name">${safe(t.title)} <span class="mini-tag">${tagOf(t)}</span></div><div class="glance-timing">${safe(rangeOf(t))}</div></div><span class="glance-chip ${isDone?'done':isMiss?'miss':''}">${label}</span><span class="chevron">⌄</span></summary><div class="glance-detail">${detailsMarkup(key,t,false)}${e?`<div class="glance-record"><b>${e.status}${isDone?' · '+e.completionPercent+'%':''}</b>${e.remarks?' · '+safe(e.remarks):''}</div>`:''}</div></details>`;
+  }).join('');
 }
-function statusClass(status){return status==='Completed'?'done':status==='Partially Completed'?'part':status==='Not Attempted'?'miss':'';}
-function statusShort(status){return status==='Completed'?'Done':status==='Partially Completed'?'Partial':status==='Not Attempted'?'Missed':'Pending';}
-function option(value,label,actual){return `<option value="${escapeHTML(value)}" ${value===actual?'selected':''}>${escapeHTML(label)}</option>`;}
-function glanceMarkup(t,i){
-  const e=glanceDraft.entries[t.id]||{};
-  const status=e.status||(glanceDate===todayKey()&&nowMinute()>=t.end?'Expired':'Pending');
-  return `<article class="glance-item ${expandedId===t.id?'expanded':''}" data-id="${escapeHTML(t.id)}">
-    <button type="button" class="glance-summary" data-action="toggle" aria-expanded="${expandedId===t.id}">
-      <div class="glance-icon">${escapeHTML(t.icon)}</div>
-      <div class="glance-text"><strong>${escapeHTML(t.title)} <span class="mini-tag">${tagOf(t)}</span></strong><span>${escapeHTML(rangeOf(t))}</span></div>
-      <span class="glance-chip ${statusClass(e.status)}">${status==='Expired'?'Closed':statusShort(e.status)}</span><span class="glance-chevron">⌄</span>
-    </button><div class="editor">${detailsMarkup(t,glanceDate,false)}${e.status?`<p class="record-info">${escapeHTML(e.status)} · ${Number(e.completionPercent)||0}%${e.remarks?' · '+escapeHTML(e.remarks):''}</p>`:''}</div>
-  </article>`;
+function openGlance(){autoCloseExpired();$('glanceOverlay').classList.add('open');$('glanceOverlay').setAttribute('aria-hidden','false');document.body.classList.add('dialog-open');$('signoff').classList.remove('show');renderGlance();$('glanceOverlay').scrollTop=0}
+function closeGlance(){$('glanceOverlay').classList.remove('open');$('glanceOverlay').setAttribute('aria-hidden','true');document.body.classList.remove('dialog-open');renderMain()}
+function exportDay(signoff=false){
+  const date=todayKey();autoCloseExpired();const schedule=getSchedule(date),entries=getEntries(date),stats=statsFor(schedule,entries);
+  const exportObj={app:'Dayflow',schemaVersion:3,date,dayType:modeText(date),exportedAt:new Date().toISOString(),
+    ...(signoff?{signedOffAt:new Date().toISOString()}:{}),
+    summary:stats,
+    schedule:schedule.map(t=>({id:t.id,title:t.title,tag:tagOf(t),start:time24(t.start),end:t.title==='Sleep'?'Next morning':time24(t.end),...(t.packing?{packingItems:t.packing}:{} )})),
+    entries:Object.fromEntries(schedule.map(t=>{
+      const e=entries[t.id],base={taskTitle:t.title,status:e?.status||'Pending',remarks:e?.remarks||''};
+      if(e?.status==='Done')base.completionPercent=e.completionPercent;
+      if(e?.savedAt)base.recordedAt=e.savedAt;
+      if(t.packing)base.packedItems=dayRecord(date).packing?.[t.id]||{};
+      return [t.id,base];
+    }))};
+  const blob=new Blob([JSON.stringify(exportObj,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`dayflow-${date}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  showToast('Daily JSON downloaded ✓');
 }
-function onGlanceListClick(event){
- const btn=event.target.closest('button[data-action]');if(!btn||!glanceDraft)return;
- const row=btn.closest('.glance-item');if(!row)return;
- const id=row.dataset.id;
- expandedId=expandedId===id?null:id;
- renderGlance();
+function setTheme(theme){
+  document.documentElement.dataset.theme=theme;
+  $('themeSwitch').textContent=theme==='night'?'☼':'☾';
+  $('themeSwitch').setAttribute('aria-label',`Switch to ${theme==='night'?'day':'night'} mode`);
+  document.querySelector('meta[name="theme-color"]').content=theme==='night'?'#1a2a40':'#f9f3e9';
+  try{localStorage.setItem(THEME_KEY,theme)}catch{}
 }
-// The original Quest Log data is never overwritten; it remains available in each download.
-function legacyFor(key){
-  try{const raw=JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY)||'{}');return raw[key]?.entries||{};}
-  catch{return {};}
-}
-function downloadDay(key=todayKey(),signOff=false){
-  const schedule=getSchedule(key),entries=getEntries(key);
-  const result={app:'javlin',schemaVersion:2,date:key,mode:modeText(key),exportedAt:new Date().toISOString(),
-    ...(signOff?{signedOffAt:new Date().toISOString()}:{}),
-    storageKey:STORAGE_KEY,summary:getStats(schedule,entries),schedule,
-    entries:Object.fromEntries(schedule.map(t=>[t.id,{taskTitle:t.title,plannedStart:shortClock(t.start),plannedEnd:shortClock(t.end),status:entries[t.id]?.status||'Not logged',completionPercent:Number(entries[t.id]?.completionPercent)||0,remarks:entries[t.id]?.remarks||'',mood:entries[t.id]?.moodLabel||''}])),
-    archivedEntries:Object.fromEntries(Object.entries(entries).filter(([id])=>!schedule.some(t=>t.id===id))),
-    legacyQuestLogEntries:legacyFor(key)};
-  const blob=new Blob([JSON.stringify(result,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`javlin-${key}.json`;
-  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
-  showToast(signOff?'Signed off · JSON downloaded':'Day data downloaded');
-}
-// UI wiring.
-document.querySelectorAll('.action-btn').forEach(b=>b.addEventListener('click',()=>openResult(b.dataset.status)));
-$('resultPercent').addEventListener('input',()=>$('resultPercentDisplay').textContent=`${$('resultPercent').value}%`);
-$('resultMoods').addEventListener('click',e=>{
-  const btn=e.target.closest('.mood-choice');if(!btn)return;
-  selectedMood=selectedMood===btn.dataset.mood?'':btn.dataset.mood;
-  document.querySelectorAll('.mood-choice').forEach(b=>b.classList.toggle('selected',b.dataset.mood===selectedMood));
-});
-$('closeResult').addEventListener('click',closeResult);
-$('cancelResult').addEventListener('click',closeResult);
-$('resultBackdrop').addEventListener('click',e=>{if(e.target===$('resultBackdrop'))closeResult();});
-$('saveResult').addEventListener('click',saveResult);
-for(const id of ['openGlance'])$(id).addEventListener('click',()=>openGlance());
+$('doneBtn').addEventListener('click',()=>openResult('Done'));
+$('notDoneBtn').addEventListener('click',()=>openResult('Not Done'));
+$('percentChoices').addEventListener('click',e=>{const b=e.target.closest('[data-percent]');if(!b)return;selectedPercent=Number(b.dataset.percent);document.querySelectorAll('.percent-choice').forEach(el=>{const chosen=el===b;el.classList.toggle('selected',chosen);el.setAttribute('aria-pressed',String(chosen))})});
+$('saveResult').addEventListener('click',submitResult);
+$('closeResult').addEventListener('click',()=>abandonResult());
+$('resultBackdrop').addEventListener('click',e=>{if(e.target===$('resultBackdrop'))abandonResult()});
+$('activeDetails').addEventListener('change',e=>{if(e.target.matches('[data-pack]'))savePacking(e.target)});
+$('openGlance').addEventListener('click',openGlance);
 $('closeGlance').addEventListener('click',closeGlance);
-
-
-$('glanceList').addEventListener('click',onGlanceListClick);
-
-
-
-
-$('downloadBtn').addEventListener('click',()=>downloadDay());
-$('activeDetails').addEventListener('change',e=>{if(e.target.matches('[data-pack]'))savePacking(e.target.dataset.pack,Number(e.target.dataset.item),e.target.checked);});
+$('downloadBtn').addEventListener('click',()=>exportDay());
+$('signoffBtn').addEventListener('click',()=>exportDay(true));
 $('themeSwitch').addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='day'?'night':'day'));
-function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem('javlin.theme',theme);$('themeSwitch').textContent=theme==='day'?'☾ Night':'☀ Day';}
-setTheme(localStorage.getItem('javlin.theme')||'night');
-$('signoffBtn').addEventListener('click',()=>downloadDay(todayKey(),true));
-document.addEventListener('keydown',e=>{
-  if(e.key!=='Escape')return;
-  if($('resultBackdrop').classList.contains('open'))closeResult();
-  else if($('glanceOverlay').classList.contains('open'))closeGlance();
-});
-mainRender();
-setInterval(mainRender,20000);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('resultBackdrop').classList.contains('open'))abandonResult();else if($('glanceOverlay').classList.contains('open'))closeGlance()}});
+// Best-effort save if the entire browser/tab closes while a check-in sheet is open.
+window.addEventListener('pagehide',()=>{if(editing){const {key,task}=editing;saveEntry(key,task,{status:'Not Done',remarks:$('resultRemarks').value.trim()})}});
+try{setTheme(localStorage.getItem(THEME_KEY)||'night')}catch{setTheme('night')}
+// Clean outdated fields in device storage while preserving existing task results and remarks.
+persist();
+renderMain();
+setInterval(renderMain,15000);
 </script>
 </body>
 </html>
