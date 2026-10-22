@@ -1,0 +1,2869 @@
+{
+  "schema": "active-learning-module-v2.1",
+  "title": "Active Learning Module — Detailed Curriculum",
+  "subtitle": "8 equal domains · 32 foundational lessons · 60 min per session · 4 days per week",
+  "created": "2026-10-22",
+  "personal_data_policy": "PUBLIC CURRICULUM ONLY. Do not commit interview PDF, private journal answers, progress logs, medical details, bank data, or contact information to a public GitHub Pages repository.",
+  "description": "Foundation cycle of 32 practice-led sessions. Curriculum is personalized in topic selection but contains no private biography or assessment results.",
+  "allocation": {
+    "domain_count": 8,
+    "equal_domain_weight": 0.125,
+    "sessions_per_week": 4,
+    "minutes_per_session": 60,
+    "lessons_per_domain": 4,
+    "weeks_for_foundation_cycle": 8
+  },
+  "session_clock": [
+    {
+      "name": "Recall and due reviews",
+      "minutes": 10
+    },
+    {
+      "name": "State an observable goal",
+      "minutes": 5
+    },
+    {
+      "name": "Study and self-explain",
+      "minutes": 15
+    },
+    {
+      "name": "Practice and create artifact",
+      "minutes": 20
+    },
+    {
+      "name": "Closed-book test",
+      "minutes": 7
+    },
+    {
+      "name": "Real-world transfer plan",
+      "minutes": 3
+    }
+  ],
+  "review_policy": {
+    "due": "next completed ALM session, ~7 calendar days, ~30 calendar days",
+    "selection": "Select oldest due/failed first; review across domains within ten minutes. If none due, use prior session or a skills demonstration.",
+    "after_miss": "Show answer guide, retry later; no moral scoring."
+  },
+  "assessment_policy": {
+    "format": "3 open response checks per lesson with answer guides",
+    "scoring": "Optional 0–2 per item (0 absent, 1 partial, 2 sound); 5/6 indicates factual competence; reflective/value questions check honest reasoning and complete exercise, not the personal answer.",
+    "retry": "Relearn the missed point and retest with a fresh example; no penalty for repeats."
+  },
+  "privacy": "Lesson content may be public. Personal responses must remain private/local, and JSON exports should be kept secure.",
+  "domains": [
+    {
+      "number": 1,
+      "name": "Identity and Values",
+      "purpose": "Understand principles, choices and personal commitments.",
+      "lesson_ids": [
+        "D01L01",
+        "D01L02",
+        "D01L03",
+        "D01L04"
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Health and Energy",
+      "purpose": "Build sustainable health literacy and practical routines.",
+      "lesson_ids": [
+        "D02L01",
+        "D02L02",
+        "D02L03",
+        "D02L04"
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Relationships",
+      "purpose": "Practice communication, empathy, repair and boundaries.",
+      "lesson_ids": [
+        "D03L01",
+        "D03L02",
+        "D03L03",
+        "D03L04"
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Career and Work",
+      "purpose": "Develop professional judgment and transferable work skills.",
+      "lesson_ids": [
+        "D04L01",
+        "D04L02",
+        "D04L03",
+        "D04L04"
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Finances",
+      "purpose": "Learn budgeting, risk and disciplined financial decisions.",
+      "lesson_ids": [
+        "D05L01",
+        "D05L02",
+        "D05L03",
+        "D05L04"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Growth and Learning",
+      "purpose": "Acquire knowledge efficiently and test it in practice.",
+      "lesson_ids": [
+        "D06L01",
+        "D06L02",
+        "D06L03",
+        "D06L04"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Environment and Lifestyle",
+      "purpose": "Design surroundings, routines and enjoyable time.",
+      "lesson_ids": [
+        "D07L01",
+        "D07L02",
+        "D07L03",
+        "D07L04"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Meaning and Contribution",
+      "purpose": "Explore purpose, service and uncertainty with agency.",
+      "lesson_ids": [
+        "D08L01",
+        "D08L02",
+        "D08L03",
+        "D08L04"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "D01L01",
+      "domain_number": 1,
+      "domain": "Identity and Values",
+      "lesson_number": 1,
+      "track": "Self-awareness and values",
+      "title": "Values revealed by choices",
+      "duration_minutes": 60,
+      "objective": "Identify three candidate values using evidence from actual decisions, without ranking moral worth.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "A value is a principle guiding choices; a goal is a result; a habit is a repeated action. 'Independence' is a value, 'save $5,000' a goal, and 'automate a transfer' a habit."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Self-descriptions are hypotheses. Stronger evidence comes from decisions, sacrifices and repeated patterns—not from an idealized self-image."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Conflicting actions do not prove hypocrisy: resources, stress and competing needs can explain a gap. Record circumstances rather than assigning character labels."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use a choice-evidence table: situation, options, chosen action, benefit gained, cost accepted, possible value, alternative explanation."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Someone says freedom matters, yet declines a promotion with unpredictable shifts. Possible values: autonomy or family time; alternative explanation: exhaustion or inadequate pay.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "List three real decisions from the last year, including one that you regret."
+        },
+        {
+          "minutes": 5,
+          "instruction": "For each, record the option chosen, an option rejected, and the cost you accepted."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Infer up to three candidate values from the observed tradeoffs. Add one competing explanation for each."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write one small, reversible experiment next week that would test whether a candidate value truly guides your choices."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Distinguish a value, a goal and a habit with an example.",
+          "answer_guide": "Value = guiding principle, goal = desired outcome, habit = repeated behavior."
+        },
+        {
+          "question": "Why might a stated value differ from actual behavior?",
+          "answer_guide": "At least two plausible causes such as stress, limits, other priorities, or lack of opportunity."
+        },
+        {
+          "question": "What evidence would challenge one of your inferred values?",
+          "answer_guide": "An actual counterexample or future decision that favors another principle."
+        }
+      ],
+      "mission_3min": {
+        "action": "During one decision this week, record the real tradeoff and which value guided it. No need to change the decision.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What distinguishes a candidate value from a self-flattering identity statement?",
+      "deliverable": "Three-decision value-evidence table + testable value hypothesis.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D01L02",
+      "domain_number": 1,
+      "domain": "Identity and Values",
+      "lesson_number": 2,
+      "track": "Decision-making",
+      "title": "Deciding when values collide",
+      "duration_minutes": 60,
+      "objective": "Use a decision matrix that makes tradeoffs and uncertainty visible without pretending numbers are objective.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Important choices often pit legitimate goods against each other: income, family, health, independence or learning. A conflict does not mean one value is wrong."
+        },
+        {
+          "minutes": 4,
+          "key_point": "State the decision as two or three feasible options with a deadline. Exclude imaginary perfect alternatives."
+        },
+        {
+          "minutes": 7,
+          "key_point": "List criteria and minimum requirements first. Weights can help compare options, but scores are only decision aids and must not be mistaken for facts."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Check reversibility, worst plausible downside, missing information and whether a small trial can reduce uncertainty."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Choice: accept a higher-paid role with more travel or a lower-paid local role. Compare take-home pay, schedule predictability, family needs, fatigue and reversibility; seek schedule details before deciding.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write a genuine pending decision and two feasible options, plus a do-nothing baseline."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose four criteria and mark which are non-negotiable versus preferred."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Compare each option using evidence and uncertainty; mark unknowns instead of inventing scores."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write one small information-gathering step and one condition that would change the decision."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What is a non-negotiable criterion?",
+          "answer_guide": "A requirement an option must satisfy before other benefits are compared."
+        },
+        {
+          "question": "How does reversibility affect a decision?",
+          "answer_guide": "Reversible choices may justify faster trials; irreversible choices need more care."
+        },
+        {
+          "question": "Name one uncertainty and a way to investigate it.",
+          "answer_guide": "Specific unknown paired with a verifiable information source or experiment."
+        }
+      ],
+      "mission_3min": {
+        "action": "Apply the matrix to one low-stakes purchase or scheduling choice, then note what the method changed.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Why should unknown facts remain marked unknown rather than receiving guessed scores?",
+      "deliverable": "Decision comparison and a one-step research plan.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D01L03",
+      "domain_number": 1,
+      "domain": "Identity and Values",
+      "lesson_number": 3,
+      "track": "Critical judgment",
+      "title": "Bias detection and belief updates",
+      "duration_minutes": 60,
+      "objective": "Separate observation from interpretation and revise one belief in response to counterevidence.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Confirmation bias is the tendency to favor evidence supporting an existing belief. It does not imply that every belief is mistaken."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Separate a claim into observation, interpretation and prediction; ask what reliable data would disagree."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use a steelman: state the strongest fair version of an opposing argument rather than mocking a weak version."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use a belief-update log with initial belief, evidence for, evidence against, current confidence and next check. Avoid false precision."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Claim: “Every new technology will eliminate my career.” Observations about some occupations do not establish a universal prediction; examine tasks, adoption barriers and counterexamples.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write one confident but non-urgent belief and identify the evidence that originally shaped it."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Separate two supporting observations from the interpretation made from them."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Construct the strongest reasonable counterargument, with a source to verify later."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a revised, more specific claim, plus what future evidence would change your mind."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What is confirmation bias?",
+          "answer_guide": "Preferential search for or interpretation of supporting evidence."
+        },
+        {
+          "question": "How is a prediction different from an observation?",
+          "answer_guide": "Prediction concerns unobserved future outcome; observation is a recorded event or measurement."
+        },
+        {
+          "question": "What would make a belief update credible?",
+          "answer_guide": "Specific counterevidence, changed confidence or narrower claim, and traceable sources."
+        }
+      ],
+      "mission_3min": {
+        "action": "When a strong claim appears in your feed, mark it as fact, interpretation or prediction before reacting.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What question helps you search for disconfirming evidence?",
+      "deliverable": "One-page belief-update log.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D01L04",
+      "domain_number": 1,
+      "domain": "Identity and Values",
+      "lesson_number": 4,
+      "track": "Follow-through and self-regulation",
+      "title": "Keeping commitments without motivation",
+      "duration_minutes": 60,
+      "objective": "Design an if–then plan and a tiny fallback action for days when motivation is absent.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Motivation fluctuates. A reliable commitment requires a clear cue, action, environment and fallback that does not depend on feeling inspired."
+        },
+        {
+          "minutes": 4,
+          "key_point": "An implementation intention has the form: “If situation X occurs, I will do action Y at place Z.”"
+        },
+        {
+          "minutes": 7,
+          "key_point": "Shrink the start: choose the smallest meaningful action (e.g., open the notebook and work for two minutes); continuation is optional, not demanded."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use an obstacle plan: anticipate the most likely disruption and specify recovery after a missed attempt. Record behavior instead of shame."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Instead of “study every day,” use “After tea on Monday, open the lesson on the library laptop for two minutes; if delayed, complete it at the next available study block.”",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Select one seven-day behavior that is useful but repeatedly postponed."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Design a precise if–then cue including place, device and start action."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List two obstacles (low energy, distraction) and one fallback for each."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Rehearse the starting cue now; create a simple yes/no observation log for seven days."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What makes an if–then plan more actionable than a wish?",
+          "answer_guide": "Observable cue, specific response and context."
+        },
+        {
+          "question": "What should happen after a missed day?",
+          "answer_guide": "A defined recovery step rather than abandoning the entire plan."
+        },
+        {
+          "question": "Why use a two-minute start?",
+          "answer_guide": "Reduces activation friction; it is a fallback, not proof of mastery."
+        }
+      ],
+      "mission_3min": {
+        "action": "Run the two-minute start at its next scheduled cue and record whether the cue worked.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What is your cue, smallest action, and recovery if interrupted?",
+      "deliverable": "Seven-day behavior trial card with an if–then plan.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D02L01",
+      "domain_number": 2,
+      "domain": "Health and Energy",
+      "lesson_number": 1,
+      "track": "Sleep and recovery",
+      "title": "Sleep literacy and a realistic wind-down",
+      "duration_minutes": 60,
+      "objective": "Create a two-week sleep experiment anchored by a consistent wake time and lower-arousal evening.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Sleep depends on timing, sleep pressure and stimulation; trying harder to fall asleep is rarely a useful standalone strategy."
+        },
+        {
+          "minutes": 4,
+          "key_point": "For many adults, 7–9 hours is a general sleep-duration guideline, but individual needs and medical issues vary. A sleep opportunity is not a guarantee."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Track bedtime, approximate sleep onset, wake time, naps, late caffeine and daytime functioning without obsessing over each minute."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Prefer consistent waking, daylight exposure and a calm routine. Persistent insomnia or major daytime impairment warrants professional assessment; CBT-I is a recognized treatment option."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "If bedtime varies by three hours, start with a feasible wake-time window and a 20-minute wind-down; do not suddenly force a 5 AM start after sleeping poorly.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write a simple account of the last three nights: bedtime, wake time, caffeine and rough restfulness."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Pick a realistic wake-time window compatible with obligations and sufficient time in bed."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Design a 20-minute wind-down: lower light, put away stimulating content and do a quiet activity."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Draft a seven-night tracking sheet, plus one rule for adjusting the experiment if sleep worsens."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Name two elements worth tracking besides time in bed.",
+          "answer_guide": "Examples: onset, wake time, naps, late caffeine, daytime function."
+        },
+        {
+          "question": "Why avoid forcing an unrealistic early wake time?",
+          "answer_guide": "It may restrict sleep and worsen functioning."
+        },
+        {
+          "question": "When should self-help become a discussion with a clinician?",
+          "answer_guide": "Persistent sleep difficulty, impairment, significant symptoms or safety concerns."
+        }
+      ],
+      "mission_3min": {
+        "action": "Follow the wind-down once at the next suitable night; observe rather than grade the night.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What two changes form your initial sleep experiment and what would prompt medical advice?",
+      "deliverable": "Two-week sleep experiment with a seven-night log.",
+      "resources": [
+        "https://www.canada.ca/en/public-health/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-42-no-4-2022/timing-24-hour-movement-behaviours-implications-practice-policy-research.html",
+        "https://www.cmhakelowna.com/mental-health/getting-help-for-mental-illness"
+      ],
+      "safety_note": "Health education only. Do not diagnose insomnia, prescribe medication or rapidly restrict sleep."
+    },
+    {
+      "id": "D02L02",
+      "domain_number": 2,
+      "domain": "Health and Energy",
+      "lesson_number": 2,
+      "track": "Nutrition and friction reduction",
+      "title": "Meals that actually happen",
+      "duration_minutes": 60,
+      "objective": "Build a practical meal implementation plan that works even on low-energy days.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "A theoretically complete meal plan has limited value if preparation and eating rarely happen. Reduce time, decisions and steps."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Design three meal tiers: normal-prep meal, quick assembly meal and emergency shelf/fridge meal; use foods you already tolerate and can access."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Link meal timing to an existing event rather than waiting until extremely hungry. Food safety and balanced nutrition still matter."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use shopping and prep checklists; test cooking burden and waste instead of requiring perfect adherence. For specific deficiencies or restrictions, consult a qualified professional."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Normal: prepared grain, legumes and vegetables. Fast: cooked leftovers plus fruit/yogurt. Backup: easy pantry protein plus ready-to-eat produce, adjusted to preferences.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Map three situations when meals are most often delayed; identify the point of friction for each."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write one normal meal, one five-minute meal and one backup meal using ingredients available locally."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Prepare a shopping/storage checklist covering safe handling and reheating."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a specific meal cue, and rehearse choosing a backup meal when preparation fails."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why are backup meals part of a good nutrition system?",
+          "answer_guide": "They maintain access to food when time and energy are limited."
+        },
+        {
+          "question": "What is one risk of eating only when extremely hungry?",
+          "answer_guide": "Meal delay may increase difficulty following planned meals; context matters."
+        },
+        {
+          "question": "What counts as successful implementation?",
+          "answer_guide": "A feasible meal actually prepared/eaten, not idealized nutritional perfection."
+        }
+      ],
+      "mission_3min": {
+        "action": "Try one five-minute meal on a low-effort day and record time taken plus one improvement.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "List your normal, quick and backup meals without looking at notes.",
+      "deliverable": "Three-tier meal system with shopping and trigger checklist.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D02L03",
+      "domain_number": 2,
+      "domain": "Health and Energy",
+      "lesson_number": 3,
+      "track": "Fitness and physical function",
+      "title": "Movement beyond working days",
+      "duration_minutes": 60,
+      "objective": "Design a starter week combining light activity, strength and recovery without overreaching.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Movement includes walking, light tasks, conditioning and muscle-strengthening; physical work is not always a complete exercise program."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Canadian adult guidance recommends at least 150 minutes of moderate-to-vigorous activity per week, plus strengthening; begin from current capacity."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use a talk test for moderate effort and simple movement quality checks. Progress gradually, and include recovery."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Avoid all-or-nothing training; a modest walk and one short strength routine are valid starting steps. Pain, dizziness or concerning symptoms need appropriate assessment."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Someone active at work but sedentary on days off might start with a ten-minute walk on two non-work days and a brief beginner strength circuit, rather than a strenuous daily workout.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Sketch a normal seven-day week; mark occupational activity, sedentary periods and available slots."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose two comfortable walking opportunities and one brief strength slot."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Practice a gentle warm-up and two suitable movements, checking comfort and form without pushing through pain."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a gradual progression rule and a lower-energy fallback plan."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What are two different forms of beneficial movement?",
+          "answer_guide": "Aerobic/light activity and muscle-strengthening, with examples."
+        },
+        {
+          "question": "What is the purpose of gradual progression?",
+          "answer_guide": "Manage adaptation and reduce overload/injury risk."
+        },
+        {
+          "question": "When should exercise stop or be modified?",
+          "answer_guide": "Pain, alarming symptoms, inability to perform safely; seek guidance when appropriate."
+        }
+      ],
+      "mission_3min": {
+        "action": "Take one comfortable movement break during a normally sedentary period; record duration and how it felt.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What is your easiest sustainable starting movement and progression rule?",
+      "deliverable": "Starter seven-day movement plan with fallback.",
+      "resources": [
+        "https://www.canada.ca/en/public-health/services/being-active/physical-activity-your-health.html"
+      ],
+      "safety_note": "No maximal testing or aggressive prescriptions; adapt to current health and seek medical advice for concerning symptoms."
+    },
+    {
+      "id": "D02L04",
+      "domain_number": 2,
+      "domain": "Health and Energy",
+      "lesson_number": 4,
+      "track": "Mental well-being and attention",
+      "title": "Stress, attention and professional support",
+      "duration_minutes": 60,
+      "objective": "Practice a short stress-response plan and distinguish self-management from situations needing professional care.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Stress reactions can include intrusive worry, rumination, avoidance, fatigue and difficulty concentrating; similar symptoms can have different causes."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Use a brief pause cycle: notice the trigger, name the thought as a thought, orient to immediate surroundings and choose one next action."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Make a two-column plan: controllable action now versus question to revisit later. Brief grounding can help some people but is not a cure."
+        },
+        {
+          "minutes": 10,
+          "key_point": "If distress, sleep or attention problems substantially affect daily life, a physician or mental health professional can assess causes and options. Do not self-diagnose."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Thought: “My efforts will be wasted.” Response: “That is a prediction, not an established fact.” Take one five-minute step toward a chosen task, and schedule broader research for another time.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "List three common triggers without dwelling on graphic or distressing details."
+        },
+        {
+          "minutes": 5,
+          "instruction": "For one mild trigger, write the thought, feeling, body cue and actionable next step."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Rehearse a 60-second grounding-orienting exercise and a five-minute task restart."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Make a private support plan: person/service to contact, what symptoms to describe and what would mean self-help is insufficient."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is a worrying thought not automatically a fact?",
+          "answer_guide": "It is a mental event requiring independent evidence."
+        },
+        {
+          "question": "What is an actionable next step when a problem is not fully controllable?",
+          "answer_guide": "Small, concrete action within your influence."
+        },
+        {
+          "question": "When is professional support appropriate?",
+          "answer_guide": "Significant or persistent impairment, worsening symptoms, or safety concerns."
+        }
+      ],
+      "mission_3min": {
+        "action": "Use the pause cycle once for a mild distraction and record whether it helped you choose an action.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Describe the four steps in your stress-response plan and one threshold for outside help.",
+      "deliverable": "Pause-cycle cue card and professional-support checklist.",
+      "resources": [
+        "https://www.cmhakelowna.com/mental-health/getting-help-for-mental-illness"
+      ],
+      "safety_note": "This is education, not therapy or diagnosis. If you feel unsafe or are in immediate danger, seek urgent local help."
+    },
+    {
+      "id": "D03L01",
+      "domain_number": 3,
+      "domain": "Relationships",
+      "lesson_number": 1,
+      "track": "Emotional communication",
+      "title": "Empathy before solutions",
+      "duration_minutes": 60,
+      "objective": "Recognize when someone wants understanding, practical advice or both, and respond appropriately.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "When someone describes a problem, their request may be emotional connection rather than immediate problem-solving."
+        },
+        {
+          "minutes": 4,
+          "key_point": "A useful sequence is listen, reflect the feeling, clarify the need, then ask permission before suggesting a solution."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Reflect without mind-reading: “That sounds frustrating; am I understanding?” is safer than telling someone how they must feel."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Validation means acknowledging an experience as understandable; it does not require agreeing with every interpretation or action."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Partner: “My day was exhausting.” Less helpful: “Plan your day better.” Better: “That sounds draining. Want me to listen, help troubleshoot, or both?”",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write three typical complaints someone might bring: work stress, family tension and a missed deadline."
+        },
+        {
+          "minutes": 5,
+          "instruction": "For each, draft a validation statement that avoids advice and assumptions."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Add a permission question: “Do you want listening, ideas, or both?” and one respectful follow-up."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Rehearse two complete exchanges aloud; replace any defensive or problem-solving opening."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "How does validation differ from agreement?",
+          "answer_guide": "Recognizes feelings without endorsing every conclusion."
+        },
+        {
+          "question": "What question helps discover the support someone wants?",
+          "answer_guide": "Ask if they want listening, advice or both."
+        },
+        {
+          "question": "Rewrite “You should just calm down” into a validating reply.",
+          "answer_guide": "Names or checks emotion without command, judgment or premature fix."
+        }
+      ],
+      "mission_3min": {
+        "action": "During an ordinary conversation, ask once whether the other person wants listening or problem-solving.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Demonstrate the listen–reflect–clarify–permission sequence.",
+      "deliverable": "Three empathetic conversation scripts and rehearsal notes.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D03L02",
+      "domain_number": 3,
+      "domain": "Relationships",
+      "lesson_number": 2,
+      "track": "Active listening",
+      "title": "Listening that proves understanding",
+      "duration_minutes": 60,
+      "objective": "Use paraphrasing, open questions and interruption control in a simulated conversation.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Hearing words is not the same as accurately understanding another person’s meaning."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Paraphrase substance briefly: “So the deadline shifted without warning?” Then check, “Did I get that right?”"
+        },
+        {
+          "minutes": 7,
+          "key_point": "Open questions (“What happened next?”) invite detail; loaded questions and lectures narrow what the speaker can say."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Notice advice impulses, phone checking and rehearsing your own response. A brief pause may improve comprehension."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Colleague: “Nobody told me the roster changed.” Reply: “You expected the earlier roster and were surprised by the new one—is that right? What was hardest about that?”",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Read a fictional 120-word complaint you write or choose; underline facts, needs and possible feelings separately."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write two paraphrases: one focusing on facts and one on the main concern."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Generate three open questions and identify two unhelpful leading questions."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Perform a five-minute role-play with a person or script; score whether you interrupted, paraphrased and checked understanding."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What makes a paraphrase effective?",
+          "answer_guide": "Accurately restates the speaker’s point and invites correction."
+        },
+        {
+          "question": "Convert “You were irresponsible, right?” into an open question.",
+          "answer_guide": "Nonjudgmental wording such as “How did you decide?”"
+        },
+        {
+          "question": "What is one sign you are preparing to reply instead of listening?",
+          "answer_guide": "Interruption, composing advice, missing details; with a recovery action."
+        }
+      ],
+      "mission_3min": {
+        "action": "In one conversation, paraphrase a key point and explicitly ask whether you understood correctly.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "State the three behaviors to practice in an active-listening exchange.",
+      "deliverable": "Open-question bank and short role-play scorecard.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D03L03",
+      "domain_number": 3,
+      "domain": "Relationships",
+      "lesson_number": 3,
+      "track": "Conflict management",
+      "title": "Conflict, boundaries and repair",
+      "duration_minutes": 60,
+      "objective": "Separate observable behavior from assumptions and express a respectful boundary or repair request.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "A boundary specifies what you will do to protect your time, money or dignity; it is not a demand to control another adult."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Before cutting contact, distinguish a repeated pattern, misunderstanding and one-off incident; safety or abuse can justify immediate distance."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use observation → impact → request: “When X happened, I felt/experienced Y. Next time, could we Z?”"
+        },
+        {
+          "minutes": 10,
+          "key_point": "Repair includes acknowledging your contribution, describing changed behavior and allowing the other person to respond without coercion."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Friend requests a loan but the repayment details are unclear: “I cannot lend money without a written plan. I can help look at other options.” No accusation needed.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose a low-stakes fictional disagreement and write only verifiable observations."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Draft two possible interpretations and what information would distinguish them."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write one boundary statement and one request for repair or clarification."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Role-play a defensive reply, then rehearse calm repetition of the boundary without escalation."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What distinguishes a boundary from controlling another person?",
+          "answer_guide": "It states your own limits and actions, not demands for obedience."
+        },
+        {
+          "question": "What belongs in the observation part of a conflict statement?",
+          "answer_guide": "Verifiable event instead of motives or character labels."
+        },
+        {
+          "question": "When might direct repair be inappropriate?",
+          "answer_guide": "Threats, coercion, abuse, or safety risk—prioritize safety and support."
+        }
+      ],
+      "mission_3min": {
+        "action": "Use the observation–impact–request format for a minor real disagreement, if safe and appropriate.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Explain the difference between an observation and an accusation.",
+      "deliverable": "Boundary script plus a repair conversation template.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D03L04",
+      "domain_number": 3,
+      "domain": "Relationships",
+      "lesson_number": 4,
+      "track": "Relationship maintenance",
+      "title": "Maintaining a small, strong circle",
+      "duration_minutes": 60,
+      "objective": "Create a low-pressure system for reciprocal contact, trust and connection.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Relationship quality need not be measured by how many friends someone has. Strong ties usually need some repeat contact and responsiveness."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Reciprocity is better assessed over time than through a strict transaction ledger; capacities and circumstances vary."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Invite without pressure: a short check-in, shared activity or concrete offer can be more sustainable than vague promises."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Trust grows from patterns of honesty, reliability and respectful disagreement; disagreement alone does not establish disloyalty."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Instead of “We should catch up sometime,” send “Free for a 15-minute call Sunday afternoon? No worries if not.”",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Map your preferred small circle by role (family, friendship, community), using initials or labels only."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Identify which connections you want to nurture, without scoring people’s worth."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Draft two short check-in messages and one invitation appropriate to your schedule."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Make a low-maintenance contact rhythm and a plan for understanding nonresponses without assuming betrayal."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Can a small social circle still be healthy?",
+          "answer_guide": "Yes; satisfaction, quality, diversity of support and personal preference matter."
+        },
+        {
+          "question": "What is a considerate invitation?",
+          "answer_guide": "Specific, low-pressure, accepting refusal."
+        },
+        {
+          "question": "Why is one missed favor weak evidence about an entire relationship?",
+          "answer_guide": "Context, availability and longer patterns may explain it."
+        }
+      ],
+      "mission_3min": {
+        "action": "Reach out to one person you genuinely wish to know better or maintain contact with, without requiring a reply.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What matters more than a raw friend count?",
+      "deliverable": "Connection map and two draft messages.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D04L01",
+      "domain_number": 4,
+      "domain": "Career and Work",
+      "lesson_number": 1,
+      "track": "Career literacy",
+      "title": "Map skills, credentials and role realities",
+      "duration_minutes": 60,
+      "objective": "Create a career evidence map distinguishing required credentials, actual duties and desired lifestyle.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Career choice is stronger when separating role tasks, work conditions, entry requirements, compensation and advancement."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Credentials, licensing and sea-time rules can change by jurisdiction; use current regulators and program providers instead of broad internet summaries."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Distinguish “what attracts me” from “what is verified.” Treat lifestyle promises, staffing and amenities as employer-specific."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Build transferable categories: safety, systems diagnosis, technical communication, teamwork and documentation, independent of a single job title."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "A vessel role may advertise rotational work, but vessel type, employer, hours, duties and qualification pathways vary. Verify each separately.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose one career role and write three verified or still-unverified job-duty claims."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Make four columns: credentials, daily duties, work conditions, progression."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List two primary sources to verify the most consequential missing claims."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Identify two transferable skills you could demonstrate through a small project or work example."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What is the difference between a role requirement and a lifestyle expectation?",
+          "answer_guide": "Mandatory qualification versus variable employer/job condition."
+        },
+        {
+          "question": "Why check regulators for licensing questions?",
+          "answer_guide": "Requirements are jurisdiction-specific and can change."
+        },
+        {
+          "question": "Name a transferable skill and evidence of it.",
+          "answer_guide": "Skill plus concrete proof, not a broad adjective."
+        }
+      ],
+      "mission_3min": {
+        "action": "Verify one critical career assumption with an official organization and record source/date.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Which role claim is least verified and most consequential?",
+      "deliverable": "Career evidence map with source-check list.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D04L02",
+      "domain_number": 4,
+      "domain": "Career and Work",
+      "lesson_number": 2,
+      "track": "Professional problem-solving",
+      "title": "Transferable problem-solving for technical work",
+      "duration_minutes": 60,
+      "objective": "Write a safe problem-solving procedure with diagnosis, verification and escalation points.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Professionals distinguish symptoms from root causes and avoid making adjustments without understanding consequences."
+        },
+        {
+          "minutes": 4,
+          "key_point": "A practical sequence: define the problem, observe, list hypotheses, prioritize safe checks, test, record results and escalate."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Safety-critical systems require approved procedures, isolation, supervision and proper qualifications. A learning exercise never authorizes real equipment work."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Clear handover notes explain what happened, what was tested, current status and outstanding risks."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Training case: a fictional pump flow reading drops. Possible causes include sensor error, restriction or operating conditions; propose non-invasive checks and an escalation plan rather than touching equipment.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Read the fictional symptom: “Pump output reading fell 25% after scheduled maintenance.” List known and unknown facts."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Generate three plausible causes and safe, non-invasive ways to distinguish them."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a decision tree with a stop/escalation rule at every unsafe uncertainty."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a six-sentence handover note: symptom, timing, checks, evidence, status, next authorized step."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is a symptom not a root cause?",
+          "answer_guide": "Several mechanisms can produce the same observation."
+        },
+        {
+          "question": "What should happen when a task crosses training or safety authority?",
+          "answer_guide": "Stop and seek qualified guidance/approved procedure."
+        },
+        {
+          "question": "Name the five most useful fields in a handover note.",
+          "answer_guide": "What, when, evidence/checks, current status, pending action/risk."
+        }
+      ],
+      "mission_3min": {
+        "action": "Apply the diagnostic structure to a harmless device or household workflow, without electrical/mechanical hazards.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What safe evidence distinguishes a hypothesis from a guess?",
+      "deliverable": "Diagnostic decision tree and handover note.",
+      "resources": [],
+      "safety_note": "Use a fictional training case. Do not perform unsupervised safety-critical mechanical or electrical work."
+    },
+    {
+      "id": "D04L03",
+      "domain_number": 4,
+      "domain": "Career and Work",
+      "lesson_number": 3,
+      "track": "Professional communication",
+      "title": "Feedback and leadership without politics",
+      "duration_minutes": 60,
+      "objective": "Practice receiving feedback, escalating concerns and making a fair leadership decision.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Good feedback describes observable behavior, effect and an improvement path; criticism may be poorly delivered yet contain useful information."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Separate the message from the delivery: ask for an example, restate the concern and choose a corrective step before evaluating motives."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Escalation sometimes must bypass an individual for safety, legal or policy reasons; it is not always a personal betrayal."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Fair leadership sets expectations consistently, welcomes dissent and documents decisions without equating job rank with human worth."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "A supervisor reports that a checklist was incomplete. Response: “Which step was missing? I’ll update it today and show you the new check method.” Even if tone was unpleasant, the task can be corrected.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write a realistic piece of fictional feedback about lateness, accuracy or communication."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Produce a defensive response and then rewrite it as a clarification-and-action response."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a one-minute decision note for a team task: expectation, evidence, risk and responsibility."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Role-play a necessary safety escalation that remains factual and respectful."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What question makes feedback actionable?",
+          "answer_guide": "Request a specific example or expected correction."
+        },
+        {
+          "question": "When is escalation appropriate without first speaking privately?",
+          "answer_guide": "Safety urgency, serious misconduct, mandatory reporting or policy constraints."
+        },
+        {
+          "question": "What is one marker of fair leadership?",
+          "answer_guide": "Consistent criteria, respectful treatment and documented reasoning."
+        }
+      ],
+      "mission_3min": {
+        "action": "Ask for one specific piece of work-related feedback or practice with a trusted person; record next action.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Explain how useful feedback and poor delivery can both be true.",
+      "deliverable": "Feedback response script and one-page leadership decision note.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D04L04",
+      "domain_number": 4,
+      "domain": "Career and Work",
+      "lesson_number": 4,
+      "track": "Opportunity evaluation",
+      "title": "Business experiments and downside limits",
+      "duration_minutes": 60,
+      "objective": "Assess a small business idea using customer evidence, unit economics and predefined exit rules.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "An appealing business idea is a hypothesis, not proof of demand. Seek behavioral evidence from prospective buyers rather than compliments."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Unit economics: revenue per sale minus variable cost; include time, customer acquisition and refund/support burden before calling it profitable."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use a bounded experiment with a specific audience, offer, test period, budget cap and success/failure criteria."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Before launching, define a stop rule and a pivot rule. Escalating commitment after weak evidence can compound losses."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "A digital service priced at $25 per month may have server costs of $3, but support, sales time and churn determine whether it actually generates worthwhile income.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Pick one hypothetical micro-business and state the buyer, pain and paid offer in one sentence."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Estimate conservative variable cost and labor time per customer; mark unknowns."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Plan a five-conversation validation experiment with neutral questions, not a sales pitch."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Set a maximum test budget, one success signal and one stop/iterate threshold before collecting data."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is “people say nice idea” not strong demand validation?",
+          "answer_guide": "No verified willingness to pay or behavior."
+        },
+        {
+          "question": "What is contribution per sale?",
+          "answer_guide": "Price minus attributable variable costs; note labor and fixed costs separately."
+        },
+        {
+          "question": "What makes an experiment safely bounded?",
+          "answer_guide": "Time/budget cap, measurable signals and prechosen exit criteria."
+        }
+      ],
+      "mission_3min": {
+        "action": "Interview one potential buyer about a problem they experienced, without pitching or recording private details.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What evidence would make you abandon the idea before spending more?",
+      "deliverable": "One-page business validation experiment and stop rule.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D05L01",
+      "domain_number": 5,
+      "domain": "Finances",
+      "lesson_number": 1,
+      "track": "Budgeting fundamentals",
+      "title": "Construct an actual cash-flow map",
+      "duration_minutes": 60,
+      "objective": "Reconcile monthly income and expenses using real or clearly labeled sample transactions.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Cash flow answers where money comes from and where it goes; it is distinct from net worth (assets minus liabilities)."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Separate fixed expenses, variable essentials, discretionary expenses, irregular planned expenses and savings."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use net income and a consistent period. Do not confuse a credit-card payment with new spending if original purchases are already counted."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Budget surplus = income minus spending and planned allocations; negative cash flow requires an explicit adjustment, not optimistic assumptions."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Fictional month: $3,200 net income; housing $1,250; groceries $400; utilities $200; transport $250; leisure $300; savings $500. Remaining unallocated $300.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose a recent month or provided fictional numbers and list all income sources."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List transactions by category, adding missing irregular costs rather than forcing neat totals."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Calculate total spending, planned saving and remaining balance; flag uncertain entries."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose two changes for the coming month and define a 10-minute weekly reconciliation ritual."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What differs between cash flow and net worth?",
+          "answer_guide": "Period inflows/outflows versus assets minus debts."
+        },
+        {
+          "question": "How much remains in the fictional example?",
+          "answer_guide": "300 dollars; 3200 minus 1250 minus 400 minus 200 minus 250 minus 300 minus 500."
+        },
+        {
+          "question": "Why plan irregular expenses?",
+          "answer_guide": "They are foreseeable even when not paid monthly, and otherwise distort surplus."
+        }
+      ],
+      "mission_3min": {
+        "action": "Log the next five transactions in your chosen categories; avoid copying private bank details into a public web page.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "How do you prevent counting a credit-card purchase and payment twice?",
+      "deliverable": "Monthly cash-flow worksheet plus weekly review cue.",
+      "resources": [
+        "https://www.canada.ca/en/financial-consumer-agency/services/make-budget.html"
+      ],
+      "safety_note": ""
+    },
+    {
+      "id": "D05L02",
+      "domain_number": 5,
+      "domain": "Finances",
+      "lesson_number": 2,
+      "track": "Cash reserves and financial risk",
+      "title": "Build safeguards before risk-taking",
+      "duration_minutes": 60,
+      "objective": "Create an emergency-reserve plan and an objective rule for avoidable financial risk.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Emergency reserves cover truly unexpected expenses or income interruptions; planned annual bills need separate sinking funds."
+        },
+        {
+          "minutes": 4,
+          "key_point": "A commonly cited target is three to six months of living costs; the suitable amount depends on job stability, expenses and obligations."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Liquidity matters: emergency money should be reasonably accessible and low risk, not tied to a volatile asset you may need to sell in a downturn."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Risk policies can include no high-interest debt, purchase waiting periods, insurance reviews and safeguards against fraud. A rule is a choice, not a moral trait."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Monthly necessary spending of $1,800 implies a rough 3–6 month range of $5,400–$10,800, before personal adjustments. A yearly tax bill belongs in planned saving, not an emergency.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Compute monthly essential expenses from the prior budget or a fictional case."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Calculate three- and six-month reserve figures, stating assumptions."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List three realistic unexpected costs and two predictable annual expenses; classify separately."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a one-page risk policy: cash access, saving transfer, purchase waiting rule and fraud verification."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "How do emergency costs differ from irregular planned costs?",
+          "answer_guide": "Unpredictable urgent events versus predictable nonmonthly bills."
+        },
+        {
+          "question": "Why avoid holding all emergency funds in risky investments?",
+          "answer_guide": "Need for liquidity may coincide with market decline."
+        },
+        {
+          "question": "With $1,800 in monthly essentials, what is three months?",
+          "answer_guide": "$5,400, assuming no other adjustments."
+        }
+      ],
+      "mission_3min": {
+        "action": "Set up or identify a separate reserve location and schedule a realistic contribution—no sensitive account data in module.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Explain which risks emergency liquidity reduces and which it does not.",
+      "deliverable": "Emergency fund estimate and personal financial safeguards.",
+      "resources": [
+        "https://www.canada.ca/en/financial-consumer-agency/services/savings-investments/setting-up-emergency-funds.html"
+      ],
+      "safety_note": ""
+    },
+    {
+      "id": "D05L03",
+      "domain_number": 5,
+      "domain": "Finances",
+      "lesson_number": 3,
+      "track": "Investing basics",
+      "title": "Investing foundations: return, risk and diversification",
+      "duration_minutes": 60,
+      "objective": "Explain risk, fees, diversification and time horizon before evaluating individual stocks.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Investing return is uncertain. Expected long-run growth is not a guaranteed annual rate and losses can persist for years."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Diversification spreads exposure across holdings and asset types; it reduces company-specific risk but not all market risk."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Asset allocation reflects when the money is needed, ability to bear loss and tolerance for volatility. Near-term money usually needs a different risk profile."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Fees, taxes, account rules and currency effects change net outcomes. Understand a product and its disclosures before buying."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Two fictional portfolios each have ten holdings: Portfolio A has ten companies from one sector; B spans broader sectors and asset types. B may better reduce concentration risk but can still lose value.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write the purpose and time horizon for three fictional goals: emergency reserve, tuition in two years, retirement in twenty."
+        },
+        {
+          "minutes": 5,
+          "instruction": "For each, list principal risk and appropriate liquidity needs without choosing real securities."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Compare concentrated versus diversified hypothetical portfolios, including fees and currency exposure."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a pre-investment checklist covering objective, horizon, diversification, downside, fees and unknowns."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why can a diversified portfolio still fall?",
+          "answer_guide": "Market-wide risk remains; diversification is not insurance."
+        },
+        {
+          "question": "Why does horizon affect an investment choice?",
+          "answer_guide": "Less time to recover from loss before funds are needed."
+        },
+        {
+          "question": "Name three costs/risks beyond headline return.",
+          "answer_guide": "Examples: fees, tax, inflation, currency, liquidity, concentration."
+        }
+      ],
+      "mission_3min": {
+        "action": "Read one fund or ETF facts document for education, and identify fees and investment objective without purchasing.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Which risks does diversification help reduce, and which remain?",
+      "deliverable": "Investment policy checklist and three-goal comparison.",
+      "resources": [
+        "https://www.canada.ca/en/financial-consumer-agency/services/financial-basics/financial-basics-videos/financial-basics-video-saving-investing.html"
+      ],
+      "safety_note": "Education, not personalized securities advice or a recommendation to trade."
+    },
+    {
+      "id": "D05L04",
+      "domain_number": 5,
+      "domain": "Finances",
+      "lesson_number": 4,
+      "track": "Company fundamentals",
+      "title": "Read a company without gambling",
+      "duration_minutes": 60,
+      "objective": "Use simple financial statements and valuation checks to analyze a fictional company, including reasons not to invest.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Income statement: revenue, costs and profit over a period; balance sheet: assets, liabilities and equity at a date; cash flow: money moving through operations, investing and financing."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Profit is not identical to cash generation. Look for cash conversion, debt burden, dilution and sustainable margins."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Valuation asks what price is paid for expected future outcomes. A good company may be a bad investment at an excessive price."
+        },
+        {
+          "minutes": 10,
+          "key_point": "A thesis needs both upside and a falsification condition. Unknowns, accounting adjustments and industry differences matter."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Fictional Firm A: sales $10m, net income $1m, operating cash flow $0.3m and rising receivables. A headline 10% net margin hides weak cash conversion; investigate before inferring value.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Read the fictional figures and calculate profit margin (1m/10m) and cash-to-net-income ratio (0.3m/1m)."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List three explanations for weak operating cash flow that would need verification."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Compare Firm A to a fictional peer with similar profits but different debt and price; state missing data."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Draft a thesis with one positive sign, two major risks, a valuation question and a no-investment conclusion if facts are insufficient."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What is Firm A’s net margin?",
+          "answer_guide": "10%, calculated as net income divided by sales."
+        },
+        {
+          "question": "Why is accounting profit not sufficient evidence of financial health?",
+          "answer_guide": "Cash flow, debts, accounting choices and working capital also matter."
+        },
+        {
+          "question": "Why can a strong company be a poor stock purchase?",
+          "answer_guide": "Price paid relative to future cash flows/risks may be too high."
+        }
+      ],
+      "mission_3min": {
+        "action": "Read an annual report’s three statement headings and note one question you cannot yet answer. No trading required.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What combination of information could invalidate an investment thesis?",
+      "deliverable": "Fictional company analysis and investment decision checklist.",
+      "resources": [
+        "https://www.canada.ca/en/financial-consumer-agency/services/financial-basics/financial-basics-videos/financial-basics-video-saving-investing.html"
+      ],
+      "safety_note": "Examples are fictional, not investment signals. Never expose private balances, credentials or account numbers."
+    },
+    {
+      "id": "D06L01",
+      "domain_number": 6,
+      "domain": "Growth and Learning",
+      "lesson_number": 1,
+      "track": "Learning science",
+      "title": "Make memory work: retrieval and spacing",
+      "duration_minutes": 60,
+      "objective": "Construct short recall questions and a review schedule for one skill.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Reading or watching can create familiarity, but recall without notes is a stronger test of accessible learning."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Retrieval practice means attempting an answer from memory, then receiving feedback. Feedback prevents rehearsing mistakes."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Distributed practice separates attempts over time. Review timing must adapt to forgetting; intervals are useful defaults, not magic numbers."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use explain–do–check: recall a principle, apply it in a new case, compare with an answer guide and record confusion."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "After a lesson on budgeting, hide notes and calculate a fresh budget. An incorrect calculation reveals exactly what to revisit.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose a recently learned skill and create three answerable recall prompts."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write concise answer guides for each, including common pitfalls."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Test yourself now without looking; compare and annotate omissions."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Schedule the next study session, about seven days, and about thirty days; add practical demonstrations."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is recognition easier than free recall?",
+          "answer_guide": "Seeing an answer supplies cues that may not exist during independent performance."
+        },
+        {
+          "question": "What should follow an incorrect practice-test response?",
+          "answer_guide": "Corrective feedback and a future retrieval attempt."
+        },
+        {
+          "question": "Name two ways to apply a concept besides rereading.",
+          "answer_guide": "Explain aloud, solve new case, demonstrate procedure, teach another."
+        }
+      ],
+      "mission_3min": {
+        "action": "Use a three-question closed-book quiz after another ordinary learning activity.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Describe retrieval practice, corrective feedback and spaced review.",
+      "deliverable": "Three-question recall deck and review schedule.",
+      "resources": [
+        "https://www.psychologicalscience.org/publications/journals/pspi/learning-techniques.html"
+      ],
+      "safety_note": ""
+    },
+    {
+      "id": "D06L02",
+      "domain_number": 6,
+      "domain": "Growth and Learning",
+      "lesson_number": 2,
+      "track": "Information literacy",
+      "title": "Verify sources—including AI",
+      "duration_minutes": 60,
+      "objective": "Use lateral verification to check a contested public claim before relying on it.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Separate primary evidence (original dataset, rule, study) from commentary and sponsored summaries."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Assess author expertise, publication date, incentives, method and whether a claim is supported by independently checkable evidence."
+        },
+        {
+          "minutes": 7,
+          "key_point": "AI tools can organize questions but can invent citations or misstate sources; verify direct passages from authoritative pages."
+        },
+        {
+          "minutes": 10,
+          "key_point": "A robust check asks: What exactly is claimed? What would count as evidence? Are multiple independent sources consistent? What remains unknown?"
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "An influencer says “a new law bans this career tomorrow.” Do not forward it. Check regulator text, effective date, exceptions and whether the quote refers to a proposal or enacted law.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write a contested but non-sensitive claim; specify geography and date."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Identify its originating source and at least one independent relevant authority."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Draft a verification checklist: author, source type, date, methods, conflict and missing context."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Produce a verdict of supported, contradicted or unresolved, with quoted facts kept short and links recorded."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Does a confident AI answer verify a fact?",
+          "answer_guide": "No; trace underlying primary and independent sources."
+        },
+        {
+          "question": "What is lateral reading?",
+          "answer_guide": "Leave a page and examine what independent sources say about it."
+        },
+        {
+          "question": "Why must an effective date be checked?",
+          "answer_guide": "Proposals, old regulations and current rules differ."
+        }
+      ],
+      "mission_3min": {
+        "action": "Before sharing one consequential online claim, find its original evidence or mark it unresolved.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What is the difference between a primary source and a summary?",
+      "deliverable": "Claim-verification worksheet with links.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D06L03",
+      "domain_number": 6,
+      "domain": "Growth and Learning",
+      "lesson_number": 3,
+      "track": "Structured problem-solving",
+      "title": "Solve complexity one question at a time",
+      "duration_minutes": 60,
+      "objective": "Build a dependency map and test the riskiest assumption of a complicated task.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Large problems feel vague until expressed as a target, constraints, unknowns and smaller work packages."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Decomposition alone is not enough: identify dependencies and the earliest decision that could invalidate later work."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Separate reversible experiments from expensive commitments; perform the cheapest informative test early."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Maintain an issue log: assumption, evidence, owner/action, stop condition and next review."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Goal: build a personal website. Dependencies: content, platform choice, accessibility, local storage and deployment. Test whether storage survives reload before implementing detailed analytics.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write a manageable project objective, one exclusion and one concrete success criterion."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Break it into six work packages and connect the dependencies."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Identify the three riskiest unknowns, then pick one low-cost test."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a ten-minute first-step procedure and a “done” verification for the first package."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is a task list alone insufficient?",
+          "answer_guide": "Dependencies and assumptions determine order and rework."
+        },
+        {
+          "question": "Which test should often come first?",
+          "answer_guide": "Cheapest safe test of a high-impact uncertainty."
+        },
+        {
+          "question": "What makes a work package verifiably done?",
+          "answer_guide": "Observable output with an acceptance check."
+        }
+      ],
+      "mission_3min": {
+        "action": "Apply the dependency approach to one everyday project, performing the smallest safe test.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What is the riskiest assumption and how will you test it?",
+      "deliverable": "Project decomposition board and first experiment.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D06L04",
+      "domain_number": 6,
+      "domain": "Growth and Learning",
+      "lesson_number": 4,
+      "track": "Deliberate practice and iteration",
+      "title": "Learn from failed experiments",
+      "duration_minutes": 60,
+      "objective": "Convert a failed attempt into a specific next trial with better feedback.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "An unsuccessful outcome is information when the goal, attempt, observations and constraints are recorded."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Separate errors in knowledge, execution, resources and circumstances; they require different responses."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Deliberate practice targets a narrow weakness with clear feedback, repeated attempts and increasing challenge."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Avoid blindly repeating a dangerous process. For electrical, chemical or mechanical risks, simulations or qualified instruction are safer than trial and error."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "A solder joint fails on a low-stakes practice board. Instead of repeating the same approach on a costly device, review technique, temperature guidance and practice with scrap components under safe instruction.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose a harmless past failed attempt. Describe intended result and observed result without self-insults."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Classify possible causes: knowledge, technique, tools, conditions; mark uncertainties."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose one variable to change and define what improved result looks like."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a two-attempt practice plan including feedback, safety stop and notes to collect."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "How does reflection differ from blaming yourself?",
+          "answer_guide": "Specific observations and modifiable causes rather than global judgments."
+        },
+        {
+          "question": "Why change one variable at a time when practical?",
+          "answer_guide": "Makes results easier to interpret."
+        },
+        {
+          "question": "When should practice move to a simulation or instructor?",
+          "answer_guide": "When the real task presents significant safety or damage risks."
+        }
+      ],
+      "mission_3min": {
+        "action": "Run one safe, low-cost iteration on a small task and document before/after results.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Name the next trial, its changed variable and how success will be observed.",
+      "deliverable": "Failure-to-experiment worksheet.",
+      "resources": [],
+      "safety_note": "For safety-critical work use training equipment, simulation or a qualified supervisor."
+    },
+    {
+      "id": "D07L01",
+      "domain_number": 7,
+      "domain": "Environment and Lifestyle",
+      "lesson_number": 1,
+      "track": "Digital environment",
+      "title": "Reduce digital distraction without relying on willpower",
+      "duration_minutes": 60,
+      "objective": "Design a measurable seven-day experiment that reduces unplanned phone use.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Apps compete for attention via easy access, novelty and notifications; the goal is deliberate choice, not declaring all entertainment bad."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Friction can help: remove shortcuts, disable nonessential notifications, place devices out of reach and require a purposeful opening reason."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Replacement behavior matters: choose a pleasant and accessible alternative for idle time, otherwise an empty gap invites the same old action."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Measure an observable baseline (e.g., pickups or screen-time minutes), not “discipline.” Retest one change without making the experiment punitive."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Instead of deleting every app, hide a distracting feed, disable its notifications and set a planned 20-minute recreational window with an offline alternative ready.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Identify two most common unplanned phone-opening cues and what each session displaces."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose one platform or behavior, and record an approximate baseline from device statistics."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Implement two friction changes and decide on an enjoyable replacement activity."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a seven-day observation table: unplanned opens, deliberate use, whether the replacement was chosen, and notes."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why might blocking alone fail?",
+          "answer_guide": "The cue and desire remain; an alternative activity may be needed."
+        },
+        {
+          "question": "What is a useful baseline?",
+          "answer_guide": "An observable count or duration measured consistently."
+        },
+        {
+          "question": "How do deliberate entertainment and compulsive scrolling differ?",
+          "answer_guide": "Choice and intended time versus automatic, unwanted continuation."
+        }
+      ],
+      "mission_3min": {
+        "action": "Test the changed phone environment for one day; observe without trying to hit a perfect streak.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "What cue, friction and replacement form your experiment?",
+      "deliverable": "Seven-day digital-friction experiment card.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D07L02",
+      "domain_number": 7,
+      "domain": "Environment and Lifestyle",
+      "lesson_number": 2,
+      "track": "Physical environment design",
+      "title": "Choose places that support action",
+      "duration_minutes": 60,
+      "objective": "Map tasks to suitable places and build a low-friction exit-from-home routine.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Behavior depends partly on environmental cues: a bed signals rest, while a prepared study space can signal work."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Different tasks need different conditions: quiet concentration, social connection, movement, equipment or privacy."
+        },
+        {
+          "minutes": 7,
+          "key_point": "A location plan should include travel time, accessibility, weather, costs and a fallback; “just go out more” is not a complete plan."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use choice architecture: pack essentials beforehand and make the next destination obvious. Keep home for tasks that require home."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "A writing task can happen at a library, an errand downtown, a hands-on task at home. Rainy-day fallback: another free indoor public location.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "List six recurring weekly tasks and label each public, home-only or flexible."
+        },
+        {
+          "minutes": 5,
+          "instruction": "For each public/flexible task, name a plausible location and one logistical constraint."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a departure checklist with bag, food, transit/weather check and destination."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Design a two-day trial and contingency for low energy, bad weather or a closed location."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is “be productive outside” too vague?",
+          "answer_guide": "Lacks task, destination, time and constraints."
+        },
+        {
+          "question": "Name one location-task mismatch.",
+          "answer_guide": "Example: loud café for confidential calls or gym for quiet reading."
+        },
+        {
+          "question": "What makes a fallback realistic?",
+          "answer_guide": "Available, affordable, safe and suited to task."
+        }
+      ],
+      "mission_3min": {
+        "action": "Complete one planned task at a suitable location and record the difference from the usual setting.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Explain how location, task and departure cue fit together.",
+      "deliverable": "Personal location–task map and departure checklist.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D07L03",
+      "domain_number": 7,
+      "domain": "Environment and Lifestyle",
+      "lesson_number": 3,
+      "track": "Physical and digital organization",
+      "title": "Build an organization system that stays usable",
+      "duration_minutes": 60,
+      "objective": "Create a simple “homes for things” system and an easy weekly reset.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Organization should reduce search time and repeated decisions, not create visually perfect shelves."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Use one obvious home for high-frequency items and consistent naming for files. Label exceptions rather than scattering duplicates."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Distinguish capture, storage and archive: an inbox catches loose items, daily homes keep active tools, archive removes old material."
+        },
+        {
+          "minutes": 10,
+          "key_point": "A reset needs a narrow trigger and small scope. If attention difficulties cause persistent impairment, practical tools can coexist with professional assessment."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Digital rule: Active Learning/01_Curriculum, 02_Exports, 03_Archive; downloads reviewed each Thursday for ten minutes. Physical rule: keys by door, bag on hook.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose one small physical zone and one messy digital folder; count friction points such as lost items or unsorted files."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create three broad categories for each and assign obvious homes/names."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Organize only a contained sample; remove duplicates cautiously and back up important files first."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a ten-minute weekly reset checklist and a “where does this new thing go?” rule."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What makes a home for an item useful?",
+          "answer_guide": "Easy to find, use and return at the point of need."
+        },
+        {
+          "question": "Why separate active items from archives?",
+          "answer_guide": "Reduces clutter without losing valuable records."
+        },
+        {
+          "question": "What must precede risky bulk deletion?",
+          "answer_guide": "Backup and confirmation of file importance."
+        }
+      ],
+      "mission_3min": {
+        "action": "Complete one ten-minute reset for the chosen area; record what is still difficult to maintain.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Describe the capture–home–archive pattern with examples.",
+      "deliverable": "Two-zone organization map and weekly reset checklist.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D07L04",
+      "domain_number": 7,
+      "domain": "Environment and Lifestyle",
+      "lesson_number": 4,
+      "track": "Routines and recreation",
+      "title": "Design a life with room for recovery and play",
+      "duration_minutes": 60,
+      "objective": "Build an ordinary-day schedule with realistic transitions, restorative recreation and interruption tolerance.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "A strong day is not packed minute by minute. Budget time for meals, travel, rest, transitions and the unexpected."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Leisure can be valuable without income or skill gains. Define the kind of enjoyment you want rather than calling all recreation waste."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use anchors (wake, first meal, departure, evening shutdown) instead of fragile rigid scheduling; separate ideal and minimum-viable days."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Run a weekly review of friction, not personal worth: what happened, what failed, what constraint changed and one adjustment."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "An ordinary Tuesday might combine morning movement, two focused blocks, a meal, some daylight, contact with family and guilt-free gaming; a low-energy day retains a few basic anchors.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Draw an actual day with sleep opportunity, meals, obligations and transitions before inserting goals."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Insert two focused blocks, one daylight/recovery period and one chosen leisure activity."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a “minimum viable day” with three essential anchors; avoid unrealistic total optimization."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Stress-test against rain, fatigue and an unexpected errand; revise for spare capacity."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why is a tightly packed timetable fragile?",
+          "answer_guide": "It ignores delays, recovery and unpredictability."
+        },
+        {
+          "question": "Does leisure require a productivity justification?",
+          "answer_guide": "No; chosen recreation can be worthwhile in itself."
+        },
+        {
+          "question": "What remains in a minimum viable day?",
+          "answer_guide": "A small number of essential, realistic anchors."
+        }
+      ],
+      "mission_3min": {
+        "action": "Run the minimum viable version or one anchor of your redesigned day; note actual constraints.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Explain the difference between an anchor and an exhaustive timetable.",
+      "deliverable": "Ordinary-day schedule, fallback day and weekly review.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D08L01",
+      "domain_number": 8,
+      "domain": "Meaning and Contribution",
+      "lesson_number": 1,
+      "track": "Purpose and meaning",
+      "title": "Purpose without a perfect life mission",
+      "duration_minutes": 60,
+      "objective": "Describe three meaningful activities and test one through action without demanding a permanent answer to life’s purpose.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Purpose can be constructed from commitments, relationships, mastery and contribution; not everyone needs a single lifelong mission."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Separate external recognition from internal significance: being admired, building a project and helping family can overlap but are not identical."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Uncertainty about meaning is common; an actionable value can be chosen even when philosophical questions remain unresolved."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Use small experiments to discover meaning in action instead of waiting for an intellectually final answer."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "A person cannot answer “What is my life for?” but notices that repairing an object, teaching a cousin and walking with a partner all make days feel worthwhile. Test one activity.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "List six moments that felt worthwhile, including quiet or uncelebrated ones."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Cluster them into themes such as connection, mastery, service, independence or beauty."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose one theme and invent two small actions that embody it this week."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Pick the safer/easier action; write how you will describe the experience afterward without demanding a grand revelation."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Is a single lifelong mission necessary to act meaningfully?",
+          "answer_guide": "No; purpose can be plural, evolving and expressed through present choices."
+        },
+        {
+          "question": "What differs between external approval and inner significance?",
+          "answer_guide": "Someone else’s admiration versus personally valued activity, even when they overlap."
+        },
+        {
+          "question": "How might you test a possible source of meaning?",
+          "answer_guide": "Small action followed by observation and reflection."
+        }
+      ],
+      "mission_3min": {
+        "action": "Spend fifteen minutes doing one meaningful activity; write what mattered about it.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Name one value-aligned action you could choose despite uncertainty.",
+      "deliverable": "Three-theme meaning map and micro-experiment.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D08L02",
+      "domain_number": 8,
+      "domain": "Meaning and Contribution",
+      "lesson_number": 2,
+      "track": "Family and responsibility",
+      "title": "Contribution to people close to you",
+      "duration_minutes": 60,
+      "objective": "Translate a broad wish to support loved ones into a sustainable, consensual act of care.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Helping can mean reliability, attention, practical assistance, listening or financial support; money is only one form."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Useful support begins by asking what the other person actually wants rather than assuming you know the right fix."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Care should respect consent, boundaries and your own capacity; overpromising can harm trust."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Evaluate contribution by the recipient’s actual experience where possible, not by how heroic the helper feels."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Instead of announcing a large future sacrifice, ask a loved one whether a weekly check-in, help with a task or shared quality time would be useful.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "List three ways to contribute that do not require significant money."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Choose one trusted relationship and draft a no-pressure question about what support would be useful."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a small two-week act of service with a realistic time limit and clear boundary."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Write a feedback prompt that lets the other person say the action was unnecessary or unhelpful."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Why ask before helping?",
+          "answer_guide": "Helps match real needs and protects autonomy."
+        },
+        {
+          "question": "Why can an unlimited promise be unwise?",
+          "answer_guide": "Capacity limits and uncertain delivery can damage trust."
+        },
+        {
+          "question": "What evidence suggests help was useful?",
+          "answer_guide": "Recipient feedback or a concrete reduction of an agreed burden."
+        }
+      ],
+      "mission_3min": {
+        "action": "Offer one small piece of help to someone, asking permission first; accept “no” comfortably.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Explain the difference between support and taking control.",
+      "deliverable": "Consensual two-week contribution plan.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D08L03",
+      "domain_number": 8,
+      "domain": "Meaning and Contribution",
+      "lesson_number": 3,
+      "track": "Service and civic contribution",
+      "title": "Seva as a sustainable practice",
+      "duration_minutes": 60,
+      "objective": "Design a small, ethical service action with a realistic budget of time or resources.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Service can be direct (helping a person) or indirect (supporting an organization or public resource)."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Effectiveness asks whether the effort addresses a real need, respects recipients and has manageable costs."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Start with reliability and local knowledge rather than public recognition. Service should not pressure or embarrass recipients."
+        },
+        {
+          "minutes": 10,
+          "key_point": "Sustainability requires boundaries, safety and follow-through; a small repeated action often beats a grand promise with no execution."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Possible trial: volunteer for a limited shift with an established organization, help someone access reliable information, or quietly contribute supplies requested by a community group.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Choose a community concern you would like to help with without making claims about an entire group."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List two types of assistance and what recipient permission or organization vetting is needed."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Select a 30–60 minute service experiment compatible with resources and safety."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Plan how to confirm usefulness and whether to repeat, revise or stop without expecting praise."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "What makes a service action recipient-centered?",
+          "answer_guide": "Based on actual needs, permission and respect."
+        },
+        {
+          "question": "Why prefer a small experiment at first?",
+          "answer_guide": "Tests feasibility and impact before large commitments."
+        },
+        {
+          "question": "Name one ethical boundary for service.",
+          "answer_guide": "Privacy, dignity, safety, noncoercion or capacity."
+        }
+      ],
+      "mission_3min": {
+        "action": "Complete or arrange one small service action without posting personal details or seeking public credit.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "How would you learn whether your service helped?",
+      "deliverable": "One-page Seva micro-project plan.",
+      "resources": [],
+      "safety_note": ""
+    },
+    {
+      "id": "D08L04",
+      "domain_number": 8,
+      "domain": "Meaning and Contribution",
+      "lesson_number": 4,
+      "track": "Existential reflection and present action",
+      "title": "Live with uncertainty and mortality awareness",
+      "duration_minutes": 60,
+      "objective": "Respond to unsettling existential thoughts with grounding and a value-consistent next action, without pretending to solve philosophy.",
+      "revisit_10min": {
+        "steps": [
+          "For 4 minutes, recall the most recently completed lesson without notes.",
+          "For 4 minutes, answer one or two due review prompts from any domain, prioritizing missed prompts.",
+          "For 2 minutes, check responses against previous answer guides and flag what to relearn."
+        ],
+        "when_no_history": "In first session, spend 10 minutes recalling a related real experience and writing what you already believe; do not award yourself points."
+      },
+      "target_5min": {
+        "instruction": "Rewrite the objective as one observable demonstration: By minute 57, I can ...; list the material needed and choose a realistic case."
+      },
+      "teach_15min": [
+        {
+          "minutes": 1,
+          "key_point": "Thoughts about mortality can intensify urgency or avoidance. The goal is not to ban such thoughts or prove a universal answer."
+        },
+        {
+          "minutes": 4,
+          "key_point": "Distinguish a question worth exploring intentionally from rumination that repeatedly interrupts sleep or valued activities."
+        },
+        {
+          "minutes": 7,
+          "key_point": "Use a gentle process: notice the thought; name the worry; choose whether now is discussion time; return attention to a chosen activity."
+        },
+        {
+          "minutes": 10,
+          "key_point": "A finite life can support both future preparation and present enjoyment. If these thoughts are persistent, distressing or impairing, professional support is appropriate."
+        },
+        {
+          "minutes": 13,
+          "key_point": "At minute 13, reproduce the central method from memory, then check for gaps; use the last 3 minutes for worked example and self-explanation."
+        }
+      ],
+      "worked_example": "Thought: “If life ends, why work?” Rather than arguing for an hour, record the question for a scheduled reflection period and choose one meaningful 10-minute present action.",
+      "practice_20min": [
+        {
+          "minutes": 5,
+          "instruction": "Write one common existential question in neutral language, avoiding exaggerated catastrophic predictions."
+        },
+        {
+          "minutes": 5,
+          "instruction": "List how the thought currently influences choices, separating useful reflection from disruptive loops."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Draft a “notice–name–choose” response and one grounding or valued action."
+        },
+        {
+          "minutes": 5,
+          "instruction": "Create a balanced weekly practice: a brief optional reflection window, meaningful activity and a threshold for seeking support."
+        }
+      ],
+      "test_7min": [
+        {
+          "question": "Does accepting uncertainty mean giving up on goals?",
+          "answer_guide": "No; action can be based on chosen values without certainty."
+        },
+        {
+          "question": "What is one sign reflection has become disruptive?",
+          "answer_guide": "Repeated interference with sleep, functioning, attention or relationships."
+        },
+        {
+          "question": "What is an appropriate response to persistent distress?",
+          "answer_guide": "Seek assessment or support; do not treat a short lesson as therapy."
+        }
+      ],
+      "mission_3min": {
+        "action": "When a mild existential worry appears, practice notice–name–choose once, then return to a personally valued task.",
+        "logging": "Record a specific when/where cue, the smallest acceptable action and whether completed; do not rely only on intention."
+      },
+      "next_review_prompt": "Describe how to distinguish deliberate reflection from an unhelpful repetitive loop.",
+      "deliverable": "Gentle response plan and optional reflection boundary.",
+      "resources": [
+        "https://www.cmhakelowna.com/mental-health/getting-help-for-mental-illness"
+      ],
+      "safety_note": "Not therapy. Avoid prolonged forced contemplation. If thoughts are overwhelming or safety is at risk, seek immediate appropriate support."
+    }
+  ],
+  "reference_links": {
+    "learning": "https://www.psychologicalscience.org/publications/journals/pspi/learning-techniques.html",
+    "activity": "https://www.canada.ca/en/public-health/services/being-active/physical-activity-your-health.html",
+    "sleep": "https://www.canada.ca/en/public-health/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-42-no-4-2022/timing-24-hour-movement-behaviours-implications-practice-policy-research.html",
+    "budget": "https://www.canada.ca/en/financial-consumer-agency/services/make-budget.html",
+    "emergency": "https://www.canada.ca/en/financial-consumer-agency/services/savings-investments/setting-up-emergency-funds.html",
+    "invest": "https://www.canada.ca/en/financial-consumer-agency/services/financial-basics/financial-basics-videos/financial-basics-video-saving-investing.html",
+    "support": "https://www.cmhakelowna.com/mental-health/getting-help-for-mental-illness"
+  },
+  "instructor_notes": [
+    "For the first lesson or when no history exists, use the 10-minute reflection fallback.",
+    "When multiple reviews are due, do not force every item into a single ten-minute slot: carry the rest forward.",
+    "No health diagnosis and no advice to buy securities. Escalate persistent functional impairment to qualified professionals.",
+    "For safety-sensitive technical exercises, use hypothetical or simulation cases.",
+    "Each lesson has four 5-minute practice steps and a three-question open-book-hidden knowledge check.",
+    "Personalized lesson selection was informed by the user-supplied private interview. No sensitive excerpts are copied into this curriculum."
+  ]
+}

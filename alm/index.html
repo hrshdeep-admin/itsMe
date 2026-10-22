@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101b2e">
+  <meta name="description" content="Active Learning Module — 32 practical lessons across eight equally important areas of life. Learn, practice, test, and apply.">
+  <title>ALM — Active Learning Module</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell" id="shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard" data-nav="dashboard" aria-label="Active Learning Module home">
+        <span class="brand-mark"><span class="brand-spark">✳</span></span>
+        <span class="brand-copy"><strong>active<span>learning.</span></strong><small>THE LIFE LABORATORY</small></span>
+      </a>
+      <div class="sidebar-section-label">WORKSPACE</div>
+      <nav class="side-nav" id="side-nav">
+        <button type="button" data-nav="dashboard" class="nav-link active"><span class="nav-ic">◫</span> Dashboard</button>
+        <button type="button" data-nav="curriculum" class="nav-link"><span class="nav-ic">▦</span> Curriculum</button>
+        <button type="button" data-nav="reviews" class="nav-link"><span class="nav-ic">↻</span> Review queue <span id="nav-review-count" class="nav-count" hidden>0</span></button>
+        <button type="button" data-nav="history" class="nav-link"><span class="nav-ic">◷</span> Session history</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-progress" id="sidebar-progress"><div class="skeleton-line"></div></div>
+      <div class="sidebar-foot">Small steps. Real-world change.<span>BUILD 01 · FOUNDATION</span></div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-left"><span class="online-dot"></span><span id="topbar-location">YOUR LEARNING SPACE</span></div>
+        <div class="topbar-right">
+          <span class="today-text" id="today-text"></span>
+          <button class="icon-button" type="button" data-action="toggle-theme" aria-label="Toggle light and dark mode" title="Toggle theme"><span id="theme-symbol">☾</span></button>
+          <button class="icon-button" type="button" data-action="export" aria-label="Download your progress backup" title="Download backup">⇩</button>
+        </div>
+      </header>
+      <main id="app" tabindex="-1" aria-label="Active Learning Module">
+        <div class="loading-wrap"><span class="loading-spinner"></span><p>Preparing your learning space…</p></div>
+      </main>
+      <footer class="site-footer">ACTIVE LEARNING MODULE <span>·</span> 8 EQUAL DOMAINS <span>·</span> 4 SESSIONS A WEEK <span>·</span> MADE FOR PRACTICE</footer>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button type="button" data-nav="dashboard"><span>◫</span> Home</button>
+    <button type="button" data-nav="curriculum"><span>▦</span> Explore</button>
+    <button type="button" data-nav="reviews"><span>↻</span> Review</button>
+    <button type="button" data-nav="history"><span>◷</span> History</button>
+  </nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+</body>
+</html>
