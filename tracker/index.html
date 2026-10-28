@@ -1,118 +1,130 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#182239">
+<meta name="theme-color" content="#e6dcc8">
 <meta name="description" content="Tracker — your private, fixed daily rhythm and check-in tracker.">
 <title>Tracker · Daily Rhythm</title>
 <style>
 :root{
-  --bg:#142035;--shell:#1c2c44;--card:#233750;
-  --line:#455770;--ink:#f4f4f7;--muted:#bdc8d8;--accent:#a6eee0;
-  --mint:#b9ebcf;--violet:#d5c4ff;--red:#ffb8bf;
-  --nav:#1a2a40ee;--control:#293950;--shadow:0 18px 45px #060f253a;
-  --hero1:#275768;--hero2:#444671;--hero3:#625079;
-  --ink-on-accent:#113e43;--accent-glow:#a6eee02e;
-  --ok:#52d9a0;--ok-soft:#52d9a030;--ok-ink:#0b3526;--ok-glow:#52d9a04d;
-  --warn:#ffd25e;--warn-soft:#ffd25e30;--warn-ink:#4a3600;--warn-glow:#ffd25e4d;
-  --bad:#ff808f;--bad-soft:#ff808f30;--bad-ink:#4a0f1b;--bad-glow:#ff808f4d;
-}
-html[data-theme="day"]{
   color-scheme:light;
-  --bg:#eee9df;--shell:#faf4e9;--card:#fff9ef;
-  --line:#d8d0c5;--ink:#2b354a;--muted:#5d6b7b;--accent:#356d68;
-  --mint:#3b7b62;--violet:#685a96;--red:#b25469;
-  --nav:#f9f3e9ee;--control:#f3ebdf;--shadow:0 12px 32px #7d77641b;
-  --hero1:#b4ded9;--hero2:#d7d6f0;--hero3:#f0ced0;
-  --ink-on-accent:#fbfff8;--accent-glow:#356d6829;
-  --ok:#2f9d6f;--ok-soft:#2f9d6f26;--ok-ink:#ffffff;--ok-glow:#2f9d6f44;
-  --warn:#e0a712;--warn-soft:#e0a71230;--warn-ink:#3b2b00;--warn-glow:#e0a71244;
-  --bad:#d64a60;--bad-soft:#d64a6026;--bad-ink:#ffffff;--bad-glow:#d64a6044;
+  /* Warm oat: a soft mid-tone, comfortable by day and in dim light */
+  --bg:#e4dac6;--shell:#efe6d3;--card:#f4ecda;
+  --line:#c9bca3;--ink:#2e3340;--muted:#625f58;
+  --accent:#2f6b66;--accent-soft:#2f6b6622;--accent-glow:#2f6b6638;--ink-on-accent:#f7f3e8;
+  --control:#e2d7c1;--nav:#e9dfcbee;--shadow:0 8px 24px #6b5d3d1f;
+  --ok:#3f8a67;--ok-soft:#3f8a6727;--ok-ink:#f7f3e8;--ok-glow:#3f8a6642;
+  --warn:#b98a1f;--warn-soft:#b98a1f2b;--warn-ink:#fffaf0;--warn-glow:#b98a1f40;
+  --bad:#b5586a;--bad-soft:#b5586a24;--bad-ink:#fff6f6;--bad-glow:#b5586a40;
+  --violet:#6d5f98;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100dvh;font:400 14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
-body:before{content:"";position:fixed;z-index:-1;pointer-events:none;inset:0;background:radial-gradient(ellipse 62% 33% at 100% 5%,#ac8cc834,transparent 75%),radial-gradient(ellipse 78% 40% at 0% 75%,#5db8a529,transparent 80%)}
+body:before{content:"";position:fixed;z-index:-1;pointer-events:none;inset:0;background:radial-gradient(ellipse 60% 32% at 100% 0%,#c9b2d433,transparent 75%),radial-gradient(ellipse 75% 38% at 0% 80%,#8fc3b333,transparent 80%);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-14px,10px,0)}}
 body.dialog-open{overflow:hidden}
 button,input,textarea{font:inherit}
 button{cursor:pointer;-webkit-tap-highlight-color:transparent}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .container{width:min(calc(100% - 24px),680px);margin-inline:auto}
 
 /* Top bar */
-.topbar{position:sticky;top:0;z-index:15;background:var(--nav);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.topbar{position:sticky;top:0;z-index:15;background:var(--nav);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .topbar-in{height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .identity{display:flex;align-items:center;gap:10px;min-width:0}
-.brand-icon{height:32px;width:32px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#94e8c8,#c7c7ff);color:#224553;font-size:23px;line-height:1;box-shadow:0 5px 20px #46b9a128}
+.brand-icon{height:32px;width:32px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#9fd9bf,#c9c3f0);color:#244a52;font-size:23px;line-height:1;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 .identity b{font-size:19px;letter-spacing:-.06em;line-height:1}
 .identity small{display:block;margin-top:4px;font-size:8px;letter-spacing:.19em;color:var(--muted);font-weight:800}
-.header-actions{display:flex;align-items:center;gap:7px}
-.icon-button{width:37px;height:37px;border:1px solid var(--line);border-radius:11px;background:var(--control);color:var(--ink);display:grid;place-items:center;font-size:17px}
+.icon-button{width:37px;height:37px;border:1px solid var(--line);border-radius:11px;background:var(--control);color:var(--ink);display:grid;place-items:center;transition:transform .15s,background .2s}
+.icon-button:hover{transform:translateY(-2px)}.icon-button:active{transform:scale(.9)}
 .icon-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 
 /* Date + totals */
 .datebar{padding:14px 0 12px}
-.datebar h1{margin:0;font-size:clamp(22px,5vw,30px);line-height:1.1;letter-spacing:-.05em}
+.datebar h1{margin:0;font-size:clamp(22px,5vw,30px);line-height:1.1;letter-spacing:-.05em;animation:slideIn .6s cubic-bezier(.2,.9,.3,1) both}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .scorestrip{margin-bottom:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.score{min-width:0;padding:10px 12px 11px;border:1px solid var(--line);border-radius:15px;background:var(--shell);box-shadow:var(--shadow);position:relative;overflow:hidden}
-.score:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--mint)}
-.score.fail:before{background:var(--red)}.score.pending:before{background:var(--violet)}
+.score{min-width:0;padding:10px 12px 11px;border:1px solid var(--line);border-radius:15px;background:var(--shell);box-shadow:var(--shadow);position:relative;overflow:hidden;animation:slideIn .6s cubic-bezier(.2,.9,.3,1) both;transition:transform .2s}
+.score:nth-child(2){animation-delay:.08s}.score:nth-child(3){animation-delay:.16s}
+.score:hover{transform:translateY(-3px)}
+.score:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--ok)}
+.score.fail:before{background:var(--bad)}.score.pending:before{background:var(--violet)}
 .score .number{display:block;font-size:26px;line-height:1.05;font-weight:900;letter-spacing:-.07em;font-variant-numeric:tabular-nums;transform-origin:left center}
 .score .label{display:block;font-size:10px;margin-top:6px;color:var(--muted);font-weight:650}
-.score.done .number{color:var(--mint)}.score.fail .number{color:var(--red)}.score.pending .number{color:var(--violet)}
-.number.bump{animation:bump .55s cubic-bezier(.2,1.6,.4,1)}
-@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
+.score.done .number{color:var(--ok)}.score.fail .number{color:var(--bad)}.score.pending .number{color:var(--violet)}
+.number.bump{animation:bump .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.5) rotate(-4deg)}100%{transform:scale(1)}}
 
-/* Compact focus card */
-.focus{position:relative;overflow:hidden;isolation:isolate;border-radius:20px;padding:13px 15px 14px;border:1px solid #b3d7e176;background:linear-gradient(127deg,var(--hero1) 2%,var(--hero2) 60%,var(--hero3));box-shadow:var(--shadow)}
-.focus:before{content:"";position:absolute;z-index:-1;right:-60px;top:-70px;width:170px;height:170px;border:1px solid #ffffff52;border-radius:50%;box-shadow:0 0 0 22px #ffffff0c,0 0 0 48px #ffffff08}
-html[data-theme="day"] .focus{color:#263d4f;border-color:#aabdc8}
+/* Day progress bar */
+.dayprog{margin:-2px 0 12px;display:flex;align-items:center;gap:9px;font-size:10px;font-weight:800;color:var(--muted)}
+.dayprog .bar{flex:1;height:8px;border-radius:99px;background:var(--control);overflow:hidden;border:1px solid var(--line)}
+.dayprog .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--ok),#8cc9a6,var(--ok));background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width .7s cubic-bezier(.2,1,.3,1)}
+@keyframes shimmer{to{background-position:-200% 0}}
+
+/* Focus card: flat tint + accent border */
+.focus{position:relative;overflow:hidden;border-radius:20px;padding:13px 15px 14px;border:2px solid var(--accent);background:#d9e6dc;box-shadow:0 0 0 4px var(--accent-soft),var(--shadow);animation:slideIn .6s .1s cubic-bezier(.2,.9,.3,1) both}
 .focus-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.focus-label{display:inline-flex;align-items:center;gap:7px;letter-spacing:.14em;font-size:9px;text-transform:uppercase;font-weight:900;color:#d5fff4}
-.focus-label:before{content:"";height:6px;width:6px;border-radius:50%;background:#a8ffcf;box-shadow:0 0 0 3px #a8ffcf30}
-html[data-theme="day"] .focus-label{color:#30635b}html[data-theme="day"] .focus-label:before{background:#448b77;box-shadow:0 0 0 3px #448b7720}
-.focus-right{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;color:#d8e3eb;font-variant-numeric:tabular-nums}
-html[data-theme="day"] .focus-right{color:#43606d}
-.fstatus{border-radius:99px;padding:1px 8px;font-size:9px;font-weight:900;background:#ffffff38}
+.focus-label{display:inline-flex;align-items:center;gap:7px;letter-spacing:.14em;font-size:9px;text-transform:uppercase;font-weight:900;color:var(--accent)}
+.focus-label:before{content:"";height:7px;width:7px;border-radius:50%;background:var(--accent);animation:live 1.6s ease-out infinite}
+@keyframes live{0%{box-shadow:0 0 0 0 var(--accent-glow)}100%{box-shadow:0 0 0 9px transparent}}
+.focus-right{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.fstatus{border-radius:99px;padding:1px 8px;font-size:9px;font-weight:900;background:var(--accent-soft);color:var(--accent);animation:popIn .4s cubic-bezier(.2,1.6,.4,1)}
+@keyframes popIn{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
 .focus-main{display:flex;align-items:center;gap:11px;margin-top:9px}
-.focus-icon{flex-shrink:0;display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:#ffffff32;border:1px solid #ffffff3b;font-size:22px}
+.focus-icon{flex-shrink:0;display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#ffffff80;border:1px solid var(--line);font-size:23px;animation:float 3.2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .focus h2{margin:0;font-size:clamp(20px,5.2vw,26px);line-height:1.12;letter-spacing:-.045em;font-weight:900;overflow-wrap:anywhere}
-.focus .note{margin:2px 0 0;font-size:11px;color:#e1e8ef;line-height:1.35}
-html[data-theme="day"] .focus .note{color:#435363}
+.focus .note{margin:2px 0 0;font-size:11px;color:var(--muted);line-height:1.35}
+.focus-swap{animation:swap .45s cubic-bezier(.2,.9,.3,1)}
+@keyframes swap{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
 .clockrow{margin-top:11px;display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:10px;font-weight:800;font-variant-numeric:tabular-nums}
-.progress-track{margin-top:6px;height:6px;border-radius:99px;background:#ffffff50;overflow:hidden}
-.progress-track i{display:block;height:100%;width:0;background:#b5ffde;border-radius:inherit;transition:width .4s ease}
-html[data-theme="day"] .progress-track{background:#ffffff9e}html[data-theme="day"] .progress-track i{background:#337d6b}
+.progress-track{margin-top:6px;height:7px;border-radius:99px;background:#ffffff90;overflow:hidden;border:1px solid var(--line)}
+.progress-track i{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .6s ease}
 
-/* My Entire Day */
+/* Day list */
 .day-section{margin-top:20px}
 .section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
 .section-title h2{font-size:15px;margin:0;letter-spacing:-.03em;font-weight:900}
-.jump{height:28px;padding:0 11px;border-radius:99px;border:1px solid var(--line);background:var(--control);color:var(--ink);font-size:10px;font-weight:850}
+.jump{height:28px;padding:0 11px;border-radius:99px;border:1px solid var(--line);background:var(--control);color:var(--ink);font-size:10px;font-weight:850;transition:transform .15s}
+.jump:hover{transform:translateY(-2px)}.jump:active{transform:scale(.92)}
 .legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}
 .lg{font-size:10px;font-weight:850;padding:3px 9px;border-radius:99px}
 .lg.ok{background:var(--ok-soft);color:var(--ok)}.lg.warn{background:var(--warn-soft);color:var(--warn)}.lg.bad{background:var(--bad-soft);color:var(--bad)}
 .legend small{font-size:10px;color:var(--muted);margin-left:2px}
 .day-list{display:grid;gap:7px}
-.row{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:var(--shell);padding:8px 9px;transition:background .3s,border-color .3s,box-shadow .3s}
+.row{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:var(--shell);padding:8px 9px;transition:background .3s,border-color .3s,box-shadow .3s,transform .2s}
+.row.enter{animation:rowIn .5s cubic-bezier(.2,.9,.3,1) both;animation-delay:calc(var(--i,0) * 35ms)}
+@keyframes rowIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.row:hover{transform:translateX(3px);box-shadow:var(--shadow)}
 .row::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transform:translateX(-100%)}
-.row.flash-full::after{background:linear-gradient(100deg,transparent 15%,#52d9a0aa 50%,transparent 85%);animation:sweep .9s ease-out}
-.row.flash-half::after{background:linear-gradient(100deg,transparent 15%,#ffd25eaa 50%,transparent 85%);animation:sweep .8s ease-out}
-.row.flash-none::after{background:linear-gradient(100deg,transparent 15%,#ff808f88 50%,transparent 85%);animation:sweep .7s ease-out}
+.row.flash-full::after{background:linear-gradient(100deg,transparent 15%,#3f8a6788 50%,transparent 85%);animation:sweep .9s ease-out}
+.row.flash-half::after{background:linear-gradient(100deg,transparent 15%,#b98a1f88 50%,transparent 85%);animation:sweep .8s ease-out}
+.row.flash-none::after{background:linear-gradient(100deg,transparent 15%,#b5586a77 50%,transparent 85%);animation:sweep .7s ease-out}
 @keyframes sweep{0%{opacity:0;transform:translateX(-100%)}20%{opacity:1}100%{opacity:0;transform:translateX(100%)}}
 .row.shake{animation:shake .42s}
 @keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.row.marked.m-full{border-left:4px solid var(--ok)}
+.row.marked.m-half{border-left:4px solid var(--warn)}
+.row.marked.m-none{border-left:4px solid var(--bad)}
 .row-main{display:flex;align-items:center;gap:8px}
-.info{flex:1;min-width:0;display:flex;align-items:center;gap:9px;padding:0;min-height:44px;background:none;border:0;color:inherit;text-align:left}
-.ricon{flex-shrink:0;width:34px;height:34px;border-radius:11px;background:var(--control);display:grid;place-items:center;font-size:18px;transition:background .3s}
+.info{flex:1;min-width:0;display:flex;align-items:center;gap:9px;padding:0;min-height:44px;background:none;border:0;color:inherit;text-align:left;text-decoration:none}
+.ricon{flex-shrink:0;width:34px;height:34px;border-radius:11px;background:var(--control);display:grid;place-items:center;font-size:18px;transition:transform .25s cubic-bezier(.2,1.6,.4,1)}
+.row:hover .ricon,.info:active .ricon{transform:scale(1.18) rotate(-8deg)}
 .rtext{min-width:0}
 .rname{display:block;font-size:13px;font-weight:850;line-height:1.25;letter-spacing:-.01em}
 .rtime{display:block;margin-top:2px;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
-.nowpill{display:none;margin-left:6px;font-style:normal;font-size:8px;font-weight:900;letter-spacing:.12em;padding:1px 6px;border-radius:99px;background:var(--accent);color:var(--ink-on-accent);vertical-align:1px}
+.go{margin-left:auto;flex-shrink:0;font-size:15px;color:var(--accent);font-weight:900;transition:transform .2s;padding-left:4px}
+.row:hover .go{transform:translateX(4px)}
+.nowpill{display:none;margin-left:6px;font-style:normal;font-size:8px;font-weight:900;letter-spacing:.12em;padding:1px 6px;border-radius:99px;background:var(--accent);color:var(--ink-on-accent);vertical-align:1px;animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.55}}
 .acts{display:flex;gap:6px;flex-shrink:0}
-.act{position:relative;width:35px;height:35px;border-radius:11px;display:grid;place-items:center;font-size:17px;font-weight:900;line-height:1;padding:0;background:var(--cs);color:var(--c);border:1.5px solid var(--cl);transition:background .2s,color .2s,box-shadow .25s,border-color .2s}
+.act{position:relative;width:35px;height:35px;border-radius:11px;display:grid;place-items:center;font-size:17px;font-weight:900;line-height:1;padding:0;background:var(--cs);color:var(--c);border:1.5px solid var(--cl);transition:background .2s,color .2s,box-shadow .25s,transform .15s}
+.act:hover{transform:translateY(-2px)}
+.act:active{transform:scale(.85)}
 .act.full{--c:var(--ok);--cs:var(--ok-soft);--cl:var(--ok);--ci:var(--ok-ink);--cg:var(--ok-glow)}
 .act.half{--c:var(--warn);--cs:var(--warn-soft);--cl:var(--warn);--ci:var(--warn-ink);--cg:var(--warn-glow)}
 .act.none{--c:var(--bad);--cs:var(--bad-soft);--cl:var(--bad);--ci:var(--bad-ink);--cg:var(--bad-glow)}
@@ -122,34 +134,31 @@ html[data-theme="day"] .progress-track{background:#ffffff9e}html[data-theme="day
 .act.pop span{display:inline-block;animation:glyph .5s cubic-bezier(.2,1.6,.4,1)}
 @keyframes pop{0%{transform:scale(1)}30%{transform:scale(.68)}65%{transform:scale(1.3) rotate(-6deg)}100%{transform:scale(1)}}
 @keyframes glyph{0%{transform:scale(.2) rotate(-60deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
-.row.past .info{opacity:.5;filter:grayscale(.85)}
+.row.past .info{opacity:.55;filter:grayscale(.7)}
 .row.past:not(.marked) .rtime:after{content:" · not logged"}
-.row.current{padding:12px 10px;border:2px solid var(--accent);background:linear-gradient(125deg,var(--hero1),var(--hero2) 70%,var(--hero3));animation:pulse 2.6s ease-in-out infinite;box-shadow:0 0 0 4px var(--accent-glow),var(--shadow)}
-html[data-theme="day"] .row.current{color:#263d4f}
+.row.current{padding:12px 10px;border:2px solid var(--accent);background:#d9e6dc;box-shadow:0 0 0 4px var(--accent-soft),var(--shadow);animation:glow 2.6s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 4px var(--accent-soft),var(--shadow)}50%{box-shadow:0 0 0 8px transparent,var(--shadow)}}
 .row.current .rname{font-size:15.5px}
-.row.current .rtime{color:inherit;opacity:.82;font-weight:700}
-.row.current .ricon{width:40px;height:40px;font-size:22px;background:#ffffff38}
+.row.current .ricon{width:40px;height:40px;font-size:22px;background:#ffffff80;animation:float 3.2s ease-in-out infinite}
 .row.current .act{width:40px;height:40px;font-size:19px}
 .row.current .nowpill{display:inline-block}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-glow),var(--shadow)}50%{box-shadow:0 0 0 8px transparent,var(--shadow)}}
-.rremark{display:block;width:100%;margin-top:6px;padding:6px 10px;border-radius:9px;border:1px dashed var(--bad);background:var(--bad-soft);color:var(--ink);font-size:11px;text-align:left;overflow-wrap:anywhere}
+.rremark{display:block;width:100%;margin-top:6px;padding:6px 10px;border-radius:9px;border:1px dashed var(--bad);background:var(--bad-soft);color:var(--ink);font-size:11px;text-align:left;overflow-wrap:anywhere;animation:slideIn .35s both}
 .rremark.empty{color:var(--muted)}
-.rdetail{margin-top:9px;padding-top:9px;border-top:1px solid var(--line);font-size:12px;line-height:1.6}
+.rdetail{margin-top:9px;padding-top:9px;border-top:1px solid var(--line);font-size:12px;line-height:1.6;animation:slideIn .3s both}
 .rdetail p{margin:6px 0 4px}
-.tag{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:3px 8px;font-size:10px;font-weight:900;background:#d9e1ff;color:#475c8e}
-.tag.outside{background:#cbeddf;color:#28624d}
-.packing{padding:10px 12px;border-radius:12px;background:var(--control);margin-top:8px}
-.packing strong{display:block;font-size:12px;margin-bottom:4px}
-.packrow{display:flex;gap:9px;align-items:center;padding:5px 0;font-size:12px}
-.packrow input{width:17px;height:17px;accent-color:#3e8675;margin:0;flex-shrink:0}
-.signoff{display:none;margin:16px 0 0}.signoff.show{display:block}
-.signoff button{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--shell);color:var(--ink);padding:13px;font-weight:800}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:3px 8px;font-size:10px;font-weight:900;background:#cfd9f0;color:#40558a}
+.tag.outside{background:#c3e3d2;color:#245c47}
+.tag.nophone{background:#f1cfd4;color:#8a2f43}
+.signoff{display:none;margin:16px 0 0}.signoff.show{display:block;animation:slideIn .5s both}
+.signoff button{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--shell);color:var(--ink);padding:13px;font-weight:800;transition:transform .15s}
+.signoff button:active{transform:scale(.97)}
 .footer{margin:24px 0 22px;text-align:center;font-size:10px;color:var(--muted)}
 
 /* Remark sheet */
-.backdrop{display:none;position:fixed;inset:0;background:#080f23bd;z-index:40;align-items:flex-end;justify-content:center;backdrop-filter:blur(7px)}
+.backdrop{display:none;position:fixed;inset:0;background:#3a342885;z-index:40;align-items:flex-end;justify-content:center;backdrop-filter:blur(5px)}
 .backdrop.open{display:flex}
-.sheet{width:min(100%,510px);max-height:calc(100dvh - 24px);overflow:auto;background:var(--shell);border:1px solid var(--line);border-radius:23px 23px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -14px 58px #060c214a;animation:rise .18s ease-out}
+.sheet{width:min(100%,510px);max-height:calc(100dvh - 24px);overflow:auto;background:var(--shell);border:1px solid var(--line);border-radius:23px 23px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -14px 50px #3a342833;animation:rise .28s cubic-bezier(.2,1.2,.4,1)}
 .handle{width:34px;height:4px;background:var(--line);border-radius:99px;margin:-4px auto 14px}
 .kicker{font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:850;color:var(--muted)}
 .sheet h2{margin:3px 0 4px;font-size:22px;letter-spacing:-.05em;line-height:1.15}
@@ -157,17 +166,19 @@ html[data-theme="day"] .row.current{color:#263d4f}
 textarea{width:100%;resize:vertical;min-height:88px;max-height:200px;border:1px solid var(--line);border-radius:13px;padding:12px;background:var(--control);color:var(--ink);font-size:13px;outline:none}
 textarea::placeholder{color:var(--muted)}
 .sheet-actions{display:grid;grid-template-columns:1fr 1.5fr;gap:9px;margin-top:12px}
-.sheet-actions button{min-height:46px;border-radius:12px;font-weight:900;font-size:14px;border:1px solid var(--line);background:var(--control);color:var(--ink)}
+.sheet-actions button{min-height:46px;border-radius:12px;font-weight:900;font-size:14px;border:1px solid var(--line);background:var(--control);color:var(--ink);transition:transform .15s}
+.sheet-actions button:active{transform:scale(.95)}
 .sheet-actions .save{background:var(--accent);color:var(--ink-on-accent);border-color:transparent}
-@keyframes rise{from{transform:translateY(25px);opacity:.5}to{transform:translateY(0);opacity:1}}
+@keyframes rise{from{transform:translateY(40px);opacity:.4}to{transform:translateY(0);opacity:1}}
 
 /* Effects + toast */
 .fx{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
 .fx-p{position:absolute;will-change:transform,opacity}
 .fx-ring{position:absolute;width:30px;height:30px;border-radius:50%;border:3px solid;transform:translate(-50%,-50%)}
-.toast{position:fixed;z-index:90;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;padding:10px 16px;border-radius:12px;background:#e7f4e5;color:#24534b;box-shadow:0 12px 36px #05102040;font-weight:850;font-size:12px;text-align:center;max-width:90vw}
-.toast.warn{background:#fff1c7;color:#5b4300}.toast.bad{background:#ffe0e4;color:#7a2335}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+.fx-float{position:absolute;font-weight:900;font-size:15px;will-change:transform,opacity;white-space:nowrap}
+.toast{position:fixed;z-index:90;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,15px) scale(.9);opacity:0;pointer-events:none;transition:opacity .2s,transform .3s cubic-bezier(.2,1.6,.4,1);padding:10px 16px;border-radius:12px;background:#d5e8d8;color:#1f4a3d;border:1px solid #9fc7ae;box-shadow:0 12px 30px #3a342833;font-weight:850;font-size:12px;text-align:center;max-width:90vw}
+.toast.warn{background:#f3e3b3;color:#5b4300;border-color:#d8bd6c}.toast.bad{background:#f2d3d8;color:#7a2335;border-color:#d79aa5}
+.toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
 
 @media(max-width:365px){.container{width:calc(100% - 16px)}.identity small{letter-spacing:.11em}.score .number{font-size:22px}.act{width:32px;height:32px}.row.current .act{width:36px;height:36px}.acts{gap:4px}.ricon{width:30px;height:30px;font-size:16px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
@@ -176,10 +187,7 @@ textarea::placeholder{color:var(--muted)}
 <body>
 <nav class="topbar" aria-label="Main navigation"><div class="container topbar-in">
   <div class="identity"><div class="brand-icon" aria-hidden="true">✳</div><div><b>tracker</b><small>MAKE TODAY COUNT</small></div></div>
-  <div class="header-actions">
-    <button type="button" class="icon-button" id="themeSwitch" title="Toggle day/night colors" aria-label="Toggle day/night colors">☼</button>
-    <button type="button" class="icon-button" id="downloadBtn" title="Download today's JSON" aria-label="Download today's JSON"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></button>
-  </div>
+  <button type="button" class="icon-button" id="downloadBtn" title="Download today's JSON" aria-label="Download today's JSON"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></button>
 </div></nav>
 
 <main class="container">
@@ -191,6 +199,8 @@ textarea::placeholder{color:var(--muted)}
     <div class="score pending"><strong id="countRemaining" class="number">0</strong><span class="label">Remaining</span></div>
   </section>
 
+  <div class="dayprog" aria-label="Day progress"><span>Day</span><div class="bar"><i id="dayFill"></i></div><span id="dayPct">0%</span></div>
+
   <section class="focus" aria-label="Current scheduled activity">
     <div class="focus-top">
       <span class="focus-label" id="liveState">CURRENT FOCUS</span>
@@ -198,7 +208,7 @@ textarea::placeholder{color:var(--muted)}
     </div>
     <div class="focus-main">
       <span class="focus-icon" id="activeIcon" aria-hidden="true">✦</span>
-      <div><h2 id="activeTitle">Loading…</h2><p class="note" id="activeNote"></p></div>
+      <div id="focusText"><h2 id="activeTitle">Loading…</h2><p class="note" id="activeNote"></p></div>
     </div>
     <div class="clockrow"><span id="activeTime">—</span><span id="remainingTime">—</span></div>
     <div class="progress-track"><i id="timeFill"></i></div>
@@ -208,7 +218,7 @@ textarea::placeholder{color:var(--muted)}
     <div class="section-title"><h2>My Entire Day</h2><button type="button" class="jump" id="jumpNow">Now ↓</button></div>
     <div class="legend">
       <span class="lg ok">✓ Done</span><span class="lg warn">✓ 50%+</span><span class="lg bad">✕ Not done</span>
-      <small>Tap a name for details · tap a result again to clear</small>
+      <small>Tap a task to open it · tap a result again to clear</small>
     </div>
     <div class="day-list" id="dayList"></div>
   </section>
@@ -231,23 +241,51 @@ textarea::placeholder{color:var(--muted)}
 
 <script>
 'use strict';
+/* Paths are relative to masterfolder/tracker/index.html */
+const BREAKS='../wol/breaks.html',DIET='../diet/index.html',MARINE='../manager/marinestudies/index.html',BIZ='../manager/business/index.html';
 const SCHEDULES={
-"A":[{"id":"A3-01","start":360,"end":390,"icon":"🍵","title":"Tea + Japji Sahib","note":"Wake calmly with tea and Japji Sahib.","location":"Home","details":"Stay away from the bed once awake; take a seat at the table.","tag":"H"},{"id":"A3-02","start":390,"end":420,"icon":"🧘","title":"Yoga","note":"30 minutes of gentle movement.","location":"Home","details":"Keep the routine simple and repeatable. Yoga is separate from the later workout.","tag":"H"},{"id":"A3-03","start":420,"end":450,"icon":"🥣","title":"Breakfast","note":"Eat before the morning work.","location":"Home","details":"Breakfast at the table. Prepare what you need for the first trip outside.","tag":"H"},{"id":"A3-04","start":450,"end":510,"icon":"📚","title":"Study Session 1","note":"Focused study before heading outside.","location":"Home","details":"Spend one focused hour on the most demanding subject. Keep the phone away.","tag":"H"},{"id":"A3-05","start":510,"end":540,"icon":"🚶","title":"Travel to other location","note":"Pack your bag, then travel to your study spot.","location":"Transit","details":"Pack these five essentials before leaving. Check them off in the task details.","packing":["A Water Bottle","Snack 1","Macbook","Headphones","Tablet"],"tag":"O"},{"id":"A3-06","start":540,"end":600,"icon":"💼","title":"Business Development","note":"One hour for client work and business progress.","location":"Outside","details":"Work on outreach, follow-ups, delivering websites or one measurable result.","tag":"O"},{"id":"A3-07","start":600,"end":615,"icon":"☕","title":"Coffee #1","note":"15-minute break, then back to study.","location":"Outside","details":"A real coffee break. Stand up, walk a little, or enjoy some fresh air.","tag":"O"},{"id":"A3-08","start":615,"end":675,"icon":"📖","title":"Study Session 2","note":"Another focused hour out of the house.","location":"Outside","details":"Continue the most important study work or switch to practice and review.","tag":"O"},{"id":"A3-09","start":675,"end":690,"icon":"🚶","title":"Travel home","note":"Head back for exercise.","location":"Transit","details":"Leave on time. Allow 15 minutes for the return trip.","tag":"O"},{"id":"A3-10","start":690,"end":720,"icon":"🏋️","title":"Workout","note":"30 minutes at home, before noon.","location":"Home","details":"Beginner-friendly workout with your available dumbbells and bodyweight. Consistency wins.","tag":"H"},{"id":"A3-11","start":720,"end":750,"icon":"🚿","title":"Bath","note":"Shower immediately after exercise.","location":"Home","details":"A clean break between workout and lunch.","tag":"H"},{"id":"A3-12","start":750,"end":790,"icon":"🍛","title":"Lunch","note":"Eat and reset before heading out again.","location":"Home","details":"Finish lunch and pack anything needed for the afternoon session.","tag":"H"},{"id":"A3-13","start":790,"end":805,"icon":"🚶","title":"Travel outside","note":"Second trip away from home.","location":"Transit","details":"Leave on schedule. Allow 15 minutes for travel.","tag":"O"},{"id":"A3-14","start":805,"end":865,"icon":"🎓","title":"Active Learning Module","note":"One focused learning module.","location":"Outside","details":"No rotating daily subjects. Work on your active learning module in a suitable place outside home.","tag":"O"},{"id":"A3-15","start":865,"end":925,"icon":"🤖","title":"Robotics","note":"A focused hour of robotics work.","location":"Outside","details":"Portable coding, design, theory, planning, or electronics at a suitable workspace. Hardware that cannot travel can be planned here.","tag":"O"},{"id":"A3-16","start":925,"end":955,"icon":"🛒","title":"Walmart / Outside + Voice Journal","note":"Errands, a walk, and a quick voice log.","location":"Outside","details":"Use Walmart only when needed. Otherwise walk outside. Record the journal when stationary or on foot, not while driving.","tag":"O"},{"id":"A3-17","start":955,"end":1050,"icon":"🌿","title":"Free Time","note":"Enjoy being outside. No productivity requirement.","location":"Outside","details":"Walk, enjoy the sky, rest by the water, meet someone, read, or relax away from the bed.","tag":"O"},{"id":"A3-18","start":1050,"end":1065,"icon":"🚶","title":"Travel home","note":"Return home for the evening.","location":"Transit","details":"Leave at your scheduled time and return home for the evening.","tag":"O"},{"id":"A3-19","start":1065,"end":1155,"icon":"🧹","title":"Chores + Cooking","note":"Get the household tasks and cooking done.","location":"Home","details":"Keep household chores and cooking together.","tag":"H"},{"id":"A3-20","start":1155,"end":1215,"icon":"🍽️","title":"Dinner","note":"A full hour for dinner.","location":"Home","details":"Relax and eat. Keep this as a dependable anchor.","tag":"H"},{"id":"A3-21","start":1215,"end":1275,"icon":"📖","title":"Fiction + Bed Preparation","note":"Read, dim the lights, prepare clothes.","location":"Home","details":"Quiet reading and simple preparation for tomorrow. Keep screens low-stimulation.","tag":"H"},{"id":"A3-22","start":1275,"end":1440,"icon":"😴","title":"Sleep","note":"Protect your bedtime and sleep through the night.","location":"Home","details":"Protect the bedtime. The overnight block continues into the next morning.","tag":"H","overnight":true}],
+"A":[
+{id:"W-01",start:360,end:390,icon:"🍵",title:"Tea + Japji Sahib",note:"Wake calmly with tea and Japji Sahib.",location:"Home",details:"Use tablet, downloaded version. Do not go to YouTube.",tag:"H",noPhone:true},
+{id:"W-02",start:390,end:420,icon:"🧘",title:"Yoga",note:"30 minutes of gentle movement.",location:"Home",tag:"H",link:"../yoga/index.html"},
+{id:"W-03",start:420,end:450,icon:"🥣",title:"Breakfast",note:"Eat before the morning work.",location:"Home",tag:"H",link:DIET},
+{id:"W-04",start:450,end:510,icon:"📚",title:"Study Session I",note:"Focused study to open the day.",location:"Home",tag:"H",link:MARINE},
+{id:"W-05",start:510,end:525,icon:"☕",title:"Break I",note:"15 minutes. Step away and reset.",location:"Outside",tag:"O",link:BREAKS},
+{id:"W-06",start:525,end:585,icon:"💼",title:"Business Development I",note:"One hour of client work and business progress.",location:"Outside",tag:"O",link:BIZ},
+{id:"W-07",start:585,end:600,icon:"🌤️",title:"Break II",note:"15 minutes. Move, breathe, drink water.",location:"Outside",tag:"O",link:BREAKS},
+{id:"W-08",start:600,end:630,icon:"🚗",title:"Drop Her to Work",note:"Start the car, then drive her to work.",location:"Transit",details:"Start the car and drop her approx. 5–7 minutes before 10:30. Then drive to your location.",tag:"O"},
+{id:"W-09",start:630,end:690,icon:"📖",title:"Study Session II",note:"A second focused study hour.",location:"Outside",tag:"O",link:MARINE},
+{id:"W-10",start:690,end:705,icon:"☕",title:"Coffee #1",note:"15-minute coffee break.",location:"Outside",tag:"O",link:BREAKS},
+{id:"W-11",start:705,end:765,icon:"💼",title:"Business Development II",note:"Second hour of business work.",location:"Outside",tag:"O",link:BIZ},
+{id:"W-12",start:765,end:780,icon:"🌿",title:"Break III",note:"15 minutes. Stretch and reset.",location:"Outside",tag:"O",link:BREAKS},
+{id:"W-13",start:780,end:840,icon:"🎓",title:"Active Learning Module",note:"One focused learning module (ALM).",location:"Outside",tag:"O",link:"../alm/index.html"},
+{id:"W-14",start:840,end:855,icon:"🏠",title:"Leave for Home",note:"Pack up and head home.",location:"Transit",details:"Leave on time and head home for exercise.",tag:"O"},
+{id:"W-15",start:855,end:885,icon:"🏋️",title:"Workout",note:"30 minutes at home.",location:"Home",tag:"H",link:"../manager/workout/index.html"},
+{id:"W-16",start:885,end:900,icon:"🚿",title:"Bath",note:"Shower right after exercise.",location:"Home",tag:"H",link:"../bath/index.html"},
+{id:"W-17",start:900,end:930,icon:"🍛",title:"Lunch",note:"Eat and reset.",location:"Home",tag:"H",link:DIET},
+{id:"W-18",start:930,end:1020,icon:"🧹",title:"Chores + Cooking",note:"Household tasks and cooking together.",location:"Home",tag:"H",link:DIET},
+{id:"W-19",start:1020,end:1035,icon:"🚶",title:"Get Outside Again",note:"Step out for the evening.",location:"Transit",details:"Shoes on, head out the door.",tag:"O"},
+{id:"W-20",start:1035,end:1050,icon:"📍",title:"Go to Location 2",note:"Travel to your second spot.",location:"Transit",details:"Head to location 2 for the evening block.",tag:"O"},
+{id:"W-21",start:1050,end:1110,icon:"🗂️",title:"Adhoc Slot",note:"Tasks that show up once in a while.",location:"Outside",tag:"O",link:"https://tasks.google.com",external:true},
+{id:"W-22",start:1110,end:1170,icon:"🌳",title:"Get Social",note:"Call home, roam in the park, get your fiancée back from work.",location:"Outside",details:"Call home. Roam in the park. Pick your fiancée up from work.",tag:"O"},
+{id:"W-23",start:1170,end:1215,icon:"🍽️",title:"Dinner + Entertainment",note:"Eat well, then unwind.",location:"Home",tag:"H",link:DIET},
+{id:"W-24",start:1215,end:1275,icon:"🛏️",title:"Fiction + Bed Prep",note:"Lights out; one yellow lamp remains.",location:"Home",tag:"H",link:"../bed/index.html"},
+{id:"W-25",start:1275,end:1440,icon:"😴",title:"Sleep",note:"Protect your bedtime and sleep through the night.",location:"Home",tag:"H",overnight:true,link:"../sleep/index.html"}
+],
 "B":[
-{"id":"F-01","start":300,"end":315,"icon":"⏰","title":"Wake up","note":"Up and moving. Feet on the floor.","location":"Home","details":"No snooze. Water first, then get moving.","tag":"H"},
-{"id":"F-02","start":315,"end":330,"icon":"🚗","title":"Dress up + car start","note":"Get dressed and start the car.","location":"Home","details":"Clothes on, keys, wallet, then start the car so it warms up.","tag":"H"},
-{"id":"F-03","start":330,"end":345,"icon":"🍳","title":"Breakfast","note":"Fuel before the long shift.","location":"Home","details":"Eat a proper breakfast. No skipped fuel before a long work day.","tag":"H"},
-{"id":"F-04","start":345,"end":360,"icon":"🚪","title":"Leave home","note":"Out the door on time.","location":"Transit","details":"Lunch, snacks and water packed. Lock up and go.","tag":"O"},
-{"id":"F-05","start":360,"end":1110,"icon":"🏭","title":"Work","note":"Long shift. Eat packed lunch + snacks.","location":"Outside","details":"The bar stays deliberately low outside work. Survival mode is valid.","tag":"O"},
-{"id":"F-06","start":1110,"end":1140,"icon":"🚗","title":"Leave work","note":"Head home. No bonus mission.","location":"Transit","details":"Drive safe and get home.","tag":"O"},
-{"id":"F-07","start":1140,"end":1155,"icon":"🚿","title":"Bath","note":"Wash the day off.","location":"Home","details":"A clean reset after the shift.","tag":"H"},
-{"id":"F-08","start":1155,"end":1215,"icon":"🍲","title":"Cook dinner","note":"Keep it simple.","location":"Home","details":"Simple, repeatable meal. No productivity theatre.","tag":"H"},
-{"id":"F-09","start":1215,"end":1260,"icon":"💊","title":"Dinner + melatonin","note":"Eat, then take your melatonin.","location":"Home","details":"Eat first, then take melatonin to start winding down.","tag":"H"},
-{"id":"F-10","start":1260,"end":1440,"icon":"😴","title":"Lights off + sleep","note":"Lights off. Try to sleep.","location":"Home","details":"Phone away, lights off. Sleep is the keystone habit.","tag":"H","overnight":true}
+{id:"F-01",start:300,end:315,icon:"⏰",title:"Wake up",note:"Up and moving. Feet on the floor.",location:"Home",details:"No snooze. Water first, then get moving.",tag:"H"},
+{id:"F-02",start:315,end:330,icon:"🚗",title:"Dress up + car start",note:"Get dressed and start the car.",location:"Home",details:"Clothes on, keys, wallet, then start the car so it warms up.",tag:"H"},
+{id:"F-03",start:330,end:345,icon:"🍳",title:"Breakfast",note:"Fuel before the long shift.",location:"Home",details:"Eat a proper breakfast. No skipped fuel before a long work day.",tag:"H"},
+{id:"F-04",start:345,end:360,icon:"🚪",title:"Leave home",note:"Out the door on time.",location:"Transit",details:"Lunch, snacks and water packed. Lock up and go.",tag:"O"},
+{id:"F-05",start:360,end:1110,icon:"🏭",title:"Work",note:"Long shift. Eat packed lunch + snacks.",location:"Outside",details:"The bar stays deliberately low outside work. Survival mode is valid.",tag:"O"},
+{id:"F-06",start:1110,end:1140,icon:"🚗",title:"Leave work",note:"Head home. No bonus mission.",location:"Transit",details:"Drive safe and get home.",tag:"O"},
+{id:"F-07",start:1140,end:1155,icon:"🚿",title:"Bath",note:"Wash the day off.",location:"Home",details:"A clean reset after the shift.",tag:"H"},
+{id:"F-08",start:1155,end:1215,icon:"🍲",title:"Cook dinner",note:"Keep it simple.",location:"Home",details:"Simple, repeatable meal. No productivity theatre.",tag:"H"},
+{id:"F-09",start:1215,end:1260,icon:"💊",title:"Dinner + melatonin",note:"Eat, then take your melatonin.",location:"Home",details:"Eat first, then take melatonin to start winding down.",tag:"H"},
+{id:"F-10",start:1260,end:1440,icon:"😴",title:"Lights off + sleep",note:"Lights off. Try to sleep.",location:"Home",details:"Phone away, lights off. Sleep is the keystone habit.",tag:"H",overnight:true}
 ]};
 
-const KEY='dayflow.tracker.v3',OLD_KEY='javlin.daily.v2',THEME_KEY='javlin.theme';
-const SIGN_OFF_MIN=20*60+45;
+const KEY='dayflow.tracker.v3';
+const SIGN_OFF_MIN=20*60+45; // Fri–Sun sign-off prompt; Mon–Thu is asleep by 21:15
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
 const reduceMotion=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -260,39 +298,19 @@ const time24=m=>`${pad(Math.floor(m/60)%24)}:${pad(m%60)}`;
 const rangeOf=t=>`${timeString(t.start)} – ${t.overnight?'next morning':timeString(t.end)}`;
 const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const tagOf=t=>t.tag||(t.location==='Home'?'H':'O');
-const tagMarkup=t=>`<span class="tag ${tagOf(t)==='H'?'':'outside'}">${tagOf(t)} · ${tagOf(t)==='H'?'Home':'Outside'}</span>`;
+const tagsMarkup=t=>`<div class="tags"><span class="tag ${tagOf(t)==='H'?'':'outside'}">${tagOf(t)} · ${tagOf(t)==='H'?'Home':'Outside'}</span>${t.noPhone?'<span class="tag nophone">📵 No phone</span>':''}</div>`;
 const fmtLeft=m=>m>=60?`${Math.floor(m/60)}h ${m%60}m left`:`${m} min left`;
 const RESULT_LABEL={full:'Done',half:'50%+ done',none:'Not done'};
 
 /* ---------- Storage (results: full | half | none) ---------- */
-function migrate(old){
-  const s={version:3,days:{}};
-  for(const [date,day] of Object.entries(old?.days||{})){
-    const entries={};
-    for(const [id,e] of Object.entries(day?.entries||{})){
-      if(!e)continue;
-      const st=e.status,pc=Number(e.completionPercent);
-      if(st==='Completed'||(st==='Done'&&(!Number.isFinite(pc)||pc>=85)))entries[id]={r:'full',remarks:'',at:e.savedAt};
-      else if(st==='Done'||st==='Partially Completed')entries[id]={r:'half',remarks:'',at:e.savedAt};
-      else if((st==='Not Done'||st==='Not Attempted')&&e.remarks)entries[id]={r:'none',remarks:String(e.remarks),at:e.savedAt}; // empty Not Done = old auto-close, leave unmarked
-    }
-    s.days[date]={entries,packing:day?.packing||{}};
-  }
-  return s;
-}
 function loadStore(){
-  try{
-    const raw=JSON.parse(localStorage.getItem(KEY)||'null');
-    if(raw&&raw.days&&typeof raw.days==='object')return raw;
-    const old=JSON.parse(localStorage.getItem(OLD_KEY)||'null');
-    return old?migrate(old):{version:3,days:{}};
-  }catch{return {version:3,days:{}}}
+  try{const raw=JSON.parse(localStorage.getItem(KEY)||'null');if(raw&&raw.days&&typeof raw.days==='object')return raw}catch{}
+  return {version:3,days:{}};
 }
 let store=loadStore();
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(store));return true}catch{showToast('Storage unavailable — not saved','warn');return false}}
 const dayOf=k=>store.days[k]||(store.days[k]={entries:{},packing:{}});
 const entriesOf=k=>store.days[k]?.entries||{};
-const packOf=(k,id)=>store.days[k]?.packing?.[id]||{};
 function statsFor(sched,entries){
   let full=0,half=0,none=0;
   for(const t of sched){const r=entries[t.id]?.r;if(r==='full')full++;else if(r==='half')half++;else if(r==='none')none++}
@@ -320,14 +338,23 @@ function burst(x,y,{colors,n,dist,size=8}){
     an.onfinish=()=>p.remove();
   }
 }
-function ring(x,y,color){
+function ring(x,y,color,delay=0){
   const r=document.createElement('i');r.className='fx-ring';r.style.cssText=`left:${x}px;top:${y}px;border-color:${color}`;fx.appendChild(r);
-  const an=r.animate([{transform:'translate(-50%,-50%) scale(.4)',opacity:.9},{transform:'translate(-50%,-50%) scale(3.2)',opacity:0}],{duration:600,easing:'ease-out',fill:'forwards'});
+  const an=r.animate([{transform:'translate(-50%,-50%) scale(.4)',opacity:.9},{transform:'translate(-50%,-50%) scale(3.4)',opacity:0}],{duration:650,delay,easing:'ease-out',fill:'both'});
   an.onfinish=()=>r.remove();
 }
+function floatText(x,y,text,color){
+  const el=document.createElement('b');el.className='fx-float';el.textContent=text;el.style.cssText=`left:${x}px;top:${y}px;color:${color}`;fx.appendChild(el);
+  const an=el.animate([
+    {transform:'translate(-50%,-50%) scale(.5)',opacity:0},
+    {transform:'translate(-50%,-50px) scale(1.25)',opacity:1,offset:.3},
+    {transform:'translate(-50%,-110px) scale(1)',opacity:0}
+  ],{duration:1100,easing:'ease-out',fill:'forwards'});
+  an.onfinish=()=>el.remove();
+}
 function rain(){
-  const colors=['#52d9a0','#a6eee0','#ffd25e','#d5c4ff','#ffc8ad','#ffffff','#ff808f'];
-  for(let i=0;i<110;i++){
+  const colors=['#3f8a67','#8cc9a6','#e0b33a','#9b8bd0','#e3a58a','#fff6e0','#c9788a'];
+  for(let i=0;i<90;i++){
     const p=document.createElement('i');p.className='fx-p';
     const w=6+Math.random()*6;
     p.style.cssText=`left:${Math.random()*innerWidth}px;top:-14px;width:${w}px;height:${w*(Math.random()<.5?1:.5)}px;background:${colors[i%colors.length]};border-radius:${Math.random()<.3?'50%':'2px'}`;
@@ -340,24 +367,37 @@ function rain(){
 function restartClass(el,cls,ms){el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);setTimeout(()=>el.classList.remove(cls),ms)}
 const WINS=['Done and dusted ✓','Crushed it 🔥','That\'s how it\'s done 💪','Another one down 🎯','Locked in ✨'];
 const HALVES=['Solid progress — over halfway 👏','Good push. Keep the momentum.','Most of it done. Nice.'];
-function celebrate(btn,row,r,streak){
+function celebrate(btn,row,r){
   try{navigator.vibrate&&navigator.vibrate(r==='full'?[18,40,18]:r==='half'?12:30)}catch{}
   restartClass(btn,'pop',550);
   restartClass(row,'flash-'+r,950);
   if(r==='none')restartClass(row,'shake',450);
   if(reduceMotion)return;
   const b=btn.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2;
-  if(r==='full'){ring(x,y,'#52d9a0');burst(x,y,{colors:['#52d9a0','#a6eee0','#ffd25e','#b9ebcf','#ffffff','#d5c4ff'],n:30,dist:100})}
-  else if(r==='half'){ring(x,y,'#ffd25e');burst(x,y,{colors:['#ffd25e','#ffe9a3','#ffc8ad'],n:14,dist:62,size:7})}
+  if(r==='full'){
+    ring(x,y,'#3f8a67');ring(x,y,'#e0b33a',120);
+    burst(x,y,{colors:['#3f8a67','#8cc9a6','#e0b33a','#b9d9c4','#fff6e0','#9b8bd0'],n:34,dist:105});
+    floatText(x,y,'+100%','#3f8a67');
+  }else if(r==='half'){
+    ring(x,y,'#b98a1f');
+    burst(x,y,{colors:['#e0b33a','#f1d98a','#e3a58a'],n:16,dist:64,size:7});
+    floatText(x,y,'+50%','#b98a1f');
+  }else{
+    floatText(x,y,'Logged','#b5586a');
+  }
 }
 
 /* ---------- List ---------- */
-let viewKey=todayKey();
-function rowMarkup(t,key){
-  const packs=t.packing?.length?`<div class="packing"><strong>🎒 Pack before leaving</strong>${t.packing.map((p,i)=>`<label class="packrow"><input type="checkbox" data-pack="${safe(t.id)}" data-index="${i}" ${packOf(key,t.id)[i]?'checked':''}><span>${safe(p)}</span></label>`).join('')}</div>`:'';
-  return `<article class="row" data-id="${safe(t.id)}">
+let viewKey=todayKey(),firstScrollDone=false,lastFocusId=null;
+function rowMarkup(t,i){
+  const inner=`<span class="ricon" aria-hidden="true">${safe(t.icon)}</span><span class="rtext"><span class="rname">${safe(t.title)}</span><span class="rtime">${safe(rangeOf(t))}<em class="nowpill">NOW</em></span></span>${t.link?`<span class="go" aria-hidden="true">${t.external?'↗':'›'}</span>`:''}`;
+  const info=t.link
+    ?`<a class="info" href="${safe(t.link)}"${t.external?' target="_blank" rel="noopener noreferrer"':''}>${inner}</a>`
+    :`<button type="button" class="info" aria-expanded="false">${inner}</button>`;
+  const detail=t.link?'':`<div class="rdetail" hidden>${tagsMarkup(t)}<p>${safe(t.details||t.note||'')}</p></div>`;
+  return `<article class="row enter" style="--i:${i}" data-id="${safe(t.id)}">
     <div class="row-main">
-      <button type="button" class="info" aria-expanded="false"><span class="ricon" aria-hidden="true">${safe(t.icon)}</span><span class="rtext"><span class="rname">${safe(t.title)}</span><span class="rtime">${safe(rangeOf(t))}<em class="nowpill">NOW</em></span></span></button>
+      ${info}
       <div class="acts" role="group" aria-label="Result for ${safe(t.title)}">
         <button type="button" class="act full" data-r="full" aria-pressed="false" aria-label="Done, 100%" title="Done"><span>✓</span></button>
         <button type="button" class="act half" data-r="half" aria-pressed="false" aria-label="More than 50% done" title="50%+ done"><span>✓</span></button>
@@ -365,15 +405,15 @@ function rowMarkup(t,key){
       </div>
     </div>
     <button type="button" class="rremark" hidden></button>
-    <div class="rdetail" hidden>${tagMarkup(t)}<p>${safe(t.details||t.note||'')}</p>${packs}</div>
+    ${detail}
   </article>`;
 }
 function buildList(){
   const sched=getSchedule(viewKey);
-  $('dayList').innerHTML=sched.map(t=>rowMarkup(t,viewKey)).join('');
+  $('dayList').innerHTML=sched.map((t,i)=>rowMarkup(t,i)).join('');
   firstScrollDone=false;
+  setTimeout(()=>document.querySelectorAll('#dayList .row.enter').forEach(r=>r.classList.remove('enter')),1700);
 }
-let firstScrollDone=false;
 function jumpNow(smooth=true){
   const cur=document.querySelector('#dayList .row.current')||document.querySelector('#dayList .row:not(.past)');
   if(cur)cur.scrollIntoView({behavior:smooth&&!reduceMotion?'smooth':'auto',block:'center'});
@@ -384,7 +424,7 @@ function setCount(id,val){
   if(el.textContent===v)return;
   const had=lastCounts[id]!==undefined;
   el.textContent=v;lastCounts[id]=v;
-  if(had)restartClass(el,'bump',600);
+  if(had)restartClass(el,'bump',650);
 }
 function update(){
   const now=new Date(),key=todayKey(now);
@@ -394,6 +434,9 @@ function update(){
 
   $('dateLabel').textContent=dateFromKey(key).toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
   setCount('countDone',st.done);setCount('countNotDone',st.notDone);setCount('countRemaining',st.remaining);
+
+  const s0=sched[0].start,dp=Math.max(0,Math.min(100,100*(nm-s0)/(1440-s0)));
+  $('dayFill').style.width=dp+'%';$('dayPct').textContent=Math.round(dp)+'%';
 
   const rows=$('dayList').children;
   let curIdx=-1;
@@ -405,6 +448,7 @@ function update(){
     row.classList.toggle('past',isPast);
     const e=entries[t.id],r=e?.r;
     row.classList.toggle('marked',!!r);
+    row.classList.toggle('m-full',r==='full');row.classList.toggle('m-half',r==='half');row.classList.toggle('m-none',r==='none');
     row.querySelectorAll('.act').forEach(b=>{const on=b.dataset.r===r;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',String(on))});
     const rem=row.querySelector('.rremark');
     if(r==='none'){
@@ -417,6 +461,9 @@ function update(){
 
   // Focus card
   const cur=curIdx>=0?sched[curIdx]:null;
+  const curId=cur?cur.id:'none';
+  if(lastFocusId!==null&&curId!==lastFocusId){restartClass($('focusText'),'focus-swap',500)}
+  lastFocusId=curId;
   $('liveState').textContent=cur?'CURRENT FOCUS':'BETWEEN TASKS';
   $('blockIndex').textContent=`${pad(curIdx>=0?curIdx+1:0)} / ${pad(sched.length)}`;
   const fs=$('focusStatus'),cr=cur?entries[cur.id]?.r:null;
@@ -491,16 +538,12 @@ $('dayList').addEventListener('click',e=>{
   if(act){onAct(act);return}
   const rem=e.target.closest('.rremark');
   if(rem){const row=rem.closest('.row'),t=getSchedule(viewKey).find(t=>t.id===row.dataset.id);if(t)openRemark(t);return}
-  const info=e.target.closest('.info');
+  const info=e.target.closest('button.info'); // unlinked tasks expand a brief; linked tasks are plain links
   if(info){
     const row=info.closest('.row'),d=row.querySelector('.rdetail');
+    if(!d)return;
     d.hidden=!d.hidden;info.setAttribute('aria-expanded',String(!d.hidden));
   }
-});
-$('dayList').addEventListener('change',e=>{
-  if(!e.target.matches('[data-pack]'))return;
-  const id=e.target.dataset.pack,i=Number(e.target.dataset.index),d=dayOf(viewKey);
-  d.packing[id]={...(d.packing[id]||{}),[i]:e.target.checked};persist();
 });
 $('remarkSave').addEventListener('click',()=>closeRemark(true));
 $('remarkSkip').addEventListener('click',()=>closeRemark(false));
@@ -508,17 +551,16 @@ $('remarkBackdrop').addEventListener('click',e=>{if(e.target===$('remarkBackdrop
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&remarkTask)closeRemark(false)});
 $('jumpNow').addEventListener('click',()=>jumpNow(true));
 
-/* ---------- Export + theme ---------- */
+/* ---------- Export ---------- */
 function exportDay(){
   const date=todayKey(),sched=getSchedule(date),entries=entriesOf(date),stats=statsFor(sched,entries);
   const status={full:'Done',half:'Partially Done',none:'Not Done'},pct={full:100,half:50};
-  const obj={app:'Tracker',schemaVersion:4,date,dayType:modeOf(date)==='A'?'Mon–Thu schedule':'Fri–Sun schedule',exportedAt:new Date().toISOString(),summary:stats,
-    schedule:sched.map(t=>({id:t.id,title:t.title,tag:tagOf(t),start:time24(t.start),end:t.overnight?'Next morning':time24(t.end),...(t.packing?{packingItems:t.packing}:{})})),
+  const obj={app:'Tracker',schemaVersion:5,date,dayType:modeOf(date)==='A'?'Mon–Thu schedule':'Fri–Sun schedule',exportedAt:new Date().toISOString(),summary:stats,
+    schedule:sched.map(t=>({id:t.id,title:t.title,tag:tagOf(t),start:time24(t.start),end:t.overnight?'Next morning':time24(t.end),...(t.link?{link:t.link}:{})})),
     entries:Object.fromEntries(sched.map(t=>{
       const e=entries[t.id],b={taskTitle:t.title,status:e?status[e.r]:'Unmarked',remarks:e?.remarks||''};
       if(e&&pct[e.r])b.completionPercent=pct[e.r];
       if(e?.at)b.recordedAt=e.at;
-      if(t.packing)b.packedItems=packOf(date,t.id);
       return [t.id,b];
     }))};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob);
@@ -526,18 +568,9 @@ function exportDay(){
   setTimeout(()=>URL.revokeObjectURL(url),60000);
   showToast('Daily JSON downloaded ✓');
 }
-function setTheme(theme){
-  document.documentElement.dataset.theme=theme;
-  $('themeSwitch').textContent=theme==='night'?'☼':'☾';
-  $('themeSwitch').setAttribute('aria-label',`Switch to ${theme==='night'?'day':'night'} mode`);
-  document.querySelector('meta[name="theme-color"]').content=theme==='night'?'#1a2a40':'#f9f3e9';
-  try{localStorage.setItem(THEME_KEY,theme)}catch{}
-}
 $('downloadBtn').addEventListener('click',exportDay);
 $('signoffBtn').addEventListener('click',exportDay);
-$('themeSwitch').addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='day'?'night':'day'));
 
-try{setTheme(localStorage.getItem(THEME_KEY)||'night')}catch{setTheme('night')}
 persist();
 buildList();
 update();
