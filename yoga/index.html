@@ -1,1 +1,1493 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f4ed">
+<title>SĀDHANA — 30 Minute Yoga</title>
+
+<style>
+:root {
+  --bg: #f5f4ed;
+  --card: #fffefa;
+  --ink: #203732;
+  --muted: #84928a;
+  --green: #254d48;
+  --sage: #e5eee6;
+  --gold: #bd9267;
+  --border: #e1e6df;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* LAYOUT */
+
+.shell {
+  max-width: 660px;
+  margin: auto;
+  padding: 24px 17px 190px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo-symbol {
+  width: 43px;
+  height: 43px;
+  border-radius: 15px;
+  background: var(--green);
+  display: grid;
+  place-items: center;
+  color: #e7ceb0;
+  font-size: 24px;
+}
+
+.brand {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .19em;
+}
+
+.brand-sub {
+  font-size: 9px;
+  letter-spacing: .17em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.icon-btn {
+  height: 42px;
+  width: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--green);
+  font-size: 18px;
+}
+
+/* HERO */
+
+.hero {
+  padding: 40px 2px 27px;
+}
+
+.eyebrow {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  color: #a17b54;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 25px;
+  height: 1px;
+  background: var(--gold);
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(37px, 9vw, 55px);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: 1.06;
+  margin: 15px 0 13px;
+}
+
+h1 em {
+  color: var(--green);
+  font-weight: 400;
+}
+
+.hero p {
+  color: #73827c;
+  line-height: 1.7;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* OVERVIEW */
+
+.overview {
+  background: var(--green);
+  color: white;
+  border-radius: 24px;
+  padding: 21px;
+  box-shadow: 0 15px 35px rgba(37,77,72,.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.overview::after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 50%;
+  top: -155px;
+  right: -90px;
+  box-shadow:
+    0 0 0 35px rgba(255,255,255,.025),
+    0 0 0 75px rgba(255,255,255,.02);
+  pointer-events: none;
+}
+
+.overview-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.overview-small {
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: #b8d1c5;
+  font-weight: 800;
+}
+
+.overview h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 25px;
+  letter-spacing: -.035em;
+  margin: 9px 0;
+}
+
+.overview p {
+  font-size: 12px;
+  color: #c3d7cf;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 330px;
+}
+
+.duration-circle {
+  flex-shrink: 0;
+  border: 1px solid #6b9184;
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.duration-circle strong {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.duration-circle span {
+  font-size: 9px;
+  color: #cadbd3;
+  letter-spacing: .08em;
+}
+
+.timeline {
+  display: flex;
+  gap: 4px;
+  margin-top: 23px;
+  position: relative;
+  z-index: 1;
+}
+
+.segment {
+  height: 7px;
+  background: rgba(255,255,255,.17);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.segment-fill {
+  height: 100%;
+  width: 0;
+  background: #e7c395;
+  border-radius: inherit;
+}
+
+.overview-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 13px;
+  color: #bad2c9;
+  font-size: 10px;
+}
+
+.wake-status {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  text-align: right;
+}
+
+.wake-dot {
+  height: 7px;
+  width: 7px;
+  background: #e4b18c;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.wake-dot.active {
+  background: #96e7bc;
+}
+
+/* EXERCISES */
+
+.section-heading {
+  margin: 31px 2px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-heading h2 {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  margin: 0;
+}
+
+.section-heading span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.exercise-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.exercise {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  overflow: hidden;
+  transition: background .2s, border-color .2s;
+}
+
+.exercise.active {
+  background: #f0f7ee;
+  border-color: #7ea99b;
+  box-shadow: 0 8px 23px rgba(43,90,70,.08);
+}
+
+.exercise.done {
+  opacity: .65;
+}
+
+.exercise a,
+.exercise button {
+  width: 100%;
+  min-height: 77px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  color: inherit;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  text-align: left;
+}
+
+.exercise-number {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  background: #f0f2eb;
+  border-radius: 13px;
+  color: #6f8376;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.exercise.active .exercise-number {
+  background: var(--green);
+  color: white;
+}
+
+.exercise.done .exercise-number {
+  background: #e0eee3;
+  color: #497e68;
+}
+
+.exercise-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.exercise-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.exercise-title strong {
+  font-size: 14px;
+  letter-spacing: -.02em;
+}
+
+.now-tag {
+  background: #d5eadb;
+  color: #277057;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.exercise-description {
+  display: block;
+  color: #8c9890;
+  font-size: 10.5px;
+  margin-top: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.exercise-time {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.exercise-time strong {
+  font-size: 12px;
+  display: block;
+}
+
+.exercise-time small {
+  font-size: 9px;
+  color: #a2ada4;
+  display: block;
+  margin-top: 5px;
+}
+
+.arrow {
+  color: #8a9e91;
+  font-size: 16px;
+}
+
+.instructions {
+  margin: 16px 3px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* BOTTOM FIXED TIMER */
+
+.bottom-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding:
+    18px
+    15px
+    calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(
+    transparent,
+    rgba(245,244,237,.97) 24%,
+    var(--bg) 70%
+  );
+}
+
+.timer-panel {
+  max-width: 640px;
+  margin: auto;
+  background: var(--card);
+  border: 1px solid #dce5db;
+  border-radius: 24px;
+  padding: 16px 18px;
+  box-shadow: 0 13px 40px rgba(31,61,52,.15);
+}
+
+.timer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.timer-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: #84948a;
+}
+
+.time-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+#timer {
+  font-size: clamp(32px, 9vw, 43px);
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-total {
+  font-size: 11px;
+  color: #8f9e94;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.reset-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #f4f5ef;
+  color: var(--green);
+  font-size: 23px;
+}
+
+.play-btn {
+  width: 62px;
+  height: 62px;
+  border: none;
+  border-radius: 19px;
+  background: var(--green);
+  color: white;
+  font-size: 27px;
+  box-shadow: 0 7px 18px rgba(37,77,72,.25);
+}
+
+.play-btn:active {
+  transform: scale(.96);
+}
+
+.timer-info {
+  border-top: 1px solid #e9eee6;
+  margin-top: 12px;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  font-size: 11px;
+}
+
+#currentExercise {
+  font-weight: 650;
+  color: #50695d;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#nextExercise {
+  flex-shrink: 0;
+  color: #94a198;
+  font-size: 10px;
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(18,39,32,.58);
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.modal-card {
+  background: var(--card);
+  border-radius: 22px;
+  padding: 28px;
+  width: min(100%, 400px);
+}
+
+.modal-card h2 {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+.modal-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #697a70;
+}
+
+.modal-card button {
+  border: none;
+  background: var(--green);
+  color: white;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 370px) {
+  .shell { padding-left: 12px; padding-right: 12px; }
+  .exercise a, .exercise button { gap: 9px; padding: 11px; }
+  .exercise-number { width: 34px; flex-basis: 34px; }
+  .exercise-title strong { font-size: 13px; }
+  .exercise-time strong { font-size: 11px; }
+  .arrow { display: none; }
+}
+
+@media (min-width: 720px) {
+  .hero { padding-top: 55px; }
+  .exercise a, .exercise button { min-height: 85px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<main class="shell">
+
+  <header>
+    <div class="logo">
+      <div class="logo-symbol">✺</div>
+      <div>
+        <div class="brand">SĀDHANA</div>
+        <div class="brand-sub">DAILY YOGA PRACTICE</div>
+      </div>
+    </div>
+    <button class="icon-btn" id="soundBtn"
+      aria-label="Mute chimes"
+      title="Mute chimes">♪</button>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">THE 30-MINUTE PRACTICE</div>
+    <h1>Move with <em>intention.</em></h1>
+    <p>
+      A gentle progression of movement, breath and focus.<br>
+      One stage at a time, at your own pace.
+    </p>
+  </section>
+
+  <section class="overview">
+
+    <div class="overview-top">
+      <div>
+        <div class="overview-small" id="overviewStatus">
+          READY WHEN YOU ARE
+        </div>
+
+        <h2 id="overviewTitle">Your daily ritual</h2>
+
+        <p id="overviewDescription">
+          Nine stages. Your timer keeps you moving,
+          with a soft chime for each transition.
+        </p>
+      </div>
+
+      <div class="duration-circle">
+        <strong>30</strong>
+        <span>MINUTES</span>
+      </div>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+
+    <div class="overview-bottom">
+      <span id="progressLabel">0% COMPLETE</span>
+
+      <span class="wake-status">
+        <span class="wake-dot" id="wakeDot"></span>
+        <span id="wakeLabel">Checking screen...</span>
+      </span>
+    </div>
+
+  </section>
+
+  <div class="section-heading">
+    <h2>THE SEQUENCE</h2>
+    <span id="completedCount">0 / 9 completed</span>
+  </div>
+
+  <ol class="exercise-list" id="exerciseList"></ol>
+
+  <p class="instructions">
+    ↗ Tap any exercise to pause your stopwatch and open
+    its video guide. Warm-up opens written instructions.
+  </p>
+
+</main>
+
+<!-- FIXED TIMER -->
+
+<div class="bottom-wrap">
+  <div class="timer-panel">
+
+    <div class="timer-main">
+
+      <div>
+        <div class="timer-label">ELAPSED TIME</div>
+
+        <div class="time-row">
+          <output id="timer">00:00</output>
+          <span class="timer-total">/ 30:00</span>
+        </div>
+      </div>
+
+      <div class="timer-controls">
+
+        <button class="reset-btn"
+          id="resetBtn"
+          aria-label="Reset session"
+          title="Reset session">↺</button>
+
+        <button class="play-btn"
+          id="playBtn"
+          aria-label="Start session"
+          title="Start session">▶</button>
+
+      </div>
+
+    </div>
+
+    <div class="timer-info">
+      <span id="currentExercise">01 · Gentle warm-up</span>
+      <span id="nextExercise">NEXT CHIME 03:00</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- WARMUP MODAL -->
+
+<div class="modal" id="warmupModal" hidden>
+  <div class="modal-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="warmupTitle">
+
+    <h2 id="warmupTitle">Prepare the body</h2>
+
+    <p>
+      Walk gently in place, circle your shoulders,
+      loosen your hips and move your ankles.
+      Continue for three minutes.
+      Keep all movements comfortable.
+    </p>
+
+    <button id="closeModal">Back to practice</button>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /*
+    SĀDHANA
+
+    30-minute yoga stopwatch.
+
+    Individual asanas are drawn from classical
+    yoga literature. The timing and sequence are
+    a modern beginner-friendly arrangement.
+  */
+
+  const exercises = [
+    {
+      name: "Gentle warm-up",
+      sanskrit: "Preparation · Modern addition",
+      description: "Walk · shoulders · hips · ankles",
+      minutes: 3,
+      url: null
+    },
+    {
+      name: "Svastikasana",
+      sanskrit: "स्वस्तिकासन · Seated posture",
+      description: "Sit cross-legged, upright and relaxed",
+      minutes: 2,
+      url: "https://www.youtube.com/watch?v=cDGR0cmRhb8"
+    },
+    {
+      name: "Vrikshasana",
+      sanskrit: "वृक्षासन · Tree pose",
+      description: "Balance on both sides, use wall support",
+      minutes: 4,
+      url: "https://www.youtube.com/watch?v=fHC1vmGXpSs"
+    },
+    {
+      name: "Bhujangasana",
+      sanskrit: "भुजङ्गासन · Cobra pose",
+      description: "Gentle chest lifts with rest between",
+      minutes: 4,
+      url: "https://youtu.be/UYDTHxVh2EE?si=rjc_cAHp1NVEgmgU&t=10"
+    },
+    {
+      name: "Shalabhasana",
+      sanskrit: "शलभासन · Locust pose",
+      description: "Small leg lifts, three repetitions",
+      minutes: 3,
+      url: "https://www.youtube.com/watch?v=_iNsUfnXubs"
+    },
+    {
+      name: "Makarasana",
+      sanskrit: "मकरासन · Crocodile pose",
+      description: "Rest on stomach, relax shoulders",
+      minutes: 2,
+      url: "https://www.youtube.com/watch?v=nRepD5QElRY"
+    },
+    {
+      name: "Paschimottanasana",
+      sanskrit: "पश्चिमोत्तानासन · Forward bend",
+      description: "Soft knees, comfortable forward bend",
+      minutes: 4,
+      url: "https://www.youtube.com/watch?v=T8sgVyF4Ux4"
+    },
+    {
+      name: "Nadi Shodhana",
+      sanskrit: "नाडीशोधन · Alternate nostril breathing",
+      description: "Slow breathing without breath retention",
+      minutes: 4,
+      url: "https://www.youtube.com/watch?v=RUFzLVf5wL4"
+    },
+    {
+      name: "Gomukhasana",
+      sanskrit: "गोमुखासन · Cow face pose",
+      description: "Two minutes per side, gentle posture",
+      minutes: 4,
+      url: "https://youtu.be/YiIWCNlCwzk?si=g8Gtto_Len40G4XZ&t=5"
+    }
+  ];
+
+  let position = 0;
+
+  for (const exercise of exercises) {
+    exercise.start = position;
+    position += exercise.minutes * 60000;
+    exercise.end = position;
+  }
+
+  const TOTAL = position;
+  const STORAGE_KEY = "sadhana-yoga-session-v1";
+
+  const $ = id => document.getElementById(id);
+
+  const list = $("exerciseList");
+  const timeline = $("timeline");
+
+  let elapsed = 0;
+  let startingPoint = 0;
+  let running = false;
+  let ticker = null;
+  let previousStage = 0;
+  let finished = false;
+  let muted = false;
+
+  let audioContext = null;
+  let wakeLock = null;
+  let wakePending = false;
+
+  /* UTILITIES */
+
+  function formatTime(milliseconds) {
+    const seconds = Math.floor(
+      Math.max(0, milliseconds) / 1000
+    );
+
+    const mm = String(
+      Math.floor(seconds / 60)
+    ).padStart(2, "0");
+
+    const ss = String(
+      seconds % 60
+    ).padStart(2, "0");
+
+    return `${mm}:${ss}`;
+  }
+
+  function today() {
+    const d = new Date();
+
+    return [
+      d.getFullYear(),
+      String(d.getMonth() + 1).padStart(2, "0"),
+      String(d.getDate()).padStart(2, "0")
+    ].join("-");
+  }
+
+  function currentElapsed() {
+    if (!running) return elapsed;
+
+    return Math.min(
+      TOTAL,
+      elapsed + performance.now() - startingPoint
+    );
+  }
+
+  function currentStage(ms) {
+    if (ms >= TOTAL) return exercises.length - 1;
+
+    return exercises.findIndex(
+      exercise => ms < exercise.end
+    );
+  }
+
+  /* SAVE / RESTORE */
+
+  function saveState() {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          date: today(),
+          elapsed: Math.round(currentElapsed()),
+          muted
+        })
+      );
+    } catch (error) {
+      // Local storage may be unavailable.
+    }
+  }
+
+  function restoreState() {
+    try {
+      const saved = JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "null"
+      );
+
+      if (!saved) return;
+
+      muted = Boolean(saved.muted);
+
+      if (saved.date === today()) {
+        elapsed = Math.max(
+          0,
+          Math.min(TOTAL, Number(saved.elapsed) || 0)
+        );
+
+        finished = elapsed >= TOTAL;
+      }
+
+    } catch (error) {
+      // Start a fresh session.
+    }
+  }
+
+  /* BUILD EXERCISE LIST */
+
+  function buildExercises() {
+    exercises.forEach((exercise, index) => {
+      const item = document.createElement("li");
+      item.className = "exercise";
+
+      const control = document.createElement(
+        exercise.url ? "a" : "button"
+      );
+
+      if (exercise.url) {
+        control.href = exercise.url;
+        control.target = "_blank";
+        control.rel = "noopener noreferrer";
+
+        control.setAttribute(
+          "aria-label",
+          `Pause and watch ${exercise.name}`
+        );
+
+        control.addEventListener("click", pauseSession);
+      } else {
+        control.type = "button";
+
+        control.addEventListener("click", () => {
+          pauseSession();
+          $("warmupModal").hidden = false;
+          $("closeModal").focus();
+        });
+      }
+
+      const number = document.createElement("span");
+      number.className = "exercise-number";
+      number.textContent = String(index + 1).padStart(2, "0");
+
+      const main = document.createElement("span");
+      main.className = "exercise-main";
+
+      const title = document.createElement("span");
+      title.className = "exercise-title";
+
+      const name = document.createElement("strong");
+      name.textContent = exercise.name;
+
+      const now = document.createElement("span");
+      now.className = "now-tag";
+      now.textContent = "NOW";
+      now.hidden = true;
+
+      title.append(name, now);
+
+      const description = document.createElement("span");
+      description.className = "exercise-description";
+      description.textContent = exercise.sanskrit;
+      description.title = exercise.description;
+
+      main.append(title, description);
+
+      const time = document.createElement("span");
+      time.className = "exercise-time";
+
+      const duration = document.createElement("strong");
+      duration.textContent =
+        String(exercise.minutes).padStart(2, "0") + " MIN";
+
+      const range = document.createElement("small");
+      range.textContent =
+        `${formatTime(exercise.start)}–${formatTime(exercise.end)}`;
+
+      time.append(duration, range);
+
+      const arrow = document.createElement("span");
+      arrow.className = "arrow";
+      arrow.textContent = exercise.url ? "↗" : "";
+
+      control.append(number, main, time, arrow);
+      item.append(control);
+
+      item.nowTag = now;
+      item.control = control;
+
+      list.append(item);
+
+      const segment = document.createElement("div");
+      segment.className = "segment";
+      segment.style.flex = exercise.minutes;
+
+      const fill = document.createElement("div");
+      fill.className = "segment-fill";
+
+      segment.append(fill);
+      timeline.append(segment);
+    });
+  }
+
+  /* UI */
+
+  function render() {
+    const ms = currentElapsed();
+    const stage = currentStage(ms);
+    const complete = ms >= TOTAL;
+
+    $("timer").textContent = formatTime(ms);
+
+    const progress = Math.floor(
+      ms / TOTAL * 100
+    );
+
+    $("progressLabel").textContent =
+      `${progress}% COMPLETE`;
+
+    $("completedCount").textContent =
+      `${complete ? exercises.length : stage} / ${exercises.length} completed`;
+
+    $("currentExercise").textContent = complete
+      ? "Session complete · Beautiful work"
+      : `${String(stage + 1).padStart(2, "0")} · ${exercises[stage].name}`;
+
+    if (complete) {
+      $("nextExercise").textContent = "30:00 FINISHED";
+    } else {
+      const remaining = exercises[stage].end - ms;
+
+      $("nextExercise").textContent =
+        "NEXT CHIME " +
+        formatTime(Math.ceil(remaining / 1000) * 1000);
+    }
+
+    Array.from(list.children).forEach((item, index) => {
+      const active = !complete && index === stage;
+      const done = complete || index < stage;
+
+      item.classList.toggle("active", active);
+      item.classList.toggle("done", done);
+
+      item.nowTag.hidden = !active;
+
+      if (active) {
+        item.control.setAttribute("aria-current", "step");
+      } else {
+        item.control.removeAttribute("aria-current");
+      }
+    });
+
+    Array.from(timeline.children).forEach(
+      (segment, index) => {
+        const exercise = exercises[index];
+
+        const percentage = Math.min(
+          100,
+          Math.max(
+            0,
+            (ms - exercise.start) /
+            (exercise.end - exercise.start) * 100
+          )
+        );
+
+        segment.firstElementChild.style.width =
+          percentage + "%";
+      }
+    );
+
+    if (complete) {
+      $("overviewStatus").textContent = "PRACTICE COMPLETE";
+      $("overviewTitle").textContent = "You did it.";
+      $("overviewDescription").textContent =
+        "Thirty minutes dedicated to movement and breath.";
+    } else if (running) {
+      $("overviewStatus").textContent =
+        `STAGE ${String(stage + 1).padStart(2, "0")} OF 09`;
+
+      $("overviewTitle").textContent =
+        exercises[stage].name;
+
+      $("overviewDescription").textContent =
+        exercises[stage].description;
+    } else if (ms > 0) {
+      $("overviewStatus").textContent = "PRACTICE PAUSED";
+      $("overviewTitle").textContent =
+        exercises[stage].name;
+
+      $("overviewDescription").textContent =
+        exercises[stage].description;
+    } else {
+      $("overviewStatus").textContent = "READY WHEN YOU ARE";
+      $("overviewTitle").textContent = "Your daily ritual";
+      $("overviewDescription").textContent =
+        "Nine stages. Your timer keeps you moving, with a soft chime for each transition.";
+    }
+
+    $("playBtn").textContent = running ? "Ⅱ" : "▶";
+
+    $("playBtn").setAttribute(
+      "aria-label",
+      running ? "Pause session" :
+      complete ? "Start new session" :
+      ms > 0 ? "Resume session" : "Start session"
+    );
+
+    $("soundBtn").textContent = muted ? "♪̸" : "♪";
+
+    $("soundBtn").setAttribute(
+      "aria-label",
+      muted ? "Unmute chimes" : "Mute chimes"
+    );
+  }
+
+  /* CHIME AUDIO */
+
+  function setupAudio() {
+    try {
+      if (!audioContext) {
+        const AudioClass =
+          window.AudioContext || window.webkitAudioContext;
+
+        if (AudioClass) {
+          audioContext = new AudioClass();
+        }
+      }
+
+      if (audioContext && audioContext.state === "suspended") {
+        return audioContext.resume();
+      }
+    } catch (error) {}
+
+    return Promise.resolve();
+  }
+
+  function chime(finalChime = false) {
+    if (muted) return;
+
+    const ready = setupAudio();
+
+    if (!audioContext) return;
+
+    const playSound = () => {
+      if (
+        muted ||
+        !audioContext ||
+        audioContext.state !== "running"
+      ) return;
+
+      const start = audioContext.currentTime + .02;
+
+      const frequencies = finalChime
+        ? [660, 880, 1109]
+        : [784, 1046];
+
+      frequencies.forEach((frequency, index) => {
+        const oscillator = audioContext.createOscillator();
+        const volume = audioContext.createGain();
+
+        const noteStart = start + index * .17;
+
+        oscillator.type = "sine";
+        oscillator.frequency.value = frequency;
+
+        volume.gain.setValueAtTime(
+          .0001,
+          noteStart
+        );
+
+        volume.gain.exponentialRampToValueAtTime(
+          .095,
+          noteStart + .02
+        );
+
+        volume.gain.exponentialRampToValueAtTime(
+          .0001,
+          noteStart + .88
+        );
+
+        oscillator.connect(volume);
+        volume.connect(audioContext.destination);
+
+        oscillator.start(noteStart);
+        oscillator.stop(noteStart + .9);
+      });
+    };
+
+    if (audioContext.state === "running") {
+      playSound();
+    } else {
+      Promise.resolve(ready).then(playSound);
+    }
+  }
+
+  /* SESSION CONTROL */
+
+  function startSession() {
+    if (running) return;
+
+    if (elapsed >= TOTAL) {
+      elapsed = 0;
+      finished = false;
+    }
+
+    startingPoint = performance.now();
+    running = true;
+    previousStage = currentStage(elapsed);
+    finished = false;
+
+    setupAudio();
+    chime();
+
+    requestWakeLock();
+
+    clearInterval(ticker);
+    ticker = setInterval(updateTimer, 150);
+
+    render();
+    saveState();
+  }
+
+  function pauseSession() {
+    if (!running) return;
+
+    elapsed = currentElapsed();
+    running = false;
+
+    clearInterval(ticker);
+    ticker = null;
+
+    render();
+    saveState();
+  }
+
+  function resetSession() {
+    if (running || elapsed > 0) {
+      const confirmed = confirm(
+        "Reset the 30-minute session to 00:00?"
+      );
+
+      if (!confirmed) return;
+    }
+
+    running = false;
+    elapsed = 0;
+    previousStage = 0;
+    finished = false;
+
+    clearInterval(ticker);
+    ticker = null;
+
+    render();
+    saveState();
+  }
+
+  function completeSession() {
+    if (finished) return;
+
+    elapsed = TOTAL;
+    running = false;
+    finished = true;
+
+    clearInterval(ticker);
+    ticker = null;
+
+    chime(true);
+    render();
+    saveState();
+  }
+
+  function updateTimer() {
+    const ms = currentElapsed();
+
+    if (ms >= TOTAL) {
+      completeSession();
+      return;
+    }
+
+    const stage = currentStage(ms);
+
+    if (stage > previousStage) {
+      previousStage = stage;
+
+      chime();
+
+      if (document.visibilityState === "visible") {
+        const item = list.children[stage];
+
+        if (item) {
+          item.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+          });
+        }
+      }
+    }
+
+    render();
+  }
+
+  /* ANDROID SCREEN WAKE LOCK */
+
+  function showWakeStatus(message, active) {
+    $("wakeLabel").textContent = message;
+
+    $("wakeDot").classList.toggle(
+      "active",
+      Boolean(active)
+    );
+  }
+
+  async function requestWakeLock() {
+    if (document.visibilityState !== "visible") return;
+
+    if (wakePending) return;
+
+    if (wakeLock && !wakeLock.released) return;
+
+    if (
+      !("wakeLock" in navigator) ||
+      !window.isSecureContext
+    ) {
+      showWakeStatus("Wake lock unavailable", false);
+      return;
+    }
+
+    wakePending = true;
+
+    try {
+      const sentinel = await navigator.wakeLock.request(
+        "screen"
+      );
+
+      wakeLock = sentinel;
+
+      showWakeStatus("Screen stays awake", true);
+
+      sentinel.addEventListener("release", () => {
+        if (wakeLock === sentinel) {
+          wakeLock = null;
+
+          showWakeStatus(
+            "Screen wake released",
+            false
+          );
+        }
+      });
+
+    } catch (error) {
+      showWakeStatus(
+        "Screen awake unavailable",
+        false
+      );
+    } finally {
+      wakePending = false;
+    }
+  }
+
+  /* EVENTS */
+
+  $("playBtn").addEventListener("click", () => {
+    if (running) {
+      pauseSession();
+    } else {
+      startSession();
+    }
+  });
+
+  $("resetBtn").addEventListener(
+    "click",
+    resetSession
+  );
+
+  $("soundBtn").addEventListener("click", () => {
+    muted = !muted;
+
+    if (!muted) {
+      setupAudio();
+    }
+
+    render();
+    saveState();
+  });
+
+  $("closeModal").addEventListener("click", () => {
+    $("warmupModal").hidden = true;
+  });
+
+  $("warmupModal").addEventListener("click", event => {
+    if (event.target === $("warmupModal")) {
+      $("warmupModal").hidden = true;
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      $("warmupModal").hidden = true;
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      requestWakeLock();
+      if (running) updateTimer();
+    } else {
+      saveState();
+    }
+  });
+
+  window.addEventListener("focus", () => {
+    requestWakeLock();
+
+    if (running) {
+      updateTimer();
+    }
+  });
+
+  window.addEventListener("pagehide", saveState);
+
+  document.addEventListener(
+    "pointerdown",
+    () => {
+      requestWakeLock();
+    },
+    { once: true }
+  );
+
+  // Save progress periodically.
+  setInterval(() => {
+    if (running) {
+      saveState();
+    }
+  }, 4000);
+
+  /* INITIALIZATION */
+
+  restoreState();
+  buildExercises();
+  previousStage = currentStage(elapsed);
+  render();
+  requestWakeLock();
+
+})();
+</script>
+
+</body>
+</html>
+
