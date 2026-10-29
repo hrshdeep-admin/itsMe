@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ece9de">
+<title>Reset Ritual — 15 minutes</title>
+<style>
+:root{
+  color-scheme:light;--bg:#ece9de;--paper:#faf8f1;--ink:#17332f;--muted:#667a71;
+  --line:#d8dccc;--forest:#174e46;--forest2:#236a5d;--soft:#e1eee2;
+  --gold:#edbc72;--glass:#ffffffaf;--shadow:0 18px 45px #324b3920;
+}
+:root[data-theme="night"]{
+  color-scheme:dark;--bg:#142320;--paper:#21332f;--ink:#e9f3e9;--muted:#b0c0b5;
+  --line:#3c5248;--forest:#1b4a40;--forest2:#2e6958;--soft:#28473e;
+  --gold:#f0c27b;--glass:#203a33ca;--shadow:0 18px 45px #0004;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100dvh;padding-bottom:calc(26px + env(safe-area-inset-bottom));background:var(--bg);color:var(--ink);font:400 15px/1.48 system-ui,-apple-system,"Segoe UI",sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 12% 10%,#8cb9aa38,transparent 36%),radial-gradient(circle at 90% 60%,#e1b67933,transparent 43%)}
+button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+a{color:inherit}.wrap{width:min(100% - 28px,610px);margin:auto}
+nav{height:61px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:13px;letter-spacing:.12em;font-weight:900;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none}
+.brand-mark{background:var(--forest);color:#edf8ee;border-radius:11px;height:32px;width:32px;display:grid;place-items:center;font-size:21px}
+.nav-actions{display:flex;gap:7px}
+.iconbtn{border:1px solid var(--line);color:var(--ink);background:var(--paper);border-radius:11px;min-width:38px;height:38px;display:grid;place-items:center;font-size:17px}
+.intro{padding:15px 4px 19px}.eyebrow{margin:0 0 6px;color:var(--forest2);font-size:10px;font-weight:900;letter-spacing:.19em;text-transform:uppercase}
+:root[data-theme="night"] .eyebrow{color:#9ad1b6}
+h1{font-size:clamp(30px,8vw,47px);line-height:1.05;letter-spacing:-.065em;margin:0 0 8px;font-weight:850}
+.subtitle{margin:0;color:var(--muted);font-size:13px;max-width:47ch}
+.session{background:linear-gradient(153deg,#1c5a4f 0%,#143c36 85%);color:#f2f7ee;border-radius:27px;box-shadow:var(--shadow);padding:18px;overflow:hidden;position:relative}
+.session:before{content:"";position:absolute;pointer-events:none;width:320px;height:320px;border:1px solid #ffffff16;border-radius:50%;right:-160px;top:-160px;box-shadow:0 0 0 48px #ffffff09,0 0 0 96px #ffffff06}
+.session-top,.phase-head{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1}
+.kicker{font-size:10px;letter-spacing:.14em;font-weight:850;color:#add8c6;text-transform:uppercase}
+.countpill{border:1px solid #ffffff31;border-radius:99px;padding:5px 9px;font-size:10px;font-weight:750;background:#ffffff0b;white-space:nowrap}
+.clock-space{position:relative;display:grid;place-items:center;margin:5px auto 8px;min-height:190px}
+.dial{width:184px;height:184px;position:relative;display:grid;place-items:center}
+.dial svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.dial circle{fill:none;stroke-width:7}
+#ringTrack{stroke:#ffffff22}#ringFill{stroke:#f3c885;stroke-linecap:round;transition:stroke-dashoffset .15s linear}
+.dial-text{text-align:center;position:relative;z-index:1}
+#timeLeft{font-size:49px;letter-spacing:-.065em;line-height:1;font-weight:820;font-variant-numeric:tabular-nums}
+.dial-text small{display:block;text-transform:uppercase;letter-spacing:.16em;color:#c2dacd;font-size:9px;font-weight:750;margin-top:8px}
+.phase-pane{border:1px solid #ffffff25;background:#ffffff11;border-radius:19px;padding:16px;min-height:171px;position:relative}
+.phase-name{font-size:10px;letter-spacing:.15em;font-weight:850;color:#bce4c7;text-transform:uppercase}
+.phase-heading{display:flex;align-items:center;gap:10px;margin-top:5px}
+.phase-emoji{font-size:31px;line-height:1}
+#phaseTitle{margin:0;letter-spacing:-.045em;font-size:25px;line-height:1.15;font-weight:800}
+#phaseDescription{margin:9px 0 0;color:#e0eae2;font-size:13px;line-height:1.5;max-width:55ch}
+.cue{font-size:12px;margin-top:12px;display:flex;gap:8px;align-items:flex-start;color:#f6d99d}
+.cue b{font-weight:750}
+.breath-ui{display:flex;align-items:center;gap:13px;margin-top:14px;padding:8px 10px;background:#082d29a8;border-radius:14px}
+.breath-orb{height:56px;width:56px;flex:none;border-radius:50%;background:radial-gradient(circle at 38% 32%,#f6e4ad,#8ddec0 65%,#4c9f84);box-shadow:0 0 25px #78dcc473;transform:scale(.7);will-change:transform}
+.breath-title{font-size:18px;font-weight:850;line-height:1.1;letter-spacing:-.02em}
+.breath-hint{font-size:11px;color:#b9d8ca;margin-top:3px}
+.intent-ui{margin-top:13px}
+.intent-ui label{display:block;color:#d9eee0;font-size:11px;margin-bottom:6px}
+.intent-ui input{width:100%;height:42px;padding:0 12px;background:#f7fbf5;color:#1e3831;border:0;border-radius:11px;font-size:13px}
+.phase-time{display:flex;justify-content:space-between;margin:14px 1px 7px;color:#b7d5c7;font-size:10px;font-weight:800;letter-spacing:.04em}
+.phase-progress{height:5px;background:#ffffff28;border-radius:100px;overflow:hidden}
+.phase-progress i{height:100%;width:0;display:block;background:#f2cb8d;border-radius:100px;transition:width .15s linear}
+.controls{display:grid;grid-template-columns:1fr 49px;gap:9px;margin-top:15px}
+.startbtn,.resetbtn{min-height:54px;border-radius:15px;font-weight:850;border:1px solid transparent}
+.startbtn{background:#f4cf93;color:#203c32;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px}
+.startbtn:active,.resetbtn:active{transform:scale(.98)}
+.resetbtn{background:#ffffff14;border-color:#ffffff3b;color:#f9faf6;font-size:22px}
+.status{min-height:17px;text-align:center;font-size:10px;color:#b9d6c9;margin-top:10px}
+.milestones{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:16px 0 0}
+.milestone{min-width:0}.milestone-bar{height:5px;background:var(--line);border-radius:40px;overflow:hidden}.milestone-bar i{height:100%;display:block;width:0;background:var(--forest2);border-radius:40px;transition:width .15s linear}
+.milestone-name{display:block;font-size:9px;color:var(--muted);margin-top:6px;font-weight:760;text-align:center;white-space:nowrap}
+.milestone.current .milestone-name{color:var(--ink);font-weight:900}
+.summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 2px 10px}
+.summary span{color:var(--muted);font-size:11px;font-weight:650}.summary strong{font-size:14px;font-weight:850}
+.how-title{font-size:15px;letter-spacing:-.025em;margin:15px 2px 10px}
+.steps{display:grid;gap:7px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;display:flex;gap:12px;align-items:center;padding:12px}
+.step-num{width:36px;height:36px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:19px;flex:none}
+.step-text{flex:1;min-width:0}.step-text strong{display:block;font-size:13px;letter-spacing:-.015em}.step-text small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.step-length{font-size:11px;color:var(--muted);font-weight:850;white-space:nowrap}
+.step.active{border-color:#529484;box-shadow:0 0 0 1px #529484}.step.done{opacity:.64}
+details{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:13px 15px;color:var(--muted);font-size:12px}
+summary{cursor:pointer;font-weight:800;color:var(--ink);font-size:13px}
+details p{margin:9px 0}details ul{margin:7px 0 0;padding-left:20px}details li{margin:6px 0}details a{color:var(--forest2)}
+:root[data-theme="night"] details a{color:#9cdbbf}
+.foot{text-align:center;font-size:10px;color:var(--muted);margin:18px 0 0}
+@media(max-width:390px){.intro{padding-top:8px;padding-bottom:12px}.session{padding:14px;border-radius:22px}.clock-space{min-height:169px}.dial{height:163px;width:163px}#timeLeft{font-size:44px}.phase-pane{min-height:155px;padding:13px}#phaseTitle{font-size:23px}.phase-emoji{font-size:27px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Top navigation">
+    <a class="brand" href="../tracker/index.html"><span class="brand-mark">✳</span> javlin <span style="opacity:.5">/</span> reset</a>
+    <div class="nav-actions">
+      <button class="iconbtn" id="soundBtn" aria-label="Mute chimes" aria-pressed="true" title="Sound on or off">♫</button>
+      <button class="iconbtn" id="themeBtn" aria-label="Switch appearance" title="Day or night appearance">☾</button>
+    </div>
+  </nav>
+  <header class="intro">
+    <p class="eyebrow" id="slotLabel">THE BETWEEN-TASK RITUAL</p>
+    <h1>Take your mind<br>off the clock.</h1>
+    <p class="subtitle">15 minutes. Five quiet moves. Guided automatically—no scrolling, no hustle, no productivity tricks.</p>
+  </header>
+  <main>
+    <section class="session" aria-label="Interactive break timer">
+      <div class="session-top"><span class="kicker" id="sessionState">READY WHEN YOU ARE</span><span class="countpill" id="phaseNumber">01 / 05</span></div>
+      <div class="clock-space">
+        <div class="dial" role="timer" aria-label="Time left in ritual">
+          <svg viewBox="0 0 184 184" aria-hidden="true"><circle id="ringTrack" cx="92" cy="92" r="82"/><circle id="ringFill" cx="92" cy="92" r="82"/></svg>
+          <div class="dial-text"><div id="timeLeft">15:00</div><small>total remaining</small></div>
+        </div>
+      </div>
+      <div class="phase-pane" aria-live="off">
+        <span class="phase-name" id="phaseCategory">01 · DISCONNECT</span>
+        <div class="phase-heading"><span class="phase-emoji" id="phaseEmoji">🔌</span><h2 id="phaseTitle">Leave the task behind.</h2></div>
+        <p id="phaseDescription">Stand up. Save your place. Pour water or get your coffee if this is your coffee break. Step away from the desk.</p>
+        <div class="cue" id="phaseCue"><span>✦</span><b>Permission to do nothing useful for two minutes.</b></div>
+        <div class="breath-ui" id="breathUI" hidden>
+          <div class="breath-orb" id="breathOrb" aria-hidden="true"></div>
+          <div><div class="breath-title" id="breathTitle">Breathe in · 4s</div><div class="breath-hint">Gentle breathing. No holding or forcing.</div></div>
+        </div>
+        <div class="intent-ui" id="intentUI" hidden>
+          <label for="nextAction">When I return, the very first small action:</label>
+          <input id="nextAction" type="text" maxlength="130" autocomplete="off" placeholder="e.g. Open notes and review page 3">
+        </div>
+      </div>
+      <div class="phase-time"><span id="phaseCountdown">02:00 left in this step</span><span id="phaseRange">0:00 — 2:00</span></div>
+      <div class="phase-progress"><i id="phaseFill"></i></div>
+      <div class="controls"><button type="button" class="startbtn" id="startBtn">▶ &nbsp; Begin the reset</button><button type="button" class="resetbtn" id="resetBtn" title="Restart ritual" aria-label="Restart ritual">↺</button></div>
+      <div class="status" id="statusLine" role="status">Place your phone down after pressing Start. Listen for chimes.</div>
+    </section>
+    <div class="milestones" id="milestones" aria-label="Ritual progress"></div>
+    <div class="summary"><span>COMPLETED TODAY</span><strong id="todayCount">0 resets</strong></div>
+    <h3 class="how-title">Your five-part reset</h3>
+    <div class="steps" id="steps"></div>
+    <details>
+      <summary>Why this routine? Research & limits</summary>
+      <p>The components have research support, but this exact 15-minute combination has <b>not</b> been tested as a package. It is a practical synthesis, not a guaranteed performance boost.</p>
+      <ul>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/36044424/" target="_blank" rel="noopener noreferrer">Micro-break meta-analysis</a> — small improvements in energy and fatigue; no clear overall performance improvement.</li>
+        <li><a href="https://www.cdc.gov/workplace-health-promotion/media/pdfs/2024/06/Workplace-Physical-Activity-Break-Guide-508.pdf" target="_blank" rel="noopener noreferrer">CDC activity break guide</a> — movement breaks are a practical way to interrupt sitting.</li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/36630953/" target="_blank" rel="noopener noreferrer">Five-minute breathing trial</a> — regular guided breathing helped mood; effects for any single break are uncertain.</li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S027249442500115X" target="_blank" rel="noopener noreferrer">Nature exposure meta-analysis</a> — modest, variable attention benefits; three minutes is not a proven dose.</li>
+        <li><a href="https://doi.org/10.1080/10463283.2024.2334563" target="_blank" rel="noopener noreferrer">If–then planning meta-analysis</a> — linking a cue to one clear action improves follow-through.</li>
+      </ul>
+      <p>Move gently. If slow breathing feels uncomfortable or dizzying, return to your natural breath. No special drink or outdoor space required. This app works offline; optional chimes and screen wake lock depend on your browser.</p>
+    </details>
+    <p class="foot">Made for your four Mon–Thu break windows · no account · saved on this device.</p>
+  </main>
+</div>
+<script>
+'use strict';
+const PHASES = [
+  {mins:2,emoji:'🔌',short:'Unhook',category:'DISCONNECT',title:'Leave the task behind.',description:'Stand up. Save your place. Pour water or pick up your coffee if you want. Step away from your work spot.',cue:'No inbox. No unfinished-task debate. Your job now: pause.'},
+  {mins:3,emoji:'🚶',short:'Move',category:'GENTLE MOVEMENT',title:'Walk, without a mission.',description:'Walk at a comfortable pace. Outdoors if convenient; indoors is fine too. Relax your hands and shoulders.',cue:'Optional game: notice three different colours around you.'},
+  {mins:5,emoji:'🫧',short:'Breathe',category:'NERVOUS SYSTEM',title:'Slow down your breathing.',description:'Stand or sit comfortably. Follow the gentle breathing circle: about four seconds in, six seconds out. Normal-size breaths.',cue:'No breath holds. If it feels strained, ignore the rhythm and breathe naturally.'},
+  {mins:3,emoji:'🌿',short:'Notice',category:'SOFT ATTENTION',title:'Let your attention wander.',description:'Look into the distance. Trees, clouds, daylight, or just the room. Notice shapes and sounds without solving anything.',cue:'Coffee break? Enjoy your coffee here, without opening another app.'},
+  {mins:2,emoji:'🎯',short:'Return',category:'EASY RE-ENTRY',title:'Choose one tiny next move.',description:'Head toward your work spot. Pick the first physical action you will take when the break ends—no elaborate plan.',cue:'If I return to my task, then I will do that one first action.'}
+];
+const TOTAL = PHASES.reduce((s,p)=>s+p.mins*60000,0);
+const ENDS = []; PHASES.reduce((s,p,i)=>(ENDS[i]=s+p.mins*60000,ENDS[i]),0);
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const mmss=ms=>{const s=Math.ceil(Math.max(0,ms)/1000);return `${pad(Math.floor(s/60))}:${pad(s%60)}`};
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`};
+const STORE='javlin.breaks.session.v1',HISTORY='javlin.breaks.history.v1';
+let sound=localStorage.getItem('javlin.breaks.sound')!=='off';
+let theme=localStorage.getItem('javlin.breaks.theme')||'day';
+document.documentElement.dataset.theme=theme;
+let audioCtx=null,wake=null,lastPhase=-1;
+function fresh(){return {id:`${Date.now()}-${Math.random().toString(36).slice(2,8)}`,day:today(),state:'idle',elapsed:0,anchor:null,intent:'',counted:false}}
+function read(){try{const s=JSON.parse(localStorage.getItem(STORE));if(s&&s.day===today()&&['idle','running','paused','complete'].includes(s.state)&&Number.isFinite(s.elapsed))return s}catch{}return fresh()}
+let session=read();
+function save(){try{localStorage.setItem(STORE,JSON.stringify(session))}catch{}}
+function elapsed(){const extra=session.state==='running'?Math.max(0,Date.now()-session.anchor):0;return Math.min(TOTAL,Math.max(0,session.elapsed+extra))}
+function countDone(){let h={};try{h=JSON.parse(localStorage.getItem(HISTORY))||{}}catch{}if(!Array.isArray(h[today()]))h[today()]=[];if(!h[today()].includes(session.id))h[today()].push(session.id);for(const k of Object.keys(h))if(k!==today())delete h[k];try{localStorage.setItem(HISTORY,JSON.stringify(h))}catch{}updateCount()}
+function updateCount(){let n=0;try{const h=JSON.parse(localStorage.getItem(HISTORY))||{};n=(h[today()]||[]).length}catch{}$('todayCount').textContent=n===1?'1 reset':`${n} resets`}
+function makeLists(){
+  $('milestones').innerHTML=PHASES.map((p,i)=>`<div class="milestone" id="mile${i}"><div class="milestone-bar"><i id="mileFill${i}"></i></div><span class="milestone-name">${p.short}</span></div>`).join('');
+  $('steps').innerHTML=PHASES.map((p,i)=>`<div class="step" id="step${i}"><div class="step-num">${p.emoji}</div><div class="step-text"><strong>${p.short} · ${p.title}</strong><small>${p.description}</small></div><span class="step-length">${p.mins} min</span></div>`).join('');
+}
+function slot(){const d=new Date();const wd=d.getDay(),m=d.getHours()*60+d.getMinutes();if(wd>=1&&wd<=4){const slots=[['BREAK I',510],['BREAK II',585],['COFFEE BREAK',690],['BREAK III',765]];const s=slots.find(([,t])=>m>=t-10&&m<t+20);if(s)return `${s[0]} · 15 MINUTES`;}return 'ONE RITUAL · ANY BREAK';}
+function chime(){
+  if(!sound)return;
+  try{
+    const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;
+    audioCtx=audioCtx||new Audio();if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});
+    const base=audioCtx.currentTime;
+    [740,980].forEach((hz,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(hz,base+i*.17);g.gain.setValueAtTime(.0001,base+i*.17);g.gain.exponentialRampToValueAtTime(.075,base+i*.17+.018);g.gain.exponentialRampToValueAtTime(.0001,base+i*.17+.39);o.connect(g).connect(audioCtx.destination);o.start(base+i*.17);o.stop(base+i*.17+.4)});
+  }catch{}
+}
+function buzz(){try{if('vibrate'in navigator)navigator.vibrate([45,65,45])}catch{}}
+async function lockScreen(){
+  if(!('wakeLock'in navigator)||document.visibilityState!=='visible'||session.state!=='running'||wake)return;
+  try{const l=await navigator.wakeLock.request('screen');if(session.state==='running')wake=l;else await l.release()}catch{}
+}
+function unlockScreen(){if(wake){wake.release().catch(()=>{});wake=null}}
+function finish(){
+  session.elapsed=TOTAL;session.anchor=null;session.state='complete';
+  if(!session.counted){session.counted=true;countDone()}
+  save();unlockScreen();chime();buzz();
+}
+function render(){
+  let time=elapsed();if(session.state==='running'&&time>=TOTAL){finish();time=TOTAL}
+  const i=ENDS.findIndex(end=>time<end);const index=i<0?4:i;
+  const p=PHASES[index],start=index===0?0:ENDS[index-1],end=ENDS[index],phaseElapsed=Math.max(0,time-start);
+  if(index!==lastPhase){
+    if(lastPhase>=0&&session.state==='running'){chime();buzz()}
+    lastPhase=index;
+    $('phaseEmoji').textContent=p.emoji;
+    $('phaseTitle').textContent=p.title;
+    $('phaseDescription').textContent=p.description;
+    $('phaseCategory').textContent=`0${index+1} · ${p.category}`;
+    $('phaseCue').lastElementChild.textContent=p.cue;
+    $('phaseNumber').textContent=`0${index+1} / 05`;
+    $('breathUI').hidden=index!==2;
+    $('intentUI').hidden=index!==4;
+  }
+  $('timeLeft').textContent=mmss(TOTAL-time);
+  $('phaseCountdown').textContent=`${mmss(end-time)} left in this step`;
+  $('phaseRange').textContent=`${Math.floor(start/60000)}:00 — ${Math.floor(end/60000)}:00`;
+  $('phaseFill').style.width=`${Math.max(0,Math.min(100,phaseElapsed/(end-start)*100))}%`;
+  $('ringFill').style.strokeDashoffset=String(2*Math.PI*82*(time/TOTAL));
+  PHASES.forEach((_,j)=>{const lo=j===0?0:ENDS[j-1],hi=ENDS[j];const progress=Math.max(0,Math.min(1,(time-lo)/(hi-lo)));$('mileFill'+j).style.width=(progress*100)+'%';$('mile'+j).classList.toggle('current',j===index);$('step'+j).classList.toggle('active',j===index);$('step'+j).classList.toggle('done',time>=hi)});
+  const state=session.state;
+  $('sessionState').textContent=state==='running'?'RITUAL IN PROGRESS':state==='paused'?'PAUSED · TAKE YOUR TIME':state==='complete'?'RESET COMPLETE':'READY WHEN YOU ARE';
+  $('startBtn').innerHTML=state==='running'?'Ⅱ &nbsp; Pause':state==='paused'?'▶ &nbsp; Resume reset':state==='complete'?'↻ &nbsp; Another reset':'▶ &nbsp; Begin the reset';
+  $('statusLine').textContent=state==='running'?'Phone down. Chimes play when your browser allows them.':state==='paused'?'Timer paused. Resume whenever ready.':state==='complete'?'A genuine break. Return when ready.':'Place your phone down after pressing Start. Listen for chimes.';
+  if(state==='complete'){
+    $('phaseCategory').textContent='05 · COMPLETE';$('phaseEmoji').textContent='✳';$('phaseTitle').textContent='Reset finished.';
+    $('phaseDescription').textContent=session.intent?`Your first next action: ${session.intent}`:'Take this steadier pace into your next task.';
+    $('phaseCue').lastElementChild.textContent='No score for how relaxed you feel. Showing up is enough.';
+    $('breathUI').hidden=true;$('intentUI').hidden=true;
+    $('phaseCountdown').textContent='00:00 · session complete';
+  }
+  if(index===2&&state!=='complete'){
+    const cycle=(phaseElapsed%10000)/1000,inhale=cycle<4;
+    $('breathTitle').textContent=inhale?`Breathe in · ${Math.ceil(4-cycle)}s`:`Breathe out · ${Math.ceil(10-cycle)}s`;
+    const f=inhale?(cycle/4):((10-cycle)/6);
+    const eased=(1-Math.cos(Math.PI*f))/2;
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)$('breathOrb').style.transform=`scale(${.65+.35*eased})`;
+  }
+}
+function toggle(){
+  if(session.state==='complete'){session=fresh();session.state='running';session.anchor=Date.now();lastPhase=-1;$('nextAction').value='';save();chime();buzz();lockScreen();render();return}
+  if(session.state==='running'){
+    session.elapsed=elapsed();session.anchor=null;session.state='paused';save();unlockScreen();render();return;
+  }
+  session.anchor=Date.now();session.state='running';save();chime();buzz();lockScreen();render();
+}
+$('startBtn').addEventListener('click',toggle);
+$('resetBtn').addEventListener('click',()=>{
+  if(session.state==='running'||session.state==='paused')if(!confirm('Restart this 15-minute break from the beginning?'))return;
+  unlockScreen();session=fresh();lastPhase=-1;$('nextAction').value='';save();render();
+});
+$('nextAction').addEventListener('input',e=>{session.intent=e.target.value;save()});
+$('soundBtn').addEventListener('click',()=>{sound=!sound;localStorage.setItem('javlin.breaks.sound',sound?'on':'off');updateSettings();if(sound)chime()});
+$('themeBtn').addEventListener('click',()=>{theme=theme==='day'?'night':'day';localStorage.setItem('javlin.breaks.theme',theme);updateSettings()});
+function updateSettings(){document.documentElement.dataset.theme=theme;$('soundBtn').textContent=sound?'♫':'♪̸';$('soundBtn').setAttribute('aria-label',sound?'Mute chimes':'Enable chimes');$('soundBtn').setAttribute('aria-pressed',String(sound));$('themeBtn').textContent=theme==='day'?'☾':'☀'}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){lockScreen();render()}else unlockScreen()});
+window.addEventListener('pagehide',save);
+const circumference=2*Math.PI*82;$('ringFill').style.strokeDasharray=String(circumference);
+$('nextAction').value=session.intent||'';
+$('slotLabel').textContent=slot();
+makeLists();updateSettings();updateCount();render();
+if(session.state==='running')lockScreen();
+setInterval(render,170);
+</script>
+</body>
+</html>
