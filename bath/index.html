@@ -1,0 +1,1593 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e17">
+<title>Nightfall — Evening Ritual</title>
+
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0b0e17;
+  --surface: #151a28;
+  --surface2: #1c2232;
+  --border: #303446;
+  --text: #f0edf5;
+  --muted: #999aaf;
+  --gold: #eac58e;
+  --lavender: #c3b7f4;
+  --green: #9dd2b5;
+  --radius: 22px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at 85% 0%,
+      rgba(110, 85, 154, .17), transparent 43%),
+    radial-gradient(ellipse at 0% 65%,
+      rgba(106, 76, 62, .08), transparent 48%),
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.app {
+  max-width: 610px;
+  margin: auto;
+  padding: 22px 18px calc(35px + env(safe-area-inset-bottom));
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 2px;
+}
+
+.brand-symbol { font-size: 23px; }
+
+.live-clock {
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255,255,255,.025);
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 27px 23px 24px;
+  border: 1px solid #363349;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 85% 5%,
+      rgba(225,178,118,.13), transparent 48%),
+    linear-gradient(145deg,#242135,#161b2a 72%);
+}
+
+.moon {
+  position: absolute;
+  right: 23px;
+  top: 22px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #f0d2a5;
+  box-shadow:
+    0 0 28px rgba(235,195,141,.18),
+    0 0 70px rgba(235,195,141,.07);
+}
+
+.moon:after {
+  content: "";
+  position: absolute;
+  width: 43px;
+  height: 43px;
+  left: -14px;
+  top: -12px;
+  background: #242135;
+  border-radius: 50%;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.hero h1 {
+  max-width: 270px;
+  margin: 0;
+  font-size: clamp(31px, 8vw, 45px);
+  font-weight: 650;
+  letter-spacing: -1.8px;
+  line-height: 1.13;
+}
+
+.hero h1 span {
+  color: var(--gold);
+  font-weight: 450;
+}
+
+.hero-sub {
+  margin: 13px 0 0;
+  color: #c2bbcd;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.lamp-rule {
+  margin-top: 24px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(234,197,142,.2);
+  background: rgba(234,197,142,.065);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lamp-icon { font-size: 24px; }
+
+.lamp-rule strong {
+  display: block;
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.lamp-rule small {
+  display: block;
+  margin-top: 4px;
+  color: #b9a998;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.timing-card {
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(21,26,40,.86);
+}
+
+.timer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.small-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 750;
+  font-size: 10px;
+}
+
+.status {
+  color: var(--lavender);
+  border: 1px solid #48415e;
+  border-radius: 30px;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.countdown {
+  font-size: clamp(34px, 10vw, 51px);
+  line-height: 1.2;
+  letter-spacing: -2px;
+  font-weight: 350;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin: 17px 0 5px;
+}
+
+.next-event {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 550;
+  min-height: 17px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 23px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.progress-track {
+  height: 5px;
+  background: #343747;
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg,var(--lavender),var(--gold));
+  transition: width 1s linear;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 32px 2px 14px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 680;
+  letter-spacing: -.4px;
+}
+
+.section-head small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.focus-card {
+  padding: 21px 17px 17px;
+  background: var(--surface);
+  border: 1px solid #454056;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 35px rgba(0,0,0,.1);
+}
+
+.focus-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.focus-kicker {
+  color: var(--gold);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+.focus-tag {
+  border-radius: 20px;
+  padding: 6px 9px;
+  background: rgba(195,183,244,.11);
+  color: var(--lavender);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.focus-title {
+  margin: 16px 0 6px;
+  font-size: 23px;
+  font-weight: 650;
+  letter-spacing: -.7px;
+}
+
+.focus-desc {
+  margin: 0 0 19px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.task {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  min-height: 66px;
+  padding: 14px 13px;
+  border-radius: 14px;
+  border: 1px solid #34394b;
+  background: var(--surface2);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+
+.task:active { background: #282b3d; }
+
+.task.checked {
+  border-color: rgba(157,210,181,.22);
+  background: rgba(157,210,181,.055);
+}
+
+.task input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1.5px solid #797990;
+  margin: 1px 0 0;
+  display: grid;
+  place-items: center;
+}
+
+.task input:checked {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.task input:checked:after {
+  content: "";
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid #14251e;
+  border-bottom: 2px solid #14251e;
+  transform: translateY(-2px) rotate(-45deg);
+}
+
+.task-content {
+  display: block;
+  min-width: 0;
+}
+
+.task-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.task.checked .task-title { color: var(--green); }
+
+.task-description {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.task-counter {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: right;
+}
+
+.return-btn {
+  margin-top: 15px;
+  padding: 10px 13px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  color: var(--lavender);
+  background: transparent;
+  font-size: 12px;
+}
+
+.hidden { display: none !important; }
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  text-align: left;
+  padding: 15px 14px;
+  min-height: 71px;
+  border: 1px solid var(--border);
+  background: rgba(21,26,40,.78);
+  border-radius: 15px;
+  color: var(--text);
+  transition: border-color .15s, background .15s;
+}
+
+.timeline-item.is-selected {
+  border-color: #8e7baa;
+  background: #252438;
+}
+
+.timeline-item.is-live:not(.is-selected) {
+  border-color: #75697e;
+}
+
+.timeline-time {
+  width: 58px;
+  flex-shrink: 0;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline-copy { flex: 1; min-width: 0; }
+
+.timeline-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.timeline-detail {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.timeline-arrow {
+  color: #8e8ca1;
+  font-size: 20px;
+}
+
+.timeline-item.is-selected .timeline-arrow {
+  color: var(--gold);
+}
+
+.library-card {
+  padding: 20px;
+  background: linear-gradient(145deg,#211f35,#151a29);
+  border: 1px solid #413a56;
+  border-radius: var(--radius);
+}
+
+.library-card p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0 0 15px;
+}
+
+.library-form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.library-form input {
+  width: 100%;
+  min-width: 0;
+  padding: 14px;
+  color: var(--text);
+  border-radius: 12px;
+  border: 1px solid #41445a;
+  background: #101522;
+  outline: none;
+  font-size: 13px;
+}
+
+.library-form input:focus { border-color: var(--lavender); }
+
+.library-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.btn {
+  min-height: 46px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 750;
+  padding: 10px;
+}
+
+.btn-secondary {
+  border: 1px solid #4b4960;
+  color: var(--text);
+  background: #2a293b;
+}
+
+.btn-primary {
+  border: none;
+  background: var(--gold);
+  color: #1b1821;
+}
+
+.btn-primary:disabled {
+  background: #39394a;
+  color: #89899c;
+  cursor: not-allowed;
+}
+
+.library-message {
+  margin-top: 10px;
+  min-height: 15px;
+  color: var(--green);
+  font-size: 11px;
+}
+
+.closing {
+  margin-top: 24px;
+  padding: 23px 16px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.closing-symbol {
+  color: var(--gold);
+  font-size: 23px;
+}
+
+.closing p {
+  color: #b3a9c5;
+  font-size: 12px;
+  line-height: 1.9;
+  font-style: italic;
+}
+
+.reset-btn {
+  display: block;
+  margin: 17px auto 0;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  color: #77788c;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (min-width: 600px) {
+  .app { padding-top: 40px; }
+  .hero { padding: 35px 30px; }
+  .focus-card { padding: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="app">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-symbol" aria-hidden="true">☾</span>
+      NIGHTFALL
+    </div>
+    <div class="live-clock" id="liveClock">--:--</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Evening ritual">
+    <div class="moon" aria-hidden="true"></div>
+
+    <p class="eyebrow">YOUR DAILY EVENING RITUAL</p>
+
+    <h1>
+      Slow the<br>
+      world <span>down.</span>
+    </h1>
+
+    <p class="hero-sub">
+      8:15 PM — 9:15 PM<br>
+      One peaceful hour. Same rhythm, every night.
+    </p>
+
+    <div class="lamp-rule">
+      <span class="lamp-icon" aria-hidden="true">♨</span>
+      <div>
+        <strong>One light. Table lamp only.</strong>
+        <small>
+          From 8:15 PM, switch off every other
+          room light. Keep the evening gentle.
+        </small>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE COUNTDOWN -->
+  <section class="timing-card" aria-label="Live countdown">
+
+    <div class="timer-top">
+      <span class="small-label">Next milestone in</span>
+      <span class="status" id="status">TONIGHT</span>
+    </div>
+
+    <div class="countdown"
+         id="countdown"
+         role="timer"
+         aria-label="Time remaining">
+      00:00:00
+    </div>
+
+    <div class="next-event" id="nextEvent">
+      Evening ritual
+    </div>
+
+    <div class="progress-header">
+      <span>8:15 PM</span>
+      <span id="progressText">0% elapsed</span>
+      <span>9:15 PM</span>
+    </div>
+
+    <div class="progress-track"
+         role="progressbar"
+         aria-label="Evening routine time elapsed"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="0"
+         id="progressTrack">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+  </section>
+
+  <!-- ACTIVE TASKS -->
+  <div class="section-head">
+    <h2>Your current ritual</h2>
+    <small id="dayLabel">Tonight</small>
+  </div>
+
+  <section class="focus-card" aria-label="Selected ritual phase">
+
+    <div class="focus-head">
+      <span class="focus-kicker" id="focusKicker">
+        PHASE 01
+      </span>
+      <span class="focus-tag" id="focusTag">
+        UPCOMING
+      </span>
+    </div>
+
+    <h2 class="focus-title" id="focusTitle">
+      Settle into the evening
+    </h2>
+
+    <p class="focus-desc" id="focusDescription">
+      Make your environment ready for sleep.
+    </p>
+
+    <div class="task-list" id="taskList"></div>
+
+    <div class="task-counter" id="taskCounter"></div>
+
+    <button class="return-btn hidden"
+            id="returnNow"
+            type="button">
+      Return to current phase
+    </button>
+
+  </section>
+
+  <!-- TIMELINE -->
+  <div class="section-head">
+    <h2>Tonight's rhythm</h2>
+    <small>Tap to preview</small>
+  </div>
+
+  <nav class="timeline" aria-label="Evening schedule">
+
+    <button class="timeline-item"
+            data-stage="0" type="button">
+      <span class="timeline-time">8:15</span>
+      <span class="timeline-copy">
+        <span class="timeline-title">Prepare & unwind</span>
+        <span class="timeline-detail">Lighting, essentials, stretching, conversation</span>
+      </span>
+      <span class="timeline-arrow" aria-hidden="true">›</span>
+    </button>
+
+    <button class="timeline-item"
+            data-stage="1" type="button">
+      <span class="timeline-time">8:45</span>
+      <span class="timeline-copy">
+        <span class="timeline-title">Melatonin & gratitude</span>
+        <span class="timeline-detail">Precise time · Prayer · Lights off</span>
+      </span>
+      <span class="timeline-arrow" aria-hidden="true">›</span>
+    </button>
+
+    <button class="timeline-item"
+            data-stage="2" type="button">
+      <span class="timeline-time">9:00</span>
+      <span class="timeline-copy">
+        <span class="timeline-title">Sleep audio</span>
+        <span class="timeline-detail">Earphones · Library · Settle</span>
+      </span>
+      <span class="timeline-arrow" aria-hidden="true">›</span>
+    </button>
+
+    <button class="timeline-item"
+            data-stage="3" type="button">
+      <span class="timeline-time">9:15</span>
+      <span class="timeline-copy">
+        <span class="timeline-title">Rest</span>
+        <span class="timeline-detail">No more tasks tonight</span>
+      </span>
+      <span class="timeline-arrow" aria-hidden="true">›</span>
+    </button>
+
+  </nav>
+
+  <!-- SLEEP LIBRARY -->
+  <div class="section-head" id="library">
+    <h2>Sleep library</h2>
+    <small>9:00 PM</small>
+  </div>
+
+  <section class="library-card" aria-label="Sleep library">
+
+    <p>
+      Your chosen sleep audio, one tap away.
+      Save your library link once. It stays
+      on this device for future nights.
+    </p>
+
+    <form class="library-form" id="libraryForm">
+
+      <label class="small-label" for="libraryUrl">
+        Library address
+      </label>
+
+      <input
+        type="text"
+        id="libraryUrl"
+        placeholder="https://... or ../sleep/index.html"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <div class="library-actions">
+        <button type="submit"
+                class="btn btn-secondary">
+          Save link
+        </button>
+
+        <button type="button"
+                class="btn btn-primary"
+                id="openLibrary"
+                disabled>
+          Open library ↗
+        </button>
+      </div>
+
+    </form>
+
+    <div class="library-message"
+         id="libraryMessage"
+         role="status"
+         aria-live="polite"></div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="closing">
+    <div class="closing-symbol" aria-hidden="true">✧</div>
+
+    <p>
+      Nothing left to prove tonight.<br>
+      The day is complete. Rest is enough.
+    </p>
+
+    <button id="resetButton"
+            class="reset-btn"
+            type="button">
+      Reset tonight's checkmarks
+    </button>
+  </footer>
+
+</main>
+
+<script>
+"use strict";
+
+/*
+  NIGHTFALL
+
+  Single-file offline-friendly evening routine.
+  No external dependencies or network requests.
+
+  Time is read from the device's local clock.
+
+  20:15  Begin, table lamp only
+  20:45  Melatonin, prayer, then lights off
+  21:00  Earphones and sleep audio
+  21:15  End of routine
+
+  Checkmarks are saved separately for each date.
+*/
+
+// ------------------------------------------
+// ROUTINE DATA
+// ------------------------------------------
+
+const stages = [
+  {
+    id: "unwind",
+    start: 20 * 60 + 15,
+    end: 20 * 60 + 45,
+    kicker: "PHASE 01 · 8:15–8:45 PM",
+    title: "Prepare & unwind",
+    description:
+      "Turn down the stimulation. Prepare your space, " +
+      "then enjoy easy stretching and quiet conversation.",
+
+    tasks: [
+      {
+        id: "lamp",
+        title: "Table lamp only",
+        description:
+          "Switch off every other room light. " +
+          "The table lamp remains the only light source."
+      },
+      {
+        id: "mask",
+        title: "Eye mask ready",
+        description:
+          "Place it beside your pillow. " +
+          "Use it to block outside streetlight."
+      },
+      {
+        id: "earphones",
+        title: "Earphones ready",
+        description:
+          "Keep them within reach for the " +
+          "9:00 PM sleep-audio session."
+      },
+      {
+        id: "phone",
+        title: "Phone charging & away",
+        description:
+          "Plug it in, put it aside. " +
+          "No scrolling or unnecessary screen time."
+      },
+      {
+        id: "pillow",
+        title: "Good pillow in place",
+        description:
+          "Arrange your preferred comfortable " +
+          "pillow before getting settled."
+      },
+      {
+        id: "stretch",
+        title: "Gentle stretching",
+        description:
+          "Slow, comfortable movements. " +
+          "No strenuous exercise. No phone."
+      },
+      {
+        id: "talk",
+        title: "Quiet time with fiancée",
+        description:
+          "Light conversation together. " +
+          "No phone. No stressful discussions."
+      }
+    ]
+  },
+
+  {
+    id: "gratitude",
+    start: 20 * 60 + 45,
+    end: 21 * 60,
+    kicker: "PHASE 02 · 8:45 PM",
+    title: "Gratitude & darkness",
+    description:
+      "The 8:45 PM anchor. Follow the exact " +
+      "sequence, without rushing your prayer.",
+
+    tasks: [
+      {
+        id: "melatonin",
+        title: "8:45 PM sharp — Melatonin",
+        description:
+          "Take your usual melatonin dose, " +
+          "according to your healthcare guidance."
+      },
+      {
+        id: "prayer",
+        title: "Gratitude prayer · 5–7 minutes",
+        description:
+          "Immediately after melatonin. " +
+          "A quiet moment of sincere gratitude."
+      },
+      {
+        id: "lights",
+        title: "Turn off the table lamp",
+        description:
+          "As soon as the prayer ends, " +
+          "switch off the last light. " +
+          "Remain in darkness and rest quietly."
+      }
+    ]
+  },
+
+  {
+    id: "audio",
+    start: 21 * 60,
+    end: 21 * 60 + 15,
+    kicker: "PHASE 03 · 9:00–9:15 PM",
+    title: "Let the audio take over",
+    description:
+      "Keep everything simple. Pick one audio, " +
+      "get comfortable, and let the night become quiet.",
+
+    tasks: [
+      {
+        id: "wear-earphones",
+        title: "Put on earphones",
+        description:
+          "Get comfortable with your earphones " +
+          "at 9:00 PM."
+      },
+      {
+        id: "choose-audio",
+        title: "Choose from sleep library",
+        description:
+          "Open your library below. " +
+          "Pick one familiar sleep audio and play it."
+      },
+      {
+        id: "settle",
+        title: "Put the device away",
+        description:
+          "Settle onto your pillow. " +
+          "Let the audio continue without browsing."
+      }
+    ]
+  },
+
+  {
+    id: "rest",
+    start: 21 * 60 + 15,
+    end: Infinity,
+    kicker: "RITUAL COMPLETE · 9:15 PM",
+    title: "Now, simply rest.",
+    description:
+      "Your one-hour wind-down is complete. " +
+      "No more checklists, no more tasks. " +
+      "Keep your eyes closed and allow sleep to come.",
+    tasks: []
+  }
+];
+
+const milestones = [
+  { minute: 20 * 60 + 15, label: "8:15 PM · Begin wind-down" },
+  { minute: 20 * 60 + 45, label: "8:45 PM · Melatonin" },
+  { minute: 21 * 60, label: "9:00 PM · Sleep audio" },
+  { minute: 21 * 60 + 15, label: "9:15 PM · Rest" }
+];
+
+const $ = id => document.getElementById(id);
+
+const elements = {
+  liveClock: $("liveClock"),
+  countdown: $("countdown"),
+  nextEvent: $("nextEvent"),
+  status: $("status"),
+  progressText: $("progressText"),
+  progressFill: $("progressFill"),
+  progressTrack: $("progressTrack"),
+  focusKicker: $("focusKicker"),
+  focusTag: $("focusTag"),
+  focusTitle: $("focusTitle"),
+  focusDescription: $("focusDescription"),
+  taskList: $("taskList"),
+  taskCounter: $("taskCounter"),
+  dayLabel: $("dayLabel"),
+  returnNow: $("returnNow"),
+  libraryUrl: $("libraryUrl"),
+  libraryMessage: $("libraryMessage"),
+  openLibrary: $("openLibrary")
+};
+
+// ------------------------------------------
+// LOCAL STORAGE
+// ------------------------------------------
+
+const STORAGE_PREFIX = "nightfall-checks-";
+const LIBRARY_KEY = "nightfall-library-url";
+
+function getStored(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function setStored(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function removeStored(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch {}
+}
+
+function dateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function readChecks(key) {
+  try {
+    const data = JSON.parse(
+      getStored(STORAGE_PREFIX + key) || "{}"
+    );
+    return data && typeof data === "object" && !Array.isArray(data)
+      ? data
+      : {};
+  } catch {
+    return {};
+  }
+}
+
+let activeDate = dateKey();
+let checkedTasks = readChecks(activeDate);
+let manualStage = null;
+let lastClockStage = -1;
+
+function saveChecks() {
+  setStored(
+    STORAGE_PREFIX + activeDate,
+    JSON.stringify(checkedTasks)
+  );
+}
+
+// ------------------------------------------
+// TIME HELPERS
+// ------------------------------------------
+
+function minutesNow(date) {
+  return date.getHours() * 60 + date.getMinutes();
+}
+
+function secondsNow(date) {
+  return (
+    date.getHours() * 3600 +
+    date.getMinutes() * 60 +
+    date.getSeconds()
+  );
+}
+
+function getCurrentStage(date) {
+  const minute = minutesNow(date);
+
+  if (minute < stages[1].start) return 0;
+  if (minute < stages[2].start) return 1;
+  if (minute < stages[3].start) return 2;
+
+  return 3;
+}
+
+function milestoneDate(minute, reference) {
+  const result = new Date(reference);
+
+  result.setHours(
+    Math.floor(minute / 60),
+    minute % 60,
+    0,
+    0
+  );
+
+  return result;
+}
+
+function formatRemaining(milliseconds) {
+  const total = Math.max(
+    0,
+    Math.ceil(milliseconds / 1000)
+  );
+
+  const hours = Math.floor(total / 3600);
+  const mins = Math.floor((total % 3600) / 60);
+  const secs = total % 60;
+
+  return [hours, mins, secs]
+    .map(n => String(n).padStart(2, "0"))
+    .join(":");
+}
+
+// ------------------------------------------
+// CHECKLIST RENDERING
+// ------------------------------------------
+
+function makeTask(task) {
+  const label = document.createElement("label");
+  label.className = "task";
+
+  const isChecked = Boolean(checkedTasks[task.id]);
+
+  if (isChecked) {
+    label.classList.add("checked");
+  }
+
+  const input = document.createElement("input");
+
+  input.type = "checkbox";
+  input.checked = isChecked;
+  input.setAttribute("aria-label", task.title);
+
+  const content = document.createElement("span");
+  content.className = "task-content";
+
+  const title = document.createElement("span");
+  title.className = "task-title";
+  title.textContent = task.title;
+
+  const description = document.createElement("span");
+  description.className = "task-description";
+  description.textContent = task.description;
+
+  content.append(title, description);
+  label.append(input, content);
+
+  input.addEventListener("change", () => {
+    checkedTasks[task.id] = input.checked;
+
+    label.classList.toggle(
+      "checked",
+      input.checked
+    );
+
+    saveChecks();
+    updateTaskCounter();
+  });
+
+  return label;
+}
+
+function updateTaskCounter() {
+  const stageIndex =
+    manualStage !== null
+      ? manualStage
+      : getCurrentStage(new Date());
+
+  const tasks = stages[stageIndex].tasks;
+
+  if (!tasks.length) {
+    elements.taskCounter.textContent =
+      "The evening is complete.";
+    return;
+  }
+
+  const complete = tasks.filter(
+    task => Boolean(checkedTasks[task.id])
+  ).length;
+
+  elements.taskCounter.textContent =
+    `${complete} of ${tasks.length} completed`;
+}
+
+function renderFocus() {
+  const now = new Date();
+  const current = getCurrentStage(now);
+
+  const index =
+    manualStage !== null ? manualStage : current;
+
+  const stage = stages[index];
+
+  elements.focusKicker.textContent = stage.kicker;
+  elements.focusTitle.textContent = stage.title;
+  elements.focusDescription.textContent =
+    stage.description;
+
+  if (manualStage !== null) {
+    elements.focusTag.textContent = "PREVIEW";
+  } else if (minutesNow(now) < stages[0].start) {
+    elements.focusTag.textContent = "UPCOMING";
+  } else if (index === 3) {
+    elements.focusTag.textContent = "COMPLETE";
+  } else {
+    elements.focusTag.textContent = "CURRENT";
+  }
+
+  elements.taskList.replaceChildren();
+
+  if (stage.tasks.length) {
+    for (const task of stage.tasks) {
+      elements.taskList.appendChild(
+        makeTask(task)
+      );
+    }
+  } else {
+    const finish = document.createElement("div");
+
+    finish.style.cssText = `
+      padding: 24px 15px;
+      border-radius: 15px;
+      background: rgba(234,197,142,.06);
+      color: var(--gold);
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.9;
+    `;
+
+    finish.textContent =
+      "☾  Nothing more to do. Good night.";
+
+    elements.taskList.appendChild(finish);
+  }
+
+  elements.returnNow.classList.toggle(
+    "hidden",
+    manualStage === null
+  );
+
+  updateTaskCounter();
+}
+
+// ------------------------------------------
+// TIMELINE RENDERING
+// ------------------------------------------
+
+function renderTimeline() {
+  const now = new Date();
+  const minute = minutesNow(now);
+  const live = getCurrentStage(now);
+
+  const selected =
+    manualStage !== null ? manualStage : live;
+
+  document
+    .querySelectorAll("[data-stage]")
+    .forEach(button => {
+      const index = Number(button.dataset.stage);
+
+      button.classList.toggle(
+        "is-selected",
+        index === selected
+      );
+
+      button.classList.toggle(
+        "is-live",
+        index === live &&
+          minute >= stages[0].start
+      );
+
+      button.setAttribute(
+        "aria-current",
+        index === live &&
+          minute >= stages[0].start
+          ? "step"
+          : "false"
+      );
+    });
+}
+
+// ------------------------------------------
+// LIVE CLOCK & COUNTDOWN
+// ------------------------------------------
+
+function updateClock(now) {
+  elements.liveClock.textContent =
+    now.toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit"
+    });
+
+  elements.dayLabel.textContent =
+    now.toLocaleDateString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric"
+    });
+
+  const elapsedSeconds = secondsNow(now);
+  const startSeconds = stages[0].start * 60;
+  const endSeconds = stages[3].start * 60;
+
+  const fraction = Math.max(
+    0,
+    Math.min(
+      1,
+      (elapsedSeconds - startSeconds) /
+      (endSeconds - startSeconds)
+    )
+  );
+
+  const percentage = Math.round(fraction * 100);
+
+  elements.progressFill.style.width =
+    `${fraction * 100}%`;
+
+  elements.progressText.textContent =
+    `${percentage}% elapsed`;
+
+  elements.progressTrack.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  const next = milestones.find(
+    item => elapsedSeconds < item.minute * 60
+  );
+
+  if (next) {
+    const target = milestoneDate(
+      next.minute,
+      now
+    );
+
+    elements.countdown.textContent =
+      formatRemaining(
+        target.getTime() - now.getTime()
+      );
+
+    elements.nextEvent.textContent = next.label;
+  } else {
+    elements.countdown.textContent = "00:00:00";
+    elements.nextEvent.textContent =
+      "Ritual complete · Time to rest";
+  }
+
+  if (elapsedSeconds < startSeconds) {
+    elements.status.textContent = "BEGINS SOON";
+  } else if (elapsedSeconds < endSeconds) {
+    elements.status.textContent = "IN PROGRESS";
+  } else {
+    elements.status.textContent = "COMPLETE";
+  }
+}
+
+function renderStatic() {
+  renderFocus();
+  renderTimeline();
+}
+
+function tick() {
+  const now = new Date();
+  const newDate = dateKey(now);
+
+  // A fresh day receives a fresh checklist.
+  if (newDate !== activeDate) {
+    activeDate = newDate;
+    checkedTasks = readChecks(activeDate);
+    manualStage = null;
+    lastClockStage = -1;
+  }
+
+  const stage = getCurrentStage(now);
+
+  // Advance the displayed phase automatically.
+  if (stage !== lastClockStage) {
+    lastClockStage = stage;
+    renderStatic();
+  }
+
+  updateClock(now);
+}
+
+// ------------------------------------------
+// MANUAL TIMELINE PREVIEW
+// ------------------------------------------
+
+document
+  .querySelectorAll("[data-stage]")
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      manualStage = Number(button.dataset.stage);
+
+      renderStatic();
+
+      document
+        .querySelector(".focus-card")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+    });
+  });
+
+elements.returnNow.addEventListener(
+  "click",
+  () => {
+    manualStage = null;
+    renderStatic();
+  }
+);
+
+// ------------------------------------------
+// SLEEP LIBRARY
+// ------------------------------------------
+
+/*
+  Accept HTTP/HTTPS links or local relative paths.
+
+  Example:
+  https://example.com/library
+
+  Or:
+  ../sleep/index.html
+*/
+
+function validateLibraryUrl(value) {
+  const trimmed = value.trim();
+
+  if (!trimmed) return null;
+
+  try {
+    const parsed = new URL(
+      trimmed,
+      window.location.href
+    );
+
+    if (
+      parsed.protocol !== "https:" &&
+      parsed.protocol !== "http:"
+    ) {
+      return null;
+    }
+
+    // Explicit URLs or relative site paths only.
+    const isAbsolute = /^https?:\/\//i.test(trimmed);
+    const isRelative = /^(\/(?!\/)|\.\/|\.\.\/)/.test(trimmed);
+
+    if (!isAbsolute && !isRelative) {
+      return null;
+    }
+
+    return trimmed;
+  } catch {
+    return null;
+  }
+}
+
+function refreshLibrary() {
+  const saved = getStored(LIBRARY_KEY);
+  const valid = saved && validateLibraryUrl(saved);
+
+  elements.openLibrary.disabled = !valid;
+  elements.libraryUrl.value = valid || "";
+
+  if (valid) {
+    elements.libraryMessage.textContent =
+      "Library link saved on this device.";
+  }
+}
+
+$("libraryForm").addEventListener(
+  "submit",
+  event => {
+    event.preventDefault();
+
+    const value = validateLibraryUrl(
+      elements.libraryUrl.value
+    );
+
+    if (!value) {
+      elements.libraryMessage.textContent =
+        "Enter a valid HTTPS link or relative site path.";
+      return;
+    }
+
+    if (setStored(LIBRARY_KEY, value)) {
+      elements.libraryMessage.textContent =
+        "Saved. Your library is ready for 9:00 PM.";
+      elements.openLibrary.disabled = false;
+    } else {
+      elements.libraryMessage.textContent =
+        "Could not save the link in this browser.";
+    }
+  }
+);
+
+elements.openLibrary.addEventListener(
+  "click",
+  () => {
+    const url = validateLibraryUrl(
+      getStored(LIBRARY_KEY) || ""
+    );
+
+    if (!url) {
+      elements.libraryMessage.textContent =
+        "Save your library link first.";
+      return;
+    }
+
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  }
+);
+
+// ------------------------------------------
+// RESET TONIGHT
+// ------------------------------------------
+
+$("resetButton").addEventListener(
+  "click",
+  () => {
+    const approved = window.confirm(
+      "Clear all checkmarks for tonight?"
+    );
+
+    if (!approved) return;
+
+    checkedTasks = {};
+    removeStored(STORAGE_PREFIX + activeDate);
+
+    renderStatic();
+  }
+);
+
+// ------------------------------------------
+// STARTUP
+// ------------------------------------------
+
+refreshLibrary();
+tick();
+
+setInterval(tick, 1000);
+
+// Update immediately when returning to the tab.
+document.addEventListener(
+  "visibilitychange",
+  () => {
+    if (!document.hidden) tick();
+  }
+);
+</script>
+</body>
+</html>
