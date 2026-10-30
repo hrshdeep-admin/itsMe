@@ -3,1591 +3,1830 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b0e17">
-<title>Nightfall — Evening Ritual</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101a20">
+<title>Ritual 30 — Personal Maintenance</title>
 
 <style>
 :root {
-  color-scheme: dark;
-  --bg: #0b0e17;
-  --surface: #151a28;
-  --surface2: #1c2232;
-  --border: #303446;
-  --text: #f0edf5;
-  --muted: #999aaf;
-  --gold: #eac58e;
-  --lavender: #c3b7f4;
-  --green: #9dd2b5;
-  --radius: 22px;
+  --bg: #101a20;
+  --panel: #1b292f;
+  --panel2: #23353b;
+  --line: #34464b;
+  --text: #f0f5f2;
+  --muted: #9badae;
+  --accent: #b9f29d;
+  --accent2: #7cbb9e;
+  --warning: #e9c58b;
 }
-
 * { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
+html,body { margin:0; width:100%; height:100%; }
 body {
-  margin: 0;
-  min-height: 100dvh;
-  background:
-    radial-gradient(ellipse at 85% 0%,
-      rgba(110, 85, 154, .17), transparent 43%),
-    radial-gradient(ellipse at 0% 65%,
-      rgba(106, 76, 62, .08), transparent 48%),
-    var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
-  -webkit-tap-highlight-color: transparent;
+  font-family: system-ui,-apple-system,Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-tap-highlight-color:transparent;
 }
-
-button, input { font: inherit; }
-button { cursor: pointer; }
-button:focus-visible, input:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
+button { font:inherit; cursor:pointer; }
+button:focus-visible {
+  outline:2px solid var(--accent);
+  outline-offset:4px;
 }
-
 .app {
-  max-width: 610px;
-  margin: auto;
-  padding: 22px 18px calc(35px + env(safe-area-inset-bottom));
+  height:100vh;
+  height:100dvh;
+  max-width:530px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  padding:env(safe-area-inset-top) 18px
+          env(safe-area-inset-bottom);
+  overflow:hidden;
 }
-
 .topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 32px;
+  min-height:70px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
-
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 750;
-  letter-spacing: 2px;
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
-
-.brand-symbol { font-size: 23px; }
-
-.live-clock {
-  padding: 9px 13px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: rgba(255,255,255,.025);
-  color: var(--muted);
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
+.brand-icon {
+  width:40px;height:40px;
+  background:var(--accent);
+  color:var(--bg);
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  letter-spacing:-2px;
 }
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 27px 23px 24px;
-  border: 1px solid #363349;
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 85% 5%,
-      rgba(225,178,118,.13), transparent 48%),
-    linear-gradient(145deg,#242135,#161b2a 72%);
+.brand-name { font-size:17px; font-weight:800; letter-spacing:.5px; }
+.brand-small {
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:2px;
+  margin-top:3px;
 }
-
-.moon {
-  position: absolute;
-  right: 23px;
-  top: 22px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: #f0d2a5;
-  box-shadow:
-    0 0 28px rgba(235,195,141,.18),
-    0 0 70px rgba(235,195,141,.07);
+.icon-btn {
+  width:43px;height:43px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  font-size:21px;
 }
-
-.moon:after {
-  content: "";
-  position: absolute;
-  width: 43px;
-  height: 43px;
-  left: -14px;
-  top: -12px;
-  background: #242135;
-  border-radius: 50%;
+.day-header {
+  padding:8px 1px 13px;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
 }
-
 .eyebrow {
-  margin: 0 0 12px;
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2.5px;
+  color:var(--accent2);
+  letter-spacing:2px;
+  font-size:10px;
+  font-weight:750;
+  text-transform:uppercase;
 }
-
-.hero h1 {
-  max-width: 270px;
-  margin: 0;
-  font-size: clamp(31px, 8vw, 45px);
-  font-weight: 650;
-  letter-spacing: -1.8px;
-  line-height: 1.13;
+.day-title {
+  margin:5px 0 2px;
+  font-size:27px;
+  font-weight:800;
+  letter-spacing:-1px;
 }
-
-.hero h1 span {
-  color: var(--gold);
-  font-weight: 450;
+.day-focus {
+  font-size:12px;
+  color:var(--muted);
 }
-
-.hero-sub {
-  margin: 13px 0 0;
-  color: #c2bbcd;
-  font-size: 13px;
-  line-height: 1.7;
+.shift {
+  font-size:10px;
+  font-weight:750;
+  padding:9px 10px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  color:var(--muted);
+  white-space:nowrap;
 }
-
-.lamp-rule {
-  margin-top: 24px;
-  padding: 13px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(234,197,142,.2);
-  background: rgba(234,197,142,.065);
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.session-strip {
+  padding:12px 14px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  margin-bottom:12px;
 }
-
-.lamp-icon { font-size: 24px; }
-
-.lamp-rule strong {
-  display: block;
-  color: var(--gold);
-  font-size: 12px;
+.session-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:9px;
+  font-size:11px;
+  color:var(--muted);
+  font-weight:650;
 }
-
-.lamp-rule small {
-  display: block;
-  margin-top: 4px;
-  color: #b9a998;
-  font-size: 11px;
-  line-height: 1.5;
+.session-top strong {
+  color:var(--text);
+  font-variant-numeric:tabular-nums;
 }
-
-.timing-card {
-  margin-top: 16px;
-  padding: 20px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: rgba(21,26,40,.86);
-}
-
-.timer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.small-label {
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-weight: 750;
-  font-size: 10px;
-}
-
-.status {
-  color: var(--lavender);
-  border: 1px solid #48415e;
-  border-radius: 30px;
-  padding: 6px 10px;
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.countdown {
-  font-size: clamp(34px, 10vw, 51px);
-  line-height: 1.2;
-  letter-spacing: -2px;
-  font-weight: 350;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
-  margin: 17px 0 5px;
-}
-
-.next-event {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 550;
-  min-height: 17px;
-}
-
-.progress-header {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 23px;
-  color: var(--muted);
-  font-size: 10px;
-}
-
 .progress-track {
-  height: 5px;
-  background: #343747;
-  border-radius: 10px;
-  margin-top: 10px;
-  overflow: hidden;
+  height:5px;
+  background:#37484c;
+  border-radius:10px;
+  overflow:hidden;
 }
-
 .progress-fill {
-  width: 0%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg,var(--lavender),var(--gold));
-  transition: width 1s linear;
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  border-radius:10px;
+  transition:width .3s linear;
 }
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin: 32px 2px 14px;
+.main-area {
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  flex:1;
+  min-height:0;
 }
-
-.section-head h2 {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 680;
-  letter-spacing: -.4px;
+.current-card {
+  flex:1;
+  min-height:0;
+  background:
+    radial-gradient(circle at 100% 0%,#28433c 0%,transparent 45%),
+    var(--panel);
+  border:1px solid #3d5a52;
+  border-radius:25px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
-
-.section-head small {
-  color: var(--muted);
-  font-size: 11px;
+.card-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-shrink:0;
 }
-
-.focus-card {
-  padding: 21px 17px 17px;
-  background: var(--surface);
-  border: 1px solid #454056;
-  border-radius: var(--radius);
-  box-shadow: 0 12px 35px rgba(0,0,0,.1);
+.live-label {
+  color:var(--accent);
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:800;
 }
-
-.focus-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.step-count {
+  font-size:11px;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
 }
-
-.focus-kicker {
-  color: var(--gold);
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  font-weight: 800;
+.timer-area {
+  display:flex;
+  align-items:center;
+  gap:19px;
+  padding:14px 0 8px;
+  flex-shrink:0;
 }
-
-.focus-tag {
-  border-radius: 20px;
-  padding: 6px 9px;
-  background: rgba(195,183,244,.11);
-  color: var(--lavender);
-  font-size: 10px;
-  font-weight: 700;
+.ring {
+  width:132px;
+  height:132px;
+  position:relative;
+  flex-shrink:0;
 }
-
-.focus-title {
-  margin: 16px 0 6px;
-  font-size: 23px;
-  font-weight: 650;
-  letter-spacing: -.7px;
+.ring svg {
+  width:100%;height:100%;
+  transform:rotate(-90deg);
 }
-
-.focus-desc {
-  margin: 0 0 19px;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.75;
+.ring-track { stroke:#385048; }
+.ring-value {
+  stroke:var(--accent);
+  stroke-linecap:round;
+  transition:stroke-dashoffset .25s linear;
 }
-
-.task-list {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
+.ring-center {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
-
-.task {
-  display: flex;
-  gap: 13px;
-  align-items: flex-start;
-  min-height: 66px;
-  padding: 14px 13px;
-  border-radius: 14px;
-  border: 1px solid #34394b;
-  background: var(--surface2);
-  cursor: pointer;
-  transition: background .15s, border-color .15s;
+.timer-number {
+  font-size:34px;
+  font-weight:850;
+  letter-spacing:-1.5px;
+  font-variant-numeric:tabular-nums;
 }
-
-.task:active { background: #282b3d; }
-
-.task.checked {
-  border-color: rgba(157,210,181,.22);
-  background: rgba(157,210,181,.055);
+.timer-sub {
+  font-size:9px;
+  color:var(--muted);
+  letter-spacing:1.5px;
+  font-weight:700;
 }
-
-.task input {
-  appearance: none;
-  -webkit-appearance: none;
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  border-radius: 7px;
-  border: 1.5px solid #797990;
-  margin: 1px 0 0;
-  display: grid;
-  place-items: center;
+.timer-side { min-width:0; }
+.timer-side .mini {
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
 }
-
-.task input:checked {
-  border-color: var(--green);
-  background: var(--green);
+.timer-side .big {
+  font-size:24px;
+  font-weight:800;
+  margin-top:6px;
 }
-
-.task input:checked:after {
-  content: "";
-  width: 9px;
-  height: 5px;
-  border-left: 2px solid #14251e;
-  border-bottom: 2px solid #14251e;
-  transform: translateY(-2px) rotate(-45deg);
+.timer-side .note {
+  font-size:11px;
+  line-height:1.5;
+  color:var(--muted);
+  margin-top:5px;
 }
-
-.task-content {
-  display: block;
-  min-width: 0;
+.task-info {
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  flex:1;
 }
-
 .task-title {
-  display: block;
-  font-size: 13px;
-  font-weight: 650;
-  line-height: 1.35;
+  font-size:clamp(20px,5vw,26px);
+  font-weight:800;
+  letter-spacing:-.6px;
+  line-height:1.14;
+  margin:0 0 10px;
+  flex-shrink:0;
+}
+.instructions {
+  overflow-y:auto;
+  min-height:0;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  padding-right:3px;
+}
+.instruction-item {
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  font-size:13px;
+  line-height:1.55;
+  color:#d6e2dc;
+}
+.instruction-dot {
+  width:5px;height:5px;
+  flex-shrink:0;
+  background:var(--accent2);
+  border-radius:50%;
+  margin-top:8px;
+}
+.upcoming {
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 15px;
+  background:#18252b;
+  border:1px solid var(--line);
+  border-radius:17px;
+  min-height:74px;
+}
+.upcoming-label {
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1.5px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+.upcoming-name {
+  font-size:14px;
+  font-weight:730;
+  line-height:1.3;
+}
+.upcoming-time {
+  white-space:nowrap;
+  color:var(--accent2);
+  font-size:11px;
+  font-weight:750;
+}
+.controls {
+  flex-shrink:0;
+  padding-top:12px;
+}
+.play-button {
+  width:100%;
+  min-height:62px;
+  background:var(--accent);
+  border:none;
+  border-radius:18px;
+  color:#12231b;
+  font-weight:850;
+  font-size:17px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+}
+.play-button:active { transform:scale(.985); }
+.play-icon { font-size:22px; }
+.bottom-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  min-height:40px;
+}
+.status {
+  color:var(--muted);
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.status-dot {
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--warning);
+}
+.status-dot.good { background:var(--accent); }
+.reset-button {
+  background:none;
+  border:none;
+  color:var(--muted);
+  font-size:11px;
+  padding:10px 0 10px 10px;
 }
 
-.task.checked .task-title { color: var(--green); }
-
-.task-description {
-  display: block;
-  margin-top: 5px;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.6;
+/* Bottom-sheet menu */
+.overlay[hidden] { display:none; }
+.overlay {
+  position:fixed;
+  inset:0;
+  background:#020709ba;
+  z-index:30;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.sheet {
+  width:100%;
+  max-width:530px;
+  height:min(88dvh,850px);
+  background:#19282e;
+  border:1px solid #3b5154;
+  border-radius:26px 26px 0 0;
+  display:flex;
+  flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom);
+  animation:slideUp .2s ease-out;
+}
+@keyframes slideUp {
+  from {transform:translateY(30px);opacity:.5}
+  to {transform:translateY(0);opacity:1}
+}
+.sheet-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 20px 14px;
+}
+.sheet-title {font-size:21px;font-weight:800;}
+.tabs {
+  display:flex;
+  padding:0 14px 12px;
+  gap:5px;
+  border-bottom:1px solid var(--line);
+}
+.tab {
+  flex:1;
+  background:transparent;
+  border:1px solid transparent;
+  color:var(--muted);
+  border-radius:11px;
+  padding:11px 3px;
+  font-size:11px;
+  font-weight:750;
+}
+.tab.active {
+  background:#34483e;
+  border-color:#4a6555;
+  color:var(--accent);
+}
+.sheet-content {
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:18px;
+  overscroll-behavior:contain;
+}
+.section-intro {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  margin:0 0 16px;
+}
+.day-picker {
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:5px;
+  margin-bottom:17px;
+}
+.day-choice {
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:9px;
+  color:var(--muted);
+  padding:11px 0;
+  font-size:11px;
+  font-weight:800;
+}
+.day-choice.active {
+  color:var(--bg);
+  background:var(--accent);
+  border-color:var(--accent);
+}
+.glance-heading {
+  margin:0 0 14px;
+  font-size:20px;
+}
+.glance-row {
+  display:flex;
+  gap:13px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+.glance-time {
+  width:75px;
+  flex-shrink:0;
+  color:var(--accent2);
+  font-size:11px;
+  font-weight:750;
+  padding-top:3px;
+  font-variant-numeric:tabular-nums;
+}
+.glance-title {
+  font-size:14px;
+  font-weight:750;
+  margin-bottom:6px;
+}
+.glance-desc {
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+}
+.product {
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+.product-name {font-size:14px;font-weight:800;}
+.product-use {
+  color:var(--accent2);
+  font-size:11px;
+  margin:5px 0;
+  font-weight:700;
+}
+.product-desc {
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+}
+.tip {
+  border:1px solid var(--line);
+  background:var(--panel);
+  padding:16px;
+  border-radius:15px;
+  margin-bottom:11px;
+}
+.tip-index {
+  color:var(--accent);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+.tip-title {
+  font-weight:800;
+  margin:6px 0;
+  font-size:15px;
+}
+.tip-text {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+.info-note {
+  background:#30392c;
+  border:1px solid #62654a;
+  color:#e8ddb3;
+  padding:13px;
+  border-radius:12px;
+  font-size:12px;
+  line-height:1.6;
+  margin-top:16px;
 }
 
-.task-counter {
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 11px;
-  text-align: right;
+@media(max-height:760px) {
+  .topbar {min-height:58px}
+  .day-header {padding:4px 0 9px}
+  .day-title {font-size:24px}
+  .session-strip {padding:9px 12px;margin-bottom:9px}
+  .main-area {gap:8px}
+  .current-card {padding:13px}
+  .timer-area {padding:7px 0;gap:13px}
+  .ring {width:105px;height:105px}
+  .timer-number {font-size:28px}
+  .timer-side .big {font-size:20px}
+  .task-info {padding-top:10px}
+  .task-title {font-size:20px;margin-bottom:7px}
+  .instruction-item {font-size:12px;margin-bottom:7px}
+  .upcoming {min-height:62px;padding:10px 12px}
+  .play-button {min-height:54px}
+  .controls {padding-top:8px}
 }
-
-.return-btn {
-  margin-top: 15px;
-  padding: 10px 13px;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-  color: var(--lavender);
-  background: transparent;
-  font-size: 12px;
+@media(max-width:355px) {
+  .ring {width:104px;height:104px}
+  .timer-area {gap:10px}
+  .day-title {font-size:23px}
+  .current-card {padding:12px}
+  .timer-side .big {font-size:19px}
 }
-
-.hidden { display: none !important; }
-
-.timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.timeline-item {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  width: 100%;
-  text-align: left;
-  padding: 15px 14px;
-  min-height: 71px;
-  border: 1px solid var(--border);
-  background: rgba(21,26,40,.78);
-  border-radius: 15px;
-  color: var(--text);
-  transition: border-color .15s, background .15s;
-}
-
-.timeline-item.is-selected {
-  border-color: #8e7baa;
-  background: #252438;
-}
-
-.timeline-item.is-live:not(.is-selected) {
-  border-color: #75697e;
-}
-
-.timeline-time {
-  width: 58px;
-  flex-shrink: 0;
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 750;
-  font-variant-numeric: tabular-nums;
-}
-
-.timeline-copy { flex: 1; min-width: 0; }
-
-.timeline-title {
-  display: block;
-  font-size: 12px;
-  font-weight: 650;
-}
-
-.timeline-detail {
-  display: block;
-  margin-top: 5px;
-  color: var(--muted);
-  font-size: 10px;
-}
-
-.timeline-arrow {
-  color: #8e8ca1;
-  font-size: 20px;
-}
-
-.timeline-item.is-selected .timeline-arrow {
-  color: var(--gold);
-}
-
-.library-card {
-  padding: 20px;
-  background: linear-gradient(145deg,#211f35,#151a29);
-  border: 1px solid #413a56;
-  border-radius: var(--radius);
-}
-
-.library-card p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-  margin: 0 0 15px;
-}
-
-.library-form {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.library-form input {
-  width: 100%;
-  min-width: 0;
-  padding: 14px;
-  color: var(--text);
-  border-radius: 12px;
-  border: 1px solid #41445a;
-  background: #101522;
-  outline: none;
-  font-size: 13px;
-}
-
-.library-form input:focus { border-color: var(--lavender); }
-
-.library-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-}
-
-.btn {
-  min-height: 46px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 750;
-  padding: 10px;
-}
-
-.btn-secondary {
-  border: 1px solid #4b4960;
-  color: var(--text);
-  background: #2a293b;
-}
-
-.btn-primary {
-  border: none;
-  background: var(--gold);
-  color: #1b1821;
-}
-
-.btn-primary:disabled {
-  background: #39394a;
-  color: #89899c;
-  cursor: not-allowed;
-}
-
-.library-message {
-  margin-top: 10px;
-  min-height: 15px;
-  color: var(--green);
-  font-size: 11px;
-}
-
-.closing {
-  margin-top: 24px;
-  padding: 23px 16px;
-  text-align: center;
-  border-top: 1px solid var(--border);
-}
-
-.closing-symbol {
-  color: var(--gold);
-  font-size: 23px;
-}
-
-.closing p {
-  color: #b3a9c5;
-  font-size: 12px;
-  line-height: 1.9;
-  font-style: italic;
-}
-
-.reset-btn {
-  display: block;
-  margin: 17px auto 0;
-  border: none;
-  background: transparent;
-  padding: 12px;
-  color: #77788c;
-  font-size: 11px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-@media (min-width: 600px) {
-  .app { padding-top: 40px; }
-  .hero { padding: 35px 30px; }
-  .focus-card { padding: 25px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0s !important;
-    animation-duration: 0s !important;
-  }
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
-<main class="app">
+<div class="app">
 
-  <!-- TOP BAR -->
   <header class="topbar">
     <div class="brand">
-      <span class="brand-symbol" aria-hidden="true">☾</span>
-      NIGHTFALL
+      <div class="brand-icon">R.</div>
+      <div>
+        <div class="brand-name">RITUAL / 30</div>
+        <div class="brand-small">PERSONAL MAINTENANCE</div>
+      </div>
     </div>
-    <div class="live-clock" id="liveClock">--:--</div>
+    <button class="icon-btn" id="menuBtn"
+      aria-label="Open menu" aria-haspopup="dialog">☰</button>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Evening ritual">
-    <div class="moon" aria-hidden="true"></div>
+  <section class="day-header">
+    <div>
+      <div class="eyebrow" id="dateLabel">TODAY</div>
+      <h1 class="day-title" id="dayTitle">Monday</h1>
+      <div class="day-focus" id="dayFocus"></div>
+    </div>
+    <div class="shift" id="shiftTag">HOME DAY</div>
+  </section>
 
-    <p class="eyebrow">YOUR DAILY EVENING RITUAL</p>
+  <section class="session-strip">
+    <div class="session-top">
+      <span>SESSION PROGRESS</span>
+      <strong id="sessionLeft">30:00 LEFT</strong>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="sessionBar"></div>
+    </div>
+  </section>
 
-    <h1>
-      Slow the<br>
-      world <span>down.</span>
-    </h1>
+  <main class="main-area">
 
-    <p class="hero-sub">
-      8:15 PM — 9:15 PM<br>
-      One peaceful hour. Same rhythm, every night.
-    </p>
+    <section class="current-card">
+      <div class="card-top">
+        <span class="live-label" id="stageLabel">● READY TO BEGIN</span>
+        <span class="step-count" id="stepCounter">01 / 07</span>
+      </div>
 
-    <div class="lamp-rule">
-      <span class="lamp-icon" aria-hidden="true">♨</span>
+      <div class="timer-area">
+        <div class="ring">
+          <svg viewBox="0 0 132 132" aria-hidden="true">
+            <circle class="ring-track" cx="66" cy="66" r="53"
+              fill="none" stroke-width="6"/>
+            <circle class="ring-value" id="ringValue"
+              cx="66" cy="66" r="53"
+              fill="none" stroke-width="6"/>
+          </svg>
+          <div class="ring-center">
+            <span class="timer-number" id="timerText">00:00</span>
+            <span class="timer-sub">REMAINING</span>
+          </div>
+        </div>
+
+        <div class="timer-side">
+          <div class="mini">CURRENT STAGE</div>
+          <div class="big" id="durationLabel">2 MIN</div>
+          <div class="note">Next stage starts automatically.</div>
+        </div>
+      </div>
+
+      <div class="task-info">
+        <h2 class="task-title" id="taskTitle"></h2>
+        <div class="instructions" id="taskInstructions"></div>
+      </div>
+    </section>
+
+    <section class="upcoming">
       <div>
-        <strong>One light. Table lamp only.</strong>
-        <small>
-          From 8:15 PM, switch off every other
-          room light. Keep the evening gentle.
-        </small>
+        <div class="upcoming-label">UP NEXT</div>
+        <div class="upcoming-name" id="upcomingName"></div>
       </div>
-    </div>
-  </section>
+      <div class="upcoming-time" id="upcomingTime"></div>
+    </section>
 
-  <!-- LIVE COUNTDOWN -->
-  <section class="timing-card" aria-label="Live countdown">
+  </main>
 
-    <div class="timer-top">
-      <span class="small-label">Next milestone in</span>
-      <span class="status" id="status">TONIGHT</span>
-    </div>
-
-    <div class="countdown"
-         id="countdown"
-         role="timer"
-         aria-label="Time remaining">
-      00:00:00
-    </div>
-
-    <div class="next-event" id="nextEvent">
-      Evening ritual
-    </div>
-
-    <div class="progress-header">
-      <span>8:15 PM</span>
-      <span id="progressText">0% elapsed</span>
-      <span>9:15 PM</span>
-    </div>
-
-    <div class="progress-track"
-         role="progressbar"
-         aria-label="Evening routine time elapsed"
-         aria-valuemin="0"
-         aria-valuemax="100"
-         aria-valuenow="0"
-         id="progressTrack">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-
-  </section>
-
-  <!-- ACTIVE TASKS -->
-  <div class="section-head">
-    <h2>Your current ritual</h2>
-    <small id="dayLabel">Tonight</small>
-  </div>
-
-  <section class="focus-card" aria-label="Selected ritual phase">
-
-    <div class="focus-head">
-      <span class="focus-kicker" id="focusKicker">
-        PHASE 01
-      </span>
-      <span class="focus-tag" id="focusTag">
-        UPCOMING
-      </span>
-    </div>
-
-    <h2 class="focus-title" id="focusTitle">
-      Settle into the evening
-    </h2>
-
-    <p class="focus-desc" id="focusDescription">
-      Make your environment ready for sleep.
-    </p>
-
-    <div class="task-list" id="taskList"></div>
-
-    <div class="task-counter" id="taskCounter"></div>
-
-    <button class="return-btn hidden"
-            id="returnNow"
-            type="button">
-      Return to current phase
+  <section class="controls">
+    <button class="play-button" id="playBtn">
+      <span class="play-icon" id="playIcon">▶</span>
+      <span id="playText">Begin Ritual</span>
     </button>
 
-  </section>
-
-  <!-- TIMELINE -->
-  <div class="section-head">
-    <h2>Tonight's rhythm</h2>
-    <small>Tap to preview</small>
-  </div>
-
-  <nav class="timeline" aria-label="Evening schedule">
-
-    <button class="timeline-item"
-            data-stage="0" type="button">
-      <span class="timeline-time">8:15</span>
-      <span class="timeline-copy">
-        <span class="timeline-title">Prepare & unwind</span>
-        <span class="timeline-detail">Lighting, essentials, stretching, conversation</span>
-      </span>
-      <span class="timeline-arrow" aria-hidden="true">›</span>
-    </button>
-
-    <button class="timeline-item"
-            data-stage="1" type="button">
-      <span class="timeline-time">8:45</span>
-      <span class="timeline-copy">
-        <span class="timeline-title">Melatonin & gratitude</span>
-        <span class="timeline-detail">Precise time · Prayer · Lights off</span>
-      </span>
-      <span class="timeline-arrow" aria-hidden="true">›</span>
-    </button>
-
-    <button class="timeline-item"
-            data-stage="2" type="button">
-      <span class="timeline-time">9:00</span>
-      <span class="timeline-copy">
-        <span class="timeline-title">Sleep audio</span>
-        <span class="timeline-detail">Earphones · Library · Settle</span>
-      </span>
-      <span class="timeline-arrow" aria-hidden="true">›</span>
-    </button>
-
-    <button class="timeline-item"
-            data-stage="3" type="button">
-      <span class="timeline-time">9:15</span>
-      <span class="timeline-copy">
-        <span class="timeline-title">Rest</span>
-        <span class="timeline-detail">No more tasks tonight</span>
-      </span>
-      <span class="timeline-arrow" aria-hidden="true">›</span>
-    </button>
-
-  </nav>
-
-  <!-- SLEEP LIBRARY -->
-  <div class="section-head" id="library">
-    <h2>Sleep library</h2>
-    <small>9:00 PM</small>
-  </div>
-
-  <section class="library-card" aria-label="Sleep library">
-
-    <p>
-      Your chosen sleep audio, one tap away.
-      Save your library link once. It stays
-      on this device for future nights.
-    </p>
-
-    <form class="library-form" id="libraryForm">
-
-      <label class="small-label" for="libraryUrl">
-        Library address
-      </label>
-
-      <input
-        type="text"
-        id="libraryUrl"
-        placeholder="https://... or ../sleep/index.html"
-        autocomplete="off"
-        spellcheck="false"
-      >
-
-      <div class="library-actions">
-        <button type="submit"
-                class="btn btn-secondary">
-          Save link
-        </button>
-
-        <button type="button"
-                class="btn btn-primary"
-                id="openLibrary"
-                disabled>
-          Open library ↗
-        </button>
+    <div class="bottom-row">
+      <div class="status">
+        <span class="status-dot" id="wakeDot"></span>
+        <span id="wakeStatus">Checking screen wake lock</span>
       </div>
-
-    </form>
-
-    <div class="library-message"
-         id="libraryMessage"
-         role="status"
-         aria-live="polite"></div>
-
+      <button class="reset-button" id="resetBtn">
+        ↻ Restart today
+      </button>
+    </div>
   </section>
+</div>
 
-  <!-- FOOTER -->
-  <footer class="closing">
-    <div class="closing-symbol" aria-hidden="true">✧</div>
+<!-- MENU -->
+<div class="overlay" id="overlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true"
+       aria-label="Routine information" id="sheet">
 
-    <p>
-      Nothing left to prove tonight.<br>
-      The day is complete. Rest is enough.
-    </p>
+    <div class="sheet-head">
+      <div class="sheet-title">The Manual</div>
+      <button class="icon-btn" id="closeMenu"
+        aria-label="Close menu">×</button>
+    </div>
 
-    <button id="resetButton"
-            class="reset-btn"
-            type="button">
-      Reset tonight's checkmarks
-    </button>
-  </footer>
+    <div class="tabs">
+      <button class="tab active" data-tab="glance">Glance</button>
+      <button class="tab" data-tab="products">Products needed</button>
+      <button class="tab" data-tab="tips">Special tips</button>
+    </div>
 
-</main>
+    <div class="sheet-content" id="sheetContent"></div>
+  </div>
+</div>
 
 <script>
 "use strict";
 
-/*
-  NIGHTFALL
+/* =================================================
+   THE SEVEN DAILY ROUTINES
+   Durations for each day total exactly 30 minutes.
+   ================================================= */
 
-  Single-file offline-friendly evening routine.
-  No external dependencies or network requests.
+const DAYS = [
 
-  Time is read from the device's local clock.
-
-  20:15  Begin, table lamp only
-  20:45  Melatonin, prayer, then lights off
-  21:00  Earphones and sleep audio
-  21:15  End of routine
-
-  Checkmarks are saved separately for each date.
-*/
-
-// ------------------------------------------
-// ROUTINE DATA
-// ------------------------------------------
-
-const stages = [
+  // MONDAY
   {
-    id: "unwind",
-    start: 20 * 60 + 15,
-    end: 20 * 60 + 45,
-    kicker: "PHASE 01 · 8:15–8:45 PM",
-    title: "Prepare & unwind",
-    description:
-      "Turn down the stimulation. Prepare your space, " +
-      "then enjoy easy stretching and quiet conversation.",
-
-    tasks: [
+    name:"Monday",
+    focus:"Beard grooming + skin treatment",
+    type:"HOME DAY",
+    tasks:[
       {
-        id: "lamp",
-        title: "Table lamp only",
-        description:
-          "Switch off every other room light. " +
-          "The table lamp remains the only light source."
+        min:7,
+        title:"Shape your beard",
+        actions:[
+          "Use Philips All-in-One Trimmer Series 5000. Start with a 6 mm guard on both cheeks and a 9 mm guard along jaw and chin.",
+          "Use a 5 mm guard for moustache if suitable. Keep both sides symmetrical.",
+          "Remove only stray hairs beneath the natural neckline. Avoid cutting over raised white bumps."
+        ]
       },
       {
-        id: "mask",
-        title: "Eye mask ready",
-        description:
-          "Place it beside your pillow. " +
-          "Use it to block outside streetlight."
+        min:9,
+        title:"Wash body + face",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented. Wash armpits, chest, back, arms, legs, feet and outer groin. Rinse completely.",
+          "Use one pump of CeraVe Hydrating Facial Cleanser. Massage forehead, nose, cheeks, chin and beneath beard for 30–45 seconds.",
+          "Rinse face with lukewarm water. Pat dry with a clean towel. Never scrub."
+        ]
       },
       {
-        id: "earphones",
-        title: "Earphones ready",
-        description:
-          "Keep them within reach for the " +
-          "9:00 PM sleep-audio session."
+        min:3,
+        title:"Hydrate + deodorize",
+        actions:[
+          "Apply approximately one pump of CeraVe Daily Moisturizing Lotion to face and neck. Spread across forehead, both cheeks, nose, chin and beard skin.",
+          "Apply a thin layer of Mitchum Men Advanced Gel Unscented to both completely dry armpits."
+        ]
       },
       {
-        id: "phone",
-        title: "Phone charging & away",
-        description:
-          "Plug it in, put it aside. " +
-          "No scrolling or unnecessary screen time."
+        min:4,
+        title:"Teeth + floss",
+        actions:[
+          "Use Oral-B Glide Comfort Plus Floss between all accessible teeth. Slide gently along each side of the tooth.",
+          "Apply a pea-sized amount of Colgate Cavity Protection Fluoride Toothpaste to a soft toothbrush.",
+          "Brush all tooth surfaces for 2 minutes. Spit; avoid rinsing immediately."
+        ]
       },
       {
-        id: "pillow",
-        title: "Good pillow in place",
-        description:
-          "Arrange your preferred comfortable " +
-          "pillow before getting settled."
+        min:3,
+        title:"Arrange long hair",
+        actions:[
+          "Use a wide-tooth comb to detangle hair, starting at the ends and moving upward.",
+          "Gather hair loosely and secure with a soft fabric hair tie or make a loose braid.",
+          "Do not pull hair tightly backward at the forehead or temples."
+        ]
       },
       {
-        id: "stretch",
-        title: "Gentle stretching",
-        description:
-          "Slow, comfortable movements. " +
-          "No strenuous exercise. No phone."
+        min:2,
+        title:"Monday texture treatment",
+        actions:[
+          "DAYS 1–14: Skip retinol. Check face for dryness and leave moisturizer undisturbed.",
+          "FROM DAY 15, if tolerated: Use one pea-sized amount of CeraVe Resurfacing Retinol Serum over dry, moisturized forehead and cheeks.",
+          "Avoid eyelids, eye corners, lips and nostril creases. Stop if persistent irritation develops."
+        ]
       },
       {
-        id: "talk",
-        title: "Quiet time with fiancée",
-        description:
-          "Light conversation together. " +
-          "No phone. No stressful discussions."
+        min:2,
+        title:"Prepare Tuesday clothes",
+        actions:[
+          "Select one clean shirt, one pair of trousers, fresh underwear and socks for Tuesday.",
+          "Fold everything together in one designated location. Put trimmer away clean and dry."
+        ]
       }
     ]
   },
 
+  // TUESDAY
   {
-    id: "gratitude",
-    start: 20 * 60 + 45,
-    end: 21 * 60,
-    kicker: "PHASE 02 · 8:45 PM",
-    title: "Gratitude & darkness",
-    description:
-      "The 8:45 PM anchor. Follow the exact " +
-      "sequence, without rushing your prayer.",
-
-    tasks: [
+    name:"Tuesday",
+    focus:"Hair maintenance + fingernails",
+    type:"HOME DAY",
+    tasks:[
       {
-        id: "melatonin",
-        title: "8:45 PM sharp — Melatonin",
-        description:
-          "Take your usual melatonin dose, " +
-          "according to your healthcare guidance."
+        min:2,
+        title:"Prepare equipment",
+        actions:[
+          "Place clean towel, wide-tooth comb, nail clippers, ATTITUDE Body Wash and CeraVe Cleanser within reach.",
+          "Put dirty clothing in laundry."
+        ]
       },
       {
-        id: "prayer",
-        title: "Gratitude prayer · 5–7 minutes",
-        description:
-          "Immediately after melatonin. " +
-          "A quiet moment of sincere gratitude."
+        min:11,
+        title:"Shower + gentle face wash",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented on body, including armpits, torso, feet and outer groin.",
+          "Use one pump of CeraVe Hydrating Facial Cleanser on forehead, cheeks, nose, chin and beard skin for 30–45 seconds.",
+          "Rinse and pat dry. Keep head hair dry today: no shampoo needed."
+        ]
       },
       {
-        id: "lights",
-        title: "Turn off the table lamp",
-        description:
-          "As soon as the prayer ends, " +
-          "switch off the last light. " +
-          "Remain in darkness and rest quietly."
+        min:3,
+        title:"Moisturize skin",
+        actions:[
+          "Apply one pump of CeraVe Daily Moisturizing Lotion across face, neck and beneath beard.",
+          "Apply a little extra lotion to dry elbows or backs of hands if needed.",
+          "Apply Mitchum Men Advanced Gel Unscented to completely dry armpits."
+        ]
+      },
+      {
+        min:4,
+        title:"Clean teeth",
+        actions:[
+          "Floss between teeth using Oral-B Glide Comfort Plus Floss.",
+          "Brush all teeth for 2 minutes with Colgate Cavity Protection Fluoride Toothpaste and a soft toothbrush."
+        ]
+      },
+      {
+        min:5,
+        title:"Detangle + protect hair",
+        actions:[
+          "Release your hair tie. Use a wide-tooth comb to gently separate hair, starting with the ends.",
+          "If the ends are dry, lightly mist them with clean water. Optionally smooth one drop of pure almond oil over the ends only if previously tolerated.",
+          "Secure hair loosely in a low braid or soft tie without pulling at the temples."
+        ]
+      },
+      {
+        min:3,
+        title:"Maintain fingernails",
+        actions:[
+          "Use clean nail clippers to trim overgrown fingernails.",
+          "Use a nail file to smooth sharp corners. Do not cut cuticles or clip nails unnecessarily short."
+        ]
+      },
+      {
+        min:2,
+        title:"Prepare Wednesday outfit",
+        actions:[
+          "Lay out Wednesday's clean shirt, trousers, underwear and socks.",
+          "Put nail clippers and comb back in their designated places."
+        ]
       }
     ]
   },
 
+  // WEDNESDAY
   {
-    id: "audio",
-    start: 21 * 60,
-    end: 21 * 60 + 15,
-    kicker: "PHASE 03 · 9:00–9:15 PM",
-    title: "Let the audio take over",
-    description:
-      "Keep everything simple. Pick one audio, " +
-      "get comfortable, and let the night become quiet.",
-
-    tasks: [
+    name:"Wednesday",
+    focus:"Skin barrier + clean bedding",
+    type:"HOME DAY",
+    tasks:[
       {
-        id: "wear-earphones",
-        title: "Put on earphones",
-        description:
-          "Get comfortable with your earphones " +
-          "at 9:00 PM."
+        min:2,
+        title:"Prepare shower + bedding",
+        actions:[
+          "Set out clean towel, fresh pillowcase and clean clothes.",
+          "Put CeraVe Hydrating Cleanser and ATTITUDE Body Wash within reach."
+        ]
       },
       {
-        id: "choose-audio",
-        title: "Choose from sleep library",
-        description:
-          "Open your library below. " +
-          "Pick one familiar sleep audio and play it."
+        min:10,
+        title:"Wash body + face",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented on armpits, torso, arms, legs, outer groin and feet.",
+          "Apply one pump of CeraVe Hydrating Facial Cleanser to forehead, nose, both cheeks, chin and beard skin. Massage gently for 30–45 seconds.",
+          "Rinse with lukewarm water and pat dry."
+        ]
       },
       {
-        id: "settle",
-        title: "Put the device away",
-        description:
-          "Settle onto your pillow. " +
-          "Let the audio continue without browsing."
+        min:3,
+        title:"Restore skin moisture",
+        actions:[
+          "Spread approximately one pump of CeraVe Daily Moisturizing Lotion over forehead, cheeks, nose, chin and neck.",
+          "Apply Mitchum Men Advanced Gel Unscented to both dry armpits."
+        ]
+      },
+      {
+        min:4,
+        title:"Teeth + floss",
+        actions:[
+          "Use Oral-B Glide Comfort Plus Floss between teeth, following the tooth edges gently.",
+          "Brush for 2 minutes with Colgate Cavity Protection Fluoride Toothpaste. Spit."
+        ]
+      },
+      {
+        min:4,
+        title:"Inspect facial texture",
+        actions:[
+          "Under ordinary bathroom lighting, inspect both cheeks, nose and forehead for new bumps, redness or dry patches.",
+          "Do not squeeze any firm white bumps. Do not use tweezers, needles or sharp tools.",
+          "On the first Wednesday of each month, take front, left and right progress photos instead."
+        ]
+      },
+      {
+        min:4,
+        title:"Refresh pillow + comb",
+        actions:[
+          "Remove used pillowcase and fit a freshly washed pillowcase.",
+          "Wash wide-tooth comb with a small drop of ATTITUDE Body Wash and water. Rinse; allow to dry."
+        ]
+      },
+      {
+        min:3,
+        title:"Prepare Thursday clothes",
+        actions:[
+          "Set out Thursday's shirt, trousers, underwear and socks.",
+          "Comb and loosely secure head hair with a soft fabric tie."
+        ]
       }
     ]
   },
 
+  // THURSDAY
   {
-    id: "rest",
-    start: 21 * 60 + 15,
-    end: Infinity,
-    kicker: "RITUAL COMPLETE · 9:15 PM",
-    title: "Now, simply rest.",
-    description:
-      "Your one-hour wind-down is complete. " +
-      "No more checklists, no more tasks. " +
-      "Keep your eyes closed and allow sleep to come.",
-    tasks: []
+    name:"Thursday",
+    focus:"Skin treatment + 3-shift preparation",
+    type:"HOME DAY",
+    tasks:[
+      {
+        min:2,
+        title:"Set up bathroom",
+        actions:[
+          "Place clean towel, ATTITUDE Body Wash, CeraVe Hydrating Cleanser and clean clothes ready.",
+          "Make space for organizing Friday–Sunday work clothing afterward."
+        ]
+      },
+      {
+        min:10,
+        title:"Wash body + face",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented to wash armpits, torso, back, arms, legs, feet and outer groin.",
+          "Use one pump of CeraVe Hydrating Facial Cleanser over forehead, nose, cheeks, chin and beneath beard.",
+          "Massage gently for 30–45 seconds, rinse thoroughly and pat dry."
+        ]
+      },
+      {
+        min:3,
+        title:"Moisturize + deodorize",
+        actions:[
+          "Spread one pump of CeraVe Daily Moisturizing Lotion over entire face, neck and beard skin.",
+          "Apply Mitchum Men Advanced Gel Unscented to both completely dry armpits."
+        ]
+      },
+      {
+        min:4,
+        title:"Floss + brush",
+        actions:[
+          "Use Oral-B Glide Comfort Plus Floss between all accessible teeth.",
+          "Brush for 2 minutes using Colgate Cavity Protection Fluoride Toothpaste on a soft toothbrush."
+        ]
+      },
+      {
+        min:3,
+        title:"Prepare work hairstyle",
+        actions:[
+          "Detangle head hair with a wide-tooth comb, starting at the ends.",
+          "Secure in a low-tension hairstyle that fits underneath required work PPE.",
+          "Check that no hair can become caught in machinery. Do not modify required PPE."
+        ]
+      },
+      {
+        min:2,
+        title:"Thursday texture treatment",
+        actions:[
+          "DAYS 1–14: Do not apply retinol.",
+          "FROM DAY 15, if tolerated: Spread one pea-sized amount of CeraVe Resurfacing Retinol Serum thinly over dry, moisturized forehead and cheeks.",
+          "Keep away from eyelids, lips and nose creases. Skip if skin is irritated."
+        ]
+      },
+      {
+        min:6,
+        title:"Prepare 3 work outfits",
+        actions:[
+          "Set FRIDAY outfit: clean work shirt, trousers, underwear and socks.",
+          "Set SATURDAY outfit: clean work shirt, trousers, underwear and socks.",
+          "Set SUNDAY outfit: clean work shirt, trousers, underwear and socks.",
+          "Place them in that order. Check footwear, required PPE and your work bag."
+        ]
+      }
+    ]
+  },
+
+  // FRIDAY
+  {
+    name:"Friday",
+    focus:"Dust removal + work recovery",
+    type:"12-HOUR SHIFT",
+    tasks:[
+      {
+        min:2,
+        title:"Remove work contamination",
+        actions:[
+          "Remove dusty workwear carefully and place it in designated work laundry.",
+          "Follow workplace dust-handling and decontamination requirements before entering clean areas.",
+          "Prepare towel and shower products."
+        ]
+      },
+      {
+        min:14,
+        title:"Thorough post-shift shower",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented to clean arms, neck, chest, back, armpits, legs, feet and outer groin.",
+          "Use one pump of CeraVe Hydrating Facial Cleanser over forehead, cheeks, nose, chin, hairline and beard skin.",
+          "Massage face gently for 30–45 seconds. Thoroughly rinse face, ears and neck without abrasive scrubbing."
+        ]
+      },
+      {
+        min:3,
+        title:"Restore moisture",
+        actions:[
+          "Apply one pump of CeraVe Daily Moisturizing Lotion across face, neck, cheeks and beneath beard.",
+          "Apply extra lotion to dry backs of hands.",
+          "Apply Mitchum Men Advanced Gel Unscented to dry armpits."
+        ]
+      },
+      {
+        min:4,
+        title:"Clean teeth thoroughly",
+        actions:[
+          "Use Oral-B Glide Comfort Plus Floss between teeth.",
+          "Brush for 2 minutes using Colgate Cavity Protection Fluoride Toothpaste with a soft toothbrush."
+        ]
+      },
+      {
+        min:3,
+        title:"Release scalp tension",
+        actions:[
+          "Remove hair tie used under work PPE.",
+          "Gently detangle with wide-tooth comb. Inspect temples and hairline for soreness or friction.",
+          "Secure hair loosely. Avoid tight hairstyles while resting."
+        ]
+      },
+      {
+        min:4,
+        title:"Prepare for recovery",
+        actions:[
+          "Put on clean underwear and comfortable sleepwear.",
+          "Check that Saturday's work clothes and required PPE are ready.",
+          "Place used towel in laundry if heavily soiled."
+        ]
+      }
+    ]
+  },
+
+  // SATURDAY
+  {
+    name:"Saturday",
+    focus:"Work recovery + foot care",
+    type:"12-HOUR SHIFT",
+    tasks:[
+      {
+        min:2,
+        title:"Remove work clothing",
+        actions:[
+          "Remove dusty clothing carefully and put in designated laundry.",
+          "Follow workplace decontamination procedures. Prepare clean towel."
+        ]
+      },
+      {
+        min:14,
+        title:"Wash off dust + sweat",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented on torso, back, arms, neck, armpits, outer groin, legs and feet.",
+          "Use one pump of CeraVe Hydrating Facial Cleanser on forehead, cheeks, nose, chin and beard skin.",
+          "Massage gently for 30–45 seconds and rinse. No exfoliating scrub or harsh facial brush."
+        ]
+      },
+      {
+        min:3,
+        title:"Feet + moisturization",
+        actions:[
+          "Dry feet with a clean towel, especially between toes. Check for blisters or pressure marks.",
+          "Apply CeraVe Daily Moisturizing Lotion to face, neck, dry hands and heels if needed. Do not apply lotion between toes.",
+          "Apply Mitchum Men Advanced Gel Unscented to dry armpits."
+        ]
+      },
+      {
+        min:4,
+        title:"Teeth + floss",
+        actions:[
+          "Floss using Oral-B Glide Comfort Plus Floss.",
+          "Brush for 2 minutes with Colgate Cavity Protection Fluoride Toothpaste and soft toothbrush."
+        ]
+      },
+      {
+        min:3,
+        title:"Free your hair",
+        actions:[
+          "Release hair from its work hairstyle.",
+          "Use wide-tooth comb to gently detangle ends upward.",
+          "Check scalp for irritation or trapped dust. Secure loosely for the evening."
+        ]
+      },
+      {
+        min:4,
+        title:"Set up final workday",
+        actions:[
+          "Put on clean underwear and comfortable clothes.",
+          "Check Sunday work outfit, socks, footwear and PPE.",
+          "Set out ATTITUDE Shampoo, The Ordinary Conditioner and microfiber towel for Sunday evening."
+        ]
+      }
+    ]
+  },
+
+  // SUNDAY
+  {
+    name:"Sunday",
+    focus:"Full hair wash + weekly reset",
+    type:"12-HOUR SHIFT",
+    tasks:[
+      {
+        min:2,
+        title:"Prepare hair-wash products",
+        actions:[
+          "Remove dusty work clothing according to workplace procedures.",
+          "Place ATTITUDE Extra-Gentle Shampoo, The Ordinary Conditioner, CeraVe Cleanser and ATTITUDE Body Wash within reach.",
+          "Prepare microfiber towel and wide-tooth comb."
+        ]
+      },
+      {
+        min:5,
+        title:"Shampoo your scalp",
+        actions:[
+          "Fully wet hair using lukewarm water.",
+          "Use ATTITUDE Extra-Gentle Shampoo — Unscented. Apply enough to cover scalp, not just hair lengths.",
+          "Massage scalp with fingertips for 60–90 seconds, covering crown, hairline and behind ears. Rinse thoroughly."
+        ]
+      },
+      {
+        min:4,
+        title:"Condition hair lengths",
+        actions:[
+          "Use The Ordinary Behentrimonium Chloride 2% Conditioner.",
+          "Smooth a small amount along mid-lengths and ends. Keep it primarily off the scalp.",
+          "Leave for approximately 2 minutes while gently distributing through hair, then rinse thoroughly."
+        ]
+      },
+      {
+        min:7,
+        title:"Clean body + face",
+        actions:[
+          "Use ATTITUDE Sensitive Skin Body Wash — Unscented to wash body, armpits, neck, back, outer groin and feet.",
+          "Use one pump of CeraVe Hydrating Facial Cleanser across forehead, cheeks, nose, chin, hairline and beard skin.",
+          "Gently massage for 30–45 seconds. Rinse away shampoo or conditioner residue from face and neck."
+        ]
+      },
+      {
+        min:4,
+        title:"Dry + detangle long hair",
+        actions:[
+          "Use microfiber towel to gently squeeze excess water from hair. Do not rub.",
+          "Use wide-tooth comb to detangle from ends upward, holding each section gently.",
+          "Leave hair loose while it dries. Avoid a tight bun or ponytail while wet."
+        ]
+      },
+      {
+        min:3,
+        title:"Moisturize skin",
+        actions:[
+          "Apply approximately one pump of CeraVe Daily Moisturizing Lotion to forehead, cheeks, nose, chin, neck and beard skin.",
+          "Apply extra to dry hands if needed. Apply Mitchum Men Advanced Gel Unscented to dry armpits."
+        ]
+      },
+      {
+        min:4,
+        title:"Floss + brush teeth",
+        actions:[
+          "Use Oral-B Glide Comfort Plus Floss between teeth.",
+          "Brush for 2 minutes with Colgate Cavity Protection Fluoride Toothpaste and a soft toothbrush.",
+          "Spit toothpaste after brushing."
+        ]
+      },
+      {
+        min:1,
+        title:"Complete weekly reset",
+        actions:[
+          "Set out Monday's clean shirt, trousers, underwear and socks.",
+          "Allow hair to continue air-drying before tying or sleeping."
+        ]
+      }
+    ]
   }
 ];
 
-const milestones = [
-  { minute: 20 * 60 + 15, label: "8:15 PM · Begin wind-down" },
-  { minute: 20 * 60 + 45, label: "8:45 PM · Melatonin" },
-  { minute: 21 * 60, label: "9:00 PM · Sleep audio" },
-  { minute: 21 * 60 + 15, label: "9:15 PM · Rest" }
+/* =================================================
+   PRODUCTS — COMPLETE WEEKLY KIT
+   ================================================= */
+
+const PRODUCTS = [
+  {
+    name:"ATTITUDE Sensitive Skin Body Wash — Unscented",
+    use:"Body wash · Every day",
+    desc:"Armpits, torso, arms, back, legs, feet and external groin. Avoid internal/genital mucosal surfaces."
+  },
+  {
+    name:"CeraVe Hydrating Facial Cleanser",
+    use:"Face wash · Every day",
+    desc:"Approximately one pump for forehead, nose, cheeks, chin and beard skin. Gently rinse."
+  },
+  {
+    name:"CeraVe Daily Moisturizing Lotion",
+    use:"Moisturizer · Every day",
+    desc:"Approximately one pump for face and neck; extra for dry hands, elbows or heels as needed."
+  },
+  {
+    name:"CeraVe Resurfacing Retinol Serum",
+    use:"Optional facial treatment · Monday and Thursday",
+    desc:"Begin after the first 14 days only if tolerated. One pea-sized amount across dry forehead and cheeks. Avoid eyelids and irritated areas. It cannot reliably remove true milia."
+  },
+  {
+    name:"ATTITUDE Extra-Gentle Shampoo — Unscented",
+    use:"Hair shampoo · Sunday",
+    desc:"Massage into the scalp, hairline and behind ears. Rinse. Wash sooner if dusty or sweaty scalp requires it."
+  },
+  {
+    name:"The Ordinary Behentrimonium Chloride 2% Conditioner",
+    use:"Hair conditioner · Sunday",
+    desc:"Smooth through mid-lengths and ends after shampooing. Rinse thoroughly."
+  },
+  {
+    name:"Mitchum Men Advanced Gel — Unscented",
+    use:"Antiperspirant · Every day",
+    desc:"Thin layer on both dry armpits. The marketed unscented formula may contain fragrance; check the label and discontinue if irritated."
+  },
+  {
+    name:"Colgate Cavity Protection Fluoride Toothpaste",
+    use:"Dental care · Every day",
+    desc:"Pea-sized amount on a soft toothbrush. Brush for two minutes during the routine and again once outside it."
+  },
+  {
+    name:"Oral-B Glide Comfort Plus Floss",
+    use:"Dental care · Every day",
+    desc:"Gently clean between teeth once daily."
+  },
+  {
+    name:"Philips All-in-One Trimmer Series 5000",
+    use:"Beard grooming · Monday",
+    desc:"Suggested starting guards: cheeks 6 mm, jaw/chin 9 mm, moustache 5 mm. Adjust to preferred length."
+  },
+  {
+    name:"Neutrogena Sheer Zinc Mineral Sunscreen SPF 50",
+    use:"Sun protection · Before daytime outdoor exposure",
+    desc:"Apply generously to exposed face, ears and neck before UV exposure and reapply as directed. Evening application does not provide next-day protection."
+  },
+  {
+    name:"Pure almond oil — optional, only if already tolerated",
+    use:"Hair ends · Tuesday, if needed",
+    desc:"A single drop on dry ends if useful. Not necessary for healthy hair if conditioning is sufficient."
+  }
 ];
+
+const TOOLS = [
+  "Soft toothbrush",
+  "Wide-tooth comb",
+  "Microfiber hair towel",
+  "Soft, non-tight fabric hair ties",
+  "Nail clippers and nail file",
+  "Clean body towel",
+  "Clean pillowcases",
+  "Separate work-clothing laundry storage"
+];
+
+/* =================================================
+   SEVEN SPECIAL TIPS
+   ================================================= */
+
+const TIPS = [
+  {
+    title:"Use lukewarm water, not very hot",
+    desc:"Hot water and long showers can aggravate dryness. Use comfortably warm water, keep washing gentle and avoid repeated soaping of already-clean skin."
+  },
+  {
+    title:"Clean your face after hair products",
+    desc:"On Sunday, shampoo and condition first. Then use CeraVe Hydrating Cleanser last, removing residual conditioner from the hairline, forehead, cheeks and neck."
+  },
+  {
+    title:"Dust does not mean scrub harder",
+    desc:"After Friday–Sunday shifts, wash gently with cleanser. Abrasive scrubs, aggressive rubbing and squeezing the firm white bumps can create irritation or marks. Follow workplace decontamination procedures for hazardous dust."
+  },
+  {
+    title:"Moisturize shortly after drying",
+    desc:"For dry-leaning skin, apply CeraVe lotion soon after patting your face dry. A small amount spread evenly is better than repeated harsh washing."
+  },
+  {
+    title:"Protect the hairline from tension",
+    desc:"Your photos show your long hair pulled backward near the temples. Alternate loose hairstyles, use soft ties and avoid persistent traction. Never tie wet hair tightly."
+  },
+  {
+    title:"Retinol: slower is often better",
+    desc:"For the first two weeks, use cleanser and lotion only. Introduce retinol twice weekly only if skin tolerates it. Avoid eyelids and broken skin. Retinol can help clogged pores but is not a guaranteed solution for milia."
+  },
+  {
+    title:"Two essentials outside the ritual",
+    desc:"Brush teeth a second time daily. Before significant daytime sun exposure, use broad-spectrum sunscreen and protective clothing. Neither step can be replaced by your evening 30-minute session."
+  }
+];
+
+/* =================================================
+   STATE + DATE
+   ================================================= */
+
+const STORAGE_KEY = "ritual30-session-v1";
+const TOTAL_MS = 30 * 60 * 1000;
+const CIRC = 2 * Math.PI * 53;
 
 const $ = id => document.getElementById(id);
 
-const elements = {
-  liveClock: $("liveClock"),
-  countdown: $("countdown"),
-  nextEvent: $("nextEvent"),
-  status: $("status"),
-  progressText: $("progressText"),
-  progressFill: $("progressFill"),
-  progressTrack: $("progressTrack"),
-  focusKicker: $("focusKicker"),
-  focusTag: $("focusTag"),
-  focusTitle: $("focusTitle"),
-  focusDescription: $("focusDescription"),
-  taskList: $("taskList"),
-  taskCounter: $("taskCounter"),
-  dayLabel: $("dayLabel"),
-  returnNow: $("returnNow"),
-  libraryUrl: $("libraryUrl"),
-  libraryMessage: $("libraryMessage"),
-  openLibrary: $("openLibrary")
-};
+function localDateKey() {
+  const d = new Date();
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,"0"),
+    String(d.getDate()).padStart(2,"0")
+  ].join("-");
+}
 
-// ------------------------------------------
-// LOCAL STORAGE
-// ------------------------------------------
+// JS Sunday=0. Our schedule Monday=0.
+function todayIndex() {
+  return (new Date().getDay()+6)%7;
+}
 
-const STORAGE_PREFIX = "nightfall-checks-";
-const LIBRARY_KEY = "nightfall-library-url";
+function newSession() {
+  const day = todayIndex();
+  return {
+    date: localDateKey(),
+    day,
+    index: 0,
+    remaining: DAYS[day].tasks[0].min*60000,
+    endsAt:0,
+    running:false,
+    started:false,
+    complete:false
+  };
+}
 
-function getStored(key) {
+function loadSession() {
   try {
-    return localStorage.getItem(key);
-  } catch {
-    return null;
+    const old = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (
+      old &&
+      old.date === localDateKey() &&
+      old.day === todayIndex() &&
+      Number.isInteger(old.index) &&
+      old.index >= 0 &&
+      old.index <= DAYS[old.day].tasks.length &&
+      Number.isFinite(old.remaining) &&
+      Number.isFinite(old.endsAt)
+    ) return old;
+  } catch(e) {}
+  return newSession();
+}
+
+let session = loadSession();
+let glanceDay = session.day;
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(session));
+  } catch(e) {}
+}
+
+function currentTasks() {
+  return DAYS[session.day].tasks;
+}
+
+function remainingNow() {
+  if (session.complete) return 0;
+  return session.running
+    ? Math.max(0,session.endsAt-Date.now())
+    : session.remaining;
+}
+
+function clock(ms) {
+  const s = Math.ceil(Math.max(0,ms)/1000);
+  const m = Math.floor(s/60);
+  return String(m).padStart(2,"0")+":"+
+         String(s%60).padStart(2,"0");
+}
+
+function totalRemaining() {
+  if(session.complete) return 0;
+  let total = remainingNow();
+  const tasks = currentTasks();
+  for(let i=session.index+1;i<tasks.length;i++) {
+    total += tasks[i].min*60000;
+  }
+  return total;
+}
+
+function timeRange(tasks,index) {
+  let start = 0;
+  for(let i=0;i<index;i++) start+=tasks[i].min;
+  let end = start+tasks[index].min;
+  return String(start).padStart(2,"0")+":00–"+
+         String(end).padStart(2,"0")+":00";
+}
+
+/* =================================================
+   SOUND ENGINE — ORIGINAL GENTLE CHIME
+   ================================================= */
+
+let audioContext = null;
+
+function unlockSound() {
+  try {
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx) return;
+    if(!audioContext) audioContext=new AudioCtx();
+    if(audioContext.state==="suspended") audioContext.resume();
+  } catch(e) {}
+}
+
+function playChime(finished=false) {
+  if(!audioContext) return;
+
+  try {
+    if(audioContext.state==="suspended") audioContext.resume();
+
+    const now=audioContext.currentTime;
+    const notes=finished
+      ? [523.25,659.25,783.99]
+      : [659.25,880];
+
+    notes.forEach((freq,i)=>{
+      const osc=audioContext.createOscillator();
+      const gain=audioContext.createGain();
+      const start=now+i*.17;
+
+      osc.type="sine";
+      osc.frequency.value=freq;
+
+      gain.gain.setValueAtTime(.0001,start);
+      gain.gain.exponentialRampToValueAtTime(.10,start+.025);
+      gain.gain.exponentialRampToValueAtTime(.0001,start+.48);
+
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      osc.start(start);
+      osc.stop(start+.50);
+    });
+
+    if(navigator.vibrate) navigator.vibrate(finished?[100,70,150]:70);
+  } catch(e) {}
+}
+
+/* =================================================
+   ANDROID SCREEN WAKE LOCK
+   ================================================= */
+
+let wakeLock=null;
+let requestingWake=false;
+
+function wakeStatus(message,good=false) {
+  $("wakeStatus").textContent=message;
+  $("wakeDot").classList.toggle("good",good);
+}
+
+async function requestWakeLock() {
+  if(!("wakeLock" in navigator)) {
+    wakeStatus("Screen lock control unavailable");
+    return;
+  }
+  if(document.visibilityState!=="visible"||wakeLock||requestingWake) return;
+
+  requestingWake=true;
+  try {
+    const sentinel=await navigator.wakeLock.request("screen");
+    wakeLock=sentinel;
+    wakeStatus("Screen awake · supported",true);
+
+    sentinel.addEventListener("release",()=>{
+      if(wakeLock===sentinel) wakeLock=null;
+      wakeStatus("Wake lock released");
+    });
+  } catch(e) {
+    wakeStatus("Tap Play to enable screen wake");
+  } finally {
+    requestingWake=false;
   }
 }
 
-function setStored(key, value) {
-  try {
-    localStorage.setItem(key, value);
-    return true;
-  } catch {
-    return false;
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible") {
+    requestWakeLock();
+    tick();
   }
-}
+});
 
-function removeStored(key) {
-  try {
-    localStorage.removeItem(key);
-  } catch {}
-}
+document.addEventListener("pointerdown",()=>{
+  if(!wakeLock) requestWakeLock();
+},{passive:true});
 
-function dateKey(date = new Date()) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
+/* =================================================
+   RENDER CURRENT + UPCOMING ONLY
+   ================================================= */
 
-  return `${year}-${month}-${day}`;
-}
+function renderStage() {
+  const day=DAYS[session.day];
+  const tasks=day.tasks;
 
-function readChecks(key) {
-  try {
-    const data = JSON.parse(
-      getStored(STORAGE_PREFIX + key) || "{}"
-    );
-    return data && typeof data === "object" && !Array.isArray(data)
-      ? data
-      : {};
-  } catch {
-    return {};
-  }
-}
+  $("dayTitle").textContent=day.name;
+  $("dayFocus").textContent=day.focus;
+  $("shiftTag").textContent=day.type;
 
-let activeDate = dateKey();
-let checkedTasks = readChecks(activeDate);
-let manualStage = null;
-let lastClockStage = -1;
+  const date=new Date();
+  $("dateLabel").textContent=date.toLocaleDateString(undefined,{
+    month:"short",day:"numeric",year:"numeric"
+  }).toUpperCase();
 
-function saveChecks() {
-  setStored(
-    STORAGE_PREFIX + activeDate,
-    JSON.stringify(checkedTasks)
-  );
-}
-
-// ------------------------------------------
-// TIME HELPERS
-// ------------------------------------------
-
-function minutesNow(date) {
-  return date.getHours() * 60 + date.getMinutes();
-}
-
-function secondsNow(date) {
-  return (
-    date.getHours() * 3600 +
-    date.getMinutes() * 60 +
-    date.getSeconds()
-  );
-}
-
-function getCurrentStage(date) {
-  const minute = minutesNow(date);
-
-  if (minute < stages[1].start) return 0;
-  if (minute < stages[2].start) return 1;
-  if (minute < stages[3].start) return 2;
-
-  return 3;
-}
-
-function milestoneDate(minute, reference) {
-  const result = new Date(reference);
-
-  result.setHours(
-    Math.floor(minute / 60),
-    minute % 60,
-    0,
-    0
-  );
-
-  return result;
-}
-
-function formatRemaining(milliseconds) {
-  const total = Math.max(
-    0,
-    Math.ceil(milliseconds / 1000)
-  );
-
-  const hours = Math.floor(total / 3600);
-  const mins = Math.floor((total % 3600) / 60);
-  const secs = total % 60;
-
-  return [hours, mins, secs]
-    .map(n => String(n).padStart(2, "0"))
-    .join(":");
-}
-
-// ------------------------------------------
-// CHECKLIST RENDERING
-// ------------------------------------------
-
-function makeTask(task) {
-  const label = document.createElement("label");
-  label.className = "task";
-
-  const isChecked = Boolean(checkedTasks[task.id]);
-
-  if (isChecked) {
-    label.classList.add("checked");
-  }
-
-  const input = document.createElement("input");
-
-  input.type = "checkbox";
-  input.checked = isChecked;
-  input.setAttribute("aria-label", task.title);
-
-  const content = document.createElement("span");
-  content.className = "task-content";
-
-  const title = document.createElement("span");
-  title.className = "task-title";
-  title.textContent = task.title;
-
-  const description = document.createElement("span");
-  description.className = "task-description";
-  description.textContent = task.description;
-
-  content.append(title, description);
-  label.append(input, content);
-
-  input.addEventListener("change", () => {
-    checkedTasks[task.id] = input.checked;
-
-    label.classList.toggle(
-      "checked",
-      input.checked
-    );
-
-    saveChecks();
-    updateTaskCounter();
-  });
-
-  return label;
-}
-
-function updateTaskCounter() {
-  const stageIndex =
-    manualStage !== null
-      ? manualStage
-      : getCurrentStage(new Date());
-
-  const tasks = stages[stageIndex].tasks;
-
-  if (!tasks.length) {
-    elements.taskCounter.textContent =
-      "The evening is complete.";
+  if(session.complete) {
+    $("stageLabel").textContent="✓ RITUAL COMPLETE";
+    $("stepCounter").textContent=tasks.length+" / "+tasks.length;
+    $("taskTitle").textContent="Mission accomplished.";
+    $("taskInstructions").innerHTML=
+      '<div class="instruction-item">'+
+      '<span class="instruction-dot"></span>'+
+      '<span>Body clean. Grooming finished. Tomorrow prepared. Return on the next day for your automatically selected routine.</span>'+
+      '</div>';
+    $("durationLabel").textContent="COMPLETE";
+    $("upcomingName").textContent="Routine finished";
+    $("upcomingTime").textContent="✓";
+    renderClock();
     return;
   }
 
-  const complete = tasks.filter(
-    task => Boolean(checkedTasks[task.id])
-  ).length;
+  const task=tasks[session.index];
+  $("stepCounter").textContent=
+    String(session.index+1).padStart(2,"0")+
+    " / "+String(tasks.length).padStart(2,"0");
 
-  elements.taskCounter.textContent =
-    `${complete} of ${tasks.length} completed`;
-}
+  $("taskTitle").textContent=task.title;
+  $("durationLabel").textContent=task.min+" MIN";
 
-function renderFocus() {
-  const now = new Date();
-  const current = getCurrentStage(now);
+  $("taskInstructions").innerHTML=task.actions.map(action=>
+    `<div class="instruction-item">
+      <span class="instruction-dot"></span>
+      <span>${action}</span>
+    </div>`
+  ).join("");
 
-  const index =
-    manualStage !== null ? manualStage : current;
+  $("taskInstructions").scrollTop=0;
 
-  const stage = stages[index];
-
-  elements.focusKicker.textContent = stage.kicker;
-  elements.focusTitle.textContent = stage.title;
-  elements.focusDescription.textContent =
-    stage.description;
-
-  if (manualStage !== null) {
-    elements.focusTag.textContent = "PREVIEW";
-  } else if (minutesNow(now) < stages[0].start) {
-    elements.focusTag.textContent = "UPCOMING";
-  } else if (index === 3) {
-    elements.focusTag.textContent = "COMPLETE";
+  const next=tasks[session.index+1];
+  if(next) {
+    $("upcomingName").textContent=next.title;
+    $("upcomingTime").textContent=next.min+" MIN";
   } else {
-    elements.focusTag.textContent = "CURRENT";
+    $("upcomingName").textContent="Finish your daily ritual";
+    $("upcomingTime").textContent="✓";
   }
 
-  elements.taskList.replaceChildren();
+  renderClock();
+}
 
-  if (stage.tasks.length) {
-    for (const task of stage.tasks) {
-      elements.taskList.appendChild(
-        makeTask(task)
-      );
+function renderClock() {
+  const tasks=currentTasks();
+  const remaining=remainingNow();
+
+  $("timerText").textContent=clock(remaining);
+  $("sessionLeft").textContent=clock(totalRemaining())+" LEFT";
+
+  const overall=1-totalRemaining()/TOTAL_MS;
+  $("sessionBar").style.width=
+    (Math.max(0,Math.min(1,overall))*100)+"%";
+
+  let progress=1;
+
+  if(!session.complete) {
+    const duration=tasks[session.index].min*60000;
+    progress=1-remaining/duration;
+  }
+
+  $("ringValue").style.strokeDasharray=CIRC;
+  $("ringValue").style.strokeDashoffset=
+    CIRC*(1-Math.max(0,Math.min(1,progress)));
+
+  if(session.complete) {
+    $("stageLabel").textContent="✓ RITUAL COMPLETE";
+    $("playIcon").textContent="↻";
+    $("playText").textContent="Start Again";
+  } else if(session.running) {
+    $("stageLabel").textContent="● STAGE IN PROGRESS";
+    $("playIcon").textContent="Ⅱ";
+    $("playText").textContent="Pause Routine";
+  } else if(session.started) {
+    $("stageLabel").textContent="● ROUTINE PAUSED";
+    $("playIcon").textContent="▶";
+    $("playText").textContent="Resume Routine";
+  } else {
+    $("stageLabel").textContent="● READY TO BEGIN";
+    $("playIcon").textContent="▶";
+    $("playText").textContent="Begin 30-Minute Ritual";
+  }
+}
+
+/* =================================================
+   TIMING + AUTOMATIC TRANSITIONS
+   Uses real wall-clock time, not tick counting.
+   ================================================= */
+
+function advanceIfNeeded() {
+  if(!session.running||session.complete) return;
+
+  let changed=false;
+  let guard=0;
+
+  while(
+    session.running &&
+    Date.now()>=session.endsAt &&
+    guard++<20
+  ) {
+    const previousEnd=session.endsAt;
+    session.index++;
+    changed=true;
+
+    if(session.index>=currentTasks().length) {
+      session.complete=true;
+      session.running=false;
+      session.remaining=0;
+      session.endsAt=0;
+      break;
     }
-  } else {
-    const finish = document.createElement("div");
 
-    finish.style.cssText = `
-      padding: 24px 15px;
-      border-radius: 15px;
-      background: rgba(234,197,142,.06);
-      color: var(--gold);
-      text-align: center;
-      font-size: 15px;
-      line-height: 1.9;
-    `;
-
-    finish.textContent =
-      "☾  Nothing more to do. Good night.";
-
-    elements.taskList.appendChild(finish);
+    const duration=currentTasks()[session.index].min*60000;
+    session.remaining=duration;
+    session.endsAt=previousEnd+duration;
   }
 
-  elements.returnNow.classList.toggle(
-    "hidden",
-    manualStage === null
-  );
-
-  updateTaskCounter();
-}
-
-// ------------------------------------------
-// TIMELINE RENDERING
-// ------------------------------------------
-
-function renderTimeline() {
-  const now = new Date();
-  const minute = minutesNow(now);
-  const live = getCurrentStage(now);
-
-  const selected =
-    manualStage !== null ? manualStage : live;
-
-  document
-    .querySelectorAll("[data-stage]")
-    .forEach(button => {
-      const index = Number(button.dataset.stage);
-
-      button.classList.toggle(
-        "is-selected",
-        index === selected
-      );
-
-      button.classList.toggle(
-        "is-live",
-        index === live &&
-          minute >= stages[0].start
-      );
-
-      button.setAttribute(
-        "aria-current",
-        index === live &&
-          minute >= stages[0].start
-          ? "step"
-          : "false"
-      );
-    });
-}
-
-// ------------------------------------------
-// LIVE CLOCK & COUNTDOWN
-// ------------------------------------------
-
-function updateClock(now) {
-  elements.liveClock.textContent =
-    now.toLocaleTimeString(undefined, {
-      hour: "numeric",
-      minute: "2-digit"
-    });
-
-  elements.dayLabel.textContent =
-    now.toLocaleDateString(undefined, {
-      weekday: "short",
-      month: "short",
-      day: "numeric"
-    });
-
-  const elapsedSeconds = secondsNow(now);
-  const startSeconds = stages[0].start * 60;
-  const endSeconds = stages[3].start * 60;
-
-  const fraction = Math.max(
-    0,
-    Math.min(
-      1,
-      (elapsedSeconds - startSeconds) /
-      (endSeconds - startSeconds)
-    )
-  );
-
-  const percentage = Math.round(fraction * 100);
-
-  elements.progressFill.style.width =
-    `${fraction * 100}%`;
-
-  elements.progressText.textContent =
-    `${percentage}% elapsed`;
-
-  elements.progressTrack.setAttribute(
-    "aria-valuenow",
-    String(percentage)
-  );
-
-  const next = milestones.find(
-    item => elapsedSeconds < item.minute * 60
-  );
-
-  if (next) {
-    const target = milestoneDate(
-      next.minute,
-      now
-    );
-
-    elements.countdown.textContent =
-      formatRemaining(
-        target.getTime() - now.getTime()
-      );
-
-    elements.nextEvent.textContent = next.label;
-  } else {
-    elements.countdown.textContent = "00:00:00";
-    elements.nextEvent.textContent =
-      "Ritual complete · Time to rest";
+  if(changed) {
+    save();
+    renderStage();
+    if(document.visibilityState==="visible") {
+      playChime(session.complete);
+    }
   }
-
-  if (elapsedSeconds < startSeconds) {
-    elements.status.textContent = "BEGINS SOON";
-  } else if (elapsedSeconds < endSeconds) {
-    elements.status.textContent = "IN PROGRESS";
-  } else {
-    elements.status.textContent = "COMPLETE";
-  }
-}
-
-function renderStatic() {
-  renderFocus();
-  renderTimeline();
 }
 
 function tick() {
-  const now = new Date();
-  const newDate = dateKey(now);
-
-  // A fresh day receives a fresh checklist.
-  if (newDate !== activeDate) {
-    activeDate = newDate;
-    checkedTasks = readChecks(activeDate);
-    manualStage = null;
-    lastClockStage = -1;
+  if(session.date!==localDateKey()&&!session.running) {
+    session=newSession();
+    glanceDay=session.day;
+    save();
+    renderStage();
   }
 
-  const stage = getCurrentStage(now);
-
-  // Advance the displayed phase automatically.
-  if (stage !== lastClockStage) {
-    lastClockStage = stage;
-    renderStatic();
-  }
-
-  updateClock(now);
+  advanceIfNeeded();
+  renderClock();
 }
 
-// ------------------------------------------
-// MANUAL TIMELINE PREVIEW
-// ------------------------------------------
+function startPause() {
+  unlockSound();
+  requestWakeLock();
 
-document
-  .querySelectorAll("[data-stage]")
-  .forEach(button => {
-    button.addEventListener("click", () => {
-      manualStage = Number(button.dataset.stage);
+  if(session.complete) {
+    session=newSession();
+    renderStage();
+  }
 
-      renderStatic();
+  if(session.running) {
+    session.remaining=Math.max(0,session.endsAt-Date.now());
+    session.running=false;
+    session.endsAt=0;
+  } else {
+    session.endsAt=Date.now()+session.remaining;
+    session.running=true;
+    session.started=true;
+    playChime();
+  }
 
-      document
-        .querySelector(".focus-card")
-        .scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-    });
+  save();
+  tick();
+}
+
+function restartToday() {
+  if(session.started&&!session.complete) {
+    if(!confirm("Restart today's entire 30-minute routine?")) return;
+  }
+  session=newSession();
+  glanceDay=session.day;
+  save();
+  renderStage();
+}
+
+$("playBtn").addEventListener("click",startPause);
+$("resetBtn").addEventListener("click",restartToday);
+
+/* =================================================
+   MENU — GLANCE / PRODUCTS / TIPS
+   ================================================= */
+
+let activeTab="glance";
+
+function openMenu(tab="glance") {
+  activeTab=tab;
+  glanceDay=session.day;
+  $("overlay").hidden=false;
+  document.body.style.overflow="hidden";
+  updateMenu();
+  $("closeMenu").focus();
+}
+
+function closeMenu() {
+  $("overlay").hidden=true;
+  document.body.style.overflow="";
+  $("menuBtn").focus();
+}
+
+function updateMenu() {
+  document.querySelectorAll(".tab").forEach(button=>{
+    button.classList.toggle("active",button.dataset.tab===activeTab);
   });
 
-elements.returnNow.addEventListener(
-  "click",
-  () => {
-    manualStage = null;
-    renderStatic();
+  const content=$("sheetContent");
+
+  if(activeTab==="glance") {
+    const day=DAYS[glanceDay];
+
+    const dayButtons=DAYS.map((d,i)=>
+      `<button class="day-choice ${i===glanceDay?"active":""}"
+        data-day="${i}" aria-label="${d.name}">
+        ${d.name.slice(0,2)}
+      </button>`
+    ).join("");
+
+    const schedule=day.tasks.map((task,i)=>
+      `<article class="glance-row">
+        <div class="glance-time">${timeRange(day.tasks,i)}</div>
+        <div>
+          <div class="glance-title">${task.title}</div>
+          <div class="glance-desc">
+            ${task.actions.join("<br><br>")}
+          </div>
+        </div>
+      </article>`
+    ).join("");
+
+    content.innerHTML=`
+      <p class="section-intro">
+        All seven schedules available for inspection.
+        Previewing a day does not change your running timer.
+      </p>
+      <div class="day-picker">${dayButtons}</div>
+      <h3 class="glance-heading">${day.name} · 30 minutes</h3>
+      <p class="section-intro">${day.focus}</p>
+      ${schedule}
+    `;
+
+    content.querySelectorAll("[data-day]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        glanceDay=Number(button.dataset.day);
+        updateMenu();
+      });
+    });
+
+  } else if(activeTab==="products") {
+
+    content.innerHTML=`
+      <p class="section-intro">
+        Your fixed weekly personal-care kit.
+        Buy once, keep products organized, use only when scheduled.
+      </p>
+      ${PRODUCTS.map((product,i)=>`
+        <article class="product">
+          <div class="product-name">${i+1}. ${product.name}</div>
+          <div class="product-use">${product.use}</div>
+          <div class="product-desc">${product.desc}</div>
+        </article>
+      `).join("")}
+
+      <h3 class="glance-heading" style="margin-top:25px">
+        Reusable tools
+      </h3>
+      ${TOOLS.map(tool=>`
+        <div class="product-desc" style="padding:7px 0">
+          • ${tool}
+        </div>
+      `).join("")}
+
+      <div class="info-note">
+        Eye sensitivity: check product labels for ingredients you
+        have reacted to, introduce new products separately,
+        and stop any product that causes eye watering.
+        The retinol is optional and should not be used as
+        a substitute for assessment of persistent milia.
+      </div>
+    `;
+
+  } else {
+
+    content.innerHTML=`
+      <p class="section-intro">
+        Seven practical principles for your skin,
+        long hair, beard and dusty work environment.
+      </p>
+      ${TIPS.map((tip,i)=>`
+        <article class="tip">
+          <div class="tip-index">
+            FIELD NOTE ${String(i+1).padStart(2,"0")}
+          </div>
+          <div class="tip-title">${tip.title}</div>
+          <div class="tip-text">${tip.desc}</div>
+        </article>
+      `).join("")}
+    `;
   }
-);
 
-// ------------------------------------------
-// SLEEP LIBRARY
-// ------------------------------------------
-
-/*
-  Accept HTTP/HTTPS links or local relative paths.
-
-  Example:
-  https://example.com/library
-
-  Or:
-  ../sleep/index.html
-*/
-
-function validateLibraryUrl(value) {
-  const trimmed = value.trim();
-
-  if (!trimmed) return null;
-
-  try {
-    const parsed = new URL(
-      trimmed,
-      window.location.href
-    );
-
-    if (
-      parsed.protocol !== "https:" &&
-      parsed.protocol !== "http:"
-    ) {
-      return null;
-    }
-
-    // Explicit URLs or relative site paths only.
-    const isAbsolute = /^https?:\/\//i.test(trimmed);
-    const isRelative = /^(\/(?!\/)|\.\/|\.\.\/)/.test(trimmed);
-
-    if (!isAbsolute && !isRelative) {
-      return null;
-    }
-
-    return trimmed;
-  } catch {
-    return null;
-  }
+  content.scrollTop=0;
 }
 
-function refreshLibrary() {
-  const saved = getStored(LIBRARY_KEY);
-  const valid = saved && validateLibraryUrl(saved);
+$("menuBtn").addEventListener("click",()=>openMenu("glance"));
+$("closeMenu").addEventListener("click",closeMenu);
 
-  elements.openLibrary.disabled = !valid;
-  elements.libraryUrl.value = valid || "";
+$("overlay").addEventListener("click",event=>{
+  if(event.target===$("overlay")) closeMenu();
+});
 
-  if (valid) {
-    elements.libraryMessage.textContent =
-      "Library link saved on this device.";
-  }
-}
+document.querySelectorAll(".tab").forEach(button=>{
+  button.addEventListener("click",()=>{
+    activeTab=button.dataset.tab;
+    updateMenu();
+  });
+});
 
-$("libraryForm").addEventListener(
-  "submit",
-  event => {
-    event.preventDefault();
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"&&!$("overlay").hidden) closeMenu();
+});
 
-    const value = validateLibraryUrl(
-      elements.libraryUrl.value
-    );
+/* =================================================
+   INITIALIZATION
+   ================================================= */
 
-    if (!value) {
-      elements.libraryMessage.textContent =
-        "Enter a valid HTTPS link or relative site path.";
-      return;
-    }
-
-    if (setStored(LIBRARY_KEY, value)) {
-      elements.libraryMessage.textContent =
-        "Saved. Your library is ready for 9:00 PM.";
-      elements.openLibrary.disabled = false;
-    } else {
-      elements.libraryMessage.textContent =
-        "Could not save the link in this browser.";
-    }
-  }
-);
-
-elements.openLibrary.addEventListener(
-  "click",
-  () => {
-    const url = validateLibraryUrl(
-      getStored(LIBRARY_KEY) || ""
-    );
-
-    if (!url) {
-      elements.libraryMessage.textContent =
-        "Save your library link first.";
-      return;
-    }
-
-    window.open(
-      url,
-      "_blank",
-      "noopener,noreferrer"
-    );
-  }
-);
-
-// ------------------------------------------
-// RESET TONIGHT
-// ------------------------------------------
-
-$("resetButton").addEventListener(
-  "click",
-  () => {
-    const approved = window.confirm(
-      "Clear all checkmarks for tonight?"
-    );
-
-    if (!approved) return;
-
-    checkedTasks = {};
-    removeStored(STORAGE_PREFIX + activeDate);
-
-    renderStatic();
-  }
-);
-
-// ------------------------------------------
-// STARTUP
-// ------------------------------------------
-
-refreshLibrary();
+save();
+renderStage();
 tick();
 
-setInterval(tick, 1000);
+// Check actual elapsed time 4 times per second.
+setInterval(tick,250);
 
-// Update immediately when returning to the tab.
-document.addEventListener(
-  "visibilitychange",
-  () => {
-    if (!document.hidden) tick();
-  }
-);
+// Request immediately, and retry on user interaction.
+requestWakeLock();
+
+// Reconcile elapsed time after switching back to the tab.
+window.addEventListener("pageshow",tick);
+
 </script>
 </body>
 </html>
