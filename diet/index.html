@@ -2,181 +2,193 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#E7ECF0">
 <title>Every item has a job: my daily plate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F2F5EE; --panel:#E7EDE0; --ink:#14231B; --muted:#56655B; --line:#D3DBCE; --dot:#A3B1A0;
-  --lens:#FFC61A; --lens-ink:#14231B; --on-c:#FFFFFF;
-  --c-breakfast:#7A4A2B; --c-snack1:#B02A6B; --c-lunch:#2C7A4B; --c-snack2:#3F52B5; --c-dinner:#C5361F; --c-bed:#2A3757; --c-any:#3F6774;
-  --display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
-  --body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --ground:#E7ECF0; --paper:#F7F9FA; --ink:#15202B; --muted:#56626E; --line:#C9D2D9; --dot:#9AA7B2;
+  --lens:#D81B72; --lens-soft:#D81B7222; --on-lens:#FFFFFF;
+  --c-b:#C8322B; --on-b:#FFFFFF;
+  --c-l1:#F2A01E; --on-l1:#1B1405;
+  --c-l2:#2E7D5A; --on-l2:#FFFFFF;
+  --c-d:#3C4BAE; --on-d:#FFFFFF;
+  --c-n:#5A3F7A; --on-n:#FFFFFF;
+  --c-x:#25788A; --on-x:#FFFFFF;
+  --display:'Big Shoulders Display','Arial Narrow','Roboto Condensed',Impact,sans-serif;
+  --body:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0F1712; --panel:#17221B; --ink:#EAF0E6; --muted:#9BAA9F; --line:#26352C; --dot:#3C4E42;
-    --on-c:#0F1712;
-    --c-breakfast:#C9915F; --c-snack1:#E8709F; --c-lunch:#5FC088; --c-snack2:#8B99FF; --c-dinner:#F27A62; --c-bed:#93A7D9; --c-any:#7DB3C4;
+    --ground:#0E141B; --paper:#17202A; --ink:#E8EEF3; --muted:#9AA8B5; --line:#26323E; --dot:#46535F;
+    --lens:#FF6FB1; --lens-soft:#FF6FB129; --on-lens:#2A0616;
+    --c-b:#FF7B6B; --on-b:#2A0A07;
+    --c-l1:#FFC25C; --on-l1:#1B1405;
+    --c-l2:#5FD0A0; --on-l2:#06241A;
+    --c-d:#8E9BFF; --on-d:#0B1040;
+    --c-n:#BC9CE6; --on-n:#1E1030;
+    --c-x:#62C3D6; --on-x:#052029;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0F1712; --panel:#17221B; --ink:#EAF0E6; --muted:#9BAA9F; --line:#26352C; --dot:#3C4E42;
-  --on-c:#0F1712;
-  --c-breakfast:#C9915F; --c-snack1:#E8709F; --c-lunch:#5FC088; --c-snack2:#8B99FF; --c-dinner:#F27A62; --c-bed:#93A7D9; --c-any:#7DB3C4;
+  --ground:#0E141B; --paper:#17202A; --ink:#E8EEF3; --muted:#9AA8B5; --line:#26323E; --dot:#46535F;
+  --lens:#FF6FB1; --lens-soft:#FF6FB129; --on-lens:#2A0616;
+  --c-b:#FF7B6B; --on-b:#2A0A07;
+  --c-l1:#FFC25C; --on-l1:#1B1405;
+  --c-l2:#5FD0A0; --on-l2:#06241A;
+  --c-d:#8E9BFF; --on-d:#0B1040;
+  --c-n:#BC9CE6; --on-n:#1E1030;
+  --c-x:#62C3D6; --on-x:#052029;
   color-scheme:dark;
 }
 
-.begin-wrap{max-width:1040px;margin:0 auto;padding:16px 20px 0;text-align:center}
-.begin-btn{display:inline-block;background:var(--lens);color:var(--lens-ink);font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:.08em;text-decoration:none;border-radius:999px;padding:12px 36px;box-shadow:0 2px 0 var(--ink);transition:transform .12s ease}
-.begin-btn:hover{transform:translateY(-1px)}
-.begin-btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--ink)}
-
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
-button{font-family:inherit;color:inherit}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font-family:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
 :focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:6px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px 72px}
 
-/* top + hero */
-.top{display:flex;justify-content:flex-end;padding:16px 0 0}
-.pill-btn{border:1.5px solid var(--ink);background:transparent;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;cursor:pointer}
-.hero{padding:30px 0 8px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,9.5vw,96px);line-height:.95;letter-spacing:-.035em;margin:0 0 22px;max-width:13ch}
-.lede{font-size:18px;color:var(--muted);max-width:60ch;margin:0 0 26px}
-.rack{display:flex;flex-wrap:wrap;gap:8px;max-width:860px}
-.chip{border:1.5px solid var(--ink);background:transparent;border-radius:999px;padding:7px 14px;font-size:14.5px;font-weight:500;cursor:pointer;transition:background .15s}
-.chip:hover{background:var(--panel)}
-.chip[aria-pressed="true"]{background:var(--lens);color:var(--lens-ink);border-color:var(--lens-ink);font-weight:700}
-.chip.mini{font-size:12.5px;padding:2px 10px;border-width:1px}
+/* begin button: same spot, top centre */
+.begin-wrap{max-width:640px;margin:0 auto;padding:16px 20px 0;text-align:center}
+.begin-btn{display:inline-block;background:var(--lens);color:var(--on-lens);font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.08em;text-decoration:none;border-radius:999px;padding:10px 44px 8px;box-shadow:0 3px 0 var(--ink);transition:transform .12s ease}
+.begin-btn:hover{transform:translateY(-1px)}
+.begin-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
 
-/* lens panel */
-.lp{margin:24px 0 36px;padding:18px 22px 20px;background:var(--panel);border-left:8px solid var(--lens);border-radius:4px 14px 14px 4px}
+.page{max-width:640px;margin:0 auto}
+
+/* hero */
+.hero{padding:18px 18px 0}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.02em}
+.pill-btn{min-height:40px;border:1.5px solid var(--ink);background:transparent;border-radius:999px;padding:0 16px;font-weight:600;font-size:14px;cursor:pointer}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(58px,19vw,108px);line-height:.88;letter-spacing:-.005em;text-transform:uppercase;margin:20px 0 16px}
+.lede{font-size:17px;color:var(--muted);max-width:46ch;margin:0}
+
+.glance{display:flex;margin:26px -18px 0}
+.gl{--i:0;flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:12px 2px 10px;background:var(--c);color:var(--on);border-bottom:6px solid color-mix(in srgb,var(--c) 68%,#000);text-decoration:none;text-align:center;animation:rise .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 80ms)}
+.gl-e{font-size:20px;line-height:1.1}
+.gl strong{font-family:var(--display);font-weight:800;font-size:clamp(15px,4.7vw,21px);line-height:1.1}
+.gl span:last-child{font-size:12px;font-weight:600;opacity:.85}
+.gl.on strong::after{content:" \2713"}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* spotlight */
+.spot{padding:34px 18px 6px}
+h2.sec{font-family:var(--display);font-weight:800;font-size:clamp(36px,10vw,48px);line-height:.95;letter-spacing:-.005em;margin:0 0 8px}
+.sec-sub{color:var(--muted);max-width:46ch;margin:0 0 16px}
+.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);gap:8px;overflow-x:auto;margin:0 -18px;padding:4px 18px 12px;scroll-snap-type:x proximity;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.chip{scroll-snap-align:start;white-space:nowrap;min-height:42px;border:1.5px solid var(--ink);background:transparent;border-radius:999px;padding:0 16px;font-size:15px;font-weight:500;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--lens);color:var(--on-lens);border-color:var(--lens);font-weight:700}
+
+.lp{margin-top:10px;padding:16px 16px 18px;background:var(--paper);border-left:6px solid var(--lens);border-radius:4px 14px 14px 4px}
 .lp .hint{margin:0;color:var(--muted)}
-.lp-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.lp h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);letter-spacing:-.025em;line-height:1;margin:0}
-.link{background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;font-weight:600;font-size:14px;cursor:pointer}
-.lp dl{display:grid;grid-template-columns:170px 1fr;gap:10px 22px;margin:16px 0 0}
-.lp dt{font-weight:700}
-.lp dd{margin:0}
-.lp ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.lp-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lp h3{font-family:var(--display);font-weight:900;font-size:40px;line-height:1;margin:0}
+.link{min-height:40px;background:none;border:0;padding:0 2px;text-decoration:underline;text-underline-offset:3px;font-weight:600;font-size:14px;cursor:pointer}
+.lp dl{margin:10px 0 0}
+.lp dt{font-weight:700;margin-top:12px}
+.lp dd{margin:2px 0 0}
+.lp ul{list-style:none;padding:0;margin:4px 0 0;display:grid;gap:6px}
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--c);margin-right:8px}
 .lp .note{margin:14px 0 0;padding-top:12px;border-top:1px dashed var(--dot);color:var(--muted)}
 
 /* dock */
-.dock{position:sticky;top:0;z-index:30;margin:0 -20px 26px;padding:10px 20px 8px;background:var(--bg);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.ribbon{display:flex;gap:4px}
-.seg{position:relative;flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 4px;border:0;border-bottom:4px solid var(--c);border-radius:4px;background:var(--panel);background:color-mix(in srgb,var(--c) 16%,var(--bg));font-weight:600;font-size:13.5px;cursor:pointer;transform-origin:left center;animation:paint .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 90ms)}
-.seg.on{background:var(--c);color:var(--on-c)}
-.seg.next{outline:2px solid var(--ink);outline-offset:2px}
-.se{font-size:17px;line-height:1}
-.sn{display:none;white-space:nowrap}
-@keyframes paint{from{transform:scaleX(0);opacity:0}to{transform:none;opacity:1}}
-.dock-row{display:flex;align-items:center;gap:12px;padding-top:7px;font-size:13.5px;color:var(--muted);flex-wrap:wrap}
+.dock{position:sticky;top:0;z-index:30;margin-top:30px;padding-top:8px;background:var(--ground);background:color-mix(in srgb,var(--ground) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 18px 4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:44px;padding:0 16px;border:2px solid var(--c);background:transparent;border-radius:999px;font-weight:600;font-size:14.5px;cursor:pointer}
+.tab.on{background:var(--c);color:var(--on)}
+.tab.next{box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--ink)}
+.dock-row{display:flex;align-items:center;gap:12px;padding:2px 18px 6px;font-size:14px;color:var(--muted)}
 .dock-row .spacer{flex:1}
-.tag{border:0;background:var(--lens);color:var(--lens-ink);font-weight:700;border-radius:999px;padding:2px 12px;font-size:13px;cursor:pointer}
+.tag{min-height:36px;border:0;background:var(--lens);color:var(--on-lens);font-weight:700;border-radius:999px;padding:0 14px;font-size:14px;cursor:pointer}
 
-/* bands */
-.band{--tint:var(--panel);display:grid;grid-template-columns:minmax(210px,270px) 1fr;gap:6px 44px;margin:0 0 18px;padding:26px 30px 28px;border-top:8px solid var(--c);border-radius:4px 4px 16px 16px;background:var(--panel);background:color-mix(in srgb,var(--c) 8%,var(--bg));scroll-margin-top:116px;transition:opacity .2s}
-.band.quiet{opacity:.5}
-.when{margin:0 0 2px;font-size:14.5px;color:var(--muted)}
-.nextpill{display:none;background:var(--ink);color:var(--bg);border-radius:999px;padding:2px 11px;font-size:12.5px;font-weight:700;margin-bottom:8px}
-.band.next .nextpill{display:inline-block}
-.band h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,50px);letter-spacing:-.03em;line-height:1;margin:0 0 6px}
-.band.done h3::after{content:" ✓";color:var(--c)}
-.sub{margin:0 0 16px;color:var(--muted);font-size:15.5px}
-.eat{border:2px solid var(--c);background:transparent;border-radius:999px;padding:7px 16px;font-weight:700;font-size:14px;cursor:pointer}
-.eat[aria-pressed="true"]{background:var(--c);color:var(--on-c)}
-.cnt{display:inline-block;margin:14px 0 0;background:var(--lens);color:var(--lens-ink);font-weight:700;font-size:13px;border-radius:999px;padding:2px 12px}
-.band.mini{padding:20px 30px 22px}
-.band.mini h3{font-size:clamp(28px,4vw,38px)}
+/* meals */
+.meal{scroll-margin-top:104px}
+.mh{background:var(--c);color:var(--on);padding:24px 18px 18px;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:6px solid color-mix(in srgb,var(--c) 68%,#000)}
+.mh-l{min-width:0}
+.when{margin:0 0 2px;font-weight:700;font-size:15px;opacity:.85}
+.mh h3{font-family:var(--display);font-weight:900;font-size:clamp(50px,16vw,76px);line-height:.88;margin:0}
+.dish{margin:8px 0 0;font-weight:500;font-size:16px}
+.cnt{display:inline-block;margin-top:10px;background:var(--lens);color:var(--on-lens);font-weight:700;font-size:13px;border-radius:999px;padding:2px 12px}
+.eat{flex:none;min-height:44px;border:2px solid var(--on);background:transparent;color:var(--on);border-radius:999px;padding:0 16px;font-weight:700;font-size:14px;cursor:pointer}
+.eat[aria-pressed="true"]{background:var(--on);color:var(--c)}
+.meal.quiet .mh{opacity:.55}
+.meal.mini .mh h3{font-size:clamp(38px,12vw,56px)}
+.meal.mini .mh{padding-top:18px;padding-bottom:14px}
 
+.mb{padding:20px 18px 30px;background:color-mix(in srgb,var(--c) 9%,var(--ground))}
+.mb h4{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;margin:26px 0 10px}
+.mb > h4:first-child{margin-top:0}
 .items{list-style:none;margin:0;padding:0}
-.grp{font-family:var(--display);font-weight:700;font-size:16px;color:var(--c);margin:16px 0 0}
+.grp{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:21px;margin:18px 0 2px}
+.grp::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--c)}
 .items > .grp:first-child{margin-top:0}
-.item{padding:8px 0;transition:opacity .2s}
-.item.miss{opacity:.32}
+.item{margin:0 -10px;padding:10px 10px;border-left:4px solid transparent;border-radius:0 8px 8px 0;transition:opacity .2s,background .2s}
+.item.hit{background:var(--lens-soft);border-left-color:var(--lens)}
+.item.miss{opacity:.38}
 .irow{display:flex;align-items:baseline;gap:8px}
 .iname{font-weight:600;font-size:17px}
-.item.hit .iname b{font-weight:700;background:linear-gradient(transparent 56%,var(--lens) 56%,var(--lens) 94%,transparent 94%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.iname b{font-weight:600}
-.lead{flex:1;min-width:14px;border-bottom:2px dotted var(--dot);transform:translateY(-4px)}
+.lead{flex:1;min-width:12px;border-bottom:2px dotted var(--dot);transform:translateY(-4px)}
 .iq{color:var(--muted);font-size:15px;white-space:nowrap}
-.spacer-l{flex:1}
-.exp{align-self:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--dot);background:transparent;font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;flex:none;transition:transform .2s}
-.item.open .exp{transform:rotate(45deg);background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.idet{margin:1px 0 0;color:var(--muted);font-size:14.5px;max-width:54ch}
-.more{display:none;margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--bg)}
-.item.open .more{display:block}
-.more p{margin:0 0 8px;font-size:14.5px}
-.mchips{display:flex;flex-wrap:wrap;gap:6px}
-.sp{margin-left:8px;font-size:12px;font-weight:700;border:1.5px solid var(--c);color:var(--c);border-radius:999px;padding:0 8px;vertical-align:1px}
-.tick{flex:none;align-self:center;width:24px;height:24px;border-radius:7px;border:2px solid var(--c);background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
-.tick[aria-pressed="true"]{background:var(--c)}
-.tick[aria-pressed="true"]::after{content:"✓";color:var(--on-c);font-size:14px;font-weight:800;line-height:1}
-.pair{margin-top:18px;padding-left:16px;border-left:4px solid var(--c)}
-.pair b{font-family:var(--display);font-size:17px;font-weight:700;display:block}
-.pair p{margin:2px 0 0;max-width:58ch}
-.pair .tip{color:var(--muted);font-size:14.5px}
+.idet{margin:2px 0 0;color:var(--muted);font-size:15px;max-width:52ch}
+.itags{margin:4px 0 0;display:flex;flex-wrap:wrap;gap:0 12px}
+.nt{border:0;background:none;padding:5px 0;font-size:13.5px;color:var(--muted);text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer}
+.nt[aria-pressed="true"]{color:var(--lens);font-weight:700;text-decoration:none}
+.sp{margin-left:8px;font-size:12px;font-weight:700;border:1.5px solid var(--ink);border-radius:999px;padding:0 8px;vertical-align:1px}
+.tick{position:relative;flex:none;align-self:center;width:28px;height:28px;border-radius:8px;border:2px solid var(--ink);background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.tick::after{content:"";position:absolute;inset:-9px}
+.tick[aria-pressed="true"]{background:var(--ink)}
+.tick[aria-pressed="true"]::before{content:"\2713";color:var(--ground);font-size:16px;font-weight:800;line-height:1}
 
-/* coverage map */
-section.block{margin-top:64px}
-h2.sec{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,46px);letter-spacing:-.03em;line-height:1;margin:0 0 10px}
-.sec-sub{color:var(--muted);max-width:60ch;margin:0 0 22px}
-.heat{max-width:760px}
-.hrow{display:grid;grid-template-columns:minmax(96px,160px) repeat(6,minmax(0,1fr)) 32px;gap:5px;align-items:center;width:100%;padding:3px 8px;border:0;background:none;border-radius:8px;font-size:14.5px;font-weight:500;text-align:left;cursor:pointer}
-.hrow:hover{background:var(--panel)}
-.hrow[aria-pressed="true"]{background:var(--lens);color:var(--lens-ink);font-weight:700}
-.hrow.hh{cursor:default;pointer-events:none;font-size:17px;text-align:center}
+.steps{list-style:none;margin:0;padding:0;counter-reset:step}
+.steps li{position:relative;counter-increment:step;padding:0 0 20px 54px;font-size:16.5px;line-height:1.55;max-width:54ch}
+.steps li::before{content:counter(step);position:absolute;left:0;top:-5px;width:36px;text-align:center;font-family:var(--display);font-weight:900;font-size:40px;line-height:1}
+.steps li::after{content:"";position:absolute;left:17px;top:38px;bottom:4px;width:3px;border-radius:2px;background:var(--c)}
+.steps li:last-child{padding-bottom:4px}
+.steps li:last-child::after{display:none}
+.tip{margin:14px 0 0;padding:12px 14px;background:var(--paper);border-radius:10px;font-size:15px}
+.why{margin-top:22px;padding-left:14px;border-left:4px solid var(--c)}
+.why b{font-family:var(--display);font-size:22px;font-weight:800;line-height:1.1;display:block}
+.why p{margin:3px 0 0;max-width:52ch}
+
+/* lower sections */
+section.block{padding:46px 18px 0}
+.heat{max-width:560px}
+.hrow{display:grid;grid-template-columns:minmax(84px,1fr) repeat(5,34px) 28px;gap:4px;align-items:center;width:100%;min-height:40px;padding:2px 6px;border:0;background:none;border-radius:8px;font-size:15px;font-weight:500;text-align:left;cursor:pointer}
+.hrow:hover{background:var(--paper)}
+.hrow[aria-pressed="true"]{background:var(--lens);color:var(--on-lens);font-weight:700}
+.hrow.hh{cursor:default;pointer-events:none;font-size:18px;min-height:34px}
 .hrow.hh span{text-align:center}
 .ht{text-align:right;color:var(--muted);font-size:13px;font-weight:600}
-.hrow[aria-pressed="true"] .ht{color:var(--lens-ink)}
-.cell{height:22px;position:relative;border-radius:4px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line)}
+.hrow[aria-pressed="true"] .ht{color:var(--on-lens)}
+.cell{height:22px;position:relative;border-radius:4px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
 .cell::before{content:"";position:absolute;inset:0;border-radius:4px;background:var(--c);opacity:var(--o,0)}
 .l1{--o:.3}.l2{--o:.52}.l3{--o:.76}.l4{--o:1}
-.hrow[aria-pressed="true"] .cell{box-shadow:inset 0 0 0 1px var(--lens-ink)}
 
-/* rules */
-.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 48px;max-width:900px}
-.rule{position:relative;padding:12px 0 12px 22px;transition:opacity .2s}
-.rule::before{content:"";position:absolute;left:0;top:21px;width:9px;height:9px;border-radius:2px;background:var(--ink)}
+.rules,.ups{list-style:none;margin:0;padding:0}
+.rule{position:relative;padding:12px 8px 12px 24px;border-radius:8px;transition:opacity .2s,background .2s}
+.rule::before{content:"";position:absolute;left:6px;top:21px;width:9px;height:9px;border-radius:2px;background:var(--ink)}
 .rule b{font-weight:700;font-size:17px}
-.rule.hit b{background:linear-gradient(transparent 56%,var(--lens) 56%,var(--lens) 94%,transparent 94%)}
-.rule.miss{opacity:.32}
-.rule span{display:block;color:var(--muted);font-size:15px;max-width:44ch}
+.rule.hit{background:var(--lens-soft)}
+.rule.miss{opacity:.4}
+.rule span{display:block;color:var(--muted);font-size:15px;max-width:46ch}
+.up{padding:14px 0;border-top:1px solid var(--line)}
+.up:first-child{border-top:0}
+.up b{font-family:var(--display);font-weight:800;font-size:23px;line-height:1.1;display:block}
+.up p{margin:2px 0 0;color:var(--muted);max-width:50ch}
+footer{padding:44px 18px calc(64px + env(safe-area-inset-bottom));color:var(--muted);font-size:14px;max-width:52ch}
 
-/* review */
-.review{max-width:760px}
-.pips{display:flex;gap:6px;margin:0 0 14px}
-.pips i{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);display:block}
-.pips i.f{background:var(--ink)}
-.review .big{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.02em;margin:0 0 12px}
-.review p{margin:0 0 12px;max-width:62ch}
-footer{margin-top:56px;color:var(--muted);font-size:14px;max-width:60ch}
-
-@media (min-width:520px){.sn{display:inline}}
-@media (max-width:820px){
-  .band{grid-template-columns:1fr;padding:22px 20px 24px}
-  .band .bl{display:grid;grid-template-columns:1fr auto;align-items:end;gap:0 12px;margin-bottom:12px}
-  .band .bl .nextpill,.band .bl .when,.band .bl h3,.band .bl .sub,.band .bl .cnt{grid-column:1}
-  .band .bl .eat{grid-column:2;grid-row:1 / span 4;align-self:center}
-  .band .bl .sub{margin-bottom:0}
-  .band .bl .cnt{justify-self:start}
-  .lp dl{grid-template-columns:1fr;gap:2px}
-  .lp dd{margin-bottom:10px}
-  .rules{grid-template-columns:1fr}
-}
-@media (max-width:420px){
-  .wrap{padding:0 14px 60px}
-  .dock{margin:0 -14px 22px;padding:10px 14px 8px}
-  .iq{font-size:14px}
-  .hrow{grid-template-columns:minmax(84px,120px) repeat(6,minmax(0,1fr)) 26px;gap:3px;padding:3px 4px;font-size:13.5px}
+@media (min-width:700px){
+  .page{margin-top:12px;margin-bottom:12px;box-shadow:0 0 0 1px var(--line);background:var(--ground)}
 }
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:none!important}
@@ -186,24 +198,32 @@ footer{margin-top:56px;color:var(--muted);font-size:14px;max-width:60ch}
 </head>
 <body>
 <div class="begin-wrap"><a class="begin-btn" href="game/index.html">BEGIN</a></div>
-<div class="wrap">
 
-  <div class="top"><button class="pill-btn" id="theme" type="button">Dark mode</button></div>
+<div class="page">
 
   <header class="hero">
-    <h1>Every item on this plate has a job.</h1>
-    <p class="lede">About 2,500 kcal across three meals and two snacks. Vegetarian, dairy-forward, and built so each iron source meets its vitamin C. Pick a nutrient to see who is doing the work.</p>
-    <div class="rack" id="rack" role="group" aria-label="Nutrients"></div>
+    <div class="hero-top">
+      <span class="brand">My daily plate</span>
+      <button class="pill-btn" id="theme" type="button">Dark mode</button>
+    </div>
+    <h1>Every item has a job.</h1>
+    <p class="lede">About 2,500 kcal across four meals and a cup of milk at night. Vegetarian, dairy-forward, and built so each iron source meets its vitamin C. Times follow your Mon&ndash;Thu schedule.</p>
+    <nav class="glance" id="glance" aria-label="The day at a glance"></nav>
   </header>
 
-  <div class="lp" id="lp" aria-live="polite"></div>
+  <section class="spot" aria-label="Nutrient spotlight">
+    <h2 class="sec">Spotlight a nutrient</h2>
+    <p class="sec-sub">Swipe the list and pick one. Every ingredient that delivers it lights up in the recipes below.</p>
+    <div class="rail" id="rack" role="group" aria-label="Nutrients"></div>
+    <div class="lp" id="lp" aria-live="polite"></div>
+  </section>
 
   <div class="dock" id="dock">
-    <nav class="ribbon" id="ribbon" aria-label="Jump to a meal"></nav>
+    <nav class="tabs" id="tabs" aria-label="Jump to a meal"></nav>
     <div class="dock-row">
       <span id="prog"></span>
-      <button class="tag" id="lensTag" type="button" hidden></button>
       <span class="spacer"></span>
+      <button class="tag" id="lensTag" type="button" hidden></button>
       <button class="link" id="reset" type="button">Reset day</button>
     </div>
   </div>
@@ -212,7 +232,7 @@ footer{margin-top:56px;color:var(--muted);font-size:14px;max-width:60ch}
 
   <section class="block" id="coverage">
     <h2 class="sec">Coverage map</h2>
-    <p class="sec-sub">Darker squares mean more sources of that nutrient in that meal. Tap a row to send it to the lens.</p>
+    <p class="sec-sub">Darker squares mean more sources of that nutrient in that meal. Tap a row to spotlight it.</p>
     <div class="heat" id="heat"></div>
   </section>
 
@@ -222,12 +242,10 @@ footer{margin-top:56px;color:var(--muted);font-size:14px;max-width:60ch}
     <ul class="rules" id="rules"></ul>
   </section>
 
-  <section class="block review">
-    <h2 class="sec">How the plan scores</h2>
-    <div class="pips" aria-hidden="true"></div>
-    <p class="big">9 out of 10</p>
-    <p>Every micronutrient on your list has a home in the day. Iron always travels with vitamin C at lunch and dinner, fat is present wherever a fat-soluble vitamin needs it, and dairy keeps B12, calcium and iodine secure.</p>
-    <p><b>Still open:</b> the white rice at dinner. The quinoa at lunch already does most of the whole-grain work, so this is a small point.</p>
+  <section class="block">
+    <h2 class="sec">Next upgrades</h2>
+    <p class="sec-sub">What the plan still leaves open.</p>
+    <ul class="ups" id="ups"></ul>
   </section>
 
   <footer>Built from your own plan. Confirm supplement doses with your doctor or pharmacist, especially selenium (label it in mcg).</footer>
@@ -239,98 +257,133 @@ footer{margin-top:56px;color:var(--muted);font-size:14px;max-width:60ch}
 
 /* ---------- data ---------- */
 var N = [
-  {id:'calcium', name:'Calcium', best:'Milk, yogurt, cheese, calcium-set tofu', pair:'Vitamin D in the diet, with a normal meal', why:'Vitamin D supports calcium absorption.', note:"Calcium-set tofu isn't available to you, so dairy carries this: about a litre of milk a day plus yogurt, curd and mozzarella."},
-  {id:'iron', name:'Iron', best:'Lentils, beans, chickpeas, soy and tofu', pair:'Vitamin C: bell pepper, orange, kiwi, tomato, lemon or lime', why:'Vitamin C improves absorption of plant (non-heme) iron.', note:'Lunch (lime) and dinner (orange juice) are your two iron-plus-vitamin-C meals. Breakfast is the coffee slot, so it is not counted on.'},
-  {id:'magnesium', name:'Magnesium', best:'Pumpkin seeds, hemp hearts, chia, cashews', pair:null, why:'Already useful without a specific pairing.'},
-  {id:'zinc', name:'Zinc', best:'Dairy, tofu, pumpkin and hemp seeds, legumes', pair:'Soaked, sprouted or fermented legumes, in a normal mixed meal', why:'Reducing phytate improves plant zinc availability.', note:'Your overnight-soaked lentils are doing this job.'},
-  {id:'b12', name:'Vitamin B12', best:'Milk, yogurt, cheese, fortified foods', pair:null, why:'No useful food pairing required.', note:'All of it comes from dairy, which is why dairy never leaves the plan.'},
-  {id:'vitd', name:'Vitamin D', best:'Fortified milk or plant milk, fortified foods, a supplement', pair:'A meal containing some fat', why:'Vitamin D is fat-soluble.', note:'The tablet lives at snack 2, next to yogurt, almonds and seeds.'},
-  {id:'iodine', name:'Iodine', best:'Iodized salt, dairy', pair:null, why:'Iodized salt is particularly reliable.', note:'Salt is iodized throughout, with dairy as the backup.'},
-  {id:'selenium', name:'Selenium', best:'Brazil nuts, dairy, legumes, whole grains', pair:null, why:'No important pairing.', note:'The 50 mcg tablet tops up what dairy and legumes already give you.'},
-  {id:'vita', name:'Vitamin A', best:'Carrots, sweet potato, spinach, kale', pair:'Some fat: milk, yogurt, ghee, nuts, seeds or oil', why:'Fat helps absorption of carotenoids.', note:'Lunch pairs the spinach with a tablespoon of ghee.'},
-  {id:'folate', name:'Folate (B9)', best:'Lentils, chickpeas, beans, spinach', pair:null, why:'A normal meal is enough.'},
-  {id:'vitc', name:'Vitamin C', best:'Bell peppers, guava, kiwi, broccoli, citrus', pair:'Legumes and lentils', why:'Especially valuable for plant iron.', note:'Lime at lunch, orange juice at dinner, both timed to sit with the iron.'},
-  {id:'potassium', name:'Potassium', best:'Potatoes, beans, lentils, dairy, dried fruit', pair:null, why:'No major pairing.'},
-  {id:'vite', name:'Vitamin E', best:'Sunflower seeds, almonds, hazelnuts', pair:'Some fat, in a normal meal', why:'Fat-soluble nutrient.'},
-  {id:'vitk', name:'Vitamin K', best:'Kale, spinach, collards', pair:'Some fat', why:'Improves absorption.', note:'Lunch greens get the ghee.'},
-  {id:'copper', name:'Copper', best:'Cashews, sesame, cocoa, legumes', pair:null, why:'No major pairing.'},
-  {id:'manganese', name:'Manganese', best:'Whole grains, nuts, legumes', pair:null, why:'No major pairing.'},
-  {id:'phosphorus', name:'Phosphorus', best:'Dairy, legumes, tofu, seeds', pair:null, why:'Usually abundant in vegetarian diets.'},
-  {id:'choline', name:'Choline', best:'Soy and tofu, milk, beans', pair:null, why:'No major pairing.'},
-  {id:'omega3', name:'Omega-3', best:'Algae-based DHA/EPA, chia, flax, walnuts', pair:'A meal with fat', why:'Fat helps absorption. Chia\u2019s plant omega-3 converts poorly, so the capsule does the real work.', note:'The capsule goes with lunch, next to the ghee. Choose an algae-based one if you want it fully vegetarian.'}
+  {id:"calcium", name:"Calcium", best:"Milk, yogurt, cheese, calcium-set tofu", pair:"Vitamin D in the diet, with a normal meal", why:"Vitamin D supports calcium absorption.", note:"Dairy carries this: about a litre of milk a day plus yogurt, curd and mozzarella. Calcium-set tofu isn't available to you."},
+  {id:"iron", name:"Iron", best:"Lentils, beans, chickpeas, soy and tofu", pair:"Vitamin C: bell pepper, orange, kiwi, tomato, lemon or lime", why:"Vitamin C improves absorption of plant (non-heme) iron.", note:"Lunch II (lime) and dinner (orange juice) are your two iron-plus-vitamin-C meals. Breakfast has coffee and Lunch I is calcium-heavy, so neither is counted on."},
+  {id:"magnesium", name:"Magnesium", best:"Pumpkin seeds, hemp hearts, chia, cashews", pair:null, why:"Already useful without a specific pairing."},
+  {id:"zinc", name:"Zinc", best:"Dairy, tofu, pumpkin and hemp seeds, legumes", pair:"Soaked, sprouted or fermented legumes, in a normal mixed meal", why:"Reducing phytate improves plant zinc availability.", note:"Your overnight-soaked lentils are doing this job."},
+  {id:"b12", name:"Vitamin B12", best:"Milk, yogurt, cheese, fortified foods", pair:null, why:"No useful food pairing required.", note:"All of it comes from dairy, which is why dairy never leaves the plan."},
+  {id:"vitd", name:"Vitamin D", best:"Fortified milk or plant milk, fortified foods, a supplement", pair:"A meal containing some fat", why:"Vitamin D is fat-soluble.", note:"The tablet sits in Lunch I, next to yogurt, almonds and seeds."},
+  {id:"iodine", name:"Iodine", best:"Iodized salt, dairy", pair:null, why:"Iodized salt is particularly reliable.", note:"Salt is iodized throughout, with dairy as the backup."},
+  {id:"selenium", name:"Selenium", best:"Brazil nuts, dairy, legumes, whole grains", pair:null, why:"No important pairing.", note:"The 50 mcg tablet tops up what dairy and legumes already give you."},
+  {id:"vita", name:"Vitamin A", best:"Carrots, sweet potato, spinach, kale", pair:"Some fat: milk, yogurt, ghee, nuts, seeds or oil", why:"Fat helps absorption of carotenoids.", note:"Lunch II pairs the spinach with a tablespoon of ghee."},
+  {id:"folate", name:"Folate (B9)", best:"Lentils, chickpeas, beans, spinach", pair:null, why:"A normal meal is enough."},
+  {id:"vitc", name:"Vitamin C", best:"Bell peppers, guava, kiwi, broccoli, citrus", pair:"Legumes and lentils", why:"Especially valuable for plant iron.", note:"Lime at Lunch II, orange juice at dinner, both timed to sit with the iron."},
+  {id:"potassium", name:"Potassium", best:"Potatoes, beans, lentils, dairy, dried fruit", pair:null, why:"No major pairing."},
+  {id:"vite", name:"Vitamin E", best:"Sunflower seeds, almonds, hazelnuts", pair:"Some fat, in a normal meal", why:"Fat-soluble nutrient."},
+  {id:"vitk", name:"Vitamin K", best:"Kale, spinach, collards", pair:"Some fat", why:"Improves absorption.", note:"Lunch II greens get the ghee."},
+  {id:"copper", name:"Copper", best:"Cashews, sesame, cocoa, legumes", pair:null, why:"No major pairing."},
+  {id:"manganese", name:"Manganese", best:"Whole grains, nuts, legumes", pair:null, why:"No major pairing."},
+  {id:"phosphorus", name:"Phosphorus", best:"Dairy, legumes, tofu, seeds", pair:null, why:"Usually abundant in vegetarian diets."},
+  {id:"choline", name:"Choline", best:"Soy and tofu, milk, beans", pair:null, why:"No major pairing."},
+  {id:"omega3", name:"Omega-3", best:"Algae-based DHA/EPA, chia, flax, walnuts", pair:"A meal with fat", why:"Fat helps absorption. Chia’s plant omega-3 converts poorly, so the capsule does the real work.", note:"The capsule goes with Lunch II, next to the ghee. Choose an algae-based one if you want it fully vegetarian."}
 ];
 var NM = {}; N.forEach(function(n){ NM[n.id] = n; });
 
-var MILK = ['calcium','b12','iodine','phosphorus','potassium','choline','zinc'];
+var MILK = ["calcium","b12","iodine","phosphorus","potassium","choline","zinc"];
 
 var SLOTS = [
-  {id:'breakfast', name:'Breakfast', short:'Breakfast', when:'Morning, meal 1', sub:'Burrito and coffee', emoji:'🌯', color:'--c-breakfast',
+  {id:"breakfast", c:"b", name:"Breakfast", short:"Breakfast", when:"7:00 AM", tg:"7:00", dish:"Pizza pops and coffee", emoji:"🍕",
    items:[
-    {n:'Coffee', q:'250 ml milk', d:'1 tbsp of coffee. It sits with the burrito, so this meal gives up some iron on purpose.', t:MILK},
-    {g:'The burrito'},
-    {n:'Tortilla', q:'1', t:[]},
-    {n:'Tofu', d:'The protein', t:['iron','zinc','choline','phosphorus','copper','manganese','folate']},
-    {n:'Mozzarella', t:['calcium','b12','phosphorus']},
-    {n:'Seasoned rice', t:[]},
-    {n:'Cabbage leaf', q:'1', t:['vitk','vitc','folate']},
-    {n:'Bell pepper, tomato, onion', q:'diced', t:['vitc','vita','potassium']},
-    {n:'Pickled jalape\u00f1o, cilantro, spices', t:['vitk','vita']}
+    {n:"Coffee", q:"250 ml milk", d:"1 tbsp of coffee. It sits with breakfast, so this meal gives up some iron on purpose.", t:MILK},
+    {g:"The pizza pops"},
+    {n:"Tortilla", q:"1", t:[]},
+    {n:"Tofu", d:"The protein, crumbled and seasoned", t:["iron","zinc","choline","phosphorus","copper","manganese","folate"]},
+    {n:"Mozzarella", t:["calcium","b12","phosphorus"]},
+    {n:"Seasoned rice", t:[]},
+    {n:"Cabbage leaf", q:"1", d:"Shredded", t:["vitk","vitc","folate"]},
+    {n:"Bell pepper, tomato, onion", q:"diced small", t:["vitc","vita","potassium"]},
+    {n:"Pickled jalapeño, cilantro, spices", t:["vitk","vita"]},
+    {n:"Oil", q:"a light brush", t:[]}
    ],
-   pair:{h:'Coffee and iron', p:'Coffee blunts iron absorption, so breakfast is not where your iron comes from. Lunch and dinner are.'}},
-
-  {id:'snack1', name:'Snack 1', short:'Snack 1', when:'Mid-morning', sub:'Whey smoothie', emoji:'🥤', color:'--c-snack1',
-   items:[
-    {n:'Milk', q:'500 ml', t:MILK.concat(['selenium'])},
-    {n:'Whey powder', q:'60 g', t:['calcium','phosphorus']},
-    {n:'Peanut butter', q:'2 tbsp', t:['magnesium','vite','copper','manganese','folate']},
-    {n:'Chia seeds', q:'1 tsp', t:['magnesium','manganese','omega3']},
-    {n:'Selenium', q:'50 mcg', k:'selenium', d:'Tablet', w:'A top-up on top of dairy and legumes. Any time of day works.', t:['selenium']}
+   steps:[
+    "Roll the tortilla into a cone with a tight point, and push a toothpick through the seam to hold it.",
+    "Stand the cone upright in a foil ring or a small oven-safe ramekin so it keeps its shape.",
+    "Mix the filling: crumbled tofu, rice, shredded cabbage, bell pepper, tomato, onion, jalapeño, cilantro and spices. Cut everything small so it cooks fast, and pat the tomato dry.",
+    "Spoon the filling in, pressing it down, and finish with the mozzarella on top.",
+    "Brush the outside of the cone with a thin film of oil.",
+    "Air fry at 190°C (375°F) for 5 to 7 minutes, until the cone is golden and the cheese is bubbling. Start checking at 4 minutes, since every air fryer runs a little different.",
+    "Rest it for a minute, pull out the toothpick, and have it with your coffee."
    ],
-   pair:{h:'A top-up, not the main source', p:'Dairy and legumes already supply selenium. The 50 mcg tablet sits far below the 400 mcg daily ceiling.'}},
+   tip:"Short on time? Roll the cones and cook the filling the night before. In the morning it is fill and fry.",
+   pair:{h:"Coffee and iron", p:"Coffee blunts iron absorption, so breakfast is not where your iron comes from. Lunch II and dinner are."}},
 
-  {id:'lunch', name:'Lunch', short:'Lunch', when:'Midday, meal 2', sub:'Quinoa bowl, iron first', emoji:'🥗', color:'--c-lunch',
+  {id:"lunch1", c:"l1", name:"Lunch I", short:"Lunch I", when:"9:45 AM", tg:"9:45", dish:"Whey smoothie and yogurt bowl", emoji:"🥤",
    items:[
-    {n:'Quinoa', d:'Rinsed for a minute, then tossed in the ghee', t:['magnesium','zinc','manganese','folate','iron','copper','phosphorus']},
-    {n:'Ghee', q:'1 tbsp', d:'The fat that carries vitamins A and K from the greens', t:['vita','vite']},
-    {n:'Spinach, broccoli, cilantro', t:['iron','folate','vita','vitk','magnesium','potassium','manganese','vitc']},
-    {n:'Soy chunks', d:'Boiled, then air-fried', t:['iron','zinc','magnesium','copper','phosphorus','potassium','folate','manganese','choline']},
-    {n:'Sesame seeds', q:'1 tbsp', d:'Roasted, on top. Added to lift the iron.', t:['iron','calcium','copper','magnesium','zinc']},
-    {n:'Sauces and spices', t:[]},
-    {n:'Lime', q:'1 wedge', d:'Squeezed over everything right before eating', t:['vitc']},
-    {n:'Omega capsule', k:'omega', d:'With lunch, next to the ghee', w:'Taken with fat so it is absorbed properly.', t:['omega3']}
+    {g:"The smoothie"},
+    {n:"Milk", q:"500 ml", t:MILK.concat(["selenium"])},
+    {n:"Whey powder", q:"60 g", t:["calcium","phosphorus"]},
+    {n:"Peanut butter", q:"2 tbsp", t:["magnesium","vite","copper","manganese","folate"]},
+    {n:"Chia seeds", q:"1 tsp", t:["magnesium","manganese","omega3"]},
+    {g:"The yogurt bowl"},
+    {n:"Yogurt", t:["calcium","b12","iodine","phosphorus","potassium","zinc","selenium"]},
+    {n:"Blueberries", t:["vitc","manganese"]},
+    {n:"Almonds", t:["vite","magnesium","manganese","copper","calcium","phosphorus"]},
+    {n:"Pumpkin seeds", t:["magnesium","zinc","iron","copper","manganese","phosphorus"]},
+    {g:"The tablets"},
+    {n:"Selenium", q:"50 mcg", k:"selenium", d:"Tablet. A top-up on top of dairy and legumes.", t:["selenium"]},
+    {n:"Vitamin D", k:"vitd", d:"Tablet, taken with the yogurt and nuts so it has fat to travel with.", t:["vitd"]}
    ],
-   pair:{h:'Iron meets vitamin C', p:'Quinoa, spinach, soy and sesame bring the iron. The lime, squeezed on last, helps your body absorb it.', tip:'Optional: cook the greens in a cast-iron pan for a little extra iron.'}},
+   steps:[
+    "Blend the milk, whey, peanut butter and chia until smooth, about 30 seconds.",
+    "Drink the smoothie first.",
+    "Spoon the yogurt into a bowl and top it with the blueberries, almonds and pumpkin seeds.",
+    "Take the selenium and vitamin D tablets with the bowl."
+   ],
+   tip:"The schedule gives Lunch I 15 minutes. This takes closer to 25, so stretch the slot or carry the bowl with you.",
+   pair:{h:"Calcium-heavy, so keep it away from iron", p:"There is a lot of dairy here, and calcium can compete with iron and zinc when they share a meal. This is not an iron meal, and it sits about five hours before Lunch II, so nothing is lost."}},
 
-  {id:'creatine', mini:true, name:'Creatine', short:'Creatine', when:'Any time', sub:'Plain water, on its own', emoji:'💧', color:'--c-any',
+  {id:"lunch2", c:"l2", name:"Lunch II", short:"Lunch II", when:"3:00 PM", tg:"3:00", dish:"Quinoa bowl, iron first", emoji:"🥗",
    items:[
-    {n:'Creatine', q:'3\u20135 g', k:'creatine', d:'Stirred into water', w:'Timing does not matter. Keeping it out of the smoothie keeps the smoothie from turning bitter.', t:[]}
+    {n:"Quinoa", d:"Rinsed for a minute, then tossed in the ghee", t:["magnesium","zinc","manganese","folate","iron","copper","phosphorus"]},
+    {n:"Ghee", q:"1 tbsp", d:"The fat that carries vitamins A and K from the greens", t:["vita","vite"]},
+    {n:"Spinach, broccoli, cilantro", t:["iron","folate","vita","vitk","magnesium","potassium","manganese","vitc"]},
+    {n:"Soy chunks", d:"Boiled, then air-fried", t:["iron","zinc","magnesium","copper","phosphorus","potassium","folate","manganese","choline"]},
+    {n:"Sesame seeds", q:"1 tbsp", d:"Roasted, on top. Added to lift the iron.", t:["iron","calcium","copper","magnesium","zinc"]},
+    {n:"Sauces and spices", t:[]},
+    {n:"Lime", q:"1 wedge", d:"Squeezed over everything right before eating", t:["vitc"]},
+    {n:"Omega capsule", k:"omega", d:"Taken with the meal, next to the ghee, so it is absorbed properly.", t:["omega3"]}
+   ],
+   steps:[
+    "Rinse the quinoa under running water for a minute, then cook it in about twice its volume of water until the grains turn translucent, around 12 to 15 minutes.",
+    "Boil the soy chunks, squeeze them dry, and air fry until the edges crisp, about 8 to 10 minutes at 190°C (375°F), shaking once.",
+    "Toast the sesame seeds in a dry pan for a minute.",
+    "Wilt the spinach and broccoli in a pan with your sauces and spices, and add the cilantro at the end. A cast-iron pan adds a little extra iron.",
+    "Toss the warm quinoa with the ghee.",
+    "Build the bowl: quinoa, greens, soy chunks, and the sesame on top.",
+    "Squeeze the lime over everything last, then eat. Take the omega capsule with the meal."
+   ],
+   pair:{h:"Iron meets vitamin C", p:"Quinoa, spinach, soy and sesame bring the iron. The lime, squeezed on last, helps your body absorb it."}},
+
+  {id:"creatine", mini:true, c:"x", name:"Creatine", short:"Creatine", when:"Any time", tg:"Any", dish:"Plain water, on its own", emoji:"💧",
+   items:[
+    {n:"Creatine", q:"3–5 g", k:"creatine", d:"Stirred into water. Timing does not matter, and keeping it out of the smoothie keeps the smoothie from turning bitter.", t:[]}
    ]},
 
-  {id:'snack2', name:'Snack 2', short:'Snack 2', when:'Afternoon', sub:'Yogurt, berries and seeds', emoji:'🫐', color:'--c-snack2',
+  {id:"dinner", c:"d", name:"Dinner", short:"Dinner", when:"7:30 PM", tg:"7:30", dish:"Dal, rice and curd", emoji:"🍛",
    items:[
-    {n:'Yogurt', t:['calcium','b12','iodine','phosphorus','potassium','zinc','selenium']},
-    {n:'Blueberries', t:['vitc','manganese']},
-    {n:'Almonds', t:['vite','magnesium','manganese','copper','calcium','phosphorus']},
-    {n:'Pumpkin seeds', t:['magnesium','zinc','iron','copper','manganese','phosphorus']},
-    {n:'Vitamin D', k:'vitd', d:'Tablet, with the yogurt and nuts', w:'Fat-soluble, so this is the right slot.', t:['vitd']}
+    {n:"Dal", d:"Soaked lentils, or canned chickpeas and kidney beans, rinsed", t:["iron","folate","zinc","magnesium","potassium","copper","manganese","phosphorus","selenium"]},
+    {n:"Rice", d:"Boiled", t:[]},
+    {n:"Curd", t:["calcium","b12","iodine","phosphorus","potassium","zinc","selenium"]},
+    {n:"Veggies", t:["potassium","folate"]},
+    {n:"Orange juice", d:"Drink it with the meal", t:["vitc","folate","potassium"]}
    ],
-   pair:{h:'Vitamin D with fat', p:'Yogurt, almonds and pumpkin seeds supply the fat. Vitamin D also helps you absorb the calcium from all that dairy.'}},
+   steps:[
+    "The night before, put the lentils in water to soak. If you are using canned chickpeas and kidney beans instead, rinse them well.",
+    "Drain the lentils, then simmer or pressure cook them until soft, seasoning with iodized salt and your usual spices.",
+    "Boil the rice.",
+    "Cook the veggies.",
+    "Serve with the curd on the side, and drink the orange juice with the meal, not after it."
+   ],
+   pair:{h:"Iron meets vitamin C, again", p:"The dal brings the iron and the orange juice brings the vitamin C. Overnight soaking frees up more zinc and iron too."}},
 
-  {id:'dinner', name:'Dinner', short:'Dinner', when:'Evening, meal 3', sub:'Dal, rice and curd', emoji:'🍛', color:'--c-dinner',
+  {id:"bed", c:"n", name:"Bedtime", short:"Bedtime", when:"Before sleep", tg:"Night", dish:"One cup of milk", emoji:"🌙",
    items:[
-    {n:'Dal', d:'Soaked lentils, or canned chickpeas and kidney beans, rinsed', t:['iron','folate','zinc','magnesium','potassium','copper','manganese','phosphorus','selenium']},
-    {n:'Rice', d:'Boiled', t:[]},
-    {n:'Curd', t:['calcium','b12','iodine','phosphorus','potassium','zinc','selenium']},
-    {n:'Veggies', t:['potassium','folate']},
-    {n:'Orange juice', d:'Drink it with the meal', t:['vitc','folate','potassium']}
+    {n:"Milk", q:"1 cup", t:MILK}
    ],
-   pair:{h:'Iron meets vitamin C, again', p:'The dal brings the iron and the orange juice brings the vitamin C. Overnight soaking frees up more zinc and iron too.'}},
-
-  {id:'bed', name:'Bedtime', short:'Bedtime', when:'Night', sub:'One cup of milk', emoji:'🌙', color:'--c-bed',
-   items:[
-    {n:'Milk', q:'1 cup', t:MILK}
+   steps:[
+    "Warm a cup of milk, or drink it cold, and finish it before you turn the lamp off."
    ],
-   pair:{h:'Rounding out the litre', p:'Across the day, milk adds up to roughly a litre. It is the backbone of your calcium and B12.'}}
+   pair:{h:"Rounding out the litre", p:"Across the day, milk adds up to roughly a litre. It is the backbone of your calcium and B12."}}
 ];
 
 var MEALS = SLOTS.filter(function(s){ return !s.mini; });
@@ -339,17 +392,27 @@ SLOTS.forEach(function(s){ s.items.forEach(function(i){ if(i.k) SUPPS.push(i.k);
 var TOTAL = MEALS.length + SUPPS.length;
 
 var RULES = [
-  {n:'Iodized salt, always', d:'Dairy is your only other iodine source, so the salt keeps it locked in.', t:['iodine']},
-  {n:'Rinse the quinoa', d:'A minute under running water washes off the saponins that taste bitter and soapy.', t:[]},
-  {n:'Soak the lentils overnight', d:'Less phytate means more zinc and iron actually reach you.', t:['zinc','iron']},
-  {n:'Rinse the canned beans', d:'Chickpeas and kidney beans lose a good share of their sodium in the rinse.', t:[]},
-  {n:'Lime goes on last', d:'Squeeze it over lunch right before you eat, so the vitamin C is there when the iron is.', t:['vitc','iron']},
-  {n:'Coffee stays with the burrito', d:'It costs some iron at breakfast. Lunch and dinner carry the iron, so the trade is fine.', t:[]}
+  {n:"Iodized salt, always", d:"Dairy is your only other iodine source, so the salt keeps it locked in.", t:["iodine"]},
+  {n:"Rinse the quinoa", d:"A minute under running water washes off the saponins that taste bitter and soapy.", t:[]},
+  {n:"Soak the lentils overnight", d:"Less phytate means more zinc and iron actually reach you.", t:["zinc","iron"]},
+  {n:"Rinse the canned beans", d:"Chickpeas and kidney beans lose a good share of their sodium in the rinse.", t:[]},
+  {n:"Lime goes on last", d:"Squeeze it over Lunch II right before you eat, so the vitamin C is there when the iron is.", t:["vitc","iron"]},
+  {n:"Coffee stays with breakfast", d:"It costs some iron at breakfast. Lunch II and dinner carry the iron, so the trade is fine.", t:["iron"]},
+  {n:"Keep Lunch I away from Lunch II", d:"Calcium competes with iron and zinc when they share a meal. About five hours apart is plenty.", t:["calcium","iron","zinc"]},
+  {n:"Tea waits too", d:"Tea and coffee cut iron absorption, so keep them an hour away from Lunch II and dinner.", t:["iron"]}
+];
+
+var UPS = [
+  {n:"Blood tests", d:"Once or twice a year: ferritin, B12 and vitamin D (25-OH). These are the usual gaps on a vegetarian plan."},
+  {n:"Half brown rice at dinner", d:"Swap half of the white rice for brown rice or millet. It is the one open point from the old plan."},
+  {n:"Walnuts or ground flax", d:"A few times a week, alongside the algae capsule, for plant omega-3."},
+  {n:"Watch the dairy load", d:"About a litre of milk plus whey, yogurt and curd is a lot. If it sits well, keep it. If not, swap some of the milk for fortified soy milk."},
+  {n:"Salt check", d:"Canned beans and pickled jalapeño add sodium. Rinse the beans and keep the iodized salt moderate."}
 ];
 
 /* ---------- state ---------- */
-var KEY = 'daily-plate-v1';
-function today(){ var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+var KEY = "daily-plate-v2";
+function today(){ var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
 var state = {date: today(), done: {}};
 try{
   var raw = localStorage.getItem(KEY);
@@ -360,129 +423,130 @@ var lens = null;
 
 /* ---------- render ---------- */
 function has(it, id){ return (it.t || []).indexOf(id) > -1; }
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); }
+function cvars(s){ return "--c:var(--c-" + s.c + ");--on:var(--on-" + s.c + ")"; }
 
 function itemHTML(it){
   if(it.g){ return '<li class="grp">' + esc(it.g) + '</li>'; }
   var tags = it.t || [];
-  var more = (it.w || tags.length) ? '<div class="more">' +
-      (it.w ? '<p>' + esc(it.w) + '</p>' : '') +
-      (tags.length ? '<div class="mchips">' + tags.map(function(t){ return '<button class="chip mini" type="button" data-lens="' + t + '" aria-pressed="false">' + NM[t].name + '</button>'; }).join('') + '</div>' : '') +
-    '</div>' : '';
-  var lead = it.k ? '<button class="tick" type="button" data-supp="' + it.k + '" aria-pressed="false" aria-label="Taken: ' + esc(it.n) + '"></button>' : '';
-  var q = it.q ? '<span class="lead"></span><span class="iq">' + esc(it.q) + '</span>' : '<span class="spacer-l"></span>';
-  var exp = more ? '<button class="exp" type="button" aria-expanded="false" aria-label="Where ' + esc(it.n) + ' earns its place">+</button>' : '';
-  return '<li class="item' + (more ? ' has-more' : '') + '" data-tags=",' + tags.join(',') + ',">' +
-    '<div class="irow">' + lead +
-      '<span class="iname"><b>' + esc(it.n) + '</b>' + (it.k ? '<span class="sp">supplement</span>' : '') + '</span>' + q + exp +
+  var tick = it.k ? '<button class="tick" type="button" data-supp="' + it.k + '" aria-pressed="false" aria-label="Taken: ' + esc(it.n) + '"></button>' : "";
+  var q = it.q ? '<span class="lead"></span><span class="iq">' + esc(it.q) + '</span>' : "";
+  var tg = tags.length ? '<p class="itags">' + tags.map(function(t){
+    return '<button class="nt" type="button" data-lens="' + t + '" aria-pressed="false">' + esc(NM[t].name) + '</button>';
+  }).join("") + '</p>' : "";
+  return '<li class="item" data-tags=",' + tags.join(",") + ',">' +
+    '<div class="irow">' + tick +
+      '<span class="iname">' + esc(it.n) + (it.k ? '<span class="sp">supplement</span>' : "") + '</span>' + q +
     '</div>' +
-    (it.d ? '<p class="idet">' + esc(it.d) + '</p>' : '') +
-    more + '</li>';
+    (it.d ? '<p class="idet">' + esc(it.d) + '</p>' : "") + tg + '</li>';
 }
 
-function bandHTML(s){
-  var pair = s.pair ? '<div class="pair"><b>' + esc(s.pair.h) + '</b><p>' + esc(s.pair.p) + '</p>' + (s.pair.tip ? '<p class="tip">' + esc(s.pair.tip) + '</p>' : '') + '</div>' : '';
-  return '<article class="band' + (s.mini ? ' mini' : '') + '" id="band-' + s.id + '" data-slot="' + s.id + '" style="--c:var(' + s.color + ')">' +
-    '<div class="bl">' +
-      '<span class="nextpill">Up next</span>' +
+function mealHTML(s){
+  var steps = (s.steps && s.steps.length) ? '<h4>How to make it</h4><ol class="steps">' + s.steps.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>' : "";
+  var tip = s.tip ? '<p class="tip"><b>Tip.</b> ' + esc(s.tip) + '</p>' : "";
+  var why = s.pair ? '<div class="why"><b>' + esc(s.pair.h) + '</b><p>' + esc(s.pair.p) + '</p></div>' : "";
+  return '<article class="meal' + (s.mini ? " mini" : "") + '" id="meal-' + s.id + '" style="' + cvars(s) + '">' +
+    '<header class="mh"><div class="mh-l">' +
       '<p class="when">' + esc(s.when) + '</p>' +
       '<h3>' + esc(s.name) + '</h3>' +
-      '<p class="sub">' + esc(s.sub) + '</p>' +
-      (s.mini ? '' : '<button class="eat" type="button" data-eat="' + s.id + '" aria-pressed="false">Mark eaten</button>') +
+      '<p class="dish">' + esc(s.dish) + '</p>' +
       '<span class="cnt" hidden></span>' +
     '</div>' +
-    '<div class="br"><ul class="items">' + s.items.map(itemHTML).join('') + '</ul>' + pair + '</div>' +
+    (s.mini ? "" : '<button class="eat" type="button" data-eat="' + s.id + '" aria-pressed="false">Mark eaten</button>') +
+    '</header>' +
+    '<div class="mb"><h4>What goes in</h4><ul class="items">' + s.items.map(itemHTML).join("") + '</ul>' + steps + tip + why + '</div>' +
   '</article>';
 }
 
 function build(){
-  document.getElementById('rack').innerHTML = N.map(function(n){
-    return '<button class="chip" type="button" data-lens="' + n.id + '" aria-pressed="false">' + n.name + '</button>';
-  }).join('');
+  document.getElementById("rack").innerHTML = N.map(function(n){
+    return '<button class="chip" type="button" data-lens="' + n.id + '" aria-pressed="false">' + esc(n.name) + '</button>';
+  }).join("");
 
-  document.getElementById('ribbon').innerHTML = MEALS.map(function(s, i){
-    return '<button class="seg" type="button" data-go="' + s.id + '" data-seg="' + s.id + '" style="--c:var(' + s.color + ');--i:' + i + '" aria-label="' + s.name + '"><span class="se" aria-hidden="true">' + s.emoji + '</span><span class="sn">' + s.short + '</span></button>';
-  }).join('');
+  document.getElementById("glance").innerHTML = MEALS.map(function(s, i){
+    return '<a class="gl" href="#meal-' + s.id + '" data-gl="' + s.id + '" style="' + cvars(s) + ';--i:' + i + '"><span class="gl-e" aria-hidden="true">' + s.emoji + '</span><strong>' + esc(s.short) + '</strong><span>' + esc(s.tg) + '</span></a>';
+  }).join("");
 
-  document.getElementById('timeline').innerHTML = SLOTS.map(bandHTML).join('');
+  document.getElementById("tabs").innerHTML = MEALS.map(function(s){
+    return '<button class="tab" type="button" data-go="' + s.id + '" data-seg="' + s.id + '" style="' + cvars(s) + '">' + esc(s.short) + '</button>';
+  }).join("");
 
-  // coverage map
-  var head = '<div class="hrow hh"><span></span>' + MEALS.map(function(s){ return '<span title="' + s.name + '">' + s.emoji + '</span>'; }).join('') + '<span></span></div>';
+  document.getElementById("timeline").innerHTML = SLOTS.map(mealHTML).join("");
+
+  var head = '<div class="hrow hh"><span></span>' + MEALS.map(function(s){ return '<span title="' + esc(s.name) + '">' + s.emoji + '</span>'; }).join("") + '<span></span></div>';
   var rows = N.map(function(n){
     var tot = 0;
     var cells = MEALS.map(function(s){
       var c = s.items.filter(function(i){ return has(i, n.id); }).length;
       tot += c;
       var l = c === 0 ? 0 : c === 1 ? 1 : c === 2 ? 2 : c <= 4 ? 3 : 4;
-      return '<span class="cell l' + l + '" style="--c:var(' + s.color + ')" title="' + s.name + ': ' + c + ' source' + (c === 1 ? '' : 's') + '"></span>';
-    }).join('');
-    return '<button class="hrow" type="button" data-lens="' + n.id + '" aria-pressed="false"><span>' + n.name + '</span>' + cells + '<span class="ht">' + tot + '</span></button>';
-  }).join('');
-  document.getElementById('heat').innerHTML = head + rows;
+      return '<span class="cell l' + l + '" style="--c:var(--c-' + s.c + ')" title="' + esc(s.name) + ': ' + c + ' source' + (c === 1 ? "" : "s") + '"></span>';
+    }).join("");
+    return '<button class="hrow" type="button" data-lens="' + n.id + '" aria-pressed="false"><span>' + esc(n.name) + '</span>' + cells + '<span class="ht">' + tot + '</span></button>';
+  }).join("");
+  document.getElementById("heat").innerHTML = head + rows;
 
-  // rules
-  document.getElementById('rules').innerHTML = RULES.map(function(r){
-    return '<li class="rule" data-tags=",' + r.t.join(',') + ',"><b>' + esc(r.n) + '</b><span>' + esc(r.d) + '</span></li>';
-  }).join('');
+  document.getElementById("rules").innerHTML = RULES.map(function(r){
+    return '<li class="rule" data-tags=",' + r.t.join(",") + ',"><b>' + esc(r.n) + '</b><span>' + esc(r.d) + '</span></li>';
+  }).join("");
 
-  // score pips
-  var pips = document.querySelector('.pips');
-  var ph = ''; for(var i = 0; i < 10; i++){ ph += '<i class="' + (i < 9 ? 'f' : '') + '"></i>'; }
-  pips.innerHTML = ph;
+  document.getElementById("ups").innerHTML = UPS.map(function(u){
+    return '<li class="up"><b>' + esc(u.n) + '</b><p>' + esc(u.d) + '</p></li>';
+  }).join("");
 }
 
 /* ---------- behaviour ---------- */
 function setLens(id){
   lens = id;
-  var all = document.querySelectorAll('[data-lens]');
-  for(var i = 0; i < all.length; i++){ all[i].setAttribute('aria-pressed', all[i].getAttribute('data-lens') === lens ? 'true' : 'false'); }
+  var all = document.querySelectorAll("[data-lens]");
+  for(var i = 0; i < all.length; i++){ all[i].setAttribute("aria-pressed", all[i].getAttribute("data-lens") === lens ? "true" : "false"); }
 
-  var items = document.querySelectorAll('.item, .rule');
+  var items = document.querySelectorAll(".item, .rule");
   for(var j = 0; j < items.length; j++){
     var el = items[j];
-    if(!lens){ el.classList.remove('hit','miss'); continue; }
-    var hit = el.getAttribute('data-tags').indexOf(',' + lens + ',') > -1;
-    el.classList.toggle('hit', hit);
-    el.classList.toggle('miss', !hit);
+    if(!lens){ el.classList.remove("hit","miss"); continue; }
+    var hit = el.getAttribute("data-tags").indexOf("," + lens + ",") > -1;
+    el.classList.toggle("hit", hit);
+    el.classList.toggle("miss", !hit);
   }
 
   SLOTS.forEach(function(s){
-    var band = document.getElementById('band-' + s.id);
-    var cnt = band.querySelector('.cnt');
-    if(!lens){ cnt.hidden = true; band.classList.remove('quiet'); return; }
+    var meal = document.getElementById("meal-" + s.id);
+    var cnt = meal.querySelector(".cnt");
+    if(!lens){ cnt.hidden = true; meal.classList.remove("quiet"); return; }
     var n = s.items.filter(function(i){ return has(i, lens); }).length;
-    band.classList.toggle('quiet', n === 0);
+    meal.classList.toggle("quiet", n === 0);
     cnt.hidden = n === 0;
-    cnt.textContent = n + (n === 1 ? ' source' : ' sources');
+    cnt.textContent = n + (n === 1 ? " source" : " sources");
   });
 
-  var tag = document.getElementById('lensTag');
+  var tag = document.getElementById("lensTag");
   tag.hidden = !lens;
-  if(lens){ tag.textContent = NM[lens].name + '  \u2715'; tag.setAttribute('aria-label', 'Clear ' + NM[lens].name + ' lens'); }
+  if(lens){ tag.textContent = NM[lens].name + "  ✕"; tag.setAttribute("aria-label", "Clear " + NM[lens].name + " spotlight"); }
 
   renderPanel();
 }
 
 function renderPanel(){
-  var lp = document.getElementById('lp');
+  var lp = document.getElementById("lp");
   if(!lens){
-    lp.innerHTML = '<p class="hint">Nothing selected yet. Tap a nutrient above and every ingredient that delivers it gets a highlighter stroke.</p>';
+    lp.innerHTML = '<p class="hint">Nothing selected yet. Tap a nutrient above, or tap any nutrient name inside a recipe.</p>';
     return;
   }
   var n = NM[lens];
   var where = SLOTS.map(function(s){
     var names = s.items.filter(function(i){ return has(i, lens); }).map(function(i){ return i.n; });
-    return names.length ? '<li><span class="sw" style="--c:var(' + s.color + ')"></span><b>' + s.name + ':</b> ' + esc(names.join(', ')) + '</li>' : '';
-  }).join('');
-  var salt = RULES.filter(function(r){ return r.t.indexOf(lens) > -1 && r.n.indexOf('salt') > -1; }).length ? '<li><span class="sw" style="--c:var(--ink)"></span><b>All day:</b> iodized salt</li>' : '';
+    return names.length ? '<li><span class="sw" style="--c:var(--c-' + s.c + ')"></span><b>' + esc(s.name) + ':</b> ' + esc(names.join(", ")) + '</li>' : "";
+  }).join("");
+  var salt = RULES.filter(function(r){ return r.t.indexOf(lens) > -1 && r.n.indexOf("salt") > -1; }).length ? '<li><span class="sw" style="--c:var(--ink)"></span><b>All day:</b> iodized salt</li>' : "";
   lp.innerHTML =
-    '<div class="lp-top"><h2>' + n.name + '</h2><button class="link" type="button" data-clear="1">Show everything</button></div>' +
+    '<div class="lp-top"><h3>' + esc(n.name) + '</h3><button class="link" type="button" data-clear="1">Show everything</button></div>' +
     '<dl>' +
       '<dt>Best vegetarian sources</dt><dd>' + esc(n.best) + '</dd>' +
-      '<dt>Pair it with</dt><dd>' + (n.pair ? esc(n.pair) + '. ' + esc(n.why) : 'Nothing special. ' + esc(n.why)) + '</dd>' +
+      '<dt>Pair it with</dt><dd>' + (n.pair ? esc(n.pair) + ". " + esc(n.why) : "Nothing special. " + esc(n.why)) + '</dd>' +
       '<dt>In your plan</dt><dd><ul>' + where + salt + '</ul></dd>' +
     '</dl>' +
-    (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    (n.note ? '<p class="note">' + esc(n.note) + '</p>' : "");
 }
 
 function toggle(id){
@@ -497,63 +561,55 @@ function sync(){
     var on = !!state.done[s.id];
     if(on) count++;
     if(!on && !next) next = s.id;
-    var band = document.getElementById('band-' + s.id);
-    band.classList.toggle('done', on);
-    var eat = band.querySelector('.eat');
-    eat.setAttribute('aria-pressed', on ? 'true' : 'false');
-    eat.textContent = on ? 'Eaten' : 'Mark eaten';
-    var seg = document.querySelector('[data-seg="' + s.id + '"]');
-    seg.classList.toggle('on', on);
+    var meal = document.getElementById("meal-" + s.id);
+    var eat = meal.querySelector(".eat");
+    eat.setAttribute("aria-pressed", on ? "true" : "false");
+    eat.textContent = on ? "Eaten ✓" : "Mark eaten";
+    document.querySelector('[data-seg="' + s.id + '"]').classList.toggle("on", on);
+    document.querySelector('[data-gl="' + s.id + '"]').classList.toggle("on", on);
   });
   MEALS.forEach(function(s){
-    document.getElementById('band-' + s.id).classList.toggle('next', s.id === next);
     var seg = document.querySelector('[data-seg="' + s.id + '"]');
-    seg.classList.toggle('next', s.id === next);
-    if(s.id === next){ seg.setAttribute('aria-current', 'step'); } else { seg.removeAttribute('aria-current'); }
+    seg.classList.toggle("next", s.id === next);
+    if(s.id === next){ seg.setAttribute("aria-current", "step"); } else { seg.removeAttribute("aria-current"); }
   });
   SUPPS.forEach(function(k){
     var on = !!state.done[k];
     if(on) count++;
     var b = document.querySelector('[data-supp="' + k + '"]');
-    if(b) b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(b) b.setAttribute("aria-pressed", on ? "true" : "false");
   });
-  document.getElementById('prog').textContent = count === TOTAL ? 'Everything checked off today.' : count + ' of ' + TOTAL + ' checked off today';
+  document.getElementById("prog").textContent = count === TOTAL ? "Everything checked off." : count + " of " + TOTAL + " checked off";
 }
 
-document.addEventListener('click', function(e){
+document.addEventListener("click", function(e){
   var t = e.target, b;
-  if((b = t.closest('[data-lens]'))){ var id = b.getAttribute('data-lens'); setLens(lens === id ? null : id); return; }
-  if(t.closest('[data-clear]') || t.closest('#lensTag')){ setLens(null); return; }
-  if((b = t.closest('[data-eat]'))){ toggle(b.getAttribute('data-eat')); return; }
-  if((b = t.closest('[data-supp]'))){ toggle(b.getAttribute('data-supp')); return; }
-  if((b = t.closest('[data-go]'))){
-    var el = document.getElementById('band-' + b.getAttribute('data-go'));
-    if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  if((b = t.closest("[data-lens]"))){ var id = b.getAttribute("data-lens"); setLens(lens === id ? null : id); return; }
+  if(t.closest("[data-clear]") || t.closest("#lensTag")){ setLens(null); return; }
+  if((b = t.closest("[data-eat]"))){ toggle(b.getAttribute("data-eat")); return; }
+  if((b = t.closest("[data-supp]"))){ toggle(b.getAttribute("data-supp")); return; }
+  if((b = t.closest("[data-go]"))){
+    var el = document.getElementById("meal-" + b.getAttribute("data-go"));
+    if(el){ el.scrollIntoView({behavior:"smooth", block:"start"}); }
     return;
   }
-  if(t.closest('#reset')){ state.done = {}; save(); sync(); return; }
-  if(t.closest('#theme')){ toggleTheme(); return; }
-  var row = t.closest('.item.has-more');
-  if(row){
-    var open = row.classList.toggle('open');
-    var x = row.querySelector('.exp');
-    if(x){ x.setAttribute('aria-expanded', open ? 'true' : 'false'); }
-  }
+  if(t.closest("#reset")){ state.done = {}; save(); sync(); return; }
+  if(t.closest("#theme")){ toggleTheme(); return; }
 });
 
 /* theme */
 var root = document.documentElement;
 function currentTheme(){
-  return root.getAttribute('data-theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  return root.getAttribute("data-theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 }
-function labelTheme(){ document.getElementById('theme').textContent = currentTheme() === 'dark' ? 'Light mode' : 'Dark mode'; }
+function labelTheme(){ document.getElementById("theme").textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode"; }
 function toggleTheme(){
-  var nxt = currentTheme() === 'dark' ? 'light' : 'dark';
-  root.setAttribute('data-theme', nxt);
-  try{ localStorage.setItem('daily-plate-theme', nxt); }catch(e){}
+  var nxt = currentTheme() === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", nxt);
+  try{ localStorage.setItem("daily-plate-theme", nxt); }catch(e){}
   labelTheme();
 }
-try{ var th = localStorage.getItem('daily-plate-theme'); if(th === 'dark' || th === 'light'){ root.setAttribute('data-theme', th); } }catch(e){}
+try{ var th = localStorage.getItem("daily-plate-theme"); if(th === "dark" || th === "light"){ root.setAttribute("data-theme", th); } }catch(e){}
 
 build();
 labelTheme();
