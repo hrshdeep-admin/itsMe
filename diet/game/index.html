@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#181410">
 <title>Kitchen Manual</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,321 +12,403 @@
 :root{
   --bg:#181410; --bg2:#211a13; --card:#2a2118; --board:#3a2c1d;
   --cream:#f4ead9; --muted:#b3a289; --saffron:#f2a93b; --herb:#93b26d;
-  --tomato:#e2593f; --line:rgba(244,234,217,0.1);
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  --tomato:#e2593f; --line:rgba(244,234,217,.11);
 }
-*{box-sizing:border-box;}
-html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{
-  margin:0; min-height:100%; font-family:'Work Sans',sans-serif; color:var(--cream);
-  background:
-    radial-gradient(ellipse at 20% -10%, #3a2c1d55, transparent 60%),
-    radial-gradient(ellipse at 100% 110%, #f2a93b22, transparent 55%),
-    linear-gradient(160deg,var(--bg2),var(--bg));
-  display:flex; flex-direction:column; align-items:center; min-height:100vh;
+  margin:0; min-height:100vh; font-family:'Work Sans',sans-serif; color:var(--cream);
+  background:radial-gradient(ellipse at 20% -10%,#3a2c1d55,transparent 60%),
+             radial-gradient(ellipse at 100% 110%,#f2a93b22,transparent 55%),
+             linear-gradient(160deg,var(--bg2),var(--bg));
+  display:flex; flex-direction:column; align-items:center;
   padding:calc(20px + env(safe-area-inset-top,0px)) 18px calc(24px + env(safe-area-inset-bottom,0px));
   overflow-x:hidden;
 }
-@media (prefers-reduced-motion:no-preference){
-  .card{animation:riseIn .5s cubic-bezier(.2,.8,.2,1);}
-}
-@keyframes riseIn{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:none;}}
-
-.top{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;}
-.brand{display:flex;align-items:center;gap:9px;}
-.brand .mark{font-size:22px;}
-.brand h1{font-family:'Fraunces',serif;font-weight:700;font-size:19px;margin:0;letter-spacing:.2px;}
-.awake{font-size:11px;color:var(--herb);display:flex;align-items:center;gap:5px;opacity:.85;}
-.awake .dot{width:6px;height:6px;border-radius:50%;background:var(--herb);box-shadow:0 0 8px var(--herb);animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
-
-.xp{font-size:13px;color:var(--saffron);font-weight:600;white-space:nowrap;}
-
-.progwrap{width:100%;max-width:520px;margin-bottom:22px;}
-.progbar{height:8px;border-radius:20px;background:var(--card);overflow:hidden;border:1px solid var(--line);}
-.progfill{height:100%;background:linear-gradient(90deg,var(--herb),var(--saffron));border-radius:20px;transition:width .5s cubic-bezier(.2,.8,.2,1);}
-.progtext{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;}
-
+button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid var(--saffron);outline-offset:3px}
+.top{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.brand{display:flex;align-items:center;gap:9px}.brand .mark{font-size:22px}
+.brand h1{font-family:'Fraunces',serif;font-weight:700;font-size:19px;margin:0;letter-spacing:.2px}
+.awake{font-size:11px;color:var(--herb);display:flex;align-items:center;justify-content:flex-end;gap:5px;opacity:.85}
+.awake .dot{width:6px;height:6px;border-radius:50%;background:var(--herb);box-shadow:0 0 8px var(--herb)}
+.xp{font-size:13px;color:var(--saffron);font-weight:600;white-space:nowrap}
+.days{width:100%;max-width:520px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:4px 0 10px}
+.day{padding:9px 0 8px;min-width:0;border:1px solid var(--line);border-radius:11px;background:#00000024;color:var(--muted);font-size:12px;font-weight:700}
+.day[aria-pressed="true"]{border-color:var(--saffron);color:#1c160e;background:var(--saffron)}
+.day .special{display:block;font-size:9px;font-weight:600;line-height:1.2;white-space:nowrap;margin-top:3px}
+.day:not([aria-pressed="true"]) .special{color:var(--herb)}
+.caption{width:100%;max-width:520px;color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 14px;min-height:18px}
+.caption strong{color:var(--cream)}
+.progwrap{width:100%;max-width:520px;margin-bottom:18px}
+.progbar{height:8px;border-radius:20px;background:var(--card);overflow:hidden;border:1px solid var(--line)}
+.progfill{height:100%;background:linear-gradient(90deg,var(--herb),var(--saffron));border-radius:20px;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.progtext{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
 .card{
   width:100%;max-width:520px;flex:1;
-  background:
-    repeating-linear-gradient(100deg, #00000012 0 2px, transparent 2px 26px),
-    linear-gradient(160deg,var(--board),var(--card));
-  border:1px solid var(--line); border-radius:26px; padding:30px 26px 26px;
-  box-shadow:0 20px 50px -20px #000000aa, inset 0 1px 0 #ffffff0d;
-  display:flex; flex-direction:column; min-height:340px; position:relative;
+  background:repeating-linear-gradient(100deg,#00000012 0 2px,transparent 2px 26px),linear-gradient(160deg,var(--board),var(--card));
+  border:1px solid var(--line);border-radius:26px;padding:27px 25px 25px;
+  box-shadow:0 20px 50px -20px #000000aa,inset 0 1px 0 #ffffff0d;
+  display:flex;flex-direction:column;min-height:365px;position:relative;
 }
-.tasknum{font-family:'Fraunces',serif;font-size:14px;color:var(--saffron);font-weight:600;letter-spacing:.3px;}
-.taskicon{font-size:44px;margin:14px 0 8px;}
-.tasktitle{font-family:'Fraunces',serif;font-size:28px;font-weight:700;line-height:1.15;margin:0 0 16px;}
-.items{list-style:none;padding:0;margin:0 0 6px;display:flex;flex-direction:column;gap:9px;}
-.items li{
-  display:flex; align-items:center; gap:10px; font-size:15px; color:var(--cream);
-  background:#00000022; border:1px solid var(--line); border-radius:12px; padding:10px 13px;
-}
-.items li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--herb);flex:none;}
-.doneflag{
-  position:absolute; top:22px; right:24px; background:var(--herb); color:#182013; font-weight:700;
-  font-size:12px; padding:5px 11px; border-radius:20px; opacity:0; transform:scale(.8);
-  transition:.25s;
-}
-.doneflag.show{opacity:1;transform:scale(1);}
-
-.spacer{flex:1;}
-
-.actions{width:100%;max-width:520px;display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin-top:18px;}
-.btn{
-  border:none; border-radius:18px; padding:19px 10px; font-family:'Work Sans',sans-serif; font-weight:700;
-  font-size:17px; cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s, filter .12s;
-  display:flex; align-items:center; justify-content:center; gap:8px;
-}
-.btn:active{transform:scale(.96);}
-.btn-back{background:var(--card); color:var(--cream); border:1px solid var(--line);}
-.btn-done{background:linear-gradient(135deg,var(--herb),#6f9552); color:#132014; box-shadow:0 10px 26px -10px #93b26d88;}
-.btn:disabled{opacity:.35; cursor:default;}
-
-.steps-fab{
-  margin-top:14px; background:none; border:1px solid var(--line); color:var(--muted); font-family:'Work Sans',sans-serif;
-  font-size:13px; padding:9px 18px; border-radius:20px; cursor:pointer; display:flex; align-items:center; gap:7px;
-}
-.steps-fab:hover{color:var(--cream); border-color:var(--saffron);}
-
-.overlay{
-  position:fixed; inset:0; background:#100c08e8; backdrop-filter:blur(4px); display:none;
-  align-items:flex-end; justify-content:center; z-index:50;
-}
-.overlay.open{display:flex;}
-.sheet{
-  width:100%; max-width:560px; max-height:80vh; background:var(--bg2); border-radius:24px 24px 0 0;
-  border:1px solid var(--line); border-bottom:none; padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));
-  overflow-y:auto; animation:up .28s cubic-bezier(.2,.8,.2,1);
-}
-@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
-.sheet h2{font-family:'Fraunces',serif;margin:0 0 14px;font-size:19px;display:flex;justify-content:space-between;align-items:center;}
-.sheet h2 button{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;}
-.steprow{
-  display:flex; align-items:center; gap:12px; padding:12px 8px; border-bottom:1px solid var(--line);
-  cursor:pointer;
-}
-.steprow.current{background:#f2a93b14; border-radius:12px;}
-.check{
-  width:24px;height:24px;border-radius:50%;border:2px solid var(--herb); flex:none; display:flex; align-items:center;
-  justify-content:center; font-size:13px; color:#132014; cursor:pointer;
-}
-.check.done{background:var(--herb);}
-.steprow .stitle{flex:1; font-size:14.5px;}
-.steprow.rowdone .stitle{color:var(--muted); text-decoration:line-through; text-decoration-color:#b3a28966;}
-
-.confetti{position:fixed; inset:0; pointer-events:none; z-index:60; overflow:hidden;}
-.piece{position:absolute; top:-16px; border-radius:2px; animation:fall linear forwards;}
-@keyframes fall{to{transform:translateY(110vh) rotate(540deg); opacity:.3;}}
-
-.complete{
-  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
-  flex:1; gap:10px; padding:20px 0;
-}
-.complete .big{font-size:60px;}
-.complete h2{font-family:'Fraunces',serif; font-size:26px; margin:6px 0 2px;}
-.complete p{color:var(--muted); font-size:14px; margin:0;}
+@media(prefers-reduced-motion:no-preference){.card{animation:riseIn .35s cubic-bezier(.2,.8,.2,1)}}
+@keyframes riseIn{from{opacity:.65;transform:translateY(9px)}to{opacity:1;transform:none}}
+.tasknum{font-family:'Fraunces',serif;font-size:14px;color:var(--saffron);font-weight:600;letter-spacing:.3px;padding-right:72px}
+.taskicon{font-size:43px;margin:12px 0 7px}
+.tasktitle{font-family:'Fraunces',serif;font-size:clamp(24px,5.8vw,29px);font-weight:700;line-height:1.16;margin:0 0 9px}
+.taskdesc{font-size:14px;line-height:1.55;color:var(--muted);margin:0 0 15px}
+.items{list-style:none;padding:0;margin:0 0 6px;display:flex;flex-direction:column;gap:8px}
+.items li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.48;color:var(--cream);background:#00000022;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.items li::before{content:"";width:7px;height:7px;margin-top:7px;border-radius:50%;background:var(--herb);flex:none}
+.doneflag{position:absolute;top:21px;right:21px;background:var(--herb);color:#182013;font-weight:700;font-size:12px;padding:5px 10px;border-radius:20px;opacity:0;transform:scale(.8);transition:.2s}
+.doneflag.show{opacity:1;transform:scale(1)}
+.spacer{flex:1}
+.actions{width:100%;max-width:520px;display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin-top:18px}
+.btn{border:0;border-radius:18px;padding:18px 10px;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,filter .12s}
+.btn:active{transform:scale(.96)}
+.btn-back{background:var(--card);color:var(--cream);border:1px solid var(--line)}
+.btn-done{background:linear-gradient(135deg,var(--herb),#6f9552);color:#132014;box-shadow:0 10px 26px -10px #93b26d88}
+.btn:disabled{opacity:.35;cursor:default}
+.steps-fab{margin-top:14px;background:none;border:1px solid var(--line);color:var(--muted);font-size:13px;padding:10px 18px;border-radius:20px;display:flex;align-items:center;gap:7px}
+.steps-fab:hover{color:var(--cream);border-color:var(--saffron)}
+.overlay{position:fixed;inset:0;background:#100c08e8;backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.overlay.open{display:flex}
+.sheet{width:100%;max-width:560px;max-height:82vh;background:var(--bg2);border-radius:24px 24px 0 0;border:1px solid var(--line);border-bottom:0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));overflow-y:auto;animation:up .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(25px);opacity:0}to{transform:none;opacity:1}}
+.sheet h2{font-family:'Fraunces',serif;margin:0 0 14px;font-size:19px;display:flex;justify-content:space-between;align-items:center}
+.sheet h2 button{background:none;border:0;color:var(--muted);font-size:22px;padding:5px}
+.steprow{display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid var(--line);cursor:pointer;width:100%;color:var(--cream);text-align:left;background:none;border-left:none;border-right:none;border-top:none}
+.steprow.current{background:#f2a93b14;border-radius:12px}
+.check{width:24px;height:24px;border-radius:50%;border:2px solid var(--herb);flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;color:#132014}
+.check.done{background:var(--herb)}
+.steprow .stitle{flex:1;font-size:14px;line-height:1.35}
+.steprow.rowdone .stitle{color:var(--muted);text-decoration:line-through;text-decoration-color:#b3a28966}
+.check-button{border:0;padding:2px;background:none;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.resetrow{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 8px 1px;color:var(--muted);font-size:12px}
+.resetrow button{border:1px solid var(--line);background:none;color:var(--muted);padding:8px 12px;border-radius:12px;font-size:12px}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.piece{position:absolute;top:-16px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.3}}
+.complete{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;gap:10px;padding:20px 0}
+.complete .big{font-size:60px}.complete h2{font-family:'Fraunces',serif;font-size:27px;margin:6px 0 2px}
+.complete p{color:var(--muted);font-size:14px;margin:0;max-width:33ch}
+@media(max-width:390px){body{padding-left:12px;padding-right:12px}.card{padding:23px 19px}.items li{font-size:13px}.day{font-size:11px}.day .special{font-size:8px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
 <div class="top">
   <div class="brand"><span class="mark">🍲</span><h1>Kitchen Manual</h1></div>
-  <div style="text-align:right">
-    <div class="xp" id="xp">0 XP</div>
-    <div class="awake"><span class="dot"></span><span id="awakeLabel">staying awake</span></div>
-  </div>
+  <div style="text-align:right"><div class="xp" id="xp">0 XP</div><div class="awake"><span class="dot" aria-hidden="true"></span><span id="awakeLabel">screen may sleep</span></div></div>
 </div>
-
+<nav class="days" id="days" aria-label="Choose day"></nav>
+<p class="caption" id="dayCaption" aria-live="polite"></p>
 <div class="progwrap">
-  <div class="progbar"><div class="progfill" id="progfill" style="width:0%"></div></div>
-  <div class="progtext"><span id="progtext">0 of 17 done</span><span id="progpct">0%</span></div>
+  <div class="progbar" role="progressbar" aria-label="Tasks completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progfill" id="progfill" style="width:0%"></div></div>
+  <div class="progtext"><span id="progtext">0 steps done</span><span id="progpct">0%</span></div>
 </div>
-
-<div class="card" id="card"></div>
-
-<div class="actions" id="actions">
-  <button class="btn btn-back" id="btnBack">← Back</button>
-  <button class="btn btn-done" id="btnDone">Done ✓</button>
-</div>
-
-<button class="steps-fab" id="btnSteps">☰ All steps</button>
-
-<div class="overlay" id="overlay">
-  <div class="sheet">
-    <h2>17 Steps <button id="closeSheet">✕</button></h2>
+<main class="card" id="card" aria-live="polite"></main>
+<div class="actions" id="actions"><button class="btn btn-back" id="btnBack" type="button">← Back</button><button class="btn btn-done" id="btnDone" type="button">Done ✓</button></div>
+<button class="steps-fab" id="btnSteps" type="button">☰ All steps</button>
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <h2><span id="sheetTitle">All steps</span><button id="closeSheet" type="button" aria-label="Close all steps">✕</button></h2>
     <div id="stepList"></div>
+    <div class="resetrow"><span>Progress saves on this device.</span><button id="resetDay" type="button">Reset this day</button></div>
   </div>
 </div>
-
-<div class="confetti" id="confetti"></div>
-
+<div class="confetti" id="confetti" aria-hidden="true"></div>
 <script>
-const TASKS=[
-{icon:"🧽",title:"Wash Utensils",items:["2 Shakers","2 Lunch Boxes","2 Plates for Dinner","2 Spoons + 2 Forks","2 Yogurt Containers","1 Washing Container (Rice + Quinoa + Daal)","1 Dry Veggie Storage Box","1 Wet Veggie Storage Box (later: Breakfast Mix)","2 Small Storage (Pumpkin Seeds + Supplements + Almonds)"]},
-{icon:"🌾",title:"Cook Quinoa",items:["100g Quinoa","200g Water"]},
-{icon:"🥦",title:"Chop & Air Fry Broccoli for Dinner",items:[]},
-{icon:"🍚",title:"Cook Rice",items:["120g Rice","240g Water","1 tsp Salt"]},
-{icon:"🧅",title:"Chop & Mix Dry Veggies",items:["Onions","Cilantro","Spinach","Bell Peppers"]},
-{icon:"🍅",title:"Chop & Mix Wet Veggies",items:["Tomatoes","Jalapenos","Lime","Corn"]},
-{icon:"🥗",title:"Split Wet Veggies into Lunch Bowls",items:["Half into lunch bowls"]},
-{icon:"🫘",title:"Cook Beans & Tofu",items:["Beans","Tofu","Seasoning"]},
-{icon:"🥣",title:"Beans into Remaining Wet Veggie Bowls",items:[]},
-{icon:"🌱",title:"Cook Soya Chunks & Air Fry",items:[]},
-{icon:"🥤",title:"Make Protein Shake",items:["Scoop of Whey","Milk"]},
-{icon:"💊",title:"Pack Supplements",items:["Selenium tablet","Omega","Vitamin D","Almonds","Pumpkin Seeds"]},
-{icon:"🧂",title:"Make Creatine Packs",items:[]},
-{icon:"🍦",title:"Make Yogurt",items:["Yogurt","Berries","Chia Seeds"]},
-{icon:"🥛",title:"Make Dahi for Dinner",items:[]},
-{icon:"🍱",title:"Lunch Bowls to Fridge",items:["Quinoa","Wet Veggies","Soy Chunks"]},
-{icon:"🧹",title:"Clean & Put Away",items:[]},
-];
-const TOTAL=TASKS.length;
-let done=new Array(TOTAL).fill(false);
-let current=0, xp=0;
+(() => {
+  'use strict';
 
-const card=document.getElementById('card');
-const actions=document.getElementById('actions');
-const btnBack=document.getElementById('btnBack');
-const btnDone=document.getElementById('btnDone');
-const btnSteps=document.getElementById('btnSteps');
-const overlay=document.getElementById('overlay');
-const closeSheet=document.getElementById('closeSheet');
-const stepList=document.getElementById('stepList');
-const progfill=document.getElementById('progfill');
-const progtext=document.getElementById('progtext');
-const progpct=document.getElementById('progpct');
-const xpEl=document.getElementById('xp');
+  // Every card is a single action or short linked action. Cooking starts early
+  // and continues in the background while other cards are completed. Only two
+  // pots and two burners are occupied at any one point.
+  const task = (id, icon, title, desc, ...items) => ({id,icon,title,desc,items});
+  const SHARED_START = [
+    task('wash','🧽','Wash & stage the kit',
+      'Put both pots on their own cooktop spots. If something is already clean, just set it out; do not wash it again.',
+      '2 lunch boxes + lids, 2 protein shakers + lids, 2 yogurt containers + lids, 2 mixing containers.',
+      'Knife, cutting board, rinse bowl, fine strainer/colander, spatula, ladle, tongs and measuring cup.',
+      '2 pots + lids, air-fryer basket, 2 clean cups for morning coffee.',
+      '2 supplement cases, 2 dinner plates, 2 dinner spoons, 2 lunch forks.',
+      'Yogurt bowl, dal bowl, and a covered bowl/container for cooked rice. Keep a clean towel, sponge and freezer bags handy.'),
+    task('rinse','🌾','Rinse rice & quinoa FIRST',
+      'Keep the two grains separate. On Monday, wash extra rice for the pizza filling as well.',
+      'Wash rice in the rinse bowl until the water runs clearer; drain.',
+      'Rinse quinoa in the fine strainer until thoroughly washed.',
+      'Measure water into pot A for rice and pot B for quinoa. Do not switch either burner on until the grains are washed.'),
+    task('grains','🍚','Start both grain pots',
+      'LEFT burner = rice. RIGHT burner = quinoa. Leave them cooking while you work on the next cards.',
+      'Pot A / LEFT: washed rice + its measured water; bring to a gentle simmer, then cover.',
+      'Pot B / RIGHT: washed quinoa + its measured water; bring to a gentle simmer, then cover.',
+      'Keep the heat low enough not to boil over. Turn off each pot once its grain is tender, even if you are working on another card.'),
+    task('broccoli','🥦','Start the broccoli in the air fryer',
+      'This runs independently of both cooktop spots.',
+      'Wash, dry, chop and season broccoli; spread it in the air-fryer basket.',
+      'Air fry until tender with crisp edges; shake the basket as needed.',
+      'Remove to a clean dish when done. The basket is needed later for soy chunks.'),
+    task('veg','🔪','Chop & split the daily vegetables',
+      'Make the lunch vegetables now, while rice and quinoa cook.',
+      'DRY mix: onion, bell pepper, spinach and cilantro. Wash and chop; keep in one mixing container.',
+      'WET mix: tomato, jalapeño and corn. Dice, drain excess liquid and hold in the other mixing container.',
+      'Split the vegetables between the 2 lunch boxes. Save fresh lime wedges separately to squeeze on after serving.',
+      'Reserve any dinner vegetables. Monday also needs chopped cabbage, peppers, tomato and onion for pizza filling.'),
+  ];
 
-function doneCount(){return done.filter(Boolean).length;}
+  const GRAINS_OUT = task('grainsout','🥣','Empty the grain pots',
+    'Check that both grains are actually cooked before you clear the burners. This is the hand-off that frees the stove.',
+    'Rice: fluff and move to a covered dinner-rice container; on Monday reserve a separate portion for pizza filling.',
+    'Quinoa: move to a mixing container or clean bowl; fold in the planned ghee while it is warm.',
+    'LEFT pot A and RIGHT pot B are now free. Keep the cooked grains covered while you continue.');
 
-function findNextUndone(from){
-  for(let i=from+1;i<TOTAL;i++) if(!done[i]) return i;
-  for(let i=0;i<=from;i++) if(!done[i]) return i;
-  return -1;
-}
-function findPrevUndone(from){
-  for(let i=from-1;i>=0;i--) if(!done[i]) return i;
-  for(let i=TOTAL-1;i>=from;i--) if(!done[i]) return i;
-  return -1;
-}
+  const SOY = task('soy','🌱','Rehydrate soy chunks',
+    'Use only the RIGHT burner. You will need this pot for another job next.',
+    'RIGHT pot B: cover dry soy chunks with water and boil until fully rehydrated.',
+    'Drain in the strainer; let cool enough to handle, then squeeze away excess water.',
+    'Toss with your lunch seasoning. Keep them ready for the air fryer; pot B is free again.');
 
-function updateProgress(){
-  const c=doneCount(), pct=Math.round((c/TOTAL)*100);
-  progfill.style.width=pct+"%";
-  progtext.textContent=c+" of "+TOTAL+" done";
-  progpct.textContent=pct+"%";
-  xpEl.textContent=xp+" XP";
-}
+  const DAAL_A = task('daal','🫘','Start the dal on LEFT',
+    'Soy is out of the other pot. Dal can now simmer while you finish the cold items.',
+    'Rinse quick-cooking split red lentils in the strainer. Use cooked or canned beans only as a substitute, not dry unsoaked kidney beans.',
+    'LEFT pot A: add lentils, water, iodized salt and spices; simmer until fully soft.',
+    'Keep an eye on the pot while making shakes. Do not start rice again.');
 
-function render(){
-  if(doneCount()===TOTAL){ renderComplete(); return; }
-  const t=TASKS[current];
-  card.innerHTML=`
-    <div class="tasknum">TASK ${current+1} OF ${TOTAL}</div>
-    <div class="doneflag ${done[current]?'show':''}">✓ DONE</div>
-    <div class="taskicon">${t.icon}</div>
-    <h2 class="tasktitle">${t.title}</h2>
-    ${t.items.length?`<ul class="items">${t.items.map(i=>`<li>${i}</li>`).join('')}</ul>`:''}
-    <div class="spacer"></div>
-  `;
-  actions.style.display='grid';
-  btnBack.disabled = findPrevUndone(current)===-1 && done.filter(Boolean).length===0;
-  updateProgress();
-  renderStepList();
-}
+  const DAAL_B = task('daal','🫘','Start the dal on RIGHT',
+    'The LEFT pot is busy with the weekly batch. Soy has already left the RIGHT pot, so that burner is free.',
+    'Rinse quick-cooking split red lentils; add to RIGHT pot B with water, iodized salt and spices.',
+    'Simmer until completely soft. Add water if needed; stir occasionally while completing the next cards.',
+    'If using beans instead, use fully cooked or canned beans. Never cook dry kidney beans from raw in this quick workflow.');
 
-function renderComplete(){
-  card.innerHTML=`
-    <div class="complete">
-      <div class="big">🎉</div>
-      <h2>Kitchen fully prepped</h2>
-      <p>All ${TOTAL} tasks done · ${xp} XP earned</p>
-    </div>`;
-  actions.style.display='none';
-  updateProgress();
-  renderStepList();
-  burstConfetti(60);
-}
+  const DAIRY = task('dairy','🥤','Make shakes & yogurt',
+    'These are no-cook jobs. Do them while the dal or batch pot is working.',
+    'Make the milk, whey, peanut-butter and chia mixture; divide into the 2 clean protein shakers and close tightly.',
+    'Portion yogurt into the 2 yogurt containers. Add blueberries; pack almonds and pumpkin seeds so they stay crunchy.',
+    'Set dinner curd/dahi aside in the clean yogurt bowl; cover and refrigerate it.',
+    'Put dairy and shakes in the fridge right away.');
 
-function renderStepList(){
-  stepList.innerHTML=TASKS.map((t,i)=>`
-    <div class="steprow ${i===current?'current':''} ${done[i]?'rowdone':''}" data-idx="${i}">
-      <div class="check ${done[i]?'done':''}" data-check="${i}">${done[i]?'✓':''}</div>
-      <div class="stitle">${i+1}. ${t.title}</div>
-    </div>`).join('');
-}
+  const LUNCH = task('lunch','🥗','Crisp soy & finish the quinoa bowls',
+    'No burner needed: the air fryer is free, and the quinoa is already cooked.',
+    'Air fry the drained, seasoned soy chunks until the edges crisp; do not overcrowd the basket.',
+    'Fold spinach, cilantro and spices into the warm quinoa to wilt, or use washed spinach fresh.',
+    'Add broccoli, soy chunks and sesame seeds. Keep the lime wedges separate until eating.',
+    'Divide everything evenly into the 2 lunch boxes.');
 
-stepList.addEventListener('click',(e)=>{
-  const checkIdx=e.target.getAttribute('data-check');
-  if(checkIdx!==null){
-    const i=parseInt(checkIdx);
-    done[i]=!done[i];
-    if(done[i]) xp+=15; else xp=Math.max(0,xp-15);
-    if(done[i]) burstConfetti(18);
+  const DAAL_FROZEN = task('finishdal','🍛','Finish dal with frozen tarka',
+    'Your frozen base comes from the most recent Wednesday batch. It can go directly into hot lentils.',
+    'Add one portion of frozen onion-tomato tarka to the soft dal in its current pot.',
+    'Simmer and stir until the tarka is fully melted and the dal is hot throughout; adjust salt and seasoning.',
+    'Turn the burner off. Transfer dal into the cleaned dal bowl or covered dinner container.');
+
+  const PACK = task('pack','🍱','Pack the two lunches',
+    'Double-check lids and the cold items, rather than cooking anything new.',
+    '2 lunch boxes: quinoa, vegetables, soy and broccoli; add lime when eating.',
+    '2 closed shakers: milk + whey mixture. 2 closed yogurt cups: yogurt + berries, with nuts/seeds packed as preferred.',
+    'Place every packed lunch in the fridge. Add the 2 clean lunch forks to tomorrow’s bag.');
+
+  const SUPPS = task('supps','💊','Fill both supplement cases',
+    'Pack only the supplements already in your approved plan; do not change doses.',
+    '2 medicine/supplement cases: sort vitamin D + selenium for the yogurt meal and omega for the quinoa meal.',
+    'Set out your usual creatine portion to mix with water separately, if part of your plan.',
+    'Close both cases, pack the nuts/seeds if not already packed, and check nothing is missing.');
+
+  const DINNER = task('dinner','🍽️','Set up dinner and morning',
+    'Everything hot was cooked first; now make sure it has a safe destination.',
+    'Dinner: cooked rice + dal + cooked or washed vegetables. Keep curd covered and orange juice ready to pour at the meal.',
+    'Set out 2 dinner plates and 2 spoons. Leave the clean dal bowl and yogurt bowl ready.',
+    'Put 2 clean cups aside for morning. Morning coffee and air-frying a frozen pizza pop are NOT part of this game.',
+    'Keep the bedtime milk in the fridge; pour it when needed.');
+
+  const CLEAN = task('clean','🧹','Wash, chill & close the kitchen',
+    'The finish line includes cleanup, not just cooking.',
+    'Wash both pots and lids, knife, board, strainer, mixing containers, spatula, tongs and the air-fryer basket.',
+    'Wipe the cooktop, counter and sink; put dry utensils away. Check the 2 lunch boxes, shakers, yogurt cups and supplement cases are closed.',
+    'Refrigerate cooked rice, dal, quinoa and dairy promptly in covered containers; do not leave cooked rice out.',
+    'Confirm LEFT and RIGHT burners and the air fryer are OFF.');
+
+  const MONDAY = [
+    task('mon-soy','🌱','Rehydrate soy on RIGHT',
+      'Both grains have been removed. This quick boil makes the RIGHT pot available for dal afterward.',
+      'RIGHT pot B: boil soy chunks in water until rehydrated, then drain and squeeze them in the colander.',
+      'Season the soy and leave it ready for the air fryer. Empty the pot completely.'),
+    DAAL_B,
+    task('mon-filling','🍕','Cook the week’s pizza filling',
+      'LEFT burner only. RIGHT is already simmering dal, so do not put another pan there.',
+      'LEFT pot A: cook crumbled tofu with the reserved cooked rice, cabbage, onion, tomato, bell pepper, jalapeño, cilantro and spices.',
+      'Keep the filling fairly dry; cook off extra tomato liquid so the frozen tortillas do not turn soggy.',
+      'Spread the cooked filling in a shallow clean container to cool. Keep mozzarella separate until assembly. Turn off LEFT burner.'),
+    DAIRY,
+    LUNCH,
+    DAAL_FROZEN,
+    task('mon-pizza','🫓','Assemble the frozen pizza pops',
+      'One batch covers the entire week. Make enough for each planned breakfast (14 if there are 2 breakfast servings per day).',
+      'Lay out tortillas; spoon in only cooled tofu-rice filling and mozzarella. Avoid overfilling.',
+      'Fold into tight sealed pockets with the seam underneath. This freezer shape is sturdier than an open cone and needs no toothpicks.',
+      'Separate pops with parchment, bag in freezer-safe bags, label and freeze flat. Air fry straight from frozen on the morning you eat them.',
+      'Keep uncooked or cooked filling and assembled pops out of the warm kitchen as briefly as practical.'),
+    PACK, SUPPS, DINNER, CLEAN,
+  ];
+
+  const WEDNESDAY_PREP = task('wed-chop','🧅','Process the big tarka vegetables',
+    'This is a large batch: using a food processor is important if everything must fit the daily kitchen window.',
+    'Peel and roughly cut AT LEAST 10 onions. Pulse them in the food processor, then set aside.',
+    'Wash and core AT LEAST 10 tomatoes; pulse separately. Do not combine raw tomato with onion yet.',
+    'Prepare garlic, ginger, oil and your normal tarka spices. Wash the processor blade carefully when finished.',
+    'Keep checking the grains; switch their heat off as soon as they are cooked.');
+
+  const WEDNESDAY = [
+    task('wed-tarka','🍅','Start the weekly tarka on LEFT',
+      'This batch owns the LEFT burner until finished. Nothing else goes on that burner.',
+      'LEFT pot A: heat oil, cook the processed onions with garlic, ginger and spices until soft and fragrant.',
+      'Add the processed tomatoes. Cook uncovered, stirring and scraping the bottom, until the raw tomato taste disappears and the mixture becomes a thick masala.',
+      'Reduce the heat once simmering and continue with the RIGHT burner tasks. Do not leave this large pot unattended.'),
+    SOY,
+    DAAL_B,
+    DAIRY,
+    LUNCH,
+    task('wed-finish','🍛','Season dal with today’s fresh tarka',
+      'The batch has cooked down on LEFT and the lentils are soft on RIGHT.',
+      'Spoon one meal-sized portion of the finished tarka from LEFT pot A into the dal in RIGHT pot B.',
+      'Stir and heat the dal until hot throughout. Turn off RIGHT burner and cover the cooked dal.',
+      'Turn off LEFT burner once the remaining tarka is thick and fully cooked.'),
+    task('wed-freeze','🧊','Freeze the rest of the tarka',
+      'Portion the batch for the days ahead, including the beginning of next week.',
+      'Divide the remaining onion-tomato masala into meal-size portions using shallow freezer-safe containers or flat freezer bags.',
+      'Cool promptly in shallow containers or a cold-water bath; never seal a deep container of steaming-hot masala.',
+      'Label the portions and freeze them promptly. Keep the next portion accessible for tomorrow.'),
+    PACK, SUPPS, DINNER, CLEAN,
+  ];
+
+  const ORDINARY = [SOY, DAAL_A, DAIRY, LUNCH, DAAL_FROZEN, PACK, SUPPS, DINNER, CLEAN];
+  const makeTasks = day => [
+    ...SHARED_START,
+    ...(day===2 ? [WEDNESDAY_PREP] : []),
+    GRAINS_OUT,
+    ...(day===0 ? MONDAY : day===2 ? WEDNESDAY : ORDINARY),
+  ];
+
+  const names=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const shortNames=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const dateNow=new Date();
+  const actualDay=(dateNow.getDay()+6)%7;
+  const weekStart=new Date(dateNow.getFullYear(),dateNow.getMonth(),dateNow.getDate()-actualDay);
+  const weekId=[weekStart.getFullYear(),String(weekStart.getMonth()+1).padStart(2,'0'),String(weekStart.getDate()).padStart(2,'0')].join('-');
+  const STORAGE_KEY='kitchen-manual-week-v4:'+weekId;
+  let saved={days:{}};
+  try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); if(stored&&typeof stored==='object'&&stored.days&&typeof stored.days==='object')saved=stored;}catch(e){}
+  let selected=actualDay;
+  let tasks=makeTasks(selected);
+  let done=[];
+  let current=0;
+  let celebrated=new Set();
+
+  function dayKey(){return names[selected];}
+  function loadDay(){
+    tasks=makeTasks(selected);
+    const arr=saved.days[dayKey()];
+    done=tasks.map((t,i)=>Array.isArray(arr)&&arr[i]===t.id);
+    current=done.findIndex(d=>!d);
+    if(current===-1)current=0;
+  }
+  function persist(){
+    saved.days[dayKey()]=tasks.map((t,i)=>done[i]?t.id:null);
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));}catch(e){}
+  }
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  const el=id=>document.getElementById(id);
+  const card=el('card'), actions=el('actions'), overlay=el('overlay');
+  const total=()=>tasks.length;
+  const doneCount=()=>done.filter(Boolean).length;
+  const findNextUndone=from=>{for(let i=from+1;i<total();i++)if(!done[i])return i;for(let i=0;i<=from;i++)if(!done[i])return i;return -1;};
+  const findPrevUndone=from=>{for(let i=from-1;i>=0;i--)if(!done[i])return i;for(let i=total()-1;i>=from;i--)if(!done[i])return i;return -1;};
+
+  function renderDays(){
+    el('days').innerHTML=names.map((name,i)=>`<button type="button" class="day" data-day="${i}" aria-pressed="${i===selected}">${shortNames[i]}${i===0?'<span class="special">Pizza</span>':i===2?'<span class="special">Tarka</span>':'<span class="special">&nbsp;</span>'}</button>`).join('');
+    el('dayCaption').innerHTML=selected===0
+      ?'<strong>Monday batch:</strong> pizza pops for the week + fresh daily meals. Use the previous frozen batch for Monday breakfast.'
+      :selected===2
+      ?'<strong>Wednesday batch:</strong> 10+ onions and 10+ tomatoes into freezer tarka + fresh daily meals.'
+      :'<strong>Daily kitchen:</strong> fresh grains, dal, quinoa bowls, soy, shakes and cleanup. Use frozen tarka from Wednesday.';
+  }
+  function updateProgress(){
+    const n=doneCount(),pct=Math.round((n/total())*100);
+    el('progfill').style.width=pct+'%';
+    el('progtext').textContent=n+' of '+total()+' done';
+    el('progpct').textContent=pct+'%';
+    el('xp').textContent=(n*15)+' XP';
+    el('progressBar').setAttribute('aria-valuenow',pct);
+    el('sheetTitle').textContent=names[selected]+' · '+total()+' steps';
+  }
+  function renderStepList(){
+    el('stepList').innerHTML=tasks.map((t,i)=>`<div class="steprow ${i===current?'current':''} ${done[i]?'rowdone':''}"><button type="button" class="check-button" data-check="${i}" aria-label="${done[i]?'Mark incomplete':'Mark complete'}: ${esc(t.title)}"><span class="check ${done[i]?'done':''}">${done[i]?'✓':''}</span></button><button type="button" class="stitle" data-idx="${i}" style="text-align:left;background:none;border:0;color:inherit;padding:5px 0;cursor:pointer">${i+1}. ${esc(t.title)}</button></div>`).join('');
+  }
+  function render(){
+    renderDays();updateProgress();renderStepList();
+    if(doneCount()===total()){
+      card.innerHTML=`<div class="complete"><div class="big">🎉</div><h2>${esc(names[selected])} complete</h2><p>Every cooking, packing, washing and storage step is done. ${doneCount()*15} XP earned.</p></div>`;
+      actions.style.display='none';
+      return;
+    }
+    if(done[current]){const n=findNextUndone(current);if(n!==-1)current=n;}
+    const t=tasks[current];
+    card.innerHTML=`<div class="tasknum">TASK ${current+1} OF ${total()}</div><div class="doneflag ${done[current]?'show':''}">✓ DONE</div><div class="taskicon" aria-hidden="true">${t.icon}</div><h2 class="tasktitle">${esc(t.title)}</h2><p class="taskdesc">${esc(t.desc)}</p>${t.items.length?`<ul class="items">${t.items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}<div class="spacer"></div>`;
+    actions.style.display='grid';
+    el('btnBack').disabled=(current===0&&doneCount()===0);
+    renderStepList();
+  }
+  function selectDay(i){
+    if(i<0||i>6||i===selected)return;
+    selected=i;loadDay();render();
+  }
+  el('days').addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(b)selectDay(Number(b.dataset.day));});
+  el('btnDone').addEventListener('click',()=>{
+    if(!done[current]){done[current]=true;burstConfetti(17);}
+    const next=findNextUndone(current);
+    persist();
+    if(next===-1){
+      if(!celebrated.has(dayKey())){celebrated.add(dayKey());burstConfetti(55);}
+    }else current=next;
     render();
-    return;
+  });
+  el('btnBack').addEventListener('click',()=>{const prev=findPrevUndone(current);if(prev!==-1){current=prev;render();}});
+  function openSheet(){renderStepList();overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');el('closeSheet').focus();}
+  function closeSheet(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');el('btnSteps').focus();}
+  el('btnSteps').addEventListener('click',openSheet);
+  el('closeSheet').addEventListener('click',closeSheet);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeSheet();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeSheet();});
+  el('stepList').addEventListener('click',e=>{
+    const check=e.target.closest('[data-check]');
+    if(check){const i=Number(check.dataset.check);done[i]=!done[i];persist();if(done[i])burstConfetti(10);render();return;}
+    const row=e.target.closest('[data-idx]');
+    if(row){current=Number(row.dataset.idx);closeSheet();render();}
+  });
+  el('resetDay').addEventListener('click',()=>{
+    if(!confirm('Clear '+names[selected]+' progress?'))return;
+    done=tasks.map(()=>false);current=0;celebrated.delete(dayKey());persist();closeSheet();render();
+  });
+  function burstConfetti(n){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const box=el('confetti'),colors=['#f2a93b','#93b26d','#e2593f','#f4ead9'];
+    for(let i=0;i<n;i++){
+      const p=document.createElement('div');p.className='piece';
+      const size=5+Math.random()*6;
+      p.style.cssText=`width:${size}px;height:${size*1.4}px;left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.4+Math.random()*1.1}s;opacity:.9`;
+      box.appendChild(p);setTimeout(()=>p.remove(),2600);
+    }
   }
-  const row=e.target.closest('.steprow');
-  if(row){
-    current=parseInt(row.getAttribute('data-idx'));
-    overlay.classList.remove('open');
-    render();
+  // The original game's wake-lock indicator, with a graceful fallback.
+  let wakeLock=null;
+  async function requestWakeLock(){
+    if(!('wakeLock' in navigator))return;
+    try{wakeLock=await navigator.wakeLock.request('screen');el('awakeLabel').textContent='staying awake';wakeLock.addEventListener('release',()=>{el('awakeLabel').textContent='screen may sleep';});}
+    catch(e){el('awakeLabel').textContent='screen may sleep';}
   }
-});
-
-btnDone.onclick=()=>{
-  if(!done[current]){ done[current]=true; xp+=15; burstConfetti(28); }
-  const nxt=findNextUndone(current);
-  if(nxt===-1){ render(); } else { current=nxt; render(); }
-};
-
-btnBack.onclick=()=>{
-  const prv=findPrevUndone(current);
-  if(prv!==-1){ current=prv; render(); }
-};
-
-btnSteps.onclick=()=>{ renderStepList(); overlay.classList.add('open'); };
-closeSheet.onclick=()=>overlay.classList.remove('open');
-overlay.addEventListener('click',(e)=>{ if(e.target===overlay) overlay.classList.remove('open'); });
-
-function burstConfetti(n){
-  const box=document.getElementById('confetti');
-  const colors=['#f2a93b','#93b26d','#e2593f','#f4ead9'];
-  for(let i=0;i<n;i++){
-    const p=document.createElement('div');
-    p.className='piece';
-    const size=5+Math.random()*6;
-    p.style.width=size+'px'; p.style.height=(size*1.4)+'px';
-    p.style.left=(Math.random()*100)+'vw';
-    p.style.background=colors[Math.floor(Math.random()*colors.length)];
-    p.style.animationDuration=(1.4+Math.random()*1.1)+'s';
-    p.style.opacity=0.9;
-    box.appendChild(p);
-    setTimeout(()=>p.remove(),2600);
-  }
-}
-
-// Wake Lock
-let wakeLock=null;
-const awakeLabel=document.getElementById('awakeLabel');
-async function requestWakeLock(){
-  try{
-    wakeLock = await navigator.wakeLock.request('screen');
-    awakeLabel.textContent='staying awake';
-    wakeLock.addEventListener('release', ()=>{ awakeLabel.textContent='screen may sleep'; });
-  }catch(err){
-    awakeLabel.textContent='wake lock unavailable';
-  }
-}
-document.addEventListener('visibilitychange', async ()=>{
-  if(document.visibilityState==='visible') await requestWakeLock();
-});
-requestWakeLock();
-
-render();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')requestWakeLock();});
+  document.addEventListener('pointerdown',()=>{if(!wakeLock||wakeLock.released)requestWakeLock();},{once:true});
+  loadDay();render();
+})();
 </script>
 </body>
 </html>
