@@ -1,23 +1,367 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5f4f0">
-<title>Mr. Manager — Your Space</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f5f4f0;--ink:#1c2524;--muted:#7c8580;--line:#e7e8e2;--card:#fff;--accent:#d9f16c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}body:before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 90% 0%,#e7eadc 0,transparent 46%);z-index:-1}.shell{width:min(1080px,100%);margin:auto;padding:22px 18px max(32px,env(safe-area-inset-bottom))}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.brandmark{width:32px;height:32px;border-radius:11px;background:var(--ink);color:var(--accent);display:grid;place-items:center;font-size:17px}.topnote{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}.hero{padding:42px 0 25px}.eyebrow{display:flex;align-items:center;gap:9px;color:#69736c;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.eyebrow:before{content:'';width:23px;height:2px;background:#9aaf51}.hero h1{font-family:Manrope,system-ui,sans-serif;font-size:clamp(45px,10vw,90px);letter-spacing:-.075em;line-height:1.07;margin:15px 0 16px;font-weight:800}.hero h1 span{color:#9aab8d}.hero p{margin:0;color:#7a837d;font-size:14px;line-height:1.65;max-width:430px}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:16px 0 16px}.sectionhead h2{font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin:0}.count{font-size:12px;color:#8b928b}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:112px;padding:12px 12px 11px;border:1px solid #e9eae5;border-radius:20px;background:var(--card);text-decoration:none;color:var(--ink);box-shadow:0 4px 15px #27352b05;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent}.tile:hover,.tile:focus-visible{transform:translateY(-3px);border-color:#c5d2a7;box-shadow:0 13px 30px #25352212;outline:none}.tile:active{transform:scale(.975)}.tiletop{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}.ico{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:var(--tint,#edf1e6);color:var(--tone,#566c51)}.ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.arrow{font-size:17px;color:#b1b8af;line-height:1}.name{font-family:Manrope,system-ui,sans-serif;font-size:clamp(13px,3.5vw,17px);font-weight:750;letter-spacing:-.045em;line-height:1.25;margin-top:10px;max-width:100%}.foot{margin-top:30px;padding-top:18px;border-top:1px solid #e1e3dc;display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#929a92}.foot strong{color:#5d6a5e;font-weight:700}@media(min-width:640px){.shell{padding:38px 36px 45px}.hero{padding:60px 0 36px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.tile{min-height:135px;padding:16px}.ico{width:40px;height:40px}.name{font-size:17px}}@media(min-width:920px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{padding:70px 0 40px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#18120f">
+  <title>Campfire — Daily Rhythm</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#17110f; --panel:#241b17; --panel-2:#2c201a;
+      --line:#5a4032; --cream:#f7e9d5; --muted:#c5a991;
+      --ember:#f2ae65; --orange:#e88349; --glow:#e8834940;
+      --green:#9ac9a0; --gold:#e3be6b; --rose:#e49387;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; min-height:100dvh; color:var(--cream);
+      font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(ellipse 80% 22% at 50% 0%,#67402b45,transparent 80%),
+        radial-gradient(ellipse 70% 35% at 95% 70%,#4d281d35,transparent 85%),
+        var(--bg);
+    }
+    button,textarea { font:inherit; }
+    button { cursor:pointer; }
+    a { color:var(--ember); }
+    button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible {
+      outline:3px solid var(--ember); outline-offset:3px;
+    }
+    .wrap { width:min(100% - 28px,700px); margin:auto; }
+    .topbar { position:sticky; top:0; z-index:10; padding:12px 0; background:#1c1512ed; border-bottom:1px solid #533626; backdrop-filter:blur(18px); }
+    .topbar .wrap { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .brand { display:flex; align-items:center; gap:10px; min-width:0; }
+    .brand-icon { display:grid; place-items:center; width:40px; height:40px; border-radius:13px; background:#483023; box-shadow:inset 0 1px #ffc48b33; font-size:22px; }
+    .brand strong { display:block; font-family:Georgia,"Times New Roman",serif; font-size:21px; letter-spacing:.01em; line-height:1.05; }
+    .brand small { display:block; color:var(--muted); font-size:10px; letter-spacing:.13em; text-transform:uppercase; margin-top:4px; }
+    .export { border:1px solid #765039; color:var(--cream); background:#34251e; border-radius:12px; padding:10px 12px; font-size:12px; font-weight:700; white-space:nowrap; }
+    main { padding:20px 0 32px; }
+    .eyebrow { text-transform:uppercase; color:#ecad75; font-size:10px; font-weight:800; letter-spacing:.16em; }
+    h1,h2,p { margin-top:0; }
+    .greeting { margin-bottom:16px; }
+    .greeting h1 { font-family:Georgia,"Times New Roman",serif; font-size:clamp(29px,7vw,43px); letter-spacing:-.03em; font-weight:500; margin:4px 0 3px; }
+    .greeting p { color:var(--muted); margin:0; font-size:13px; }
+
+    /* The fire illustration is made from inline SVG: works without internet. */
+    .hearth { position:relative; isolation:isolate; overflow:hidden; background:linear-gradient(145deg,#382519,#211916 62%,#241915); border:1px solid #92613c; border-radius:24px; padding:21px; box-shadow:0 16px 40px #09060475,inset 0 1px #ffcc8a22; }
+    .hearth:before { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(circle at 85% 70%,#e9803b44,transparent 41%); }
+    .stars { position:absolute; top:0; right:0; width:45%; height:100%; pointer-events:none; opacity:.8; background-image:radial-gradient(#ffe4bd 1px,transparent 1px),radial-gradient(#ffe4bd 1px,transparent 1px); background-size:53px 43px,74px 67px; background-position:8px 10px,31px 26px; mask-image:linear-gradient(90deg,transparent,#000); }
+    .fire-art { position:absolute; top:34px; right:9px; width:98px; height:98px; filter:drop-shadow(0 0 16px #eb78276b); opacity:.96; pointer-events:none; }
+    .hearth .eyebrow { color:#ffd19b; position:relative; }
+    .focus-title { font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:clamp(23px,6.3vw,34px); letter-spacing:-.025em; line-height:1.13; margin:17px 82px 8px 0; min-height:53px; position:relative; }
+    .focus-note { max-width:530px; color:#e5cbb6; font-size:12px; margin:0 60px 16px 0; position:relative; }
+    .focus-meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; font-size:12px; font-weight:700; margin-bottom:9px; }
+    .focus-meta span:last-child { color:#ffd19b; }
+    .track { height:8px; background:#100d0b; border:1px solid #634430; border-radius:99px; overflow:hidden; }
+    .track span { display:block; width:0; height:100%; background:linear-gradient(90deg,#ba623b,#f0ad66); border-radius:99px; transition:width .4s; }
+    .stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin:12px 0 24px; }
+    .stat { padding:12px 11px; background:var(--panel); border:1px solid var(--line); border-radius:15px; }
+    .stat strong { font-size:26px; font-weight:700; font-variant-numeric:tabular-nums; display:block; line-height:1; }
+    .stat small { color:var(--muted); display:block; margin-top:7px; font-size:10px; }
+    .stat.done strong { color:var(--green); } .stat.missed strong { color:var(--rose); } .stat.left strong { color:var(--gold); }
+
+    .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin:0 0 17px; }
+    .section-head h2 { font:500 27px/1 Georgia,"Times New Roman",serif; margin:4px 0 0; }
+    .jump { color:#ffd1a0; background:transparent; border:1px solid #866047; padding:8px 12px; border-radius:30px; font-size:12px; white-space:nowrap; }
+    .timeline { position:relative; }
+    .timeline:before { content:""; position:absolute; top:18px; bottom:18px; left:65px; width:1px; background:linear-gradient(#ad6338,#604232 38%,#604232 80%,transparent); }
+    .entry { position:relative; display:grid; grid-template-columns:55px minmax(0,1fr); column-gap:21px; padding-bottom:12px; scroll-margin-top:95px; }
+    .entry:before { content:""; position:absolute; top:22px; left:61px; width:9px; height:9px; border-radius:50%; background:#5e4031; border:2px solid var(--bg); z-index:1; }
+    .entry.current:before { background:var(--ember); box-shadow:0 0 0 4px #f0a25831,0 0 13px #f0a25888; }
+    .time { color:#d1ad8d; text-align:right; padding-top:12px; font-variant-numeric:tabular-nums; font-size:12px; font-weight:750; line-height:1.3; }
+    .time small { display:block; color:#876d5a; font-size:10px; font-weight:400; margin-top:3px; }
+    .task { min-width:0; padding:14px; background:linear-gradient(180deg,#2b201b,#241a16); border:1px solid #5b4032; border-radius:17px; box-shadow:inset 0 1px #f9c58b09; }
+    .entry.current .task { border-color:#e5a068; background:linear-gradient(160deg,#423026,#2b211c 85%); box-shadow:0 0 0 3px #e79a5933,0 10px 22px #00000024; }
+    .entry.past:not(.current) .task { opacity:.88; }
+    .task-head { display:flex; align-items:flex-start; gap:10px; }
+    .emoji { flex:none; width:34px; height:34px; display:grid; place-items:center; font-size:17px; background:#4b3527; border:1px solid #74513b; border-radius:11px; }
+    .task-text { flex:1; min-width:0; }
+    .task h3 { font-size:14px; line-height:1.3; margin:0; letter-spacing:-.005em; }
+    .task p { color:var(--muted); font-size:11px; line-height:1.45; margin:5px 0 0; }
+    .pill { display:inline-block; font-size:9px; font-weight:800; letter-spacing:.04em; padding:4px 7px; border:1px solid #886043; border-radius:30px; color:#ffd19b; margin-top:8px; }
+    .pill.offline { color:#ffd0a9; border-color:#a56c45; background:#6b422b55; }
+    .task-links { display:flex; gap:14px; margin-top:9px; flex-wrap:wrap; }
+    .task-links a { text-decoration:none; font-size:11px; font-weight:700; }
+    details { margin-top:9px; color:#e4cdb8; font-size:11px; }
+    summary { cursor:pointer; color:#e6b17c; width:max-content; }
+    details p { margin-top:7px !important; }
+    .actions { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-top:13px; }
+    .actions button { min-height:42px; padding:7px 4px; border:1px solid #664b3c; border-radius:11px; background:#392a24; color:var(--cream); font-size:11px; font-weight:750; }
+    .actions button[aria-pressed="true"] { border-width:2px; background:#4d3527; }
+    .actions .full[aria-pressed="true"] { color:#b5e8b7; border-color:var(--green); }
+    .actions .half[aria-pressed="true"] { color:#ffe0a2; border-color:var(--gold); }
+    .actions .none[aria-pressed="true"] { color:#ffb3a6; border-color:var(--rose); }
+    .reason { margin-top:9px; background:#472921; color:#f4c2b9; border:1px solid #804e42; border-radius:10px; padding:8px 10px; width:100%; text-align:left; font-size:11px; }
+    .transition { position:relative; margin:0 0 16px 76px; border:1px dashed #92603d; padding:10px 12px; background:#372519; color:#f1c495; border-radius:12px; font-size:11px; }
+    .transition strong { display:block; font-size:11px; margin-bottom:2px; }
+    .transition span { color:#d6b298; }
+    footer { text-align:center; font:italic 15px/1.6 Georgia,serif; color:#c4a489; padding:28px 0 0; }
+    dialog { width:min(440px,calc(100% - 24px)); color:var(--cream); background:#2b201b; border:1px solid #966a48; border-radius:20px; box-shadow:0 22px 80px #0009; padding:20px; }
+    dialog::backdrop { background:#090605ba; backdrop-filter:blur(3px); }
+    dialog h2 { font:500 24px Georgia,serif; margin:0 0 8px; }
+    dialog p { color:var(--muted); font-size:12px; }
+    dialog textarea { width:100%; min-height:105px; resize:vertical; background:#1b1411; color:var(--cream); border:1px solid #76513e; border-radius:12px; padding:10px; }
+    .dialog-actions { display:flex; justify-content:flex-end; gap:9px; margin-top:12px; }
+    .dialog-actions button { border:1px solid #785542; color:var(--cream); background:#3a2921; border-radius:10px; padding:10px 15px; }
+    .dialog-actions button:last-child { background:#af6335; border-color:#af6335; }
+    @media (min-width:600px) {
+      .wrap { width:min(100% - 48px,700px); }
+      main { padding-top:29px; }
+      .hearth { padding:26px 28px; }
+      .fire-art { width:128px; height:128px; right:20px; top:20px; }
+      .focus-title { margin-right:110px; }
+      .focus-note { margin-right:120px; }
+      .timeline:before { left:80px; }
+      .entry { grid-template-columns:70px minmax(0,1fr); }
+      .entry:before { left:76px; }
+      .transition { margin-left:91px; }
+      .task { padding:17px 18px; }
+    }
+    @media (max-width:350px) {
+      .wrap { width:calc(100% - 18px); }
+      .entry { grid-template-columns:47px minmax(0,1fr); column-gap:18px; }
+      .timeline:before { left:54px; }
+      .entry:before { left:50px; }
+      .transition { margin-left:65px; }
+      .task { padding:11px; }
+      .actions { gap:4px; }
+      .actions button { font-size:10px; }
+      .fire-art { opacity:.6; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
+  </style>
 </head>
-<body><main class="shell"><header class="top"><div class="brand"><span class="brandmark">✳</span> Mr. Manager</div><span class="topnote">Personal workspace / 01</span></header><nav class="grid" aria-label="Main navigation">
-<a class="tile" href="workout/index.html" style="--tint:#fce8dc;--tone:#b76d4b"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 8v8M3 10v4m15-6v8m3-6v4M6 12h12M3 12H1m22 0h-2"/></svg></span><span class="arrow">↗</span></div><span class="name">Workout</span></a>
-<a class="tile" href="marinestudies/index.html" style="--tint:#dcecf4;--tone:#447f9c"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15 9-2 5-4 1 2-5zM12 3v2m0 14v2M3 12h2m14 0h2"/></svg></span><span class="arrow">↗</span></div><span class="name">Marine Wizard</span></a>
-<a class="tile" href="robotic/index.html" style="--tint:#ece5fa;--tone:#8467b6"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4m-2 0h4M2 12v4m20-4v4M8 16h8"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/></svg></span><span class="arrow">↗</span></div><span class="name">Roboticana</span></a>
-<a class="tile" href="business/index.html" style="--tint:#f8edcf;--tone:#aa8336"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12c4 3 14 3 18 0m-11 2h4"/></svg></span><span class="arrow">↗</span></div><span class="name">Businessman</span></a>
-<a class="tile" style="--tint:#e8f0df;--tone:#66834c" href="../alm/index.html"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 20c-2-2-5-3-9-3V4c4 0 7 1 9 3 2-2 5-3 9-3v13c-4 0-7 1-9 3zM12 7v13M6 9h3m6 0h3"/></svg></span><span class="arrow">↗</span></div><span class="name">Active Learning<br>Module</span></a>
-<a class="tile" href="https://keep.google.com/u/1/#NOTE/1cJNBl9jg89nlwUPkf0_0qUcYzNXPHdE3mAOQKq2HjSXVqh12JXP5jBnOcTlVKEU" style="--tint:#e5f1e4;--tone:#578b5c"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM9 21v-7h6v7"/></svg></span><span class="arrow">↗</span></div><span class="name">House vs Me</span></a>
-<a class="tile" href="https://keep.google.com/u/1/#LIST/1NN2-k9LwJyGDaUj7YEJ_lFeUTpxP6Z4upZtY-_PfYbhyquoRbhXouVju9fqHpg" style="--tint:#f9e6ed;--tone:#a75f7a"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m7 9 2 2 3-3m2 1h3m-10 7 2 2 3-3m2 1h3"/></svg></span><span class="arrow">↗</span></div><span class="name">Adhoc Sloth</span></a>
-<a class="tile" href="../tracker/index.html" style="--tint:#e3e9fa;--tone:#647fbc"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20v-7m5 7V9m5 11V4m5 16v-9M2 20h20"/></svg></span><span class="arrow">↗</span></div><span class="name">Tracker</span></a>
-<a class="tile" href="../three-month-plan/index.html" style="--tint:#f8ebd9;--tone:#aa7845"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18M8 15h3m4 0h2m-9 3h3"/></svg></span><span class="arrow">↗</span></div><span class="name">90-Day</span></a>
-<a class="tile" href="../diet/index.html" style="--tint:#e4f1e9;--tone:#578e74"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><path d="M5 14a5 5 0 0 1-.8-9.2A5 5 0 0 1 12 3a5 5 0 0 1 7.8 1.8A5 5 0 0 1 19 14v6H5zM5 16h14M8 20h8"/></svg></span><span class="arrow">↗</span></div><span class="name">Cook</span></a>
-<a class="tile" href="../system/speech/index.html" style="--tint:#efe7fa;--tone:#8a69a6"><div class="tiletop"><span class="ico"><svg viewBox="0 0 24 24"><path d="m12 2 2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span><span class="arrow">↗</span></div><span class="name">Affirmation</span></a>
-</nav><footer class="foot"><span>Designed for focus.</span><strong>MR. MANAGER ✳</strong></footer></main></body></html>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand"><div class="brand-icon" aria-hidden="true">🔥</div><div><strong>Campfire</strong><small>Daily rhythm</small></div></div>
+      <button class="export" id="exportBtn" type="button">↓ Export day</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="greeting">
+      <div class="eyebrow" id="dayType">A little warmth for the day</div>
+      <h1 id="dateTitle">Your daily rhythm</h1>
+      <p>One task at a time. No unnecessary decisions.</p>
+    </section>
+
+    <section class="hearth" aria-label="Current focus">
+      <div class="stars" aria-hidden="true"></div>
+      <svg class="fire-art" viewBox="0 0 128 128" aria-hidden="true">
+        <ellipse cx="64" cy="106" rx="43" ry="10" fill="#eb783e" opacity=".2"/>
+        <path d="M64 14c12 23-7 30 7 43 7-11 9-16 9-27 24 26 27 49 16 66-13 20-53 25-69 2-16-24-1-49 17-67-1 15 1 24 7 28 4-17 6-24 13-45Z" fill="#ed7a38"/>
+        <path d="M65 47c7 13-2 18 7 27 2-8 4-11 6-15 15 21 10 40-6 45-18 6-30-8-23-24 2-6 6-9 9-14 0 8 2 12 4 14 0-13 1-20 3-33Z" fill="#ffcd79"/>
+        <path d="M29 108 99 88" stroke="#69402c" stroke-width="14" stroke-linecap="round"/>
+        <path d="M31 88 99 108" stroke="#905b35" stroke-width="14" stroke-linecap="round"/>
+        <path d="M29 88 99 108M29 108 99 88" stroke="#d59d65" stroke-width="2" opacity=".5"/>
+        <circle cx="36" cy="37" r="2" fill="#ffd6a2" opacity=".9"/><circle cx="93" cy="20" r="2" fill="#ffd6a2" opacity=".7"/>
+      </svg>
+      <div class="eyebrow" id="focusLabel">CURRENT FOCUS</div>
+      <h2 class="focus-title" id="focusTitle">Loading your day...</h2>
+      <p class="focus-note" id="focusNote"></p>
+      <div class="focus-meta"><span id="focusTime">—</span><span id="timeLeft">—</span></div>
+      <div class="track"><span id="focusProgress"></span></div>
+    </section>
+
+    <section class="stats" aria-label="Daily results">
+      <div class="stat done"><strong id="doneCount">0</strong><small>Done / half</small></div>
+      <div class="stat missed"><strong id="missedCount">0</strong><small>Not done</small></div>
+      <div class="stat left"><strong id="leftCount">0</strong><small>Remaining</small></div>
+    </section>
+
+    <section aria-label="Today's schedule">
+      <div class="section-head"><div><div class="eyebrow">THE WAY FORWARD</div><h2>Today's trail</h2></div><button class="jump" id="jumpBtn" type="button">Find now ↓</button></div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+    <footer>Keep the fire steady, not frantic. ✦</footer>
+  </main>
+
+  <dialog id="reasonDialog" aria-labelledby="reasonTitle">
+    <h2 id="reasonTitle">What got in the way?</h2>
+    <p>A short note is optional. This is information, not a judgment.</p>
+    <textarea id="reasonText" placeholder="A quick note for tomorrow..."></textarea>
+    <div class="dialog-actions"><button type="button" id="cancelReason">Skip</button><button type="button" id="saveReason">Save note</button></div>
+  </dialog>
+
+  <script>
+    'use strict';
+    // Keep relative links and existing localStorage data compatible with the original tracker.
+    const BREAKS='../wol/breaks.html';
+    const DIET='../diet/index.html';
+    const MARINE='../manager/marinestudies/index.html';
+    const BIZ='../manager/business/index.html';
+    const KEY='dayflow.tracker.v3';
+
+    const SCHEDULES={
+      A:[
+        {id:'W-00',start:360,end:380,icon:'🫖',title:'Make Tea',note:'Easy start to the morning.',details:'Use the last five minutes to prepare for your next block.',location:'Home'},
+        {id:'W-01',start:380,end:420,icon:'🍵',title:'Tea + Japji Sahib',note:'Tea, prayer, and calm.',details:'Use the downloaded version on your tablet. Avoid YouTube.',location:'Home',noPhone:true},
+        {id:'W-04',start:420,end:480,icon:'⚓',title:'Marine Engineering · Part 1',note:'Focused technical study.',details:'Use a preselected topic. Finish five minutes early to wrap up.',location:'Home',link:MARINE},
+        {id:'W-02',start:480,end:540,icon:'🧘',title:'Yoga + Breakfast',note:'Movement, food, and a fresh start.',location:'Home',link:'../yoga/index.html'},
+        {id:'W-13',start:540,end:600,icon:'🎓',title:'Active Learning Module',note:'One selected module. One uninterrupted hour.',location:'Home',link:'../alm/index.html'},
+        {id:'W-08',start:600,end:630,icon:'🚗',title:'Dress Up + Drive',note:'Get ready, drive, and complete the morning drop-off.',location:'Transit'},
+        {id:'W-21',start:630,end:660,icon:'🗂️',title:'Ad Hoc Slot',note:'Small tasks or a settling-in buffer.',location:'Outside',link:'https://tasks.google.com',external:true},
+        {id:'W-09',start:660,end:720,icon:'⚓',title:'Marine Engineering · Part 2',note:'Second focused study session.',location:'Outside',link:MARINE},
+        {id:'W-12',start:720,end:735,icon:'🌿',title:'Break',note:'Rest, stretch, and hydrate.',location:'Outside',link:BREAKS},
+        {id:'W-11',start:735,end:870,icon:'💼',title:'Business Development',note:'One protected 2h 15m work block.',details:'Work from a preselected priority. Reserve the final five to ten minutes to finish up.',location:'Outside',link:BIZ},
+        {id:'W-14',start:870,end:900,icon:'🚙',title:'Drive Home + Change',note:'Pack, drive home, and change.',location:'Transit'},
+        {id:'W-17',start:900,end:930,icon:'🍛',title:'Lunch',note:'A calm midday meal.',location:'Home',link:DIET},
+        {id:'W-18',start:930,end:990,icon:'🧹',title:'Chores + Cooking',note:'Your 60-minute experimental block.',location:'Home',link:DIET,offline:true},
+        {id:'W-15',start:990,end:1020,icon:'🏋️',title:'Exercise',note:'Thirty minutes of movement.',location:'Home',link:'../manager/workout/index.html',offline:true},
+        {id:'W-16',start:1020,end:1050,icon:'🚿',title:'Bath',note:'Clean up and transition into evening.',location:'Home',link:'../bath/index.html',offline:true},
+        {id:'W-27',start:1050,end:1110,icon:'🎮',title:'Game Time',note:'Completely offline gaming.',location:'Home',offline:true},
+        {id:'W-22',start:1110,end:1170,icon:'🌆',title:'Leave Home + Talk to Parents',note:'Travel, family call, and evening pickup.',location:'Outside'},
+        {id:'W-23',start:1170,end:1215,icon:'🍽️',title:'Dinner',note:'Eat and unwind.',location:'Home',link:DIET},
+        {id:'W-24',start:1215,end:1275,icon:'📖',title:'Read Book in Bed',note:'Quiet, offline reading.',location:'Home',link:'../bed/index.html',offline:true,noPhone:true},
+        {id:'W-25',start:1275,end:1440,icon:'🌙',title:'Sleep · Lights Off',note:'Lights off at 21:15. Internet returns at 23:30.',location:'Home',link:'../sleep/index.html',overnight:true}
+      ],
+      // Friday–Sunday: same activities, start times, end times, descriptions and links.
+      B:[
+        {id:'F-01',start:300,end:315,icon:'⏰',title:'Wake up',note:'Up and moving. Feet on the floor.',location:'Home',details:'No snooze. Water first, then get moving.'},
+        {id:'F-02',start:315,end:330,icon:'🚗',title:'Dress up + car start',note:'Get dressed and start the car.',location:'Home',details:'Clothes on, keys, wallet, then start the car so it warms up.'},
+        {id:'F-03',start:330,end:345,icon:'🍳',title:'Breakfast',note:'Fuel before the long shift.',location:'Home',details:'Eat a proper breakfast. No skipped fuel before a long work day.'},
+        {id:'F-04',start:345,end:360,icon:'🚪',title:'Leave home',note:'Out the door on time.',location:'Transit',details:'Lunch, snacks and water packed. Lock up and go.'},
+        {id:'F-05',start:360,end:1110,icon:'🏭',title:'Work',note:'Long shift. Eat packed lunch + snacks.',location:'Outside',details:'The bar stays deliberately low outside work. Survival mode is valid.'},
+        {id:'F-06',start:1110,end:1140,icon:'🚗',title:'Leave work',note:'Head home. No bonus mission.',location:'Transit',details:'Drive safe and get home.'},
+        {id:'F-07',start:1140,end:1155,icon:'🚿',title:'Bath',note:'Wash the day off.',location:'Home',details:'A clean reset after the shift.'},
+        {id:'F-08',start:1155,end:1215,icon:'🍲',title:'Cook dinner',note:'Keep it simple.',location:'Home',details:'Simple, repeatable meal. No productivity theatre.'},
+        {id:'F-09',start:1215,end:1260,icon:'💊',title:'Dinner + melatonin',note:'Eat, then take your melatonin.',location:'Home',details:'Eat first, then take melatonin to start winding down.'},
+        {id:'F-10',start:1260,end:1440,icon:'😴',title:'Lights off + sleep',note:'Lights off. Try to sleep.',location:'Home',details:'Phone away, lights off. Sleep is the keystone habit.',overnight:true}
+      ]
+    };
+    const $=id=>document.getElementById(id);
+    const pad=n=>String(n).padStart(2,'0');
+    const keyOf=(date=new Date())=>`${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+    const typeOf=date=>{const d=date.getDay();return d>=1&&d<=4?'A':'B'};
+    const time=m=>`${pad(Math.floor(m/60)%24)}:${pad(m%60)}`;
+    const duration=m=>m>=60?`${Math.floor(m/60)}h ${Math.floor(m%60)}m`:`${Math.ceil(m)}m`;
+    const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    let store;
+    try { store=JSON.parse(localStorage.getItem(KEY)||'null')||{version:3,days:{}}; }
+    catch { store={version:3,days:{}}; }
+    if(!store.days||typeof store.days!=='object')store.days={};
+    const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){alert('Local storage is unavailable. Results may not be saved.');}};
+    const getEntries=day=>store.days[day]?.entries||{};
+    const ensureEntries=day=>(store.days[day]??={entries:{},packing:{}}).entries;
+    let activeDay='',tasks=[],pendingReason=null;
+
+    function transition(start,type){
+      if(type!=='A')return '';
+      const events={930:['🌘 Internet paused','15:30–18:30 · Chores, exercise, bath and offline gaming'],1110:['✨ Internet restored','18:30 · Back online for the evening'],1215:['🌙 Internet paused again','20:15–23:30 · Reading and sleep come first']};
+      if(!events[start])return '';
+      const [title,description]=events[start];
+      return `<div class="transition"><strong>${title}</strong><span>${description}</span></div>`;
+    }
+    function taskMarkup(t,entries){
+      const r=entries[t.id]?.r;
+      const selected=n=>r===n?'true':'false';
+      return `<article class="entry" data-id="${safe(t.id)}" data-start="${t.start}" data-end="${t.end}">
+        <div class="time">${time(t.start)}<small>${time(t.end)}</small></div>
+        <div class="task">
+          <div class="task-head"><span class="emoji" aria-hidden="true">${safe(t.icon)}</span>
+          <div class="task-text"><h3>${safe(t.title)}</h3><p>${safe(t.note||'')}</p></div></div>
+          ${t.offline?'<span class="pill offline">📴 Offline</span>':''}
+          ${t.noPhone?'<span class="pill">No phone</span>':''}
+          <div class="task-links">${t.link?`<a href="${safe(t.link)}" ${t.external?'target="_blank" rel="noopener noreferrer"':''}>Open related page ↗</a>`:''}</div>
+          ${t.details?`<details><summary>Details</summary><p>${safe(t.details)}</p></details>`:''}
+          <div class="actions" aria-label="Result for ${safe(t.title)}">
+            <button type="button" class="full" data-result="full" aria-pressed="${selected('full')}">✓ Done</button>
+            <button type="button" class="half" data-result="half" aria-pressed="${selected('half')}">½ Partial</button>
+            <button type="button" class="none" data-result="none" aria-pressed="${selected('none')}">✕ Missed</button>
+          </div>
+          <button class="reason" type="button" ${r==='none'?'':'hidden'}>${safe(entries[t.id]?.remarks||'Add a note (optional)')}</button>
+        </div>
+      </article>`;
+    }
+    function build(date){
+      activeDay=keyOf(date);const type=typeOf(date);tasks=SCHEDULES[type];
+      $('dateTitle').textContent=date.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+      $('dayType').textContent=type==='A'?'MONDAY — THURSDAY':'FRIDAY — SUNDAY';
+      const entries=getEntries(activeDay);
+      $('timeline').innerHTML=tasks.map(t=>transition(t.start,type)+taskMarkup(t,entries)).join('');
+      refresh();
+    }
+    function refresh(){
+      const now=new Date(),day=keyOf(now);
+      if(day!==activeDay){build(now);return;}
+      const entries=getEntries(day);
+      let done=0,missed=0;
+      for(const t of tasks){if(entries[t.id]?.r==='full'||entries[t.id]?.r==='half')done++;else if(entries[t.id]?.r==='none')missed++;}
+      $('doneCount').textContent=done;
+      $('missedCount').textContent=missed;
+      $('leftCount').textContent=tasks.length-done-missed;
+      const minute=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+      const current=tasks.find(t=>minute>=t.start&&minute<t.end);
+      $('focusLabel').textContent=current?'✦ CURRENT FOCUS':'✦ THE QUIET BETWEEN TASKS';
+      $('focusTitle').textContent=current?current.title:minute<tasks[0].start?'Rest before the day begins':'The day is complete';
+      $('focusNote').textContent=current?current.note:'No task requires your attention right now.';
+      $('focusTime').textContent=current?`${time(current.start)} – ${time(current.end)}`:'—';
+      $('timeLeft').textContent=current?`${duration(current.end-minute)} left`:'At ease';
+      $('focusProgress').style.width=current?`${Math.max(0,Math.min(100,100*(minute-current.start)/(current.end-current.start)))}%`:'0%';
+      document.querySelectorAll('.entry').forEach(row=>{
+        const start=Number(row.dataset.start),end=Number(row.dataset.end);
+        row.classList.toggle('current',minute>=start&&minute<end);
+        row.classList.toggle('past',minute>=end);
+      });
+    }
+    function setResult(taskId,result){
+      const entries=ensureEntries(activeDay);
+      const previous=entries[taskId]?.r;
+      if(previous===result)delete entries[taskId];
+      else entries[taskId]={r:result,remarks:previous==='none'&&result==='none'?entries[taskId].remarks||'':'',at:new Date().toISOString()};
+      save();
+      const row=[...document.querySelectorAll('.entry')].find(el=>el.dataset.id===taskId);
+      if(row){
+        row.querySelectorAll('[data-result]').forEach(btn=>btn.setAttribute('aria-pressed',String(entries[taskId]?.r===btn.dataset.result)));
+        const reason=row.querySelector('.reason');
+        reason.hidden=entries[taskId]?.r!=='none';
+        reason.textContent=entries[taskId]?.remarks||'Add a note (optional)';
+      }
+      if(result==='none'&&previous!==result)openReason(taskId);
+      refresh();
+    }
+    function openReason(taskId){
+      pendingReason=taskId;
+      $('reasonTitle').textContent='What got in the way?';
+      $('reasonText').value=getEntries(activeDay)[taskId]?.remarks||'';
+      $('reasonDialog').showModal();
+    }
+    function closeReason(shouldSave){
+      if(shouldSave&&pendingReason){
+        const entry=getEntries(activeDay)[pendingReason];
+        if(entry?.r==='none'){entry.remarks=$('reasonText').value.trim();save();
+          const row=[...document.querySelectorAll('.entry')].find(el=>el.dataset.id===pendingReason);
+          if(row)row.querySelector('.reason').textContent=entry.remarks||'Add a note (optional)';
+        }
+      }
+      pendingReason=null;$('reasonDialog').close();
+    }
+    $('timeline').addEventListener('click',event=>{
+      const row=event.target.closest('.entry');if(!row)return;
+      const action=event.target.closest('[data-result]');
+      if(action){setResult(row.dataset.id,action.dataset.result);return;}
+      if(event.target.closest('.reason'))openReason(row.dataset.id);
+    });
+    $('cancelReason').addEventListener('click',()=>closeReason(false));
+    $('saveReason').addEventListener('click',()=>closeReason(true));
+    $('reasonDialog').addEventListener('close',()=>{pendingReason=null;});
+    $('jumpBtn').addEventListener('click',()=>{
+      (document.querySelector('.entry.current')||[...document.querySelectorAll('.entry')].find(el=>!el.classList.contains('past'))||document.querySelector('.entry:last-child'))?.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+    $('exportBtn').addEventListener('click',()=>{
+      const entries=getEntries(activeDay);
+      const results={full:0,half:0,none:0};
+      tasks.forEach(t=>{const r=entries[t.id]?.r;if(results[r]!==undefined)results[r]++;});
+      const total=tasks.length;
+      const output={app:'Tracker',schemaVersion:5,date:activeDay,dayType:typeOf(new Date(activeDay+'T12:00:00'))==='A'?'Mon–Thu schedule':'Fri–Sun schedule',exportedAt:new Date().toISOString(),summary:{...results,done:results.full+results.half,notDone:results.none,remaining:total-results.full-results.half-results.none,total,score:Math.round((results.full*100+results.half*50)/total)},schedule:tasks.map(t=>({id:t.id,title:t.title,tag:t.location==='Home'?'H':'O',start:time(t.start),end:t.overnight?'Next morning':time(t.end),...(t.link?{link:t.link}:{})})),entries:Object.fromEntries(tasks.map(t=>{const e=entries[t.id],status={full:'Done',half:'Partially Done',none:'Not Done'};return [t.id,{taskTitle:t.title,status:e?status[e.r]:'Unmarked',remarks:e?.remarks||'',...(e?.at?{recordedAt:e.at}:{}),...(e?.r==='full'?{completionPercent:100}:e?.r==='half'?{completionPercent:50}:{})}];}))};
+      const url=URL.createObjectURL(new Blob([JSON.stringify(output,null,2)],{type:'application/json'}));
+      const a=document.createElement('a');a.href=url;a.download=`tracker-${activeDay}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    });
+    build(new Date());
+    setInterval(refresh,15000);
+  </script>
+</body>
+</html>
