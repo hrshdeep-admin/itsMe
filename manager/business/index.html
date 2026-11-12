@@ -1,505 +1,3752 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
-  <title>Visual Flares — 30-Day Mission Control</title>
-  <style>
-    :root {
-      --bg:#090d16; --sidebar:#0c121e; --panel:#111a29; --panel-2:#151f31;
-      --panel-light:#182538; --stroke:#263447; --stroke-subtle:#202b3a;
-      --text:#e9f1f8; --muted:#92a5ba; --dim:#61748a;
-      --mint:#69f0c3; --mint-deep:#123c35; --blue:#78abff; --amber:#facb7c;
-      --red:#fa9aa8; --shadow:0 25px 65px rgba(0,0,0,.24);
-      --radius:18px;
-    }
-    * { box-sizing:border-box; }
-    html,body {margin:0;min-height:100%;}
-    body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;}
-    button,input,textarea{font:inherit;}button{cursor:pointer;}
-    button:focus-visible, input:focus-visible, textarea:focus-visible,a:focus-visible {outline:2px solid var(--mint);outline-offset:3px;}
-    .app {display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh;}
-    .sidebar {position:sticky;top:0;height:100vh;display:flex;flex-direction:column;background:linear-gradient(170deg,#0e1624 0%,#0b111c 84%);border-right:1px solid var(--stroke-subtle);z-index:5;}
-    .brand {padding:29px 22px 24px;border-bottom:1px solid var(--stroke-subtle);}
-    .brand-row{display:flex;align-items:center;gap:12px;}
-    .brandmark{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#74f0c3,#5d99ff);box-shadow:0 8px 25px rgba(105,240,195,.17);}
-    .brandmark svg{width:23px;height:23px;stroke:#0c1820;fill:none;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;}
-    .brandname{font-size:17px;font-weight:750;letter-spacing:-.5px;line-height:1.1;}
-    .brandsub{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:2.5px;margin-top:4px;}
-    .side-label {padding:21px 25px 10px;text-transform:uppercase;color:var(--dim);font-size:10px;font-weight:800;letter-spacing:1.9px;}
-    .side-scroll {overflow-y:auto;flex:1;padding:0 11px 8px;scrollbar-width:thin;scrollbar-color:#304052 transparent;}
-    .side-button {width:100%;display:flex;gap:10px;align-items:center;padding:11px 12px;border:1px solid transparent;border-radius:11px;color:var(--muted);background:transparent;text-align:left;transition:background .16s,color .16s,border .16s;}
-    .side-button:hover{background:#182538;color:var(--text);}
-    .side-button.active{border-color:#305647;background:linear-gradient(90deg,#1b403a,#172635);color:var(--text);}
-    .side-button svg{width:17px;height:17px;flex:none;}
-    .side-button .nav-title{flex:1;font-weight:650;font-size:13px;}
-    .side-button .nav-counter{color:var(--mint);font-size:11px;font-weight:750;font-variant-numeric:tabular-nums;}
-    .nav-week-label{font-size:10px;color:#64788f;font-weight:800;letter-spacing:1.7px;margin:20px 10px 8px;text-transform:uppercase;display:flex;justify-content:space-between;}
-    .day-link {height:37px;width:100%;display:flex;align-items:center;gap:10px;padding:0 12px;border:1px solid transparent;border-radius:9px;background:transparent;color:#9badc1;text-align:left;transition:all .15s;}
-    .day-link:hover {background:#162234;color:#f2f8ff;}
-    .day-link.active {background:#1c3240;color:#f3fff8;border-color:#2c5c53;}
-    .day-index {font-variant-numeric:tabular-nums;font-size:11px;width:22px;color:#8294aa;}
-    .day-link.active .day-index {color:var(--mint);}
-    .day-name {flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;font-weight:570;}
-    .day-dots{display:flex;gap:3px;}
-    .day-dots i {display:block;width:4px;height:4px;border-radius:50%;background:#36475c;}
-    .day-dots i.on{background:var(--mint);box-shadow:0 0 6px #69f0c36b;}
-    .side-bottom{border-top:1px solid var(--stroke-subtle);padding:17px 19px 21px;}
-    .storage-label{display:flex;gap:9px;align-items:center;font-size:11px;color:var(--muted);}
-    .storage-dot{width:8px;height:8px;background:var(--mint);border-radius:50%;box-shadow:0 0 10px rgba(105,240,195,.4);}
-    .storage-dot.bad{background:var(--red);box-shadow:none;}
-    .tiny-note{font-size:10px;color:var(--dim);margin:8px 0 0;line-height:1.55;}
-    main{min-width:0;max-width:1700px;width:100%;margin:0 auto;padding:0 38px 60px;}
-    .topbar{position:sticky;top:0;z-index:3;min-height:91px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(180deg,#090d16 78%,#090d1600);backdrop-filter:blur(12px);padding:15px 0 23px;}
-    .crumb {display:flex;align-items:center;gap:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1.6px;font-size:10px;font-weight:800;}
-    .crumb b{color:var(--mint);font-weight:800;}
-    .crumb .slash{color:#445466;}
-    .top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end;}
-    .btn{border-radius:10px;border:1px solid var(--stroke);background:#152032;color:var(--text);padding:10px 14px;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:750;white-space:nowrap;transition:transform .12s,background .15s,border-color .15s;}
-    .btn:hover{background:#213047;border-color:#3e5469;transform:translateY(-1px);}
-    .btn svg{width:15px;height:15px;}
-    .btn-primary {background:var(--mint);color:#10261e;border-color:var(--mint);box-shadow:0 6px 22px rgba(105,240,195,.15);}
-    .btn-primary:hover{background:#95ffdd;border-color:#95ffdd;}
-    .btn:disabled{opacity:.35;cursor:default;transform:none;}
-    .hero {position:relative;isolation:isolate;overflow:hidden;min-height:220px;padding:34px 38px;background:radial-gradient(ellipse 50% 120% at 100% 5%,#173d4b 0%,transparent 75%),linear-gradient(114deg,#19283c,#121b2b 62%,#101b2b);border:1px solid #294055;border-radius:22px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:24px;}
-    .hero::before {content:"";position:absolute;right:0;top:0;width:400px;height:100%;z-index:-1;opacity:.26;background-image:linear-gradient(90deg,transparent 97%,#4e7b87 98%),linear-gradient(0deg,transparent 97%,#4e7b87 98%);background-size:29px 29px;mask-image:linear-gradient(90deg,transparent,#000);}
-    .hero-eyebrow{font-size:10px;font-weight:800;color:var(--mint);letter-spacing:2.3px;text-transform:uppercase;margin-bottom:12px;}
-    h1,h2,h3,p{margin:0;}
-    h1{font-size:clamp(29px,3vw,43px);font-weight:770;line-height:1.12;letter-spacing:-1.6px;margin:0 0 11px;}
-    .hero-desc{font-size:13px;color:#acbed0;max-width:630px;line-height:1.7;}
-    .hero-tags{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:21px;}
-    .tag {padding:7px 11px;border-radius:7px;border:1px solid #3c5263;background:#172b3a;color:#ccdae5;font-size:11px;font-weight:650;}
-    .tag strong{color:var(--mint);}
-    .progress-wheel {width:126px;height:126px;position:relative;flex:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.18));}
-    .progress-wheel svg{width:100%;height:100%;transform:rotate(-90deg);}
-    .progress-wheel .rail{stroke:#334757;stroke-width:8;fill:none;}
-    .progress-wheel .fill{stroke:var(--mint);stroke-width:8;fill:none;stroke-linecap:round;transition:stroke-dashoffset .35s;}
-    .wheel-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-    .wheel-percent{font-size:27px;font-weight:780;line-height:1.1;letter-spacing:-1px;}
-    .wheel-label{font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-top:5px;font-weight:750;}
-    .metrics-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:18px 0 24px;}
-    .stat {background:linear-gradient(135deg,#141f2f,#101925);border:1px solid var(--stroke-subtle);border-radius:14px;padding:18px 19px;min-height:108px;}
-    .stat-label{color:var(--muted);font-size:11px;font-weight:600;display:flex;align-items:center;gap:7px;}
-    .stat-label svg{width:14px;height:14px;}
-    .stat-value{font-size:26px;font-weight:770;letter-spacing:-.9px;margin-top:8px;font-variant-numeric:tabular-nums;}
-    .stat-foot{font-size:10px;color:var(--dim);margin-top:3px;}
-    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin:29px 0 13px;}
-    .section-overline{font-size:10px;color:var(--mint);letter-spacing:1.8px;font-weight:800;text-transform:uppercase;margin-bottom:6px;}
-    .section-title{font-size:19px;font-weight:740;letter-spacing:-.5px;}
-    .section-sub{color:var(--muted);font-size:12px;margin-top:3px;}
-    .small-light{color:var(--muted);font-size:11px;white-space:nowrap;}
-    .work-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(340px,1fr);gap:17px;align-items:start;}
-    .work-panel{background:#111a28;border:1px solid var(--stroke);border-radius:17px;overflow:hidden;}
-    .panel-top{display:flex;align-items:center;justify-content:space-between;padding:20px 23px;border-bottom:1px solid var(--stroke-subtle);gap:14px;}
-    .panel-title{font-size:14px;font-weight:800;letter-spacing:-.1px;display:flex;align-items:center;gap:10px;}
-    .panel-title svg{color:var(--mint);width:17px;height:17px;}
-    .panel-pill{background:#1b2b3c;color:#aec2d5;border:1px solid #30435a;padding:5px 9px;border-radius:7px;font-size:10px;font-weight:750;white-space:nowrap;}
-    .task{padding:20px 22px;border-bottom:1px solid var(--stroke-subtle);transition:background .14s;}
-    .task:last-child{border-bottom:none;}
-    .task:hover{background:#142030;}
-    .task-row{display:flex;align-items:flex-start;gap:13px;}
-    .check {appearance:none;flex:none;width:21px;height:21px;margin:1px 0 0;border-radius:7px;background:#111c2c;border:1.5px solid #52677d;position:relative;cursor:pointer;transition:background .15s;}
-    .check:checked{background:var(--mint);border-color:var(--mint);}
-    .check:checked:after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border-right:2px solid #09231c;border-bottom:2px solid #09231c;transform:rotate(45deg);}
-    .task-body{min-width:0;flex:1;}
-    .task-line{font-size:13px;color:#e1eaf4;line-height:1.65;font-weight:560;}
-    .task.done .task-line{color:#8c9bad;text-decoration:line-through;text-decoration-color:#687b89;}
-    .task-meta{display:flex;align-items:center;gap:7px;margin-top:8px;font-size:10px;color:var(--dim);font-weight:750;letter-spacing:.5px;}
-    .task-meta .small-pill{color:#a1e8d2;background:#17362e;padding:3px 6px;border-radius:5px;}
-    .remarks-button{flex:none;padding:8px 10px;border:1px solid #34485b;border-radius:8px;background:#182637;color:#bacde0;font-size:11px;font-weight:750;display:flex;align-items:center;gap:7px;min-width:91px;justify-content:center;}
-    .remarks-button:hover,.remarks-button.open{background:#21374b;color:var(--mint);border-color:#407f70;}
-    .remarks-button svg{width:14px;height:14px;}
-    .remarks-indicator{width:5px;height:5px;border-radius:50%;background:var(--mint);display:none;}
-    .task.has-remark .remarks-indicator{display:block;}
-    .remark-shell{display:none;margin:15px 0 0 35px;}
-    .task.open .remark-shell{display:block;animation:reveal .16s ease-out;}
-    @keyframes reveal {from{opacity:.4;transform:translateY(-3px);}to{opacity:1;transform:translateY(0);}}
-    .remark-label{font-size:10px;font-weight:780;letter-spacing:1.3px;color:var(--mint);text-transform:uppercase;margin-bottom:8px;}
-    .remark-input,.notes-input {resize:vertical;min-height:108px;width:100%;background:#0c1522;color:#e8f3fb;border:1px solid #30445a;outline:0;border-radius:9px;padding:12px 13px;font-size:12px;line-height:1.65;transition:border-color .15s;}
-    .remark-input:focus,.notes-input:focus{border-color:#6fe5c5;box-shadow:0 0 0 3px #58d9b91c;}
-    textarea::placeholder{color:#60758d;}
-    .input-help{margin-top:6px;font-size:10px;color:var(--dim);display:flex;gap:6px;align-items:center;}
-    .input-help svg{width:12px;height:12px;color:var(--mint);}
-    .right-stack{display:grid;gap:17px;}
-    .learning-top {display:flex;align-items:center;gap:10px;}
-    .learning-icon {background:linear-gradient(135deg,#483e37,#342e2c);border:1px solid #655342;color:var(--amber);height:31px;width:31px;border-radius:9px;display:grid;place-items:center;}
-    .learning-icon svg{width:16px;height:16px;}
-    .learning-card .panel-top{padding:19px;}
-    .learning-card .task{padding:21px 19px;}
-    .learning-card .task-row{flex-wrap:wrap;}
-    .learning-card .remarks-button{margin-left:auto;}
-    .learning-card .remark-shell{margin-left:0;}
-    .learning-tip {margin:0 19px 20px;padding:13px 14px;border:1px solid #514932;background:#28261f;border-radius:10px;color:#cab99f;font-size:11px;line-height:1.65;}
-    .learning-tip strong{color:#f4ce94;}
-    .notes-area{padding:18px 19px 20px;}
-    .notes-input{min-height:130px;}
-    .learning-links{display:flex;flex-wrap:wrap;gap:8px;padding:0 19px 19px;}
-    .resource{display:inline-flex;gap:7px;align-items:center;border:1px solid #32475c;background:#142235;border-radius:8px;text-decoration:none;color:#a9bfd2;padding:8px 10px;font-size:10px;font-weight:750;}
-    .resource:hover{border-color:#59a4a0;color:var(--mint);}
-    .resource svg{width:12px;height:12px;}
-    .next-card{background:linear-gradient(115deg,#192c36,#182335);border:1px solid #2b4d52;border-radius:15px;padding:18px 21px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-    .next-card-title{font-size:12px;color:var(--mint);font-weight:780;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px;}
-    .next-card p{font-size:13px;color:#d5e2ec;}
-    .footer{display:flex;align-items:center;justify-content:space-between;color:var(--dim);font-size:10px;margin-top:35px;padding-top:20px;border-top:1px solid #243142;gap:16px;}
-    .dashboard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
-    .metric-box{border:1px solid var(--stroke);background:var(--panel);border-radius:13px;padding:18px;}
-    .metric-box label{display:block;color:var(--muted);font-size:11px;min-height:33px;font-weight:600;}
-    .metric-box input{width:100%;background:#0b1522;border:1px solid #35475d;border-radius:8px;color:var(--text);font-size:23px;font-weight:760;padding:8px 10px;margin-top:10px;font-variant-numeric:tabular-nums;}
-    .metric-target{color:var(--dim);font-size:10px;margin-top:7px;}
-    .full-panel{background:var(--panel);border:1px solid var(--stroke);border-radius:17px;padding:23px;margin-top:17px;}
-    .full-panel h3{font-size:14px;margin-bottom:13px;}
-    .timeline{display:grid;grid-template-columns:repeat(30,1fr);gap:5px;align-items:end;height:80px;}
-    .timeline button{border:0;padding:0;border-radius:4px 4px 2px 2px;background:#2a3a4d;min-width:3px;height:20px;transition:height .16s,background .16s;}
-    .timeline button:hover{background:var(--blue);}
-    .timeline button.part{background:#39746d;}
-    .timeline button.complete{background:var(--mint);}
-    .timeline-labels{display:flex;justify-content:space-between;color:var(--dim);font-size:10px;margin-top:8px;}
-    .score-hint{font-size:12px;color:var(--muted);margin-top:13px;line-height:1.7;}
-    .empty{padding:38px;text-align:center;color:var(--muted);}
-    .toast{position:fixed;right:30px;bottom:25px;background:#d6ffed;color:#10291f;border:1px solid #9de0c3;padding:12px 16px;border-radius:11px;font-weight:750;font-size:12px;box-shadow:0 20px 65px #0008;opacity:0;transform:translateY(12px);pointer-events:none;transition:all .2s;z-index:20;}
-    .toast.visible{opacity:1;transform:translateY(0);}
-    .toast.error{background:#3e2229;color:#ffbac3;border-color:#874957;}
-    .dialog-wrap{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:12;padding:20px;}
-    .dialog-wrap.show{display:flex;}
-    .dialog{max-width:490px;width:100%;background:#152335;border:1px solid #3f5668;padding:29px;border-radius:19px;box-shadow:0 50px 100px #000a;}
-    .dialog h2{font-size:21px;letter-spacing:-.5px;margin-bottom:10px;}
-    .dialog p{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:22px;}
-    .dialog-actions{display:flex;gap:10px;justify-content:flex-end;}
-    .hidden{display:none!important;}
-    @media(max-width:1200px){.app{grid-template-columns:244px 1fr;}main{padding:0 24px 45px;}.work-grid{grid-template-columns:minmax(0,1fr) minmax(295px,.88fr);gap:12px;}.dashboard-grid{grid-template-columns:repeat(2,1fr);}.metrics-strip{gap:9px}.stat{padding:14px}.stat-value{font-size:23px;}}
-    @media(max-width:900px){.app{grid-template-columns:1fr;}.sidebar{position:relative;height:auto;}.side-scroll,.side-bottom,.side-label{display:none;}.brand{padding:12px 20px;}.work-grid{grid-template-columns:1fr;}.topbar{position:relative;}.hero{padding:24px;}.metrics-strip{grid-template-columns:repeat(2,1fr);}main{padding:0 16px 35px;}.footer{flex-wrap:wrap;}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0f18">
+<title>Founder Academy — 7-Week Business Mastery</title>
+
+<style>
+:root {
+  --bg:#090e17;
+  --side:#0d1420;
+  --panel:#121d2c;
+  --panel2:#172436;
+  --panel3:#1b2b3e;
+  --border:#2a3a4d;
+  --text:#edf3f9;
+  --muted:#94a8bd;
+  --dim:#64788e;
+  --mint:#72edc2;
+  --blue:#8ab8ff;
+  --amber:#ffd08a;
+  --purple:#c5a5fa;
+  --red:#ff9ca7;
+  --radius:15px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,
+  "Segoe UI",Roboto,Arial,sans-serif;
+  font-size:14px;
+  line-height:1.65;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.35;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--mint);
+  outline-offset:3px;
+}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(29px,3.5vw,43px);line-height:1.15;letter-spacing:-1.3px}
+h2{font-size:23px;letter-spacing:-.5px}
+h3{font-size:16px}
+p{color:var(--muted)}
+small{color:var(--dim)}
+a{color:var(--mint)}
+strong{color:var(--text)}
+
+.app{
+  display:grid;
+  grid-template-columns:285px minmax(0,1fr);
+  min-height:100vh;
+}
+
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  background:var(--side);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+}
+
+.brand{
+  padding:27px 22px;
+  border-bottom:1px solid var(--border);
+}
+.brand-title{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-.7px;
+}
+.brand-title span{color:var(--mint)}
+.brand-sub{
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-top:3px;
+}
+
+.nav-scroll{
+  padding:16px 11px;
+  overflow-y:auto;
+  flex:1;
+}
+.nav-label{
+  font-size:10px;
+  color:var(--dim);
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+  font-weight:800;
+  margin:16px 12px 10px;
+}
+.nav-btn{
+  width:100%;
+  background:transparent;
+  color:var(--muted);
+  border:1px solid transparent;
+  padding:11px 12px;
+  text-align:left;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  font-weight:650;
+}
+.nav-btn:hover{background:var(--panel2);color:var(--text)}
+.nav-btn.active{
+  color:var(--text);
+  background:#193a36;
+  border-color:#35695b;
+}
+.nav-count{
+  color:var(--mint);
+  font-size:11px;
+  font-variant-numeric:tabular-nums;
+}
+.week-nav{
+  margin:13px 0;
+  border-top:1px solid #202d3d;
+  padding-top:12px;
+}
+.week-heading{
+  padding:8px 12px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.3px;
+  display:flex;
+  justify-content:space-between;
+}
+.day-nav{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:9px;
+  padding:9px 11px;
+  color:#a8b8c9;
+  text-align:left;
+  font-size:12px;
+}
+.day-nav:hover{background:#192637;color:white}
+.day-nav.active{
+  background:#1b3938;
+  color:white;
+  border-color:#32635a;
+}
+.day-number{
+  color:var(--dim);
+  min-width:22px;
+  font-size:11px;
+}
+.day-name{
+  flex:1;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#34475b;
+  flex:none;
+}
+.dot.done{background:var(--mint)}
+.dot.partial{background:var(--amber)}
+
+.side-bottom{
+  border-top:1px solid var(--border);
+  padding:19px 22px;
+  font-size:11px;
+  color:var(--muted);
+}
+.storage-indicator{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--mint);
+  margin-bottom:8px;
+}
+.storage-indicator::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+main{
+  width:100%;
+  min-width:0;
+  max-width:1650px;
+  margin:auto;
+  padding:0 34px 55px;
+}
+
+.topbar{
+  min-height:82px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  position:sticky;
+  top:0;
+  background:rgba(9,14,23,.95);
+  backdrop-filter:blur(15px);
+  z-index:5;
+  border-bottom:1px solid #1e2b3b;
+  margin-bottom:25px;
+}
+.crumb{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:1px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+.crumb span{color:var(--mint)}
+.actions{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.btn{
+  padding:10px 14px;
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+  border-radius:10px;
+  font-size:12px;
+  font-weight:750;
+  transition:.15s;
+}
+.btn:hover:not(:disabled){
+  background:#26394e;
+  border-color:#527089;
+}
+.btn.primary{
+  color:#0a261d;
+  background:var(--mint);
+  border-color:var(--mint);
+}
+.btn.primary:hover:not(:disabled){background:#a2ffe0}
+.btn.danger{color:var(--red)}
+.btn.small{padding:7px 10px;font-size:11px}
+.btn.full{width:100%}
+
+.view{display:none}
+.view.active{display:block}
+
+.hero{
+  padding:34px 38px;
+  border-radius:22px;
+  border:1px solid #30495a;
+  background:
+    radial-gradient(ellipse at 100% 0%,#20514b 0%,transparent 48%),
+    linear-gradient(120deg,#192a3d,#111b2a);
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+}
+.eyebrow{
+  font-size:11px;
+  color:var(--mint);
+  letter-spacing:2px;
+  font-weight:850;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.hero h1{max-width:860px;margin-bottom:11px}
+.hero p{max-width:780px;color:#bfd0df;margin-bottom:0}
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:22px;
+}
+.tag{
+  display:inline-flex;
+  gap:5px;
+  padding:6px 11px;
+  font-size:11px;
+  color:#d7e5ef;
+  background:#1b3040;
+  border:1px solid #3b5666;
+  border-radius:7px;
+  font-weight:650;
+}
+.tag b{color:var(--mint)}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+  margin-bottom:25px;
+}
+.metric{
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--panel);
+  padding:19px;
+}
+.metric-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:650;
+}
+.metric-value{
+  font-weight:800;
+  font-size:30px;
+  letter-spacing:-1px;
+  margin:6px 0 2px;
+}
+.metric-detail{color:var(--dim);font-size:10px}
+
+.section-heading{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:15px;
+  margin:29px 0 13px;
+}
+.section-heading h2{margin:0}
+.section-heading p{margin:5px 0 0;font-size:12px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.panel-pad{padding:23px}
+.panel-header{
+  padding:18px 22px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.panel-header h3{margin:0}
+.panel-content{padding:20px 22px}
+.panel-content p:last-child{margin-bottom:0}
+
+.week-card{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.week-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.week-index{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:1.5px;
+  color:var(--mint);
+}
+.week-card h3{font-size:19px;margin:0}
+.week-card p{font-size:12px;min-height:40px}
+.progress-rail{
+  height:7px;
+  background:#28394b;
+  overflow:hidden;
+  border-radius:50px;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,#408bba,var(--mint));
+  border-radius:50px;
+  transition:width .2s;
+}
+.progress-caption{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:7px;
+}
+.card-bottom{
+  margin-top:auto;
+  padding-top:10px;
+}
+
+.lesson-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr);
+  align-items:start;
+  gap:16px;
+}
+.stack{display:grid;gap:16px}
+.lesson-goal{
+  border-left:3px solid var(--mint);
+  padding:4px 15px;
+  color:#cbd8e5;
+}
+.concepts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:16px;
+}
+.concept{
+  border:1px solid #415268;
+  background:#1d2c3d;
+  border-radius:7px;
+  color:#cee0ec;
+  padding:5px 9px;
+  font-size:11px;
+}
+
+.activity{
+  padding:22px;
+  border-bottom:1px solid var(--border);
+}
+.activity:last-child{border-bottom:none}
+.activity.completed{background:#12261f}
+.activity-top{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.checkbox{
+  width:20px;
+  height:20px;
+  margin:2px 0 0;
+  accent-color:var(--mint);
+  cursor:pointer;
+  flex:none;
+}
+.activity-main{flex:1;min-width:0}
+.activity-title{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.activity-title strong{font-size:14px}
+.time-label{
+  font-size:10px;
+  font-weight:850;
+  border-radius:6px;
+  padding:4px 7px;
+  background:#26364b;
+  color:var(--blue);
+}
+.activity[data-type="investigate"] .time-label{color:var(--mint)}
+.activity[data-type="apply"] .time-label{color:var(--amber)}
+.activity[data-type="review"] .time-label{color:var(--purple)}
+.activity p{
+  font-size:13px;
+  color:#b6c7d8;
+  margin-bottom:0;
+  white-space:pre-line;
+}
+.activity.completed p{color:#839e96}
+.activity.completed strong{color:#a7e4cc}
+
+.field-label{
+  color:#d8e5ef;
+  font-size:12px;
+  font-weight:800;
+  display:block;
+  margin-bottom:8px;
+}
+.textarea{
+  display:block;
+  resize:vertical;
+  width:100%;
+  min-height:145px;
+  background:#0c1623;
+  color:var(--text);
+  border:1px solid #34495f;
+  border-radius:10px;
+  padding:13px;
+  font-size:12px;
+  line-height:1.7;
+  outline:none;
+}
+.textarea:focus{
+  border-color:var(--mint);
+  box-shadow:0 0 0 3px #72edc214;
+}
+.textarea.large{min-height:210px}
+.textarea.short{min-height:95px}
+.field-help{
+  margin-top:7px;
+  color:var(--dim);
+  font-size:10px;
+}
+.field-group{margin-bottom:18px}
+.field-group:last-child{margin-bottom:0}
+
+.info-box{
+  padding:17px;
+  border:1px solid #3a5660;
+  background:#17303a;
+  border-radius:11px;
+}
+.info-box h3{color:var(--mint);margin-bottom:9px}
+.info-box p{font-size:12px;color:#bfcfd9;margin:0}
+.info-box.amber{
+  background:#29251e;
+  border-color:#65543d;
+}
+.info-box.amber h3{color:var(--amber)}
+.info-box.amber p{color:#e0cfb5}
+
+.week-checkpoint{
+  border:1px solid #4b5d78;
+  background:#18253a;
+  border-radius:13px;
+  padding:20px;
+}
+.week-checkpoint h3{color:var(--blue)}
+.week-checkpoint p{font-size:13px}
+
+.lesson-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:17px;
+}
+.lesson-bottom div{display:flex;gap:8px}
+
+.workbook-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  border-bottom:1px solid var(--border);
+  padding:18px 0;
+}
+.workbook-row:last-child{border-bottom:0}
+.workbook-title{font-weight:750;margin-bottom:3px}
+.workbook-sub{font-size:12px;color:var(--muted)}
+.workbook-status{font-size:11px;white-space:nowrap;color:var(--amber)}
+.workbook-status.done{color:var(--mint)}
+
+.method-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.method{
+  background:#152233;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:17px;
+}
+.method b{display:block;color:var(--mint);margin-bottom:5px}
+.method p{font-size:11px;margin:0}
+
+.toast{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  padding:13px 18px;
+  border-radius:10px;
+  color:#0c281f;
+  background:#b4f9de;
+  font-weight:750;
+  box-shadow:0 15px 45px #0007;
+  z-index:20;
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:.2s;
+  max-width:330px;
+}
+.toast.visible{opacity:1;transform:translateY(0)}
+.toast.error{background:#f7c2c7;color:#521c25}
+
+.footer{
+  color:var(--dim);
+  font-size:11px;
+  border-top:1px solid var(--border);
+  margin-top:40px;
+  padding-top:20px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.hidden{display:none!important}
+
+@media(max-width:1150px){
+  .app{grid-template-columns:240px minmax(0,1fr)}
+  main{padding:0 20px 35px}
+  .lesson-layout{grid-template-columns:1fr}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto}
+  .brand{padding:16px 20px}
+  .nav-scroll{max-height:280px;overflow:auto}
+  .side-bottom{display:none}
+  .topbar{position:relative;flex-wrap:wrap;padding:14px 0}
+  .hero{padding:25px}
+  .grid{grid-template-columns:1fr}
+  .method-grid{grid-template-columns:repeat(2,1fr)}
+  .metrics{gap:9px}
+  .metric{padding:14px}
+  .metric-value{font-size:24px}
+}
+@media(max-width:440px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .method-grid{grid-template-columns:1fr}
+  .actions{width:100%}
+  .actions .btn{flex:1}
+  .panel-pad,.panel-content{padding:17px}
+  .activity{padding:17px}
+  .lesson-bottom{flex-direction:column}
+  .lesson-bottom div{width:100%}
+  .lesson-bottom .btn{flex:1}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}
+@media print{
+  .sidebar,.topbar,.actions,.btn,.toast{display:none!important}
+  .app{display:block}
+  main{padding:0}
+  .view:not(.active){display:none}
+  .panel,.hero{break-inside:avoid}
+}
+</style>
 </head>
+
 <body>
-  <div class="app">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-row">
-          <div class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m13 2-3 9h8L8 22l3-9H5z"/></svg></div>
-          <div><div class="brandname">visual<span style="color:var(--mint)">flares.</span></div><div class="brandsub">Mission control</div></div>
-        </div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-title">founder<span>academy.</span></div>
+      <div class="brand-sub">Business Mastery • Phase 01</div>
+    </div>
+
+    <div class="nav-scroll">
+      <div class="nav-label">Workspace</div>
+
+      <button class="nav-btn" data-view="overview">
+        <span>◈ &nbsp; Mission Control</span>
+        <span class="nav-count" id="sidePercent">0%</span>
+      </button>
+
+      <button class="nav-btn" data-view="workbook">
+        <span>▤ &nbsp; Founder Workbook</span>
+      </button>
+
+      <div class="nav-label">The Curriculum</div>
+      <nav id="courseNavigation" aria-label="Course lessons"></nav>
+    </div>
+
+    <div class="side-bottom">
+      <div class="storage-indicator" id="storageStatus">
+        Local progress enabled
       </div>
-      <div class="side-label">Workspace</div>
-      <div style="padding:0 11px 3px">
-        <button class="side-button" id="overviewNav" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          <span class="nav-title">30-day scoreboard</span><span class="nav-counter" id="navPercent">0%</span>
+      Notes and checkmarks are stored in this browser.
+      Export JSON backups regularly.
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div class="crumb" id="breadcrumb">
+        FOUNDER ACADEMY <span>/</span> OVERVIEW
+      </div>
+
+      <div class="actions">
+        <button class="btn" data-export>
+          Export JSON
+        </button>
+        <button class="btn" id="importButton">
+          Import Backup
+        </button>
+        <input
+          type="file"
+          id="importFile"
+          accept=".json,application/json"
+          class="hidden"
+        >
+        <button class="btn primary" id="continueButton">
+          Continue Learning →
         </button>
       </div>
-      <div class="side-label" style="padding-top:10px">The sprint</div>
-      <nav class="side-scroll" id="dayNavigation" aria-label="Select a day"></nav>
-      <div class="side-bottom">
-        <div class="storage-label"><i id="storageDot" class="storage-dot"></i><span id="storageMessage">Saved on this device</span></div>
-        <p class="tiny-note">Saved automatically in this browser. Export JSON backups regularly; private browsing or cleared site data can erase local storage.</p>
-      </div>
-    </aside>
+    </header>
 
-    <main>
-      <header class="topbar">
-        <div class="crumb" id="breadcrumb">MISSION CONTROL <span class="slash">/</span> <b>DAY 01</b></div>
-        <div class="top-actions">
-          <button class="btn" id="importButton" type="button" title="Restore a previous JSON backup">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 16V3m0 0L7 8m5-5 5 5M4 16v4h16v-4"/></svg> Import backup
-          </button>
-          <button class="btn btn-primary" id="downloadButton" type="button" title="Download your remarks, progress and scoreboard as JSON">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 17v3h16v-3"/></svg> Download remarks <span style="opacity:.55">↗</span>
-          </button>
-        </div>
-        <input id="importFile" class="hidden" type="file" accept=".json,application/json" />
-      </header>
+    <section class="view active" id="overviewView"></section>
+    <section class="view" id="lessonView"></section>
+    <section class="view" id="workbookView"></section>
 
-      <div id="dayView">
-        <section class="hero">
-          <div>
-            <div class="hero-eyebrow" id="heroEyebrow">WEEK 01 • THURSDAY, OCTOBER 8</div>
-            <h1 id="heroTitle">Day 01 — Business Foundation</h1>
-            <p class="hero-desc" id="heroDescription">Build the system before chasing more clients. A deliberate 2 hours of execution plus a separate hour of marketing education.</p>
-            <div class="hero-tags"><span class="tag"><strong>02h</strong> Business execution</span><span class="tag"><strong>01h</strong> Marketing education</span><span class="tag">30-day sprint</span></div>
-          </div>
-          <div class="progress-wheel" aria-label="Day task completion">
-            <svg viewBox="0 0 128 128" aria-hidden="true"><circle class="rail" cx="64" cy="64" r="52"/><circle id="dayCircle" class="fill" cx="64" cy="64" r="52" stroke-dasharray="326.726" stroke-dashoffset="326.726"/></svg>
-            <div class="wheel-text"><span class="wheel-percent" id="dayPercent">0%</span><span class="wheel-label">Complete</span></div>
-          </div>
-        </section>
-        <div class="metrics-strip">
-          <div class="stat"><div class="stat-label">Current active clients</div><div class="stat-value" id="clientStat">3</div><div class="stat-foot">Baseline: 3 paying clients</div></div>
-          <div class="stat"><div class="stat-label">Monthly recurring</div><div class="stat-value" id="revenueStat">$45</div><div class="stat-foot">Before expenses · CAD</div></div>
-          <div class="stat"><div class="stat-label">Sprint completion</div><div class="stat-value" id="sprintStat">0/120</div><div class="stat-foot">Individual tasks completed</div></div>
-          <div class="stat"><div class="stat-label">Paid ad test cap</div><div class="stat-value">$25</div><div class="stat-foot">CAD · Days 24–28</div></div>
-        </div>
+    <footer class="footer">
+      <span>FOUNDER ACADEMY · 7 WEEKS · 28 SESSIONS · 56 HOURS</span>
+      <span>Evidence over assumptions. Cash flow over vanity. Judgment over hype.</span>
+    </footer>
+  </main>
+</div>
 
-        <div class="section-head">
-          <div><div class="section-overline">Today's playbook</div><h2 class="section-title">Four tasks. Three hours. Full focus.</h2><p class="section-sub">Check off each task and attach your remarks for Coach's review.</p></div>
-          <div class="small-light" id="dayTaskCount">0 / 4 tasks completed</div>
-        </div>
-        <div class="work-grid">
-          <section class="work-panel">
-            <div class="panel-top"><div class="panel-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 20h16M7 20V5h10v15M10 9h4m-4 4h4"/></svg> Business execution</div><span class="panel-pill">120 MINUTES</span></div>
-            <div id="businessTasks"></div>
-          </section>
-          <div class="right-stack">
-            <section class="work-panel learning-card">
-              <div class="panel-top"><div class="learning-top"><div class="learning-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m3 9 9-5 9 5-9 5-9-5Zm3 2v6l6 3 6-3v-6M21 9v7"/></svg></div><span class="panel-title">Marketing academy</span></div><span class="panel-pill">60 MINUTES</span></div>
-              <div id="learningTask"></div>
-              <div class="learning-tip"><strong>Learning method:</strong> Spend ~35 minutes studying the concept, then ~25 minutes applying it to Visual Flares. Record what you learned in Remarks.</div>
-              <div class="learning-links"><a class="resource" href="https://www.facebook.com/business/learn" target="_blank" rel="noopener noreferrer">Meta learning <span>↗</span></a><a class="resource" href="https://skillshop.withgoogle.com/googleads/" target="_blank" rel="noopener noreferrer">Google Skillshop <span>↗</span></a><a class="resource" href="https://www.facebook.com/ads/library/" target="_blank" rel="noopener noreferrer">Meta Ad Library <span>↗</span></a></div>
-            </section>
-            <section class="work-panel">
-              <div class="panel-top"><div class="panel-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M8 4h11v16H5V7zM8 4v3H5m4 4h6m-6 4h6"/></svg> Daily field notes</div><span class="panel-pill">AUTO-SAVED</span></div>
-              <div class="notes-area"><textarea id="dailyNotes" class="notes-input" placeholder="What worked? Who responded? What should Coach know? Write freely..."></textarea><div class="input-help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg> Saved locally as you type • included in JSON export</div></div>
-            </section>
-          </div>
-        </div>
-        <div class="next-card"><div><div class="next-card-title">Continue the mission</div><p id="nextCaption">Tomorrow: pricing and positioning.</p></div><button id="nextDayButton" type="button" class="btn">Next day <span aria-hidden="true">→</span></button></div>
-      </div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-      <div id="scoreboardView" class="hidden">
-        <section class="hero">
-          <div><div class="hero-eyebrow">EXECUTION INTELLIGENCE • 30 DAYS</div><h1>Business scoreboard.</h1><p class="hero-desc">Track the numbers that matter: real conversations, actual clients, advertising spend and recurring revenue. Download everything for Coach's analysis.</p><div class="hero-tags"><span class="tag"><strong>60h</strong> Business plan</span><span class="tag"><strong>30h</strong> Marketing education</span><span class="tag"><strong>3</strong> Existing clients</span></div></div>
-          <div class="progress-wheel"><svg viewBox="0 0 128 128" aria-hidden="true"><circle class="rail" cx="64" cy="64" r="52"/><circle id="allCircle" class="fill" cx="64" cy="64" r="52" stroke-dasharray="326.726" stroke-dashoffset="326.726"/></svg><div class="wheel-text"><span class="wheel-percent" id="allPercent">0%</span><span class="wheel-label">Complete</span></div></div>
-        </section>
-        <div class="section-head"><div><div class="section-overline">Measurable outcomes</div><h2 class="section-title">30-day results</h2><p class="section-sub">Type your cumulative numbers. Every field saves automatically.</p></div></div>
-        <div class="dashboard-grid" id="scoreboardInputs"></div>
-        <div class="full-panel"><h3>Daily task completion</h3><div id="timeline" class="timeline"></div><div class="timeline-labels"><span>DAY 01</span><span>DAY 15</span><span>DAY 30</span></div><div class="score-hint">Each bar represents one day. Click a bar to open that day's checklist. Your remarks and checkmarks are retained between visits in the same browser profile.</div></div>
-        <div class="full-panel"><h3>End-of-sprint questions for Coach</h3><p class="score-hint" style="margin-top:0">Which trade bought most often? Which channel brought the most qualified customers? How much time did each customer cost to acquire? How many customers remained subscribed? Export the JSON on Day 30 and upload it to our conversation for analysis.</p></div>
-      </div>
+<script>
+"use strict";
 
-      <footer class="footer"><span>VISUAL FLARES · GHOST × COACH · BUILT FOR REAL EXECUTION</span><span id="lastSaved">Local storage • Ready</span></footer>
-    </main>
-  </div>
+/* =========================================================
+   FOUNDER ACADEMY
+   Phase 01: First 7 Weeks
 
-  <div id="importDialog" class="dialog-wrap" role="dialog" aria-modal="true" aria-labelledby="importTitle">
-    <div class="dialog"><h2 id="importTitle">Restore a backup?</h2><p>This replaces the saved checkmarks, remarks, field notes, and scoreboard currently stored in this browser with the contents of your selected JSON backup.</p><div class="dialog-actions"><button type="button" id="cancelImport" class="btn">Cancel</button><button type="button" id="confirmImport" class="btn btn-primary">Restore backup</button></div></div>
-  </div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+   7 weeks
+   4 sessions per week
+   2 hours per session
+   56 total planned learning hours
 
-  <script>
-  'use strict';
-  // All data is contained in this file. No external scripts, APIs, cookies or trackers.
-  const PLAN = [
-    {title:'Business foundation',focus:'Understand what already works before growing.',business:[[30,'Create a Google Sheets lead tracker.'],[30,'Review your three existing client websites.'],[60,'Speak to those three clients: ask how they found you, what convinced them, and what they value.']],learn:'Meta: Customer journey — awareness, interest, purchase. Draw Visual Flares\' customer journey.'},
-    {title:'Define the offer',focus:'Sell one specific, understandable product.',business:[[30,'Write the $25/month contractor website offer.'],[45,'Define the five included pages, two monthly content edits, and all service exclusions.'],[45,'Rewrite your homepage headline and primary contact action.']],learn:'Meta: Identify your ideal customer. Write a Punjabi-speaking contractor buyer profile.'},
-    {title:'Make pricing transparent',focus:'Clear details convert better than vague promises.',business:[[40,'Update the pricing page on visualflares.ca.'],[40,'Add six FAQs, including ownership and cancellation.'],[40,'Test the website and contact buttons on your Android phone.']],learn:'Meta: Facebook Page basics — description, location, and action buttons.'},
-    {title:'Create social proof',focus:'Show genuine work, with permission.',business:[[30,'Ask existing clients for permission to showcase their websites.'],[60,'Prepare up to three portfolio examples using approved client work.'],[30,'Update the Visual Flares Instagram bio and pinned introduction.']],learn:'Meta: Instagram business accounts and how to connect one to a Facebook Page.'},
-    {title:'Find the right communities',focus:'Research first. Contribute before pitching.',business:[[20,'Find five relevant contractor Facebook groups and read their rules.'],[60,'Research ten local painting or drywall businesses.'],[40,'Leave two genuinely helpful comments on relevant discussions.']],learn:'Meta: Business Suite — publishing, inbox, scheduling, and insights.'},
-    {title:'First direct conversations',focus:'Qualify businesses with honest outreach.',business:[[30,'Complete applicable CRTC telemarketing registration and compliance setup.'],[60,'Make five compliant business calls using public business numbers.'],[30,'Record responses and objections in your lead tracker.']],learn:'Meta: Complete the beginner Facebook and Instagram advertising lesson.'},
-    {title:'Week-one review',focus:'Measure the signal, not the excitement.',business:[[40,'Respond to open conversations and requested follow-ups.'],[40,'Create a 20-second contractor website walkthrough Reel.'],[40,'Review week-one leads, calls, responses, and progress.']],learn:'Meta: Study five Canadian website-service ads in Ad Library. Note the offer and opening hook.'},
-    {title:'Expand the prospect list',focus:'Build a shortlist of real-fit contractors.',business:[[45,'Find ten additional painting or drywall contractors in British Columbia.'],[45,'Examine their online presence and identify five good-fit businesses.'],[30,'Call three qualified prospects.']],learn:'Meta: Campaign objectives — awareness, traffic, engagement, and leads.'},
-    {title:'Start conversations',focus:'Practice clear, confident communication.',business:[[30,'Publish a helpful post in a Facebook group that permits business content.'],[60,'Call five qualified contractors.'],[30,'Log their objections and requested information.']],learn:'Meta: Ads Manager — campaign, ad set, and ad hierarchy.'},
-    {title:'Sharpen the demo',focus:'Show a finished result instead of making claims.',business:[[40,'Improve the reusable contractor homepage template.'],[40,'Record a 30-second mobile-screen website demonstration.'],[40,'Follow up on three previously interested conversations where permitted.']],learn:'Meta: Audience creation, location settings, and audience size.'},
-    {title:'Practice the offer',focus:'Repeat the same pitch and learn from replies.',business:[[30,'Reply to inbound inquiries.'],[60,'Call five qualified contractors.'],[30,'Record each sales conversation outcome.']],learn:'Meta: Create two practice ad headlines and two graphics for contractor websites.'},
-    {title:'Activate referrals',focus:'Earn introductions from real relationships.',business:[[40,'Ask your three current clients for introductions to other business owners.'],[40,'Publish one approved testimonial or client example.'],[40,'Make three qualified business calls.']],learn:'Meta: Reels ads, feed ads, and placement formats.'},
-    {title:'Understand objections',focus:'Document concerns before changing the offer.',business:[[30,'Research ten more contractors.'],[60,'Call five qualified businesses.'],[30,'Record the three most common objections and write short responses.']],learn:'Meta: Daily budgets, lifetime budgets, ad schedules, and billing controls.'},
-    {title:'Week-two review',focus:'Make decisions using real reactions.',business:[[40,'Review all lead statuses and unanswered proposals.'],[40,'Improve your website FAQ using real objections.'],[40,'Publish one educational Instagram post.']],learn:'Meta: Metrics — impressions, reach, click-through rate, CPC, and cost per lead.'},
-    {title:'Explore Ontario',focus:'Test a second geographic market.',business:[[30,'Find ten contractors in Ontario.'],[60,'Call five qualified businesses.'],[30,'Record differences between British Columbia and Ontario conversations.']],learn:'Meta: Advertising Standards, privacy, and lead-form consent.'},
-    {title:'Refine the sales process',focus:'Keep what converts. Remove what confuses.',business:[[40,'Review objections from the first fifteen days.'],[40,'Refine your sales explanation and Visual Flares homepage copy.'],[40,'Ask one current client about their experience using the website.']],learn:'Google: Introduction to Search advertising versus organic search results.'},
-    {title:'Help before you sell',focus:'Use community credibility as an acquisition channel.',business:[[30,'Publish helpful content in a local group that allows it.'],[60,'Make five qualified business calls.'],[30,'Update your lead tracker with outcomes.']],learn:'Google: Search intent — compare “free website” with “website designer for contractors”.'},
-    {title:'Present one tailored demo',focus:'Get a clear decision or next step.',business:[[60,'Customize a website demonstration for one interested prospect.'],[30,'Present the demonstration.'],[30,'Ask for a clear decision or an agreed next step.']],learn:'Google: Keywords, match types, and how people search for services.'},
-    {title:'Turn feedback into proof',focus:'Publish, follow up, and maintain reliability.',business:[[45,'Complete three approved follow-ups.'],[45,'Publish a website demonstration Reel.'],[30,'Check existing client websites for broken links and incorrect contact details.']],learn:'Google: Keyword Planner — research ten website-design search phrases.'},
-    {title:'Another outreach batch',focus:'Increase sample size, not randomness.',business:[[30,'Research ten further contractors.'],[60,'Make five qualified business calls.'],[30,'Log results and identify the best-performing trade.']],learn:'Google: Negative keywords — build a list of fifteen irrelevant searches to exclude.'},
-    {title:'Week-three audit',focus:'Separate contacts, conversations, quotes, and sales.',business:[[60,'Calculate leads, calls, conversations, quotes, sales, and time invested.'],[30,'Refine your business introduction script.'],[30,'Check in with existing clients.']],learn:'Google: Campaign structure, search campaigns, and ad groups.'},
-    {title:'Prepare the ad experiment',focus:'One small test with a strict spending cap.',business:[[30,'Choose your strongest portfolio example.'],[60,'Prepare two Meta advertisement versions with different opening messages.'],[30,'Test your landing page and the inquiry process.']],learn:'Google: Location targeting for British Columbia and Ontario, and geographic exclusions.'},
-    {title:'Build the tracking system',focus:'Measure qualified leads, not merely clicks.',business:[[45,'Create a Meta campaign draft without publishing it.'],[45,'Create a spreadsheet for tracking paid inquiries.'],[30,'Make three qualified business calls.']],learn:'Google: Write ten search-ad headlines and four descriptions for Visual Flares.'},
-    {title:'Launch a $25 ad test',focus:'Controlled spend. Clear measurement.',business:[[40,'Launch one Meta message-focused ad test at $5/day for five days, capped at $25 CAD.'],[40,'Make three qualified business calls.'],[40,'Record inquiries and verify campaign spending controls.']],learn:'Google: Conversion measurement — inquiries, qualified leads, and actual sales.'},
-    {title:'Review early ad responses',focus:'Measure quality before celebrating volume.',business:[[45,'Review incoming advertisement conversations and respond.'],[45,'Call three qualified businesses.'],[30,'Log advertising spend and inquiry quality.']],learn:'Google: Landing-page relevance, ad quality, and Quality Score basics.'},
-    {title:'Make another targeted offer',focus:'Present the work and request a decision.',business:[[45,'Prepare one personalized example for an engaged prospect.'],[45,'Present it and ask for a decision.'],[30,'Check the Meta campaign and record results.']],learn:'Google: CPC, cost per lead, customer acquisition cost, and customer lifetime value.'},
-    {title:'Return to warm referrals',focus:'Use proof to make introductions easier.',business:[[30,'Ask satisfied existing clients for referrals.'],[45,'Call three qualified businesses.'],[45,'Publish a Punjabi website-explainer Reel.']],learn:'Google: Search terms reports and how negative keywords prevent wasted clicks.'},
-    {title:'Close the ad experiment',focus:'Record outcomes without increasing the budget.',business:[[30,'End the Meta experiment at its planned spending limit.'],[45,'Calculate total spend, inquiries, and qualified leads.'],[45,'Make three calls or complete open proposals.']],learn:'Google: Compare when Meta ads and Google Search ads are appropriate.'},
-    {title:'Reconcile the operation',focus:'Know what the first month actually earned.',business:[[60,'Contact prospects with open proposals and agreed follow-ups.'],[30,'Complete pending client requests.'],[30,'Reconcile subscription revenue, expenses, and work hours.']],learn:'Google: Draft a Search campaign in a worksheet without activating spending.'},
-    {title:'Final review with Coach',focus:'Export your evidence and design the next sprint.',business:[[60,'Complete the thirty-day performance report.'],[30,'Identify the three improvements supported by the strongest evidence.'],[30,'Set next month\'s sales and operational targets.']],learn:'Marketing review: Explain Meta and Google targeting, campaign setup, costs, and measurement from memory; fill knowledge gaps.'}
-  ];
+   All curriculum content is embedded in this file.
+   No frameworks, accounts, external APIs, or trackers.
+========================================================= */
 
-  const SCORE_FIELDS=[
-    {id:'researched',label:'Qualified businesses researched',target:'60',placeholder:'60'},
-    {id:'calls',label:'Business calls completed',target:'40–50',placeholder:'45'},
-    {id:'talks',label:'Meaningful sales conversations',target:'10–15',placeholder:'12'},
-    {id:'demos',label:'Demonstrations / proposals',target:'4–6',placeholder:'5'},
-    {id:'sales',label:'New paying clients',target:'2–3',placeholder:'3'},
-    {id:'revenue',label:'New monthly recurring revenue (CAD)',target:'$50–75',placeholder:'75'},
-    {id:'spend',label:'Advertising spend (CAD)',target:'≤ $25',placeholder:'25'},
-    {id:'hours',label:'Actual business hours worked',target:'≤ 60',placeholder:'60'}
-  ];
-  const STORAGE_KEY='visualflares.mission-control.30days.v1';
-  const baseState=()=>({version:1,completed:{},remarks:{},dayNotes:{},scoreboard:{},lastDay:1});
-  const allTasks=PLAN.flatMap((d,i)=>[...d.business.map(([minutes,text],j)=>({id:`d${String(i+1).padStart(2,'0')}-b${j+1}`,day:i+1,type:'Business',minutes,text})),{id:`d${String(i+1).padStart(2,'0')}-m1`,day:i+1,type:'Marketing',minutes:60,text:d.learn}]);
-  const taskById=Object.fromEntries(allTasks.map(t=>[t.id,t]));
-  let storageWorks=true;
-  let currentDay=1, view='day', openRemarks=new Set(), state=baseState(), importPending=null, toastTimeout=null;
-  const $=id=>document.getElementById(id);
-  const dateForDay=n=>new Date(Date.UTC(2026,9,7+n));
-  const formattedDate=(n,options)=>new Intl.DateTimeFormat('en-CA',{timeZone:'UTC',...options}).format(dateForDay(n));
-  function load(){
-    try {
-      const raw=localStorage.getItem(STORAGE_KEY);
-      if(raw){ const parsed=JSON.parse(raw);if(parsed&&typeof parsed==='object'){
-        state={...baseState(),...parsed,completed:parsed.completed||{},remarks:parsed.remarks||{},dayNotes:parsed.dayNotes||{},scoreboard:parsed.scoreboard||{}};
-      }}
-      currentDay=Number.isInteger(state.lastDay)&&state.lastDay>=1&&state.lastDay<=30?state.lastDay:1;
-      const test='__vf_storage_test';localStorage.setItem(test,'1');localStorage.removeItem(test);
-    } catch(e){storageWorks=false;console.warn('Local storage unavailable',e);}
-    updateStorageStatus();
-  }
-  function save(){
-    state.lastDay=currentDay;
-    try {localStorage.setItem(STORAGE_KEY,JSON.stringify(state));storageWorks=true;}catch(e){storageWorks=false;console.warn('Could not persist local data',e);}
-    updateStorageStatus();
-  }
-  function updateStorageStatus(){
-    $('storageDot').classList.toggle('bad',!storageWorks);
-    $('storageMessage').textContent=storageWorks?'Saved automatically on this device':'Local saving unavailable — export a backup';
-    $('lastSaved').textContent=storageWorks?'Local storage • Auto-saved':'Warning • Local storage unavailable';
-  }
-  function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function taskCount(day){return allTasks.filter(t=>t.day===day&&state.completed[t.id]).length;}
-  function allComplete(){return allTasks.reduce((a,t)=>a+(state.completed[t.id]?1:0),0);}
-  function iconComment(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 1 1 16.1-4z"/></svg>';}
-  function nav(){
-    let html='';
-    const weeks=[['WEEK 01','October 8 – 14',1,7],['WEEK 02','October 15 – 21',8,14],['WEEK 03','October 22 – 28',15,21],['WEEK 04','October 29 – November 4',22,28],['FINAL DAYS','November 5 – 6',29,30]];
-    for(const [week,label,from,to] of weeks){
-      html+=`<div class="nav-week-label"><span>${week}</span><span style="text-transform:none;letter-spacing:0">${label}</span></div>`;
-      for(let n=from;n<=to;n++){
-        const dots=Array.from({length:4},(_,i)=>`<i class="${i<taskCount(n)?'on':''}"></i>`).join('');
-        html+=`<button type="button" class="day-link ${view==='day'&&currentDay===n?'active':''}" data-day="${n}" aria-current="${view==='day'&&currentDay===n?'page':'false'}"><span class="day-index">${String(n).padStart(2,'0')}</span><span class="day-name">${escapeHTML(PLAN[n-1].title)}</span><span class="day-dots">${dots}</span></button>`;
+const SESSION_MINUTES = [20,25,60,15];
+
+const BLOCK_NAMES = [
+  "01 — LEARN",
+  "02 — INVESTIGATE",
+  "03 — APPLY",
+  "04 — REVIEW"
+];
+
+const BLOCK_KEYS = [
+  "learn",
+  "investigate",
+  "apply",
+  "review"
+];
+
+const COURSE_ID = "founder-academy-phase01-7weeks";
+
+function D(
+  title,
+  goal,
+  concepts,
+  learn,
+  investigate,
+  apply,
+  review,
+  artifact,
+  mastery
+){
+  return {
+    title,
+    goal,
+    concepts,
+    steps:[learn,investigate,apply,review],
+    artifact,
+    mastery
+  };
+}
+
+/* =========================================================
+   THE COMPLETE 28-SESSION CURRICULUM
+========================================================= */
+
+const COURSE = [
+
+/* ===================== WEEK 1 ===================== */
+
+{
+  title:"The Anatomy of a Business",
+  subtitle:"Understand how businesses actually generate money.",
+  objective:
+    "Understand a business as an interconnected economic system rather than merely a product or a job.",
+
+  checkpoint:
+    "You can explain how three different businesses attract customers, deliver value, collect revenue, incur costs, and retain profit.",
+
+  days:[
+
+    D(
+      "What Exactly Is a Business?",
+      "Understand the complete system that turns a customer problem into economic value.",
+      [
+        "Customer problem",
+        "Value creation",
+        "Business system",
+        "Revenue engine",
+        "Delivery system"
+      ],
+      `Study the fundamental business chain:
+
+Problem → Customer → Offer → Acquisition → Sale → Delivery → Revenue → Costs → Profit → Reinvestment.
+
+Learn the difference between being self-employed, owning a repeatable business, and owning a scalable business.
+
+Define what makes a business sustainable: customer demand, positive economics, repeatable delivery, and sufficient cash.`,
+      `Examine three contrasting businesses:
+
+1. A local cleaning company.
+2. A niche industrial parts distributor.
+3. A subscription software provider.
+
+For each, identify who pays, what the customer receives, how the business finds customers, and what costs it must cover.`,
+      `Create a one-page "Business Anatomy Map" for all three examples.
+
+For each business, record:
+• Customer and problem.
+• Product or service.
+• Acquisition channel.
+• Revenue model.
+• Main expenses.
+• Delivery process.
+• Key operational risk.
+• Reason customers might return.
+
+Finish by identifying which model appears easiest to start with limited capital and which seems most scalable.
+
+Distinguish observations from assumptions.`,
+      `Without looking at your notes, explain the business chain in your own words.
+
+Write three important differences between a business that generates revenue and one that consistently generates profit.
+
+Record the two concepts you found hardest.`,
+      "Three complete business anatomy maps and one comparative conclusion.",
+      "Can you explain where money enters, where it leaves, and what must happen for the business to earn a return?"
+    ),
+
+    D(
+      "Business Models and Revenue Engines",
+      "Learn the principal ways businesses earn revenue and why the same product can support different models.",
+      [
+        "One-time sales",
+        "Subscription",
+        "Service contracts",
+        "Licensing",
+        "Distribution",
+        "Recurring revenue"
+      ],
+      `Study seven business models:
+
+1. One-time product sales.
+2. Project-based services.
+3. Recurring service contracts.
+4. Subscriptions.
+5. Wholesale and distribution.
+6. Licensing.
+7. Marketplaces.
+
+Learn their typical strengths, weaknesses, capital requirements, and sources of recurring revenue.`,
+      `Find five real businesses representing at least four different models.
+
+Use official company websites or publicly available business descriptions.
+
+For each, identify the apparent revenue model, customer type, and whether revenue is recurring or transactional.`,
+      `Build a comparison matrix containing:
+
+• Business model.
+• Example.
+• Customer type.
+• Revenue frequency.
+• Upfront capital needs.
+• Operational complexity.
+• Customer acquisition difficulty.
+• Potential for repeat purchasing.
+• Primary business risk.
+
+Rate each category as Low, Medium, or High and explain the reasoning.
+
+Then select three models you would investigate as a capital-constrained solo founder.`,
+      `Explain why recurring revenue can be valuable without assuming subscriptions are always superior.
+
+Identify a business model that has strong revenue potential but poor compatibility with limited starting capital.`,
+      "Seven-model comparison matrix and shortlist of three models.",
+      "Can you distinguish revenue predictability, actual profitability, capital intensity, and scalability?"
+    ),
+
+    D(
+      "Revenue, Profit, Margins and Unit Economics",
+      "Understand the mathematics that determines whether each sale contributes to profit.",
+      [
+        "Revenue",
+        "Cost of goods sold",
+        "Gross margin",
+        "Contribution margin",
+        "Fixed costs",
+        "Break-even point"
+      ],
+      `Learn the formulas:
+
+Revenue = Price × Quantity.
+
+Gross Profit = Revenue − Cost of Goods Sold.
+
+Contribution per Unit = Selling Price − Variable Cost per Unit.
+
+Break-even Units = Fixed Costs ÷ Contribution per Unit, rounded up.
+
+Distinguish gross profit, contribution profit, operating profit, and cash flow.`,
+      `Investigate how expenses differ across three businesses:
+
+• Physical-product retailer.
+• Home-service provider.
+• Subscription software company.
+
+Classify their common costs as fixed, variable, or mixed.
+
+Consider payment fees, packaging, refunds, shipping, labor, insurance, and customer acquisition.`,
+      `Complete this numerical exercise:
+
+A company sells a product for $100 CAD.
+
+Manufacturing and packaging cost $40.
+Payment and transaction fees cost $3.
+Monthly fixed expenses total $1,000.
+
+Calculate:
+1. Revenue from 50 sales.
+2. Variable cost per unit.
+3. Contribution per unit.
+4. Contribution margin percentage.
+5. Monthly break-even unit volume.
+6. Operating profit at 50 sales.
+
+Then change the price to $85 and recalculate.
+
+Finally, build your own hypothetical unit-economics model.`,
+      `Explain why a business with $100,000 in sales might still lose money.
+
+Identify three cost assumptions that you would want to verify before investing actual capital.`,
+      "Two pricing scenarios, one custom unit-economics model, and written calculations.",
+      "Can you calculate contribution margin and break-even volume correctly without confusing revenue with profit?"
+    ),
+
+    D(
+      "Cash Flow and Financial Survival",
+      "Understand why a profitable business can still face a cash shortage.",
+      [
+        "Cash flow",
+        "Accounts receivable",
+        "Inventory",
+        "Working capital",
+        "Income statement",
+        "Balance sheet"
+      ],
+      `Study the differences among:
+
+• Profit on an income statement.
+• Cash movement.
+• Assets and liabilities.
+• Owner investment and loans.
+• Working capital.
+
+Understand how late payments, prepaid inventory, and debt obligations can create a cash shortage even when sales are profitable.`,
+      `Analyze two hypothetical cases.
+
+Business A receives customer payments immediately but pays suppliers in 30 days.
+
+Business B pays suppliers immediately but receives customer payments in 60 days.
+
+Describe which business may need more working capital and why.`,
+      `Build a simple 12-week cash-flow forecast.
+
+Start with $2,000 CAD in cash.
+
+Invent a realistic small-business scenario and record, by week:
+• Opening cash.
+• Cash received.
+• Supplier payments.
+• Operating expenses.
+• Equipment spending.
+• Closing cash.
+
+Use separate rows for invoiced revenue and actual cash received.
+
+Identify any week when available cash becomes insufficient.`,
+      `Write your Week 1 summary:
+
+What are the five most important drivers of a company's financial survival?
+
+Explain the difference between a profitable company and a cash-sustainable company.`,
+      "12-week cash-flow forecast and Week 1 business fundamentals summary.",
+      "Can you trace an accounting profit to the actual cash available to operate the business?"
+    )
+  ]
+},
+
+/* ===================== WEEK 2 ===================== */
+
+{
+  title:"Business Judgment and Decision-Making",
+  subtitle:"Learn to distinguish intelligent decisions from lucky outcomes.",
+  objective:
+    "Develop a structured method for evaluating opportunities, uncertainty, risks, and sustainable competitive advantages.",
+
+  checkpoint:
+    "You can compare business decisions using expected outcomes, risk exposure, incentives, evidence, and downside protection.",
+
+  days:[
+
+    D(
+      "Probability, Uncertainty and Expected Value",
+      "Learn to evaluate uncertain business decisions without pretending the future is predictable.",
+      [
+        "Expected value",
+        "Probability",
+        "Downside risk",
+        "Opportunity cost",
+        "Risk of ruin"
+      ],
+      `Learn how expected value works:
+
+Expected Value = Sum of (Probability × Outcome).
+
+Understand that estimated probabilities can be wrong and that positive expected value does not guarantee success.
+
+Differentiate uncertainty, financial risk, and the possibility of losing the ability to continue operating.`,
+      `Analyze three hypothetical business choices:
+
+A. Spend $300 testing demand.
+B. Spend $5,000 developing inventory before validation.
+C. Offer a limited pilot to a potential business customer.
+
+List what could go right, what could go wrong, and what each experiment would teach.`,
+      `Construct three scenario tables.
+
+For each decision, define:
+• Best plausible outcome.
+• Normal outcome.
+• Worst plausible outcome.
+• Estimated probability.
+• Financial cost.
+• Time cost.
+• Information gained.
+
+Calculate expected monetary value for a simplified example.
+
+Then separately evaluate the maximum loss and whether you could afford that loss.
+
+Do not confuse your estimated probabilities with proven facts.`,
+      `Explain how a positive expected-value opportunity could still be an unacceptable decision for a founder with limited capital.
+
+Write your personal rules for limiting business downside risk.`,
+      "Three decision scenarios and a personal business-risk policy.",
+      "Can you compare the possible upside with both expected losses and maximum affordable losses?"
+    ),
+
+    D(
+      "Why Successful People Sometimes Keep Winning",
+      "Examine the roles of skill, information, discipline, incentives, and randomness.",
+      [
+        "Selection bias",
+        "Survivorship bias",
+        "Causal reasoning",
+        "Feedback loops",
+        "Decision quality"
+      ],
+      `Study survivorship bias, hindsight bias, and confirmation bias.
+
+Learn why a successful result does not automatically prove a good decision.
+
+Explore why repeated success may reflect better research, access to opportunities, execution, or risk management.
+
+Remember that observed win rates can also be misleading when sample sizes and hidden losses are unknown.`,
+      `Study two business founders or business case studies using reputable sources.
+
+Investigate their original assumptions, competition, execution, access to capital, and important mistakes.
+
+Avoid attributing success to one fashionable explanation.`,
+      `Write two short case analyses.
+
+For each case, separate:
+• Information available before the decision.
+• Decision actually made.
+• Risks identified.
+• Risks apparently overlooked.
+• Subsequent outcome.
+• Evidence of repeatable skill.
+• Possible contribution from luck.
+
+Then describe five habits that could help an ordinary founder improve decision quality.`,
+      `Answer this question:
+
+If someone succeeds in nine of ten business decisions, what additional information would you need before concluding that they have exceptional judgment?`,
+      "Two founder case analyses and a five-habit decision framework.",
+      "Can you evaluate the quality of the process independently from the outcome?"
+    ),
+
+    D(
+      "Competition and Competitive Advantage",
+      "Discover why some businesses defend their profitability while others compete mostly on price.",
+      [
+        "Competitive advantage",
+        "Switching costs",
+        "Economies of scale",
+        "Distribution advantage",
+        "Brand trust",
+        "Barriers to entry"
+      ],
+      `Learn common forms of competitive advantage:
+
+• Cost advantage.
+• Distribution access.
+• Specialized expertise.
+• Customer trust.
+• Switching costs.
+• Proprietary assets.
+• Operational efficiency.
+• Network effects.
+
+Distinguish a temporary differentiation from a durable advantage.`,
+      `Compare three businesses in one industry.
+
+Examples:
+• Three local service providers.
+• Three packaging suppliers.
+• Three software providers.
+
+Investigate their positioning, delivery promises, customer relationships, and apparent advantages.`,
+      `Create a competitive-advantage matrix.
+
+Score each company from 1 to 5 on:
+• Price advantage.
+• Trust.
+• Accessibility.
+• Specialization.
+• Switching costs.
+• Operational reliability.
+• Difficulty of replication.
+
+Every score must include evidence or be labeled an assumption.
+
+Design three possible advantages a small new entrant could realistically develop.`,
+      `Describe why being the cheapest is often difficult to sustain.
+
+Explain the difference between a competitive advantage and an advertising claim.`,
+      "Three-company competitive matrix and three potential founder advantages.",
+      "Can you identify an advantage that customers value and competitors cannot easily replicate?"
+    ),
+
+    D(
+      "Decision Journals and Failure Prevention",
+      "Create a repeatable method for making major business decisions.",
+      [
+        "Premortem",
+        "Decision journal",
+        "Reversible decisions",
+        "Kill criteria",
+        "Risk register"
+      ],
+      `Study decision journals, premortems, and reversible versus difficult-to-reverse choices.
+
+Learn how to use precommitted limits to avoid escalating commitment to a failing idea.
+
+Understand the value of experiments that produce information without large irreversible spending.`,
+      `Review two hypothetical failures:
+
+1. A founder buys inventory before testing demand.
+2. A founder spends heavily on advertisements without knowing their margins.
+
+Identify the earliest point at which each mistake could have been detected.`,
+      `Create your personal Founder Decision Template with fields for:
+
+• Decision.
+• Goal.
+• Evidence.
+• Assumptions.
+• Alternatives.
+• Estimated upside.
+• Maximum downside.
+• Required capital.
+• Reversibility.
+• Success criteria.
+• Stop conditions.
+• Review date.
+
+Use the template to compare two possible business experiments.
+
+Write a premortem for the more attractive option.`,
+      `Write your Week 2 conclusion:
+
+What makes a business decision intelligent, even if its final outcome is disappointing?
+
+List three rules you will follow before spending meaningful capital.`,
+      "Reusable decision journal, risk register, and Week 2 evaluation.",
+      "Can you identify failure modes before committing money and define when to stop?"
+    )
+  ]
+},
+
+/* ===================== WEEK 3 ===================== */
+
+{
+  title:"Opportunity Discovery",
+  subtitle:"Find commercially valuable problems hiding in ordinary industries.",
+  objective:
+    "Develop the ability to recognize persistent problems, inefficient workflows, neglected customer segments, and AI-related market changes.",
+
+  checkpoint:
+    "You have a documented problem database with evidence levels, affected customer groups, and an initial ranking.",
+
+  days:[
+
+    D(
+      "Finding Problems Worth Solving",
+      "Learn to search for expensive, frequent, frustrating problems rather than fashionable ideas.",
+      [
+        "Customer pain",
+        "Frequency",
+        "Economic impact",
+        "Urgency",
+        "Willingness to pay"
+      ],
+      `Study the characteristics of commercially attractive problems.
+
+A useful problem often involves:
+• Repetition.
+• A measurable cost.
+• Existing spending.
+• Urgency.
+• Frustration.
+• Inefficient manual work.
+
+Learn to distinguish a real problem from a minor inconvenience.`,
+      `Research three ordinary industries, such as:
+
+• Property maintenance.
+• Small-business logistics.
+• Commercial cleaning.
+
+Read public customer reviews, business descriptions, service listings, and industry discussions.
+
+Look for repeated complaints and slow, costly processes.`,
+      `Create a database of at least 12 distinct problems.
+
+For each record:
+• Industry.
+• Affected customer.
+• Problem description.
+• Frequency.
+• Consequence.
+• Existing solution.
+• Possible economic cost.
+• Source.
+• Confidence level.
+
+Label each entry as observed evidence, secondhand evidence, or hypothesis.
+
+Do not invent customer interviews.`,
+      `Choose your five most promising problems.
+
+For each, explain what evidence would convince you that businesses or consumers would pay to solve it.`,
+      "Twelve-entry problem database and five prioritized problems.",
+      "Can you describe a problem precisely without immediately jumping to a product idea?"
+    ),
+
+    D(
+      "Industry Mapping and Value Chains",
+      "Understand how money, goods, services, and decisions move through an industry.",
+      [
+        "Value chain",
+        "Supplier",
+        "Distributor",
+        "Buyer",
+        "End user",
+        "Industry bottleneck"
+      ],
+      `Study basic industry value chains:
+
+Raw materials → Manufacturing → Distribution → Retail or integration → Final customer.
+
+Recognize that service businesses have value chains too.
+
+Understand how different participants capture value and why the person using a product may not be the person buying it.`,
+      `Choose one ordinary industry.
+
+Examples:
+• Commercial HVAC maintenance.
+• Construction supplies.
+• Restaurant packaging.
+• Equipment servicing.
+
+Research key participant types and the role they play.`,
+      `Create an industry map showing:
+
+• Suppliers.
+• Manufacturers.
+• Distributors.
+• Service providers.
+• Decision-makers.
+• End customers.
+• Payment flows.
+• Main sources of delay.
+• Common quality problems.
+• Regulatory or safety constraints.
+
+Identify at least five points where inefficiency may create an opportunity.
+
+Distinguish a verified bottleneck from a suspected one.`,
+      `Explain where a small founder could enter the value chain without owning an entire factory, warehouse, or national distribution system.`,
+      "One detailed industry value-chain map and five possible opportunity locations.",
+      "Can you follow both the movement of value and the movement of money through an industry?"
+    ),
+
+    D(
+      "AI, Automation and Robotics Opportunities",
+      "Learn to recognize where AI changes business economics and where physical-world constraints remain important.",
+      [
+        "AI augmentation",
+        "Automation",
+        "Robotics integration",
+        "Human oversight",
+        "Process economics",
+        "Technology adoption"
+      ],
+      `Study three effects of AI and robotics:
+
+1. Existing tasks become cheaper.
+2. New products and services become possible.
+3. Supporting industries gain new demand.
+
+Learn the differences among AI software, workflow automation, industrial robotics, robotics maintenance, and robotics integration.`,
+      `Investigate eight workflows across ordinary industries.
+
+Look at:
+• Information processing.
+• Repetitive administrative tasks.
+• Physical handling.
+• Inspection.
+• Scheduling.
+• Equipment maintenance.
+• Customer communication.
+• Quality assurance.
+
+Identify technical, safety, regulatory, and human constraints.`,
+      `Create an AI/Robotics Opportunity Matrix.
+
+For eight workflows, score:
+• Labor or time cost.
+• Repetition.
+• Automation feasibility.
+• Failure consequence.
+• Human oversight required.
+• Adoption difficulty.
+• Customer willingness to pay.
+• Required startup capital.
+
+Select three opportunities that may be realistic for a small business to participate in.
+
+Do not assume a task is profitable to automate merely because it is technically automatable.`,
+      `Explain why increasing robot adoption might create opportunities in training, integration, servicing, inspection, and specialized components.
+
+Identify two businesses that AI could threaten.`,
+      "Eight-workflow technology matrix and three technology-related opportunities.",
+      "Can you distinguish technological capability from economically viable customer demand?"
+    ),
+
+    D(
+      "Ranking Real-World Problems",
+      "Develop a structured scoring system to prioritize problem research.",
+      [
+        "Opportunity scoring",
+        "Evidence quality",
+        "Market accessibility",
+        "Startup feasibility",
+        "Ranking bias"
+      ],
+      `Study scoring models and their limitations.
+
+Learn why estimated market size is not the same as accessible demand.
+
+Create a simple five-factor model:
+• Problem severity.
+• Frequency.
+• Customer spending.
+• Accessibility.
+• Capital feasibility.`,
+      `Revisit your problem database from Day 9.
+
+Find additional evidence for the five most promising problems.
+
+Look for competitors, customer complaints, existing spending, and signs of urgent demand.`,
+      `Score at least 12 problems from 1 to 5 on each factor.
+
+Use equal weights initially.
+
+Calculate each total out of 25.
+
+Then add:
+• Evidence confidence.
+• Biggest unknown.
+• Cheapest next research step.
+• Potential impact of AI.
+• Primary operational obstacle.
+
+Select the five strongest problems and explain where your scoring might be misleading.`,
+      `Prepare a Week 3 Opportunity Discovery Report.
+
+Identify the top five problems, strongest evidence, greatest uncertainties, and next research questions.`,
+      "Scored 12-problem database and Week 3 opportunity report.",
+      "Can you prioritize opportunities without treating guesses or arbitrary scores as verified facts?"
+    )
+  ]
+},
+
+/* ===================== WEEK 4 ===================== */
+
+{
+  title:"Business Idea Generation and Selection",
+  subtitle:"Generate many possibilities, then reject weak ones deliberately.",
+  objective:
+    "Turn observed customer problems into potential business models and select a small number for serious validation.",
+
+  checkpoint:
+    "You have at least 20 business concepts, a comparison framework, and three well-reasoned opportunities to investigate.",
+
+  days:[
+
+    D(
+      "Structured Business Idea Generation",
+      "Learn reproducible techniques for generating business concepts.",
+      [
+        "Problem-solution fit",
+        "Vertical specialization",
+        "Unbundling",
+        "Business-model innovation",
+        "Adjacent opportunities"
+      ],
+      `Learn five ideation methods:
+
+1. Solve repeated complaints.
+2. Serve an overlooked niche.
+3. Make an expensive solution simpler.
+4. Improve an inefficient workflow.
+5. Offer a specialized version of a general product.
+
+Understand why idea quantity is useful before filtering.`,
+      `Study several existing businesses and ask:
+
+• Which customer group is underserved?
+• What part of their offer is too expensive?
+• What feature could be removed?
+• What process remains manual?
+• What complementary service is missing?`,
+      `Generate at least 25 raw business ideas.
+
+Produce five ideas using each of the five methods.
+
+For every idea write:
+• Customer.
+• Problem.
+• Offering.
+• Why someone might pay.
+• Potential revenue model.
+• Possible AI or automation role.
+
+Include both unglamorous traditional industries and technology-enabled models.
+
+Do not evaluate ideas while first generating them.`,
+      `Remove duplicates and combine overlapping ideas.
+
+Keep at least 20 distinct concepts.
+
+Mark each one as physical product, service, software, distribution, or hybrid.`,
+      "Database containing at least 20 distinct business ideas.",
+      "Can you consistently generate business concepts from customer problems instead of relying on inspiration?"
+    ),
+
+    D(
+      "Matching Ideas to Business Models",
+      "Understand how different ways of delivering the same value affect economics.",
+      [
+        "Service model",
+        "Product model",
+        "Distribution model",
+        "Software model",
+        "Hybrid model"
+      ],
+      `Study how a single customer problem might be solved with:
+
+• A done-for-you service.
+• A physical product.
+• A digital tool.
+• A distribution business.
+• A subscription.
+• A partnership or integration service.
+
+Learn the tradeoffs in margin, capital needs, customer involvement, and delivery complexity.`,
+      `Choose five ideas from your database.
+
+For each, find an existing company or adjacent business that solves a similar problem.
+
+Determine how it charges customers and whether delivery depends on people, inventory, software, or physical assets.`,
+      `For five ideas, create two possible business models each.
+
+Compare:
+• Initial investment.
+• Time to first test.
+• Gross margin potential.
+• Working capital.
+• Supplier dependency.
+• Customer acquisition.
+• Ease of delivery.
+• Ability to expand.
+• Exposure to AI disruption.
+
+Choose the most realistic model for each idea.
+
+Explain why it suits a capital-constrained founder.`,
+      `Describe one case where a low-capital service could become the starting point for a later product business.
+
+Identify the risks in that transition.`,
+      "Five ideas expanded into ten business-model variations.",
+      "Can you choose a business model based on economics and execution rather than novelty?"
+    ),
+
+    D(
+      "Feasibility and Capital-Constrained Selection",
+      "Learn to reject ideas that are currently impractical without dismissing their long-term potential.",
+      [
+        "Capital intensity",
+        "Time to validation",
+        "Execution risk",
+        "Regulatory constraints",
+        "Opportunity cost"
+      ],
+      `Study business feasibility across:
+
+• Startup cost.
+• Technical capability.
+• Legal and regulatory requirements.
+• Customer access.
+• Supply requirements.
+• Time commitment.
+• Cash-flow timing.
+
+Distinguish business attractiveness from personal feasibility today.`,
+      `Investigate the likely startup requirements of six shortlisted ideas.
+
+Use publicly available supplier information, official business resources, and realistic cost categories.
+
+Separate confirmed amounts from preliminary estimates.`,
+      `Build a six-idea feasibility table.
+
+Evaluate:
+• Estimated startup cash.
+• Earliest testable version.
+• First customer acquisition difficulty.
+• Upfront inventory.
+• Operational risk.
+• Legal or licensing questions.
+• Founder time requirement.
+• Learning value.
+
+Give each idea a score, but preserve the underlying evidence.
+
+Select three ideas suitable for continued investigation.
+
+Place promising but currently inaccessible ideas in a future-opportunity list.`,
+      `Write down the three main reasons why each rejected idea is unsuitable right now.
+
+Avoid confusing rejection with permanent failure.`,
+      "Six-idea feasibility matrix and three selected candidates.",
+      "Can you distinguish a great industry from a realistic first business?"
+    ),
+
+    D(
+      "The Business Opportunity Investment Memo",
+      "Learn to defend a business opportunity with evidence and explicit assumptions.",
+      [
+        "Investment thesis",
+        "Assumption register",
+        "Feasibility",
+        "Disconfirming evidence",
+        "Go/no-go decision"
+      ],
+      `Study the structure of a short opportunity memo:
+
+• Problem.
+• Customer.
+• Evidence.
+• Solution.
+• Alternatives.
+• Business model.
+• Economics.
+• Capital requirements.
+• Risks.
+• Validation plan.
+
+Learn why the purpose is a better decision, not a persuasive sales pitch.`,
+      `Review all research from Weeks 1–4.
+
+Identify assumptions that remain unsupported.
+
+Locate at least one possible reason why each shortlisted opportunity might fail.`,
+      `Write a one-page opportunity memo for each of your top three ideas.
+
+For every memo include:
+• Customer and problem.
+• Current alternatives.
+• Why this could be a business.
+• Revenue model.
+• Rough startup requirements.
+• Competitive difficulty.
+• AI implications.
+• Five biggest assumptions.
+• Evidence that would disprove the idea.
+
+Rank the three opportunities for customer research in Month 2.`,
+      `Complete your Month 1 evaluation.
+
+Explain which idea you favor, what you actually know, and what you still need to discover.
+
+Do not commit substantial capital.`,
+      "Three opportunity memos and Month 1 decision report.",
+      "Can you explain and challenge your own business thesis without becoming attached to the idea?"
+    )
+  ]
+},
+
+/* ===================== WEEK 5 ===================== */
+
+{
+  title:"Customer Discovery",
+  subtitle:"Understand the people who experience problems and authorize purchases.",
+  objective:
+    "Learn ethical customer research, buyer identification, interview design, and evidence-based interpretation.",
+
+  checkpoint:
+    "You have documented target buyers, a tested interview guide, an interview or alternative research evidence log, and a clear set of demand hypotheses.",
+
+  days:[
+
+    D(
+      "Customer Segments and Decision-Makers",
+      "Understand exactly who experiences a problem, who chooses a solution, and who pays.",
+      [
+        "Target segment",
+        "Economic buyer",
+        "End user",
+        "Decision-maker",
+        "Jobs to be done"
+      ],
+      `Learn to distinguish:
+
+• User.
+• Buyer.
+• Decision-maker.
+• Influencer.
+• Gatekeeper.
+
+Study customer segmentation by industry, company size, geography, budget, and problem intensity.
+
+Understand jobs-to-be-done thinking: the progress a customer wants to make.`,
+      `For your top three opportunities, investigate the likely buying process.
+
+Example:
+A technician may use equipment, a manager may recommend it, and an owner may approve the purchase.
+
+Identify whose problem matters and whose budget pays.`,
+      `Create a Customer Map for your top two ideas.
+
+For each include:
+• Customer segment.
+• Main job to be done.
+• Current workaround.
+• Buyer role.
+• User role.
+• Purchase trigger.
+• Expected budget source.
+• Likely objections.
+• Places to find research participants.
+
+Write one clear customer hypothesis for each opportunity.`,
+      `Explain why a product loved by end users can still fail if the economic buyer sees insufficient value.`,
+      "Two customer maps and two testable buyer hypotheses.",
+      "Can you identify who can actually authorize and pay for the proposed solution?"
+    ),
+
+    D(
+      "Designing Useful Customer Interviews",
+      "Learn to collect genuine information without leading people toward the answer you want.",
+      [
+        "Customer interview",
+        "Leading questions",
+        "Behavioral evidence",
+        "Interview bias",
+        "Research ethics"
+      ],
+      `Study the differences between:
+
+Bad: "Would you buy my amazing solution?"
+
+Better: "How did you solve this problem the last time it happened?"
+
+Focus on real past behavior, actual spending, frequency, and existing workarounds.
+
+Understand consent, privacy, and respecting participants' time.`,
+      `Research examples of discovery interview questions.
+
+Analyze why hypothetical purchase questions are often unreliable.
+
+Consider how asking about past expenses and completed purchases can produce more useful evidence.`,
+      `Create a ten-question customer interview guide.
+
+Cover:
+1. Customer role.
+2. Recent relevant experience.
+3. Problem frequency.
+4. Current solution.
+5. Cost of the problem.
+6. Alternatives considered.
+7. Previous spending.
+8. Decision process.
+9. Dissatisfaction.
+10. Unanswered questions.
+
+Add five follow-up probes.
+
+Practice with a hypothetical customer scenario, clearly marked as practice.`,
+      `Review every question for leading language.
+
+Rewrite questions that encourage agreement.
+
+Prepare a simple consent introduction and a structured notes template.`,
+      "Ten-question interview guide, five follow-up probes, and interview notes template.",
+      "Can you conduct a conversation that discovers facts rather than attempts to sell?"
+    ),
+
+    D(
+      "Customer Discovery Fieldwork",
+      "Practice gathering real-world evidence and separating participant statements from your interpretations.",
+      [
+        "Primary research",
+        "Interview notes",
+        "Evidence logging",
+        "Observed behavior",
+        "Research limitations"
+      ],
+      `Review interview etiquette.
+
+Learn how to:
+• Explain the purpose.
+• Obtain consent.
+• Ask neutral questions.
+• Avoid pitching.
+• Capture exact observations.
+• Protect sensitive information.
+
+Understand why simulated interviews are practice, not proof of demand.`,
+      `Identify potential research participants through appropriate, permitted channels.
+
+Where feasible, speak with two or three consenting participants.
+
+If interviews cannot be arranged during this session, analyze public customer reviews or industry discussions instead and mark those sources as secondary evidence.`,
+      `Create an evidence record for every genuine source.
+
+Record:
+• Source type.
+• Date.
+• Customer segment.
+• Problem described.
+• Existing workaround.
+• Costs mentioned.
+• Buying authority.
+• Unanswered questions.
+• Evidence confidence.
+
+Separate direct statements from your interpretation.
+
+Do not manufacture interview results or represent AI-generated personas as real customers.`,
+      `Identify the most surprising finding.
+
+Write three hypotheses that became stronger and three that remain unproven.
+
+Plan further interviews as availability permits.`,
+      "Customer discovery evidence log with real sources and documented uncertainties.",
+      "Can you identify what customers actually demonstrated versus what you hoped they would say?"
+    ),
+
+    D(
+      "Interpreting Customer Evidence",
+      "Learn to recognize useful patterns without overgeneralizing from small samples.",
+      [
+        "Evidence synthesis",
+        "Sampling bias",
+        "Demand hypothesis",
+        "Purchase intent",
+        "Validation criteria"
+      ],
+      `Study how to group interview findings into themes.
+
+Learn to distinguish:
+• A complaint.
+• A frequent problem.
+• A costly problem.
+• Existing spending.
+• Strong buying intent.
+
+Understand why a small research sample cannot establish population-wide demand.`,
+      `Review your customer evidence and relevant publicly available research.
+
+Identify repeated complaints, alternative solutions, possible buying triggers, and contradictory evidence.
+
+Keep direct interviews separate from reviews and hypothetical examples.`,
+      `Write a Customer Discovery Report.
+
+Include:
+• Research sources and sample size.
+• Five important findings.
+• Three contradictions.
+• Common workarounds.
+• Evidence of financial impact.
+• Key objections.
+• Remaining knowledge gaps.
+• Next five research questions.
+
+Classify your original assumptions as supported, challenged, or unresolved.
+
+Prioritize your strongest opportunity without pretending demand has already been proven.`,
+      `Complete the Week 5 review.
+
+Explain what evidence would make you abandon or substantially modify the opportunity.
+
+Write the next action that would improve confidence most efficiently.`,
+      "Customer discovery report and updated opportunity hypotheses.",
+      "Can you accurately communicate what your research supports and what it does not support?"
+    )
+  ]
+},
+
+/* ===================== WEEK 6 ===================== */
+
+{
+  title:"Market Research and Competitive Intelligence",
+  subtitle:"Investigate customer alternatives, market economics, pricing, and industry structure.",
+  objective:
+    "Learn to assess whether an opportunity has reachable customers, adequate economic potential, and a realistic competitive entry point.",
+
+  checkpoint:
+    "You have a documented competitor map, bottom-up market estimate, pricing comparison, and market-attractiveness assessment.",
+
+  days:[
+
+    D(
+      "Competitor and Substitute Research",
+      "Learn to identify every alternative a customer can choose, including doing nothing.",
+      [
+        "Direct competitor",
+        "Indirect competitor",
+        "Substitute",
+        "Status quo",
+        "Competitive positioning"
+      ],
+      `Learn the difference between:
+
+Direct competitors: similar solutions for similar buyers.
+
+Indirect competitors: different ways to solve the same problem.
+
+Substitutes: alternative methods or technologies.
+
+Status quo: continuing with the existing workaround.
+
+Understand why having no competitors can indicate either an opportunity or an absence of demand.`,
+      `Research at least six alternatives in one selected market.
+
+Use company websites, service directories, public reviews, and industry listings.
+
+Look for both specialized providers and established general solutions.`,
+      `Build a Competitor Intelligence Matrix containing:
+
+• Provider.
+• Target customer.
+• Core offer.
+• Publicly listed price, if available.
+• Delivery model.
+• Stated advantages.
+• Customer complaints.
+• Distribution channels.
+• Perceived weaknesses.
+• Source and research date.
+
+Include the customer's current workaround as a separate alternative.
+
+Avoid claiming unknown prices or internal margins as facts.`,
+      `Identify three realistic ways a new entrant might differentiate.
+
+Explain why each differentiation could matter to a paying customer.`,
+      "Competitor matrix covering at least six alternatives and the status quo.",
+      "Can you explain what customers would compare your business against before purchasing?"
+    ),
+
+    D(
+      "Market Sizing Without Fantasy Numbers",
+      "Learn to estimate markets from reachable customers and actual purchase behavior.",
+      [
+        "TAM",
+        "SAM",
+        "SOM",
+        "Bottom-up market sizing",
+        "Market penetration"
+      ],
+      `Learn:
+
+TAM: Total addressable market.
+
+SAM: Serviceable available market.
+
+SOM: Serviceable obtainable market.
+
+Study bottom-up estimation:
+Eligible Customers × Purchase Frequency × Annual Spend.
+
+Learn why a massive industry does not imply a massive accessible opportunity.`,
+      `Find credible data sources relevant to your selected market.
+
+Consider Statistics Canada, company directories, industry associations, public procurement information, and supplier reports.
+
+Record source dates and geographic limitations.`,
+      `Build a bottom-up market estimate.
+
+Use a hypothetical worked example first:
+
+1,500 reachable businesses ×
+1 purchase annually ×
+$900 average spending =
+$1,350,000 estimated annual market spending.
+
+Then create a separate estimate for your chosen opportunity.
+
+Document:
+• Estimated number of buyers.
+• Geographic reach.
+• Customer eligibility.
+• Annual frequency.
+• Average annual spending.
+• Assumptions.
+• Low/base/high scenarios.
+
+Estimate a realistic early customer share without treating it as guaranteed.`,
+      `Explain the difference between market spending, potential business revenue, and actual profit.
+
+Identify the three assumptions that most affect your estimate.`,
+      "Bottom-up market model with low, base, and high scenarios.",
+      "Can you defend your market estimate using reachable customers and explicit assumptions?"
+    ),
+
+    D(
+      "Pricing Research and Customer Value",
+      "Learn to investigate what customers pay and what drives perceived value.",
+      [
+        "Reference price",
+        "Value-based pricing",
+        "Cost-based pricing",
+        "Price sensitivity",
+        "Buyer alternatives"
+      ],
+      `Study cost-based, competitor-based, and value-based pricing.
+
+Learn why willingness to pay may depend on urgency, risk, saved time, reliability, and available alternatives.
+
+Distinguish advertised prices from actual transaction prices.`,
+      `Research publicly available prices or pricing structures from six providers, where available.
+
+If a competitor uses quote-based pricing, record that honestly instead of inventing an amount.
+
+Read customer reviews for evidence about what buyers value.`,
+      `Build a pricing intelligence sheet.
+
+Include:
+• Provider.
+• Base offer.
+• Pricing structure.
+• Included services.
+• Exclusions.
+• Contract terms.
+• Quality or service promises.
+• Customer complaints.
+• Source and date.
+
+Create three hypothetical customer scenarios.
+
+For each, estimate the potential economic value of solving the problem and identify what must be verified.`,
+      `Explain why a higher-priced solution might sell better than a cheaper solution.
+
+Identify where price competition could destroy profitability.`,
+      "Competitor pricing research and three customer-value scenarios.",
+      "Can you connect pricing decisions to customer outcomes rather than copying competitors blindly?"
+    ),
+
+    D(
+      "Industry Attractiveness and Market Entry",
+      "Decide whether a market is worth entering and where an entrant could compete.",
+      [
+        "Industry structure",
+        "Five Forces",
+        "Distribution access",
+        "Supplier power",
+        "Entry barriers"
+      ],
+      `Study Porter's Five Forces:
+
+• Competitive rivalry.
+• New entrants.
+• Supplier power.
+• Buyer power.
+• Substitutes.
+
+Learn how distribution access, customer concentration, and supplier dependence affect business economics.`,
+      `Compare two shortlisted industries.
+
+Investigate:
+• Number of competitors.
+• Buyer concentration.
+• Supplier constraints.
+• Typical distribution channels.
+• Startup barriers.
+• Regulations.
+• Signs of price pressure.`,
+      `Create an Industry Attractiveness Scorecard.
+
+Evaluate each market on:
+• Problem severity.
+• Accessible demand.
+• Pricing power.
+• Capital requirements.
+• Competition.
+• Customer concentration.
+• Supply constraints.
+• AI-related changes.
+• Potential repeat sales.
+
+Explain each rating.
+
+Recommend one market for further positioning work.
+
+If evidence remains weak, explicitly record that no final choice has been justified.`,
+      `Write your Week 6 Market Intelligence Report.
+
+Summarize the strongest opportunity, market size assumptions, competitive barriers, and top research gaps.`,
+      "Two-market attractiveness analysis and selected research direction.",
+      "Can you identify an accessible entry point without assuming that a large market guarantees success?"
+    )
+  ]
+},
+
+/* ===================== WEEK 7 ===================== */
+
+{
+  title:"Product Positioning and Pricing",
+  subtitle:"Translate market research into an offer people can understand and a business can deliver profitably.",
+  objective:
+    "Learn how to define a differentiated offer, establish preliminary pricing, and prepare the tests needed to validate demand.",
+
+  checkpoint:
+    "You have a complete first-version business offer, preliminary pricing economics, clear customer positioning, and a Week 8 demand-validation plan.",
+
+  days:[
+
+    D(
+      "Designing a Clear Value Proposition",
+      "Learn to explain who you help, what problem you solve, and why your approach matters.",
+      [
+        "Value proposition",
+        "Positioning",
+        "Differentiation",
+        "Customer outcome",
+        "Proof"
+      ],
+      `Study the components of a strong value proposition:
+
+• Specific customer.
+• Specific problem.
+• Desired outcome.
+• Clear solution.
+• Relevant differentiator.
+• Supporting evidence.
+
+Understand why generic claims such as "best quality" or "revolutionary AI" are often weak.`,
+      `Analyze five businesses' value propositions.
+
+Identify:
+• Who is targeted.
+• What is promised.
+• How the offer differs.
+• Whether claims are specific.
+• Whether evidence supports the claims.`,
+      `Develop three positioning statements for your selected opportunity.
+
+Use this structure:
+
+For [specific customer] who struggles with [problem], our [solution] helps achieve [result] through [method], unlike [existing alternative].
+
+Then create:
+• One-sentence offer.
+• Thirty-second explanation.
+• Three important benefits.
+• Three supporting proof requirements.
+• Five expected objections.
+
+Do not invent testimonials, guarantees, or performance evidence.`,
+      `Choose your clearest positioning statement.
+
+Explain why the intended customer would care and what evidence is still needed to justify the promise.`,
+      "Three positioning alternatives and one selected value proposition.",
+      "Can a potential buyer understand the customer, problem, outcome, and difference in thirty seconds?"
+    ),
+
+    D(
+      "Pricing Models and Contribution Economics",
+      "Learn to set preliminary prices that reflect customer value and financial constraints.",
+      [
+        "Price floor",
+        "Contribution margin",
+        "Markup",
+        "Gross margin",
+        "Willingness to pay"
+      ],
+      `Study pricing approaches:
+
+• Cost-plus.
+• Value-based.
+• Competitive.
+• Tiered.
+• Subscription.
+• Usage-based.
+• Project-based.
+
+Learn the difference between markup and margin.
+
+Practice this formula:
+
+Minimum price =
+Variable Cost ÷ (1 − Target Contribution Margin).`,
+      `Examine pricing models used by real businesses in your selected industry.
+
+Identify what customers receive at different price points.
+
+Note what pricing information is publicly available and what would require primary research.`,
+      `Complete the pricing exercise:
+
+Variable cost = $65 CAD.
+
+Target contribution margin = 40%.
+
+Calculate the minimum selling price before fixed costs.
+
+Then build your own pricing model showing:
+• Direct cost.
+• Payment fees.
+• Shipping or delivery.
+• Labor.
+• Refund allowance.
+• Contribution per sale.
+• Fixed operating expenses.
+• Break-even volume.
+
+Compare three possible price points.
+
+Add a sensitivity test for higher costs and lower sales.`,
+      `Explain why covering variable costs does not guarantee overall profitability.
+
+Identify what you would need to learn before finalizing a selling price.`,
+      "Three-scenario pricing model with contribution and break-even calculations.",
+      "Can you calculate a defensible price floor and explain the difference between margin and markup?"
+    ),
+
+    D(
+      "Designing the First Customer Offer",
+      "Package a solution so customers understand its benefits, scope, limits, and purchase conditions.",
+      [
+        "Offer design",
+        "Scope",
+        "Packaging",
+        "Service levels",
+        "Purchase friction"
+      ],
+      `Study how offers combine:
+
+• Core outcome.
+• Features.
+• Delivery.
+• Price.
+• Timeline.
+• Support.
+• Terms.
+• Risk reduction.
+
+Learn why vague deliverables, unlimited revisions, and unsupported promises create operational problems.`,
+      `Review three examples of tiered product or service offerings.
+
+Observe how providers communicate inclusions, exclusions, delivery times, upgrades, and support arrangements.`,
+      `Create three potential offer packages:
+
+1. Essential.
+2. Standard.
+3. Premium.
+
+For each define:
+• Target buyer.
+• Customer result.
+• Included deliverables.
+• Excluded work.
+• Delivery process.
+• Estimated cost.
+• Proposed price.
+• Contribution margin.
+• Support requirements.
+• Major delivery risk.
+
+Select one package suitable for a future low-cost pilot.
+
+Avoid unverified performance guarantees and artificial scarcity.`,
+      `Review your offer as both customer and operator.
+
+Is it easy to understand?
+Can it be delivered reliably?
+Does the price support the business?
+What could cause scope creep?`,
+      "Three-tier offer comparison and selected pilot offer.",
+      "Can you explain exactly what a customer receives and what it costs the business to deliver?"
+    ),
+
+    D(
+      "The First Business Opportunity Blueprint",
+      "Combine seven weeks of learning into a coherent, testable first business concept.",
+      [
+        "Business thesis",
+        "Customer evidence",
+        "Offer economics",
+        "Validation roadmap",
+        "Go/pivot/stop"
+      ],
+      `Review the full seven-week learning journey.
+
+Focus on the connection between:
+• Customer problem.
+• Market demand.
+• Competitive positioning.
+• Delivery feasibility.
+• Pricing.
+• Costs.
+• Capital risk.
+
+Understand that Week 8 will focus on validating demand, not blindly launching.`,
+      `Audit your Founder Workbook.
+
+Locate:
+• Original opportunity research.
+• Problem evidence.
+• Customer findings.
+• Competitor research.
+• Market-size estimates.
+• Pricing calculations.
+• Unresolved assumptions.
+
+Check for contradictions and unsupported conclusions.`,
+      `Prepare your First Business Opportunity Blueprint.
+
+Include:
+1. Target customer.
+2. Specific problem.
+3. Current alternatives.
+4. Proposed solution.
+5. Value proposition.
+6. Preliminary offer.
+7. Proposed price.
+8. Unit economics.
+9. Capital requirements.
+10. Production or delivery approach.
+11. Distribution hypothesis.
+12. Competitive advantage hypothesis.
+13. AI opportunities and threats.
+14. Major risks.
+15. Evidence gaps.
+
+Design three low-cost experiments for Week 8.
+
+Define a success condition and stop condition for each.`,
+      `Complete the seven-week assessment.
+
+Make one decision:
+• Proceed to validation.
+• Revise the offer.
+• Research further.
+• Reject the opportunity.
+
+Explain the decision using evidence rather than enthusiasm.
+
+Identify the three most important subjects to revisit.`,
+      "Complete business opportunity blueprint and Week 8 validation experiment plan.",
+      "Can you defend your proposed business and clearly identify what still needs to be proven?"
+    )
+  ]
+}
+
+];
+
+/* =========================================================
+   FLATTEN THE CURRICULUM
+========================================================= */
+
+const SESSIONS = [];
+
+COURSE.forEach((week,weekIndex)=>{
+  week.days.forEach((day,dayIndex)=>{
+    SESSIONS.push({
+      ...day,
+      weekIndex,
+      dayIndex,
+      globalIndex:SESSIONS.length
+    });
+  });
+});
+
+const TOTAL_SESSIONS = SESSIONS.length;
+const TOTAL_BLOCKS = TOTAL_SESSIONS * 4;
+const TOTAL_MINUTES = TOTAL_SESSIONS * 120;
+
+const STORAGE_KEY = "founder-academy.phase01.v1";
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function emptyState(){
+  return {
+    version:1,
+    completed:{},
+    notes:{},
+    weekReviews:{},
+    lastLesson:0,
+    activeView:"overview"
+  };
+}
+
+let state = emptyState();
+let activeView = "overview";
+let currentLesson = 0;
+let storageAvailable = true;
+let toastTimer = null;
+
+function isPlainObject(v){
+  return v !== null &&
+    typeof v === "object" &&
+    !Array.isArray(v);
+}
+
+function sanitizeState(raw){
+  const clean = emptyState();
+
+  if(!isPlainObject(raw)) return clean;
+
+  if(isPlainObject(raw.completed)){
+    for(let i=0;i<TOTAL_SESSIONS;i++){
+      for(let k=0;k<4;k++){
+        const id = `${i}:${k}`;
+        if(raw.completed[id] === true){
+          clean.completed[id] = true;
+        }
       }
     }
-    $('dayNavigation').innerHTML=html;
-    $('dayNavigation').querySelectorAll('[data-day]').forEach(btn=>btn.addEventListener('click',()=>showDay(Number(btn.dataset.day))));
-    $('overviewNav').classList.toggle('active',view==='scoreboard');
-    $('navPercent').textContent=Math.round(100*allComplete()/allTasks.length)+'%';
   }
-  function taskMarkup(t){
-    const done=!!state.completed[t.id],remark=state.remarks[t.id]||'',open=openRemarks.has(t.id);
-    return `<article class="task ${done?'done':''} ${remark.trim()?'has-remark':''} ${open?'open':''}" data-task="${t.id}">
-      <div class="task-row"><input type="checkbox" class="check" aria-label="Mark task complete: ${escapeHTML(t.text)}" ${done?'checked':''} data-check="${t.id}" />
-        <div class="task-body"><div class="task-line">${escapeHTML(t.text)}</div><div class="task-meta"><span class="small-pill">${t.minutes} MIN</span><span>${escapeHTML(t.type.toUpperCase())} TASK</span></div></div>
-        <button class="remarks-button ${open?'open':''}" aria-expanded="${open}" data-remark-toggle="${t.id}" type="button">${iconComment()}<span>Remarks</span><span class="remarks-indicator"></span></button>
-      </div>
-      <div class="remark-shell"><div class="remark-label">Task remarks / actual results</div>
-        <textarea class="remark-input" data-remark-input="${t.id}" placeholder="Record what happened, names of leads, outcomes, numbers, obstacles, or key insights…">${escapeHTML(remark)}</textarea>
-        <div class="input-help">Notes save instantly in this browser and export with the task ID.</div>
-      </div>
-    </article>`;
+
+  const validFields = ["output","evidence","reflection"];
+
+  if(isPlainObject(raw.notes)){
+    for(let i=0;i<TOTAL_SESSIONS;i++){
+      const record = raw.notes[i];
+
+      if(!isPlainObject(record)) continue;
+
+      clean.notes[i] = {};
+
+      for(const field of validFields){
+        if(typeof record[field] === "string"){
+          clean.notes[i][field] = record[field].slice(0,100000);
+        }
+      }
+    }
   }
-  function wireTasks(root){
-    root.querySelectorAll('[data-check]').forEach(box=>box.addEventListener('change',()=>{
-      state.completed[box.dataset.check]=box.checked;save();
-      const article=box.closest('.task');article.classList.toggle('done',box.checked);
-      updateProgress();nav();
-    }));
-    root.querySelectorAll('[data-remark-toggle]').forEach(button=>button.addEventListener('click',()=>{
-      const id=button.dataset.remarkToggle,article=button.closest('.task');const opened=!article.classList.contains('open');
-      article.classList.toggle('open',opened);button.classList.toggle('open',opened);button.setAttribute('aria-expanded',String(opened));
-      if(opened){openRemarks.add(id);article.querySelector('textarea').focus();}else openRemarks.delete(id);
-    }));
-    root.querySelectorAll('[data-remark-input]').forEach(input=>input.addEventListener('input',()=>{
-      const id=input.dataset.remarkInput;state.remarks[id]=input.value;save();input.closest('.task').classList.toggle('has-remark',!!input.value.trim());
-    }));
+
+  if(isPlainObject(raw.weekReviews)){
+    for(let i=0;i<COURSE.length;i++){
+      if(typeof raw.weekReviews[i] === "string"){
+        clean.weekReviews[i] =
+          raw.weekReviews[i].slice(0,100000);
+      }
+    }
   }
-  function updateProgress(){
-    const done=taskCount(currentDay),percent=Math.round(done/4*100),all=allComplete();
-    $('dayTaskCount').textContent=`${done} / 4 tasks completed`;
-    $('dayPercent').textContent=percent+'%';$('dayCircle').setAttribute('stroke-dashoffset',String(326.726*(1-done/4)));
-    $('sprintStat').textContent=`${all}/${allTasks.length}`;
-    const sales=Number(state.scoreboard.sales)||0,revenue=Number(state.scoreboard.revenue)||0;
-    $('clientStat').textContent=String(3+Math.max(sales,0));
-    $('revenueStat').textContent='$'+Math.round(45+Math.max(revenue,0)).toLocaleString('en-CA');
+
+  if(
+    Number.isInteger(raw.lastLesson) &&
+    raw.lastLesson >= 0 &&
+    raw.lastLesson < TOTAL_SESSIONS
+  ){
+    clean.lastLesson = raw.lastLesson;
   }
-  function showDay(n){
-    currentDay=Math.min(30,Math.max(1,n));view='day';save();
-    $('dayView').classList.remove('hidden');$('scoreboardView').classList.add('hidden');
-    const d=PLAN[currentDay-1],week=Math.min(5,Math.ceil(currentDay/7));
-    $('breadcrumb').innerHTML=`MISSION CONTROL <span class="slash">/</span> WEEK ${String(week).padStart(2,'0')} <span class="slash">/</span> <b>DAY ${String(currentDay).padStart(2,'0')}</b>`;
-    $('heroEyebrow').textContent=`WEEK ${String(week).padStart(2,'0')} • ${formattedDate(currentDay,{weekday:'long',month:'long',day:'numeric',year:'numeric'}).toUpperCase()}`;
-    $('heroTitle').textContent=`Day ${String(currentDay).padStart(2,'0')} — ${d.title}`;
-    $('heroDescription').textContent=d.focus+' Two hours of focused business execution plus one separate hour of marketing education.';
-    $('businessTasks').innerHTML=allTasks.filter(t=>t.day===currentDay&&t.type==='Business').map(taskMarkup).join('');
-    $('learningTask').innerHTML=taskMarkup(allTasks.find(t=>t.day===currentDay&&t.type==='Marketing'));
-    wireTasks($('businessTasks'));wireTasks($('learningTask'));
-    $('dailyNotes').value=state.dayNotes['day_'+String(currentDay).padStart(2,'0')]||'';
-    $('nextDayButton').disabled=currentDay===30;
-    $('nextCaption').textContent=currentDay===30?'Thirty days complete. Download your JSON and review the scoreboard.':`Tomorrow: ${PLAN[currentDay].title.toLowerCase()}.`;
-    $('nextDayButton').textContent=currentDay===30?'Sprint complete':'Next day →';
-    updateProgress();nav();window.scrollTo({top:0,behavior:'auto'});
+
+  if(["overview","lesson","workbook"].includes(raw.activeView)){
+    clean.activeView = raw.activeView;
   }
-  function renderScoreboard(){
-    const html=SCORE_FIELDS.map(f=>`<div class="metric-box"><label for="score-${f.id}">${escapeHTML(f.label)}</label><input type="number" min="0" step="any" inputmode="decimal" id="score-${f.id}" placeholder="${escapeHTML(f.placeholder)}" value="${escapeHTML(state.scoreboard[f.id]??'')}" /><div class="metric-target">TARGET: ${escapeHTML(f.target)}</div></div>`).join('');
-    $('scoreboardInputs').innerHTML=html;
-    SCORE_FIELDS.forEach(f=>{$('score-'+f.id).addEventListener('input',e=>{state.scoreboard[f.id]=e.target.value;save();});});
-    $('timeline').innerHTML=PLAN.map((d,i)=>{
-      const c=taskCount(i+1),height=20+60*c/4;
-      return `<button data-day="${i+1}" title="Day ${i+1}: ${escapeHTML(d.title)} — ${c}/4 tasks complete" class="${c===4?'complete':c?'part':''}" style="height:${height}px" aria-label="Open day ${i+1}"></button>`;
-    }).join('');
-    $('timeline').querySelectorAll('[data-day]').forEach(el=>el.addEventListener('click',()=>showDay(Number(el.dataset.day))));
-    const fraction=allComplete()/allTasks.length;
-    $('allPercent').textContent=Math.round(fraction*100)+'%';$('allCircle').setAttribute('stroke-dashoffset',String(326.726*(1-fraction)));
+
+  return clean;
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if(raw){
+      state = sanitizeState(JSON.parse(raw));
+    }
+
+    const testKey = "__founder_academy_test__";
+
+    localStorage.setItem(testKey,"1");
+    localStorage.removeItem(testKey);
+  }catch(error){
+    storageAvailable = false;
+    console.warn("Local storage unavailable:",error);
   }
-  function showScoreboard(){
-    view='scoreboard';$('dayView').classList.add('hidden');$('scoreboardView').classList.remove('hidden');
-    $('breadcrumb').innerHTML='MISSION CONTROL <span class="slash">/</span> <b>SCOREBOARD</b>';
-    renderScoreboard();nav();window.scrollTo({top:0,behavior:'auto'});
+
+  currentLesson = state.lastLesson;
+  activeView = state.activeView;
+
+  updateStorageStatus();
+}
+
+function saveState(){
+  state.lastLesson = currentLesson;
+  state.activeView = activeView;
+
+  try{
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(state)
+    );
+
+    storageAvailable = true;
+  }catch(error){
+    storageAvailable = false;
+    console.warn("Unable to save progress:",error);
   }
-  function notify(message,isError=false){
-    const box=$('toast');box.textContent=message;box.classList.toggle('error',isError);box.classList.add('visible');
-    clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>box.classList.remove('visible'),3500);
+
+  updateStorageStatus();
+}
+
+function updateStorageStatus(){
+  const el = document.getElementById("storageStatus");
+
+  if(!el) return;
+
+  if(storageAvailable){
+    el.textContent = "Local progress enabled";
+    el.style.color = "var(--mint)";
+  }else{
+    el.textContent = "Local saving unavailable";
+    el.style.color = "var(--red)";
   }
-  function getExport(){
-    const remarks={},taskCatalog={},completion={};
-    allTasks.forEach(t=>{
-      taskCatalog[t.id]={day:t.day,category:t.type,minutes:t.minutes,task:t.text};
-      // Exact requested key:value remarks format, with stable task IDs.
-      remarks[t.id]=state.remarks[t.id]||'';
-      completion[t.id]=!!state.completed[t.id];
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value){
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    character => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    })[character]
+  );
+}
+
+function pct(a,b){
+  if(!b) return 0;
+  return Math.round(100*a/b);
+}
+
+function isDone(sessionIndex,blockIndex){
+  return state.completed[
+    `${sessionIndex}:${blockIndex}`
+  ] === true;
+}
+
+function sessionDoneCount(index){
+  let count = 0;
+
+  for(let k=0;k<4;k++){
+    if(isDone(index,k)) count++;
+  }
+
+  return count;
+}
+
+function allDoneCount(){
+  let count = 0;
+
+  for(let i=0;i<TOTAL_SESSIONS;i++){
+    count += sessionDoneCount(i);
+  }
+
+  return count;
+}
+
+function completedSessions(){
+  return SESSIONS.filter(
+    (_,index)=>sessionDoneCount(index)===4
+  ).length;
+}
+
+function completedWeeks(){
+  return COURSE.filter((_,weekIndex)=>{
+    const start = weekIndex*4;
+
+    return [0,1,2,3].every(
+      offset=>sessionDoneCount(start+offset)===4
+    );
+  }).length;
+}
+
+function completedMinutes(){
+  let minutes = 0;
+
+  for(let i=0;i<TOTAL_SESSIONS;i++){
+    for(let k=0;k<4;k++){
+      if(isDone(i,k)){
+        minutes += SESSION_MINUTES[k];
+      }
+    }
+  }
+
+  return minutes;
+}
+
+function note(index,field){
+  return state.notes[index]?.[field] || "";
+}
+
+function hasWrittenOutput(index){
+  return note(index,"output").trim().length > 0;
+}
+
+function writtenOutputs(){
+  return SESSIONS.filter(
+    (_,index)=>hasWrittenOutput(index)
+  ).length;
+}
+
+function progressBar(value){
+  return `
+    <div class="progress-rail">
+      <div class="progress-fill" style="width:${value}%"></div>
+    </div>
+  `;
+}
+
+function notify(message,isError=false){
+  const toast = $("toast");
+
+  toast.textContent = message;
+  toast.classList.toggle("error",isError);
+  toast.classList.add("visible");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(()=>{
+    toast.classList.remove("visible");
+  },3200);
+}
+
+function changeView(view,index=null){
+  if(index !== null){
+    currentLesson = Math.max(
+      0,
+      Math.min(TOTAL_SESSIONS-1,index)
+    );
+  }
+
+  activeView = view;
+  saveState();
+  render();
+
+  window.scrollTo({
+    top:0,
+    behavior:"instant"
+  });
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function renderSidebar(){
+  const navigation = $("courseNavigation");
+
+  let html = "";
+
+  COURSE.forEach((week,weekIndex)=>{
+    const start = weekIndex*4;
+
+    const weekBlocks =
+      [0,1,2,3].reduce(
+        (sum,offset)=>sum+sessionDoneCount(start+offset),
+        0
+      );
+
+    html += `
+      <div class="week-nav">
+        <div class="week-heading">
+          <span>WEEK ${String(weekIndex+1).padStart(2,"0")}</span>
+          <span>${weekBlocks}/16</span>
+        </div>
+    `;
+
+    week.days.forEach((day,dayIndex)=>{
+      const index = start+dayIndex;
+      const count = sessionDoneCount(index);
+
+      let dotClass = "";
+
+      if(count===4) dotClass="done";
+      else if(count>0) dotClass="partial";
+
+      const active =
+        activeView==="lesson" &&
+        currentLesson===index;
+
+      html += `
+        <button
+          type="button"
+          class="day-nav ${active?"active":""}"
+          data-lesson="${index}"
+          ${active?'aria-current="page"':""}
+        >
+          <span class="day-number">
+            ${String(index+1).padStart(2,"0")}
+          </span>
+          <span class="day-name">
+            ${escapeHTML(day.title)}
+          </span>
+          <span class="dot ${dotClass}"></span>
+        </button>
+      `;
     });
+
+    html += "</div>";
+  });
+
+  navigation.innerHTML = html;
+
+  $("sidePercent").textContent =
+    pct(allDoneCount(),TOTAL_BLOCKS)+"%";
+
+  document.querySelectorAll("[data-view]").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.view===activeView
+    );
+  });
+}
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+function renderOverview(){
+  const overallProgress = pct(
+    allDoneCount(),
+    TOTAL_BLOCKS
+  );
+
+  let weeksHTML = "";
+
+  COURSE.forEach((week,weekIndex)=>{
+    const start = weekIndex*4;
+
+    const finished = [0,1,2,3].reduce(
+      (sum,offset)=>{
+        return sum+sessionDoneCount(start+offset);
+      },0
+    );
+
+    const percentage = pct(finished,16);
+
+    weeksHTML += `
+      <article class="panel panel-pad week-card">
+        <div class="week-card-top">
+          <span class="week-index">
+            WEEK ${String(weekIndex+1).padStart(2,"0")}
+          </span>
+          <span class="tag">${percentage}% COMPLETE</span>
+        </div>
+
+        <h3>${escapeHTML(week.title)}</h3>
+        <p>${escapeHTML(week.subtitle)}</p>
+
+        ${progressBar(percentage)}
+
+        <div class="progress-caption">
+          <span>${finished}/16 task blocks</span>
+          <span>8 hours planned</span>
+        </div>
+
+        <div class="card-bottom">
+          <button
+            class="btn full"
+            data-lesson="${start}"
+          >
+            Open Week ${weekIndex+1} →
+          </button>
+        </div>
+      </article>
+    `;
+  });
+
+  $("overviewView").innerHTML = `
+    <section class="hero">
+      <div class="eyebrow">Phase 01 · Founder Development</div>
+
+      <h1>Learn to Build Businesses.<br>
+      Not Just Chase Ideas.</h1>
+
+      <p>
+        A structured seven-week curriculum for understanding
+        business fundamentals, making better decisions,
+        discovering real problems, researching markets,
+        and designing a financially sensible customer offer.
+      </p>
+
+      <div class="hero-tags">
+        <span class="tag"><b>7</b> Weeks</span>
+        <span class="tag"><b>28</b> Sessions</span>
+        <span class="tag"><b>56</b> Hours</span>
+        <span class="tag">4 Days / Week</span>
+        <span class="tag">2 Hours / Day</span>
+      </div>
+    </section>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Overall Progress</div>
+        <div class="metric-value">${overallProgress}%</div>
+        <div class="metric-detail">
+          ${allDoneCount()} of ${TOTAL_BLOCKS} task blocks
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">Sessions Completed</div>
+        <div class="metric-value">${completedSessions()}/28</div>
+        <div class="metric-detail">Four blocks per session</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">Weeks Completed</div>
+        <div class="metric-value">${completedWeeks()}/7</div>
+        <div class="metric-detail">Curriculum checkpoints</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">Planned Work Checked</div>
+        <div class="metric-value">
+          ${(completedMinutes()/60).toFixed(1)}h
+        </div>
+        <div class="metric-detail">
+          Based on completed blocks, not a live timer
+        </div>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <div>
+        <h2>The Seven-Week Roadmap</h2>
+        <p>
+          Each week contains four independent,
+          two-hour learning sessions.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid">${weeksHTML}</div>
+
+    <div class="section-heading">
+      <div>
+        <h2>Your Learning Method</h2>
+        <p>
+          Every session follows the same four-part structure.
+        </p>
+      </div>
+    </div>
+
+    <div class="method-grid">
+      <div class="method">
+        <b>20 min · Learn</b>
+        <p>
+          Understand definitions, principles,
+          formulas, and frameworks.
+        </p>
+      </div>
+
+      <div class="method">
+        <b>25 min · Investigate</b>
+        <p>
+          Examine actual industries, businesses,
+          customers, and evidence.
+        </p>
+      </div>
+
+      <div class="method">
+        <b>60 min · Apply</b>
+        <p>
+          Create calculations, matrices,
+          research, or business documents.
+        </p>
+      </div>
+
+      <div class="method">
+        <b>15 min · Review</b>
+        <p>
+          Explain what you learned,
+          identify errors, and record gaps.
+        </p>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <div>
+        <h2>The Founder Standard</h2>
+      </div>
+    </div>
+
+    <section class="panel panel-pad">
+      <div class="info-box">
+        <h3>Evidence is more important than optimism.</h3>
+        <p>
+          This program does not require you to start a
+          company immediately. A well-researched decision
+          to reject a bad business idea is valuable progress.
+
+          Use real observations, verify important facts,
+          preserve assumptions separately, and avoid
+          significant spending before validation.
+        </p>
+      </div>
+
+      <p style="margin:20px 0 0;font-size:12px">
+        <strong>Canada note:</strong>
+        Research and learning are the default activities.
+        Before conducting commercial operations, paid work,
+        or outreach on behalf of a business, verify your
+        immigration/work authorization, applicable
+        provincial rules, age-related requirements,
+        and relevant marketing/privacy laws.
+      </p>
+    </section>
+  `;
+}
+
+/* =========================================================
+   LESSON
+========================================================= */
+
+function renderLesson(){
+  const session = SESSIONS[currentLesson];
+  const week = COURSE[session.weekIndex];
+
+  const done = sessionDoneCount(currentLesson);
+  const percentage = pct(done,4);
+
+  const activityHTML = session.steps.map((step,index)=>{
+    const completed = isDone(currentLesson,index);
+
+    return `
+      <article
+        class="activity ${completed?"completed":""}"
+        data-type="${BLOCK_KEYS[index]}"
+        data-activity="${index}"
+      >
+        <div class="activity-top">
+          <input
+            type="checkbox"
+            class="checkbox"
+            data-task="${currentLesson}:${index}"
+            ${completed?"checked":""}
+            aria-label="Complete ${escapeHTML(BLOCK_NAMES[index])}"
+          >
+
+          <div class="activity-main">
+            <div class="activity-title">
+              <strong>${BLOCK_NAMES[index]}</strong>
+              <span class="time-label">
+                ${SESSION_MINUTES[index]} MINUTES
+              </span>
+            </div>
+
+            <p>${escapeHTML(step)}</p>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  const concepts = session.concepts.map(
+    concept=>`<span class="concept">${escapeHTML(concept)}</span>`
+  ).join("");
+
+  const checkpointHTML = session.dayIndex===3 ? `
+    <section class="week-checkpoint">
+      <h3>Week ${session.weekIndex+1} Checkpoint</h3>
+      <p>${escapeHTML(week.checkpoint)}</p>
+
+      <label class="field-label" for="weekReview">
+        Weekly performance review
+      </label>
+
+      <textarea
+        class="textarea"
+        id="weekReview"
+        data-week-note="${session.weekIndex}"
+        placeholder="What did I understand? What evidence did I gather? What mistakes did I make? What should I revisit?"
+      >${escapeHTML(state.weekReviews[session.weekIndex]||"")}</textarea>
+
+      <div class="field-help">
+        Weekly notes are saved automatically.
+      </div>
+    </section>
+  ` : "";
+
+  $("lessonView").innerHTML = `
+    <section class="hero">
+      <div class="eyebrow">
+        Week ${String(session.weekIndex+1).padStart(2,"0")}
+        · Day ${session.dayIndex+1}
+        · Session ${String(currentLesson+1).padStart(2,"0")} / 28
+      </div>
+
+      <h1>${escapeHTML(session.title)}</h1>
+
+      <p>${escapeHTML(session.goal)}</p>
+
+      <div class="hero-tags">
+        <span class="tag"><b>120 min</b> Total</span>
+        <span class="tag"><b>4</b> Learning Blocks</span>
+        <span class="tag">
+          <b id="heroTaskCount">${done}/4</b> Completed
+        </span>
+        <span class="tag">
+          ${escapeHTML(week.title)}
+        </span>
+      </div>
+    </section>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Today's Progress</div>
+        <div class="metric-value" id="lessonPercent">
+          ${percentage}%
+        </div>
+        <div class="metric-detail" id="lessonTaskCount">
+          ${done} of 4 blocks checked
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">Lesson Number</div>
+        <div class="metric-value">
+          ${String(currentLesson+1).padStart(2,"0")}
+        </div>
+        <div class="metric-detail">Of 28 sessions</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">Planned Duration</div>
+        <div class="metric-value">2h</div>
+        <div class="metric-detail">Four focused study blocks</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">Study Outputs</div>
+        <div class="metric-value" id="outputCount">
+          ${writtenOutputs()}
+        </div>
+        <div class="metric-detail">
+          Session deliverables with written notes
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-layout">
+
+      <div class="stack">
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Today's Learning Objective</h3>
+            <span class="tag">FOUNDATION</span>
+          </div>
+
+          <div class="panel-content">
+            <div class="lesson-goal">
+              ${escapeHTML(session.goal)}
+            </div>
+
+            <div class="concepts">${concepts}</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Today's Execution Plan</h3>
+            <span class="tag" id="executionCount">
+              ${done} / 4 COMPLETE
+            </span>
+          </div>
+
+          ${activityHTML}
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Expected Deliverable</h3>
+            <span class="tag">OUTPUT REQUIRED</span>
+          </div>
+
+          <div class="panel-content">
+            <div class="info-box">
+              <h3>Your Artifact</h3>
+              <p>${escapeHTML(session.artifact)}</p>
+            </div>
+
+            <div class="field-group" style="margin-top:20px">
+              <label class="field-label" for="outputNotes">
+                Deliverable / My Work
+              </label>
+
+              <textarea
+                class="textarea large"
+                id="outputNotes"
+                data-note="output"
+                placeholder="Record your calculations, business analysis, findings, framework, or a description of the document you created. Be specific."
+              >${escapeHTML(note(currentLesson,"output"))}</textarea>
+
+              <div class="field-help">
+                You can write here or summarize a separate document.
+                All text is included in JSON exports.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        ${checkpointHTML}
+
+        <div class="lesson-bottom">
+          <button
+            class="btn"
+            data-prev
+            ${currentLesson===0?"disabled":""}
+          >
+            ← Previous Session
+          </button>
+
+          <div>
+            <button class="btn" data-view="overview">
+              Overview
+            </button>
+
+            <button
+              class="btn primary"
+              data-next
+              ${currentLesson===TOTAL_SESSIONS-1?"disabled":""}
+            >
+              Next Session →
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="stack">
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Research & Evidence</h3>
+          </div>
+
+          <div class="panel-content">
+            <label class="field-label" for="evidenceNotes">
+              Sources, Facts and Assumptions
+            </label>
+
+            <textarea
+              class="textarea"
+              id="evidenceNotes"
+              data-note="evidence"
+              placeholder="Source / date / fact learned / what remains an assumption..."
+            >${escapeHTML(note(currentLesson,"evidence"))}</textarea>
+
+            <div class="field-help">
+              Record source names or links and dates.
+              Separate evidence from estimates.
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Learning Reflection</h3>
+          </div>
+
+          <div class="panel-content">
+            <label class="field-label" for="reflectionNotes">
+              What I Learned
+            </label>
+
+            <textarea
+              class="textarea"
+              id="reflectionNotes"
+              data-note="reflection"
+              placeholder="What clicked? What confused me? What would I do differently?"
+            >${escapeHTML(note(currentLesson,"reflection"))}</textarea>
+
+            <div class="field-help">
+              Record errors, unanswered questions,
+              and lessons worth revisiting.
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Mastery Test</h3>
+          </div>
+
+          <div class="panel-content">
+            <div class="info-box amber">
+              <h3>Can You Explain This?</h3>
+              <p>${escapeHTML(session.mastery)}</p>
+            </div>
+
+            <p style="font-size:12px;margin-top:15px">
+              Answer this from memory before consulting
+              your notes or asking AI for assistance.
+            </p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>AI Tutor</h3>
+            <span class="tag">STUDY ASSISTANT</span>
+          </div>
+
+          <div class="panel-content">
+            <p style="font-size:12px">
+              Copy a session-specific prompt to your
+              preferred AI model. It includes the learning
+              objective, concepts, assignments, and assessment.
+            </p>
+
+            <button
+              class="btn primary full"
+              data-copy-prompt
+            >
+              Copy AI Tutor Prompt
+            </button>
+
+            <div class="field-help">
+              The prompt asks your tutor to teach,
+              question, correct, and assess you rather
+              than simply completing the assignment.
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Study Rules</h3>
+          </div>
+
+          <div class="panel-content">
+            <div class="info-box">
+              <h3>Rules of the Founder</h3>
+              <p>
+                Do not confuse research with validation.
+                Do not invent financial data.
+                Do not copy AI answers without understanding.
+                Do not treat estimated demand as actual sales.
+                Do not commit significant capital merely
+                because an idea sounds exciting.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  `;
+}
+
+/* =========================================================
+   WORKBOOK
+========================================================= */
+
+function renderWorkbook(){
+  const count = writtenOutputs();
+
+  let rows = "";
+
+  COURSE.forEach((week,weekIndex)=>{
+    rows += `
+      <div class="section-heading">
+        <div>
+          <h2>Week ${weekIndex+1} — ${escapeHTML(week.title)}</h2>
+          <p>${escapeHTML(week.checkpoint)}</p>
+        </div>
+      </div>
+
+      <section class="panel panel-pad">
+    `;
+
+    week.days.forEach((day,dayIndex)=>{
+      const index = weekIndex*4+dayIndex;
+      const checked = sessionDoneCount(index);
+      const written = hasWrittenOutput(index);
+
+      rows += `
+        <div class="workbook-row">
+          <div>
+            <div class="workbook-title">
+              Day ${String(index+1).padStart(2,"0")}
+              — ${escapeHTML(day.title)}
+            </div>
+
+            <div class="workbook-sub">
+              ${escapeHTML(day.artifact)}
+            </div>
+
+            <div class="workbook-sub" style="margin-top:7px">
+              ${checked}/4 learning blocks completed
+            </div>
+          </div>
+
+          <div style="text-align:right">
+            <div class="workbook-status ${written?"done":""}">
+              ${written?"OUTPUT RECORDED":"OUTPUT PENDING"}
+            </div>
+
+            <button
+              class="btn small"
+              data-lesson="${index}"
+              style="margin-top:9px"
+            >
+              Open
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    rows += "</section>";
+  });
+
+  $("workbookView").innerHTML = `
+    <section class="hero">
+      <div class="eyebrow">Your Evidence Portfolio</div>
+
+      <h1>The Founder Workbook.</h1>
+
+      <p>
+        A record of your thinking, research,
+        calculations, business ideas, decisions,
+        and lessons learned over seven weeks.
+      </p>
+
+      <div class="hero-tags">
+        <span class="tag">
+          <b>${count}</b> Written Deliverables
+        </span>
+        <span class="tag">
+          <b>${completedSessions()}</b> Completed Sessions
+        </span>
+        <span class="tag">
+          <b>28</b> Total Deliverables
+        </span>
+      </div>
+    </section>
+
+    <section class="panel panel-pad">
+      <div class="info-box">
+        <h3>Your Work Is Your Real Progress.</h3>
+        <p>
+          A checked activity means you marked the task
+          complete. A recorded deliverable provides
+          evidence of your work. Neither automatically
+          proves mastery.
+
+          Periodically explain key ideas without notes,
+          redo calculations, and challenge your own
+          conclusions.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:9px;margin-top:18px;flex-wrap:wrap">
+        <button class="btn primary" data-export>
+          Export Complete Workbook (JSON)
+        </button>
+
+        <button class="btn danger" data-reset>
+          Reset All Progress
+        </button>
+      </div>
+
+      <p style="font-size:11px;margin:12px 0 0">
+        JSON exports include task definitions,
+        checkmarks, deliverables, evidence notes,
+        reflections, and weekly reviews.
+      </p>
+    </section>
+
+    ${rows}
+  `;
+}
+
+/* =========================================================
+   MASTER RENDER
+========================================================= */
+
+function render(){
+  const views = ["overview","lesson","workbook"];
+
+  views.forEach(view=>{
+    const element = $(`${view}View`);
+
+    element.classList.toggle(
+      "active",
+      activeView===view
+    );
+  });
+
+  if(activeView==="overview"){
+    renderOverview();
+
+    $("breadcrumb").innerHTML =
+      'FOUNDER ACADEMY <span>/</span> MISSION CONTROL';
+  }
+
+  if(activeView==="lesson"){
+    renderLesson();
+
+    const session = SESSIONS[currentLesson];
+
+    $("breadcrumb").innerHTML = `
+      FOUNDER ACADEMY
+      <span>/</span>
+      WEEK ${String(session.weekIndex+1).padStart(2,"0")}
+      <span>/</span>
+      DAY ${String(currentLesson+1).padStart(2,"0")}
+    `;
+  }
+
+  if(activeView==="workbook"){
+    renderWorkbook();
+
+    $("breadcrumb").innerHTML =
+      'FOUNDER ACADEMY <span>/</span> WORKBOOK';
+  }
+
+  $("continueButton").textContent =
+    activeView==="lesson" ?
+    "Current Session" :
+    "Continue Learning →";
+
+  renderSidebar();
+}
+
+/* =========================================================
+   LIVE PROGRESS UPDATE
+========================================================= */
+
+function updateLessonProgress(){
+  if(activeView!=="lesson") return;
+
+  const done = sessionDoneCount(currentLesson);
+  const percentage = pct(done,4);
+
+  const percentElement = $("lessonPercent");
+  const countElement = $("lessonTaskCount");
+  const executionElement = $("executionCount");
+  const heroElement = $("heroTaskCount");
+
+  if(percentElement){
+    percentElement.textContent = percentage+"%";
+  }
+
+  if(countElement){
+    countElement.textContent =
+      `${done} of 4 blocks checked`;
+  }
+
+  if(executionElement){
+    executionElement.textContent =
+      `${done} / 4 COMPLETE`;
+  }
+
+  if(heroElement){
+    heroElement.textContent = `${done}/4`;
+  }
+
+  const outputElement = $("outputCount");
+
+  if(outputElement){
+    outputElement.textContent = writtenOutputs();
+  }
+}
+
+/* =========================================================
+   AI TUTOR PROMPT
+========================================================= */
+
+function buildTutorPrompt(index){
+  const session = SESSIONS[index];
+  const week = COURSE[session.weekIndex];
+
+  const evidence = note(index,"evidence");
+  const reflection = note(index,"reflection");
+
+  return `
+YOU ARE MY BUSINESS EDUCATION TUTOR.
+
+CONTEXT
+I am studying entrepreneurship as a beginner.
+I live in Canada and am transitioning toward permanent residence.
+My starting capital is limited.
+I study four days per week, two hours per day.
+I want to build sound business judgment, not chase overnight wealth.
+I am interested in traditional businesses, niche industries,
+physical products, services, AI, automation, and robotics.
+
+I am not asking you to trade stocks or select investments.
+
+CURRENT LESSON
+Week: ${session.weekIndex+1}
+Day: ${session.dayIndex+1}
+Overall session: ${index+1}/28
+
+Week theme:
+${week.title}
+
+Session title:
+${session.title}
+
+LEARNING OBJECTIVE
+${session.goal}
+
+KEY CONCEPTS
+${session.concepts.map((x,i)=>`${i+1}. ${x}`).join("\n")}
+
+STUDY PLAN
+
+BLOCK 1 — 20 MINUTES — LEARN
+${session.steps[0]}
+
+BLOCK 2 — 25 MINUTES — INVESTIGATE
+${session.steps[1]}
+
+BLOCK 3 — 60 MINUTES — APPLY
+${session.steps[2]}
+
+BLOCK 4 — 15 MINUTES — REVIEW
+${session.steps[3]}
+
+EXPECTED DELIVERABLE
+${session.artifact}
+
+MASTERY QUESTION
+${session.mastery}
+
+MY EXISTING RESEARCH NOTES
+${evidence || "No research notes recorded yet."}
+
+MY EXISTING REFLECTIONS
+${reflection || "No reflections recorded yet."}
+
+HOW YOU MUST TEACH ME
+
+1. Begin by checking my prior knowledge with two short questions.
+
+2. Teach the underlying principles accurately,
+   using plain language and practical business examples.
+
+3. Use Canadian context when relevant.
+   Explain when a law, rule, price, or market claim
+   needs verification with an official or current source.
+
+4. Prefer real business examples.
+   If you use invented numbers or hypothetical companies,
+   label them clearly.
+
+5. Explain formulas step by step.
+   Require me to attempt calculations before showing solutions.
+
+6. Ask me to make decisions and defend my reasoning.
+
+7. Challenge weak assumptions and confirmation bias.
+   Distinguish facts, estimates, hypotheses, and opinions.
+
+8. Do not complete my assignments automatically.
+   Help me produce the work myself.
+
+9. When I give an answer, identify mistakes,
+   missing evidence, and possible alternatives.
+
+10. Keep the discussion appropriate for a solo beginner
+    with limited starting capital.
+
+11. Include the effects of AI, automation, or robotics
+    when they materially affect the business topic.
+
+12. Do not encourage unauthorized business activity.
+    Note relevant Canadian immigration, age,
+    registration, tax, privacy, or work-authorization
+    constraints when applicable.
+
+13. At the end, assess my understanding from 0–5:
+
+    0 = No understanding.
+    1 = Recognizes basic terms.
+    2 = Can explain with assistance.
+    3 = Can apply independently.
+    4 = Can analyze tradeoffs and errors.
+    5 = Can defend decisions using evidence.
+
+14. Give me a short list of knowledge gaps
+    and one focused revision exercise.
+
+15. Do not advance to the next session
+    until I ask you to continue.
+
+START WITH THE TWO DIAGNOSTIC QUESTIONS.
+  `.trim();
+}
+
+/* =========================================================
+   CLIPBOARD
+========================================================= */
+
+async function copyText(text){
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  }catch(error){
+    console.warn("Clipboard API unavailable:",error);
+  }
+
+  const input = document.createElement("textarea");
+
+  input.value = text;
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  input.style.left = "-9999px";
+
+  document.body.appendChild(input);
+  input.focus();
+  input.select();
+
+  let copied = false;
+
+  try{
+    copied = document.execCommand("copy");
+  }catch(error){
+    copied = false;
+  }
+
+  input.remove();
+
+  return copied;
+}
+
+/* =========================================================
+   BACKUP AND RESTORE
+========================================================= */
+
+function createExport(){
+  const detailedSessions = SESSIONS.map((session,index)=>{
     return {
-      format:'visualflares-30-day-sprint',version:1,
-      exported_at:new Date().toISOString(),
-      business:'Visual Flares',owner:'Ghost',period:{start:'2026-10-08',end:'2026-11-06'},
-      baseline:{clients:3,monthly_recurring_revenue_cad:45,instagram_followers:1000},
-      remarks,task_catalog:taskCatalog,completed:completion,
-      daily_notes:Object.fromEntries(PLAN.map((d,i)=>[`day_${String(i+1).padStart(2,'0')}`,state.dayNotes[`day_${String(i+1).padStart(2,'0')}`]||''])),
-      scoreboard:{...state.scoreboard},
-      summary:{completed_tasks:allComplete(),total_tasks:allTasks.length,days_fully_completed:PLAN.filter((_,i)=>taskCount(i+1)===4).length},
-      saved_state:{version:1,completed:{...state.completed},remarks:{...state.remarks},dayNotes:{...state.dayNotes},scoreboard:{...state.scoreboard},lastDay:currentDay}
+      session_number:index+1,
+      week:session.weekIndex+1,
+      day_of_week:session.dayIndex+1,
+      title:session.title,
+      learning_goal:session.goal,
+      concepts:session.concepts,
+      activities:session.steps.map((text,k)=>({
+        block:BLOCK_KEYS[k],
+        planned_minutes:SESSION_MINUTES[k],
+        instructions:text,
+        completed:isDone(index,k)
+      })),
+      expected_deliverable:session.artifact,
+      mastery_question:session.mastery,
+      notes:{
+        output:note(index,"output"),
+        evidence:note(index,"evidence"),
+        reflection:note(index,"reflection")
+      },
+      completed_blocks:sessionDoneCount(index)
     };
-  }
-  function download(){
-    const blob=new Blob([JSON.stringify(getExport(),null,2)],{type:'application/json;charset=utf-8'});
-    const url=URL.createObjectURL(blob),a=document.createElement('a');
-    a.href=url;a.download=`visualflares-ghost-30day-remarks-${new Date().toISOString().slice(0,10)}.json`;
-    document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);
-    notify('JSON backup downloaded. Ready to share with Coach.');
-  }
-  function validateAndPrepareBackup(json){
-    if(!json||typeof json!=='object'||json.format!=='visualflares-30-day-sprint'||json.version!==1){throw new Error('Not a valid Visual Flares 30-day backup.');}
-    const saved=json.saved_state||{};
-    const completed=saved.completed||json.completed||{};
-    const remarks=saved.remarks||json.remarks||{};
-    const dayNotes=saved.dayNotes||json.daily_notes||{};
-    const scoreboard=saved.scoreboard||json.scoreboard||{};
-    for(const value of [completed,remarks,dayNotes,scoreboard]){if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('The backup contains an invalid field.');}
-    return {version:1,completed:Object.fromEntries(Object.keys(taskById).map(k=>[k,completed[k]===true])),remarks:Object.fromEntries(Object.keys(taskById).map(k=>[k,typeof remarks[k]==='string'?remarks[k]:''])),dayNotes:Object.fromEntries(PLAN.map((_,i)=>{const k='day_'+String(i+1).padStart(2,'0');return [k,typeof dayNotes[k]==='string'?dayNotes[k]:''];})),scoreboard:Object.fromEntries(SCORE_FIELDS.map(f=>[f.id,typeof scoreboard[f.id]==='string'||typeof scoreboard[f.id]==='number'?String(scoreboard[f.id]):''])),lastDay:Number.isInteger(saved.lastDay)&&saved.lastDay>=1&&saved.lastDay<=30?saved.lastDay:1};
-  }
-  function closeImport(){importPending=null;$('importDialog').classList.remove('show');$('importFile').value='';}
-  $('downloadButton').addEventListener('click',download);
-  $('importButton').addEventListener('click',()=>$('importFile').click());
-  $('importFile').addEventListener('change',async e=>{
-    const file=e.target.files?.[0];if(!file)return;
-    try{const json=JSON.parse(await file.text());importPending=validateAndPrepareBackup(json);$('importDialog').classList.add('show');}
-    catch(err){notify('Import failed: '+err.message,true);$('importFile').value='';}
   });
-  $('cancelImport').addEventListener('click',closeImport);
-  $('importDialog').addEventListener('click',e=>{if(e.target===$('importDialog'))closeImport();});
-  $('confirmImport').addEventListener('click',()=>{
-    if(!importPending)return;state=importPending;currentDay=state.lastDay;openRemarks.clear();save();closeImport();showDay(currentDay);notify('Backup restored successfully.');
-  });
-  $('dailyNotes').addEventListener('input',e=>{state.dayNotes['day_'+String(currentDay).padStart(2,'0')]=e.target.value;save();});
-  $('overviewNav').addEventListener('click',showScoreboard);
-  $('nextDayButton').addEventListener('click',()=>{if(currentDay<30)showDay(currentDay+1);});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('importDialog').classList.contains('show'))closeImport();});
-  load();showDay(currentDay);
-  </script>
-</body>
-</html>
+
+  return {
+    format:COURSE_ID,
+    version:1,
+    exported_at:new Date().toISOString(),
+
+    course:{
+      title:"Founder Academy — Business Mastery",
+      phase:"First 7 Weeks",
+      total_weeks:7,
+      sessions_per_week:4,
+      minutes_per_session:120,
+      planned_hours:56
+    },
+
+    summary:{
+      completed_task_blocks:allDoneCount(),
+      total_task_blocks:TOTAL_BLOCKS,
+      completed_sessions:completedSessions(),
+      total_sessions:TOTAL_SESSIONS,
+      completed_weeks:completedWeeks(),
+      recorded_deliverables:writtenOutputs(),
+      planned_minutes_checked:completedMinutes()
+    },
+
+    sessions:detailedSessions,
+
+    weekly_reviews:COURSE.map((week,index)=>({
+      week:index+1,
+      title:week.title,
+      objective:week.objective,
+      checkpoint:week.checkpoint,
+      reflection:state.weekReviews[index]||""
+    })),
+
+    saved_state:state
+  };
+}
+
+function exportJSON(){
+  const output = createExport();
+
+  const data = JSON.stringify(output,null,2);
+
+  const blob = new Blob(
+    [data],
+    {type:"application/json;charset=utf-8"}
+  );
+
+  const url = URL.createObjectURL(blob);
+
+  const anchor = document.createElement("a");
+  anchor.href = url;
+
+  const date = new Date().toISOString().slice(0,10);
+
+  anchor.download =
+    `founder-academy-7weeks-${date}.json`;
+
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+
+  notify("Workbook backup exported successfully.");
+}
+
+async function importJSON(file){
+  if(!file) return;
+
+  try{
+    const text = await file.text();
+    const json = JSON.parse(text);
+
+    if(
+      !isPlainObject(json) ||
+      json.format!==COURSE_ID ||
+      json.version!==1 ||
+      !isPlainObject(json.saved_state)
+    ){
+      throw new Error("Not a recognized Founder Academy backup.");
+    }
+
+    const confirmed = confirm(
+      "Restore this backup?\n\n" +
+      "Current local progress, notes, and checkmarks " +
+      "will be replaced."
+    );
+
+    if(!confirmed) return;
+
+    state = sanitizeState(json.saved_state);
+    currentLesson = state.lastLesson;
+    activeView = state.activeView;
+
+    saveState();
+    render();
+
+    notify("Backup restored successfully.");
+  }catch(error){
+    notify("Import failed: "+error.message,true);
+  }
+}
+
+/* =========================================================
+   RESET
+================================================
