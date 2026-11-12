@@ -1,263 +1,725 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Marine Engineering Study Plan</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<style>
-:root{
-  --bg:#F2F5F7; --surface:#FFFFFF; --surface2:#E7EDF1; --fg:#12212B; --muted:#4F616D; --line:#C9D5DC;
-  --accent:#0A6C86; --accent-ink:#FFFFFF; --accent-soft:#D5EAF1; --brass:#80530A; --brass-soft:#F3E4C4; --test:#A03812; --test-soft:#F8DDD1;
-  --display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
-  --body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0D1A22; --surface:#13242E; --surface2:#1B303C; --fg:#E4EDF2; --muted:#9DB1BD; --line:#2A4352;
-    --accent:#5BC0DB; --accent-ink:#06222B; --accent-soft:#173946; --brass:#E4B864; --brass-soft:#3A2D12; --test:#F29B77; --test-soft:#43231A;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0D1A22; --surface:#13242E; --surface2:#1B303C; --fg:#E4EDF2; --muted:#9DB1BD; --line:#2A4352;
-  --accent:#5BC0DB; --accent-ink:#06222B; --accent-soft:#173946; --brass:#E4B864; --brass-soft:#3A2D12; --test:#F29B77; --test-soft:#43231A;
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);}
-a{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:1040px;margin-inline:auto;padding-inline:16px}
-h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c2530">
+  <meta name="description" content="Marine Engineering — 52-week college preparation curriculum with a detailed plan for the first seven weeks.">
+  <title>Marine Engineering · Study Atlas</title>
+  <style>
+    :root{color-scheme:light;--ink:#122b33;--navy:#0c2530;--navy2:#143946;--teal:#127c82;--teal2:#0d636d;--sea:#72c7b9;--sand:#e4ae68;--paper:#f4f6f4;--surface:#fff;--surface2:#ecf3f1;--subtle:#e4ece9;--line:#dce5e2;--muted:#64757a;--muted2:#8b999a;--shadow:0 14px 38px rgba(11,44,48,.055);--radius:16px;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:Inter,"Aptos",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    [data-theme="dark"]{color-scheme:dark;--ink:#dcebea;--navy:#07181f;--navy2:#0e3440;--teal:#80d5c5;--teal2:#71c6b7;--sea:#99e1d5;--sand:#dcb478;--paper:#091b22;--surface:#102934;--surface2:#15323c;--subtle:#193842;--line:#2a4850;--muted:#a4b5b7;--muted2:#83999f;--shadow:0 14px 40px rgba(0,0,0,.15)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}body{margin:0;min-width:320px;background:var(--paper);font-family:var(--sans);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--sand);outline-offset:3px}::selection{background:#83cfc5;color:#072c32}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .site-header{position:relative;z-index:9;background:var(--navy);color:#ebf5f3;border-bottom:1px solid rgba(255,255,255,.11)}.header-inner{max-width:1440px;margin:auto;padding:15px 42px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:13px;text-decoration:none;min-width:0}.brand-emblem{width:38px;height:38px;border:1px solid rgba(161,218,208,.48);border-radius:10px;display:grid;place-items:center;color:#b3efe2;flex:none;background:rgba(255,255,255,.025)}.brand-copy{display:grid;line-height:1.15}.brand-copy strong{font-size:13px;letter-spacing:.16em;font-weight:750}.brand-copy small{font:500 10px var(--mono);color:#98b7b8;letter-spacing:.095em;margin-top:5px}.header-actions{display:flex;align-items:center;gap:18px}.header-quiet{font:500 11px var(--mono);color:#b4cacc;letter-spacing:.04em}.icon-button{width:38px;height:38px;border:1px solid rgba(196,229,223,.25);border-radius:11px;background:transparent;color:#e5f3ef;display:grid;place-items:center}.icon-button:hover{background:rgba(255,255,255,.09)}
+    .hero{background:radial-gradient(circle at 72% 20%,rgba(49,116,119,.30),transparent 42%),linear-gradient(130deg,var(--navy),#10323d 84%);color:white;position:relative;overflow:hidden}.hero:before{content:"";pointer-events:none;position:absolute;inset:0;opacity:.24;background-image:linear-gradient(rgba(150,212,206,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(150,212,206,.11) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(100deg,transparent 15%,#000 100%)}.hero-inner{position:relative;max-width:1440px;margin:auto;min-height:335px;padding:62px 42px 55px;display:grid;grid-template-columns:minmax(0,1fr) 320px;align-items:center;gap:54px}.hero-eyebrow,.eyebrow{font:700 11px var(--mono);letter-spacing:.16em;text-transform:uppercase}.hero-eyebrow{color:#92d7c9;display:flex;align-items:center;gap:10px}.eyebrow-line{width:23px;height:1px;background:#8bdecf}.hero h1{font-size:clamp(40px,5.2vw,70px);line-height:1.05;letter-spacing:-.052em;font-weight:800;margin:20px 0 15px;max-width:760px}.hero h1 em{font-style:normal;color:#a3e0d4}.hero-desc{max-width:660px;color:#b8cfce;line-height:1.7;font-size:15px;margin:0}.hero-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}.primary-btn,.ghost-btn{border-radius:10px;padding:12px 16px;font-size:13px;font-weight:750;display:inline-flex;align-items:center;gap:11px;text-decoration:none}.primary-btn{border:1px solid #aee7d9;background:#b5eadc;color:#0b353a;box-shadow:0 9px 25px #0002}.primary-btn:hover{background:#dbfff6}.ghost-btn{border:1px solid rgba(190,230,221,.25);background:rgba(255,255,255,.04);color:#e8f9f5}.ghost-btn:hover{background:rgba(255,255,255,.10)}.arrow{font-size:18px;font-weight:600;line-height:1}.blueprint{width:300px;height:260px;align-self:center;position:relative;margin:auto;opacity:.93}.blueprint svg{width:100%;height:100%;overflow:visible}.blueprint-caption{position:absolute;bottom:0;right:-8px;font:600 9px var(--mono);letter-spacing:.1em;color:#9acbc7}
+    .mode-bar{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:8;box-shadow:0 4px 18px rgba(4,35,38,.035)}.mode-inner{max-width:1440px;margin:auto;padding:12px 42px;display:flex;align-items:center;justify-content:space-between;gap:15px}.mode-tabs{display:flex;gap:5px;border:1px solid var(--line);padding:4px;border-radius:11px;background:var(--paper)}.mode-tab{border:0;border-radius:8px;padding:8px 13px;background:transparent;color:var(--muted);font-weight:730;font-size:12px;display:flex;gap:9px;align-items:center;white-space:nowrap}.mode-tab.active{background:var(--navy2);color:#eafff9;box-shadow:0 2px 6px #0002}.mode-tab:not(.active):hover{color:var(--ink);background:var(--subtle)}.tab-count{font:700 10px var(--mono);opacity:.75;border:1px solid currentColor;border-radius:5px;padding:2px 4px}.mode-utils{display:flex;align-items:center;gap:12px}.nav-progress{display:flex;align-items:center;gap:9px;color:var(--muted);font:650 11px var(--mono);white-space:nowrap}.meter{height:6px;width:90px;background:var(--subtle);border-radius:10px;overflow:hidden}.meter-fill{height:100%;background:var(--teal);width:0;transition:width .3s}.print-btn{background:none;border:0;color:var(--muted);font-size:12px;font-weight:700;padding:8px;display:flex;gap:6px;align-items:center}.print-btn:hover{color:var(--teal)}
+    .content-wrap{max-width:1440px;margin:auto;padding:36px 42px 100px;display:grid;grid-template-columns:235px minmax(0,1fr);gap:42px}.sidebar{align-self:start;position:sticky;top:96px}.side-panel{border:1px solid var(--line);background:var(--surface);border-radius:15px;overflow:hidden}.side-top{padding:18px 17px 13px;border-bottom:1px solid var(--line)}.side-kicker{font:700 10px var(--mono);letter-spacing:.13em;color:var(--muted);margin:0 0 9px}.side-top strong{font-size:15px;letter-spacing:-.025em}.side-top p{margin:5px 0 0;color:var(--muted);font-size:12px}.side-nav{padding:10px}.side-link{display:flex;align-items:center;gap:11px;text-decoration:none;border-radius:9px;padding:10px 9px;transition:background .2s}.side-link:hover{background:var(--surface2)}.side-link .side-index{font:700 11px var(--mono);color:var(--teal);width:24px;flex:none}.side-link .side-label{font-size:12px;font-weight:700;line-height:1.3}.side-link .side-check{margin-left:auto;color:var(--teal);opacity:0;font-weight:800}.side-link.completed .side-check{opacity:1}.side-bottom{border-top:1px solid var(--line);padding:16px}.side-bottom strong{display:block;font:700 10px var(--mono);color:var(--muted);letter-spacing:.08em}.side-bottom p{color:var(--muted);font-size:12px;margin:5px 0 0}.side-bottom .tally{font:750 26px var(--sans);color:var(--ink);margin:4px 0 6px;letter-spacing:-.04em}.side-bottom .tally small{font-size:14px;color:var(--muted)}.side-reset{background:none;border:0;padding:8px 0 0;color:var(--teal);font-size:11px;font-weight:730;text-decoration:underline;text-underline-offset:3px}.sidebar-note{border:1px dashed var(--line);padding:14px 16px;border-radius:12px;margin-top:13px;color:var(--muted);font-size:11px;line-height:1.7}.sidebar-note strong{display:block;color:var(--ink);margin-bottom:4px;font-size:11px}
+    .content-main{min-width:0}.intro-label{font:750 10px var(--mono);color:var(--teal);letter-spacing:.16em;text-transform:uppercase}.content-header{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:19px}.content-header h2{font-size:clamp(29px,3.0vw,42px);line-height:1.13;letter-spacing:-.045em;margin:8px 0 8px}.content-header p{font-size:14px;color:var(--muted);line-height:1.65;max-width:760px;margin:0}.mini-actions{display:flex;gap:5px;align-items:center;flex:none}.small-btn{border:1px solid var(--line);padding:8px 10px;background:var(--surface);border-radius:8px;font-size:11px;font-weight:720;color:var(--muted)}.small-btn:hover{color:var(--teal);border-color:var(--teal)}
+    .overview-card{border:1px solid var(--line);border-radius:14px;background:var(--surface);display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:27px;box-shadow:var(--shadow);overflow:hidden}.overview-cell{padding:17px 18px;border-right:1px solid var(--line)}.overview-cell:last-child{border:0}.overview-cell .ov-label{display:block;font:750 10px var(--mono);letter-spacing:.09em;color:var(--muted);margin-bottom:7px}.overview-cell strong{font-size:20px;line-height:1.15;letter-spacing:-.04em}.overview-cell small{font-size:11px;color:var(--muted);display:block;margin-top:5px}.notice{background:var(--surface2);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:13px 17px;font-size:12px;line-height:1.65;color:var(--muted);margin:0 0 27px}.notice strong{color:var(--ink)}
+    .week-detail{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);margin:0 0 21px;overflow:hidden;box-shadow:var(--shadow);scroll-margin-top:95px}.week-detail:not([open]){box-shadow:none}.week-summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:17px;padding:21px 23px;min-height:102px}.week-summary::-webkit-details-marker{display:none}.week-summary::marker{content:""}.week-detail[open]>.week-summary{border-bottom:1px solid var(--line)}.week-num{width:57px;height:59px;background:var(--navy2);color:#c1efe3;border-radius:12px;display:grid;place-items:center;font:750 24px var(--mono);flex:none}.summary-title{flex:1;min-width:0}.summary-eyebrow{font:750 10px var(--mono);letter-spacing:.09em;color:var(--teal);text-transform:uppercase}.dot-sep{padding:0 7px;color:var(--muted2)}.summary-title h3{font-size:clamp(20px,2vw,27px);line-height:1.18;letter-spacing:-.035em;margin:5px 0 5px}.summary-title p{color:var(--muted);font:600 11px var(--mono);margin:0}.week-hours{font:700 11px var(--mono);background:var(--surface2);padding:7px 9px;border-radius:7px;color:var(--muted);white-space:nowrap}.summary-chevron{font-size:23px;color:var(--teal);display:inline-block;transition:transform .2s}.week-detail[open] .summary-chevron{transform:rotate(180deg)}.week-body{padding:23px}.objective-block{background:var(--surface2);padding:17px 20px;border-radius:10px;border:1px solid var(--subtle)}.teal{color:var(--teal)}.objective-block p{font-size:15px;font-weight:590;line-height:1.6;margin:8px 0 0;max-width:780px}.subsection-header{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:31px 0 16px}.subsection-header .section-kicker{font:750 10px var(--mono);color:var(--teal);letter-spacing:.13em}.subsection-header h4{font-size:20px;letter-spacing:-.035em;line-height:1.2;margin:5px 0 0}.subsection-header>span{font-size:11px;color:var(--muted);text-align:right}.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.topic-card{border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px;display:grid;grid-template-columns:30px 1fr;gap:8px;min-width:0}.topic-index{color:var(--teal);font:750 11px var(--mono);padding-top:3px}.topic-card h4{font-size:14px;letter-spacing:-.01em;line-height:1.35;margin:0 0 8px}.topic-card ul{padding-left:16px;margin:0;color:var(--muted);font-size:12px;line-height:1.7}.topic-card li+li{margin-top:4px}.topic-card li::marker{color:var(--teal)}
+    .schedule-heading{margin-top:36px}.days-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.day-card{border:1px solid var(--line);background:var(--paper);border-radius:10px;overflow:hidden}.day-heading{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}.day-rail{font:760 11px var(--mono);color:var(--teal);width:29px}.day-heading strong{font-size:12px;line-height:1.2}.small-muted{font:650 10px var(--mono);color:var(--muted);margin-left:auto;white-space:nowrap}.day-sessions{padding:12px 14px 14px}.day-session+.day-session{border-top:1px dashed var(--line);margin-top:12px;padding-top:11px}.session-tag{font:760 10px var(--mono);color:var(--teal);letter-spacing:.08em}.session-tag.practice{color:#b3864e}.day-session p{font-size:12px;color:var(--muted);line-height:1.6;margin:4px 0 0}.verify-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}.competencies-panel,.output-panel,.exclusion-panel{border:1px solid var(--line);border-radius:10px;padding:17px 19px}.competencies-panel h5{font-size:13px;margin:0 0 12px}.competencies-panel ol{padding-left:23px;margin:0;color:var(--muted);font-size:12px;line-height:1.65}.competencies-panel li{padding-left:4px;margin-bottom:8px}.competencies-panel li::marker{color:var(--teal);font:700 11px var(--mono)}.output-stack{display:flex;flex-direction:column;gap:10px}.panel-kicker{font:750 10px var(--mono);letter-spacing:.1em;color:var(--teal)}.output-stack p{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.65}.exclusion-panel{background:var(--paper);border-style:dashed}.exclusion-panel .panel-kicker{color:#aa8358}.formula-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:18px;margin-top:25px}.formula-label{font:750 10px var(--mono);color:var(--muted);letter-spacing:.09em;margin-right:6px}.formula-pill{border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:var(--paper);font:600 12px var(--mono);white-space:normal}.week-footer{margin-top:23px;border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}.complete-label{display:flex;gap:10px;align-items:center;cursor:pointer}.complete-label input,.tiny-check input{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--muted2);border-radius:6px;background:var(--surface);display:grid;place-items:center;cursor:pointer;flex:none}.complete-label input:checked,.tiny-check input:checked{background:var(--teal);border-color:var(--teal)}.complete-label input:checked:after,.tiny-check input:checked:after{content:"✓";font:bold 14px var(--sans);color:var(--paper)}.checkbox-copy strong{font-size:12px;display:block}.checkbox-copy small{display:block;font-size:11px;color:var(--muted)}.jump-link{color:var(--teal);font-size:11px;font-weight:740;text-decoration:none}.jump-link:hover{text-decoration:underline}
+    .roadmap-top-actions{display:flex;align-items:center;gap:10px;margin:24px 0 22px}.search-box{position:relative;flex:1}.search-box svg{position:absolute;top:50%;left:14px;transform:translateY(-50%);color:var(--muted);width:17px;height:17px}.search-box input{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 15px 12px 40px;color:var(--ink);font-size:13px;outline:0}.search-box input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,125,125,.1)}.result-count{font:650 11px var(--mono);color:var(--muted);white-space:nowrap}.phase-block{border:1px solid var(--line);background:var(--surface);border-radius:15px;padding:24px;margin-bottom:21px;scroll-margin-top:90px;box-shadow:var(--shadow)}.phase-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.phase-code{font:750 10px var(--mono);color:var(--teal);letter-spacing:.14em}.phase-range{font:650 10px var(--mono);color:var(--muted);text-align:right}.phase-block h3{font-size:clamp(21px,2.2vw,29px);letter-spacing:-.038em;line-height:1.17;margin:12px 0 8px}.phase-desc{font-size:13px;color:var(--muted);line-height:1.6;margin:0}.phase-dates{font:600 11px var(--mono);color:var(--teal);margin-top:9px}.roadmap-weeks{border-top:1px solid var(--line);margin-top:20px}.roadmap-week{display:grid;grid-template-columns:46px minmax(0,1fr) 26px;gap:15px;padding:17px 2px;border-bottom:1px solid var(--line);align-items:start}.roadmap-week:last-child{border-bottom:0;padding-bottom:0}.roadmap-num{font:780 16px var(--mono);letter-spacing:-.04em;color:var(--teal)}.roadmap-week-content h4{font-size:14px;letter-spacing:-.012em;margin:0 0 5px;line-height:1.35}.roadmap-week-content p{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 6px}.date-mini{font:600 10px var(--mono);color:var(--muted2)}.date-mini b{padding:0 5px}.tiny-check{cursor:pointer;padding-top:1px}.tiny-check input{width:18px;height:18px;border-radius:5px}.tiny-check input:checked:after{font-size:12px}.milestone-banner{border:1px solid var(--teal);background:var(--surface2);border-radius:12px;display:flex;gap:14px;padding:18px;margin:0 0 21px}.milestone-symbol{color:var(--teal);font-size:26px}.milestone-banner strong{font-size:13px}.milestone-banner p{color:var(--muted);font-size:12px;margin:4px 0 0}.empty-results{padding:45px 15px;text-align:center;color:var(--muted);font-size:14px}.footnote{border-top:1px solid var(--line);margin-top:36px;padding-top:19px;color:var(--muted);font-size:11px;line-height:1.65}.footnote strong{color:var(--ink)}.footer{max-width:1440px;margin:auto;border-top:1px solid var(--line);padding:24px 42px 40px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font:600 10px var(--mono);letter-spacing:.04em}
+    @media(max-width:1100px){.content-wrap{grid-template-columns:195px minmax(0,1fr);gap:24px;padding:30px 28px 85px}.hero-inner,.header-inner,.mode-inner,.footer{padding-left:28px;padding-right:28px}.blueprint{width:240px}.hero-inner{grid-template-columns:minmax(0,1fr) 240px;gap:15px}.topic-card{padding:15px 12px;grid-template-columns:22px 1fr}}
+    @media(max-width:900px){.content-wrap{display:block;padding:28px 20px 80px}.sidebar{display:none}.hero-inner,.header-inner,.mode-inner,.footer{padding-left:20px;padding-right:20px}.hero-inner{min-height:300px;grid-template-columns:1fr}.blueprint{display:none}.hero h1{max-width:820px}.header-quiet{display:none}.overview-cell{padding:14px}.overview-cell strong{font-size:17px}}
+    @media(max-width:620px){.header-inner{padding:12px 16px}.brand-copy strong{font-size:11px}.brand-copy small{font-size:9px}.hero-inner{padding:38px 18px 40px;min-height:0}.hero h1{font-size:clamp(38px,9vw,50px);margin:15px 0}.hero-desc{font-size:13px}.hero-buttons{gap:8px}.primary-btn,.ghost-btn{font-size:12px;padding:11px 13px}.mode-inner{padding:10px 12px}.mode-tabs{width:100%;gap:3px}.mode-tab{flex:1;justify-content:center;font-size:11px;padding:8px 6px}.nav-progress,.print-btn{display:none}.content-wrap{padding:23px 12px 60px}.content-header{align-items:start;flex-direction:column}.content-header h2{font-size:29px}.content-header p{font-size:13px}.mini-actions{align-self:flex-end}.overview-card{grid-template-columns:1fr 1fr}.overview-cell:nth-child(2){border-right:0}.overview-cell:nth-child(-n+2){border-bottom:1px solid var(--line)}.overview-cell strong{font-size:17px}.week-summary{padding:15px 13px;gap:11px;min-height:83px}.week-num{width:43px;height:49px;font-size:19px;border-radius:9px}.summary-title h3{font-size:18px}.summary-eyebrow{font-size:9px}.summary-title p{font-size:10px}.week-hours{display:none}.week-body{padding:13px}.objective-block{padding:14px}.objective-block p{font-size:13px}.subsection-header>span{font-size:10px}.subsection-header h4{font-size:18px}.topic-grid,.days-grid,.verify-grid{grid-template-columns:1fr}.topic-card{grid-template-columns:25px 1fr;padding:14px}.day-heading{padding:10px 12px}.day-sessions{padding:10px 12px}.competencies-panel,.output-panel,.exclusion-panel{padding:14px}.formula-pill{font-size:10px}.week-footer{align-items:flex-start}.phase-block{padding:17px 14px}.phase-block h3{font-size:22px}.roadmap-week{grid-template-columns:34px minmax(0,1fr) 22px;gap:9px}.roadmap-num{font-size:14px}.roadmap-week-content h4{font-size:13px}.roadmap-week-content p{font-size:11.5px}.roadmap-top-actions{flex-wrap:wrap}.footer{padding:18px 15px 30px;font-size:9px;flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+    @media print{*{box-shadow:none!important;scroll-behavior:auto!important}@page{margin:15mm}body{background:#fff!important;color:#15252a!important}.site-header,.mode-bar,.hero-buttons,.sidebar,.mini-actions,.roadmap-top-actions,.week-footer,.footer,.blueprint{display:none!important}.hero{background:white!important;color:#122b33!important;border-bottom:2px solid #122b33}.hero:before{display:none}.hero-inner{min-height:0;display:block;padding:0 0 15px}.hero-eyebrow,.hero h1 em{color:#15767e!important}.hero h1{font-size:32px;margin:9px 0}.hero-desc{color:#3d4c50!important}.content-wrap{padding:20px 0!important;display:block!important;max-width:none}.week-detail{break-inside:avoid-page;margin-bottom:15px}.week-summary{padding:11px}.week-body{padding:12px}.topic-card,.day-card,.competencies-panel,.output-panel,.exclusion-panel{break-inside:avoid}.week-num{background:#173744!important;color:#fff!important;print-color-adjust:exact}.topic-grid,.days-grid,.verify-grid{grid-template-columns:1fr 1fr}.subsection-header{margin-top:20px}.phase-block{break-inside:auto}.roadmap-week{break-inside:avoid}.notice{background:#eee!important}.footnote{color:#666}a{text-decoration:none}}
+  </style>
+</head>
+<body id="curriculum-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#curriculum-top" aria-label="Study Atlas home">
+        <span class="brand-emblem" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="2"/><path d="m12 3.8 1.6 6.4L20.2 12l-6.6 1.8L12 20.2l-1.6-6.4L3.8 12l6.6-1.8L12 3.8Z"/></svg></span>
+        <span class="brand-copy"><strong>STUDY ATLAS</strong><small>MARINE ENGINEERING / CANADA</small></span>
+      </a>
+      <div class="header-actions"><span class="header-quiet">COLLEGE PREPARATION · 2026—27</span><button id="themeButton" class="icon-button" type="button" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"><svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 16.4A8.5 8.5 0 0 1 7.6 4a8.5 8.5 0 1 0 12.4 12.4Z"/></svg></button></div>
+    </div>
+  </header>
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-inner"><div class="hero-copy">
+      <div class="hero-eyebrow"><span class="eyebrow-line"></span>YOUR PERSONAL LEARNING CHART</div>
+      <h1 id="heroTitle">Engineering begins<br><em>before college.</em></h1>
+      <p class="hero-desc">A carefully sequenced, college-independent marine engineering foundation. Study in focused one-hour blocks, prove your understanding, and protect your weekends.</p>
+      <div class="hero-buttons"><button class="primary-btn" type="button" data-switch-view="roadmap">View complete 12-month plan <span class="arrow">↗</span></button><button class="ghost-btn" type="button" data-switch-view="details">Explore first 7 weeks <span class="arrow">↓</span></button></div>
+    </div>
+    <div class="blueprint" aria-hidden="true"><svg viewBox="0 0 310 270" fill="none"><circle cx="155" cy="127" r="105" stroke="#88bdba" stroke-width="1" opacity=".5" stroke-dasharray="4 7"/><circle cx="155" cy="127" r="80" stroke="#aed5ce" stroke-width="1" opacity=".5"/><circle cx="155" cy="127" r="60" stroke="#aed5ce" stroke-width="1.1" opacity=".65"/><circle cx="155" cy="127" r="13" stroke="#b9ece3" stroke-width="1.5"/><circle cx="155" cy="127" r="5" fill="#b9ece3"/><path d="M155 114C148 84 165 65 174 60c29 28 31 50 8 62M168 127c29-12 52 1 58 12-15 35-33 43-57 25M155 140c-1 31-20 46-31 49-26-29-25-53-2-65" fill="#90d1c6" fill-opacity=".19" stroke="#9cd4c9" stroke-width="1.4"/><path d="M155 20v214M48 127h214M79 51l152 152M231 51 79 203" stroke="#7eb6b2" stroke-width=".6" stroke-dasharray="3 5" opacity=".5"/><path d="M155 6v13M155 235v13M34 127h13M263 127h13" stroke="#9acbc7" stroke-width="1.8"/><g fill="#d5b27a" font-size="10" font-family="monospace"><text x="151" y="12">N</text><text x="151" y="265">S</text><text x="20" y="131">W</text><text x="279" y="131">E</text></g><path d="M204 36h70M229 225h-70" stroke="#8cbeba" stroke-width="1" opacity=".55"/><circle cx="204" cy="36" r="3" fill="#d5b27a"/><circle cx="229" cy="225" r="3" fill="#d5b27a"/></svg><span class="blueprint-caption">FIG. 01 / PROPULSION STUDIES</span></div>
+    </div>
+  </section>
+  <nav class="mode-bar" aria-label="Curriculum views"><div class="mode-inner">
+    <div class="mode-tabs"><button id="detailsTab" type="button" class="mode-tab active" data-switch-view="details" aria-pressed="true">Detailed start <span class="tab-count">07 WEEKS</span></button><button id="roadmapTab" type="button" class="mode-tab" data-switch-view="roadmap" aria-pressed="false">Full roadmap <span class="tab-count">52 WEEKS</span></button></div>
+    <div class="mode-utils"><div class="nav-progress"><span id="navComplete">0 / 52</span><div class="meter" aria-hidden="true"><div id="navMeter" class="meter-fill"></div></div></div><button class="print-btn" type="button" id="printButton"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 15h12v6H6z"/></svg> Print current view</button></div>
+  </div></nav>
+  <div class="content-wrap" id="mainContent">
+    <aside class="sidebar" aria-label="Section navigation">
+      <div class="side-panel"><div class="side-top"><p class="side-kicker">COURSE NAVIGATION</p><strong id="sideTitle">The first 7 weeks</strong><p id="sideSubtitle">Tap a week to jump to its syllabus.</p></div>
+        <div class="side-nav" id="detailSideNav">
+          <a href="#week-01" class="side-link" data-side-week="1"><span class="side-index">01</span><span class="side-label">Engineering Arithmetic &amp; Units</span><span class="side-check">✓</span></a><a href="#week-02" class="side-link" data-side-week="2"><span class="side-index">02</span><span class="side-label">Algebra &amp; Engineering Formulas</span><span class="side-check">✓</span></a><a href="#week-03" class="side-link" data-side-week="3"><span class="side-index">03</span><span class="side-label">Engineering Geometry</span><span class="side-check">✓</span></a><a href="#week-04" class="side-link" data-side-week="4"><span class="side-index">04</span><span class="side-label">Trigonometry &amp; Vectors</span><span class="side-check">✓</span></a><a href="#week-05" class="side-link" data-side-week="5"><span class="side-index">05</span><span class="side-label">Graphs &amp; Mathematical Functions</span><span class="side-check">✓</span></a><a href="#week-06" class="side-link" data-side-week="6"><span class="side-index">06</span><span class="side-label">Motion &amp; Newton’s Laws</span><span class="side-check">✓</span></a><a href="#week-07" class="side-link" data-side-week="7"><span class="side-index">07</span><span class="side-label">Statics, Equilibrium &amp; Moments</span><span class="side-check">✓</span></a>
+        </div>
+        <div class="side-nav" id="roadmapSideNav" hidden>
+          <a href="#phase-01" class="side-link"><span class="side-index">01</span><span class="side-label">Engineering Mathematics</span></a><a href="#phase-02" class="side-link"><span class="side-index">02</span><span class="side-label">Physics &amp; Applied Mechanics</span></a><a href="#phase-03" class="side-link"><span class="side-index">03</span><span class="side-label">Marine Chemistry &amp; Materials</span></a><a href="#phase-04" class="side-link"><span class="side-index">04</span><span class="side-label">Drawings &amp; Technical Literacy</span></a><a href="#phase-05" class="side-link"><span class="side-index">05</span><span class="side-label">Marine Diesel Engines &amp; Propulsion</span></a><a href="#phase-06" class="side-link"><span class="side-index">06</span><span class="side-label">Auxiliary Systems &amp; Fluid Power</span></a><a href="#phase-07" class="side-link"><span class="side-index">07</span><span class="side-label">Marine Electricity &amp; Controls</span></a><a href="#phase-08" class="side-link"><span class="side-index">08</span><span class="side-label">Marine Auxiliary Steam Systems</span></a><a href="#phase-09" class="side-link"><span class="side-index">09</span><span class="side-label">Reinforcement &amp; College Transition</span></a>
+        </div>
+        <div class="side-bottom"><strong>TOTAL COMPLETED</strong><div class="tally"><span id="sideComplete">0</span> <small>/ 52 weeks</small></div><div class="meter" style="width:100%"><div class="meter-fill" id="sideMeter"></div></div><button class="side-reset" type="button" id="resetProgress">Reset progress</button></div>
+      </div><div class="sidebar-note"><strong>YOUR STUDY RHYTHM</strong>Mon–Thu: 2 × 60-minute sessions daily.<br>Friday to Sunday: protected.<br>Weekly assessments: aim ≥80%.</div>
+    </aside>
+    <main class="content-main">
+      <section id="detailsView" aria-labelledby="detailsTitle">
+        <div class="content-header"><div><span class="intro-label">PART 02 / DETAILED FOUNDATION</span><h2 id="detailsTitle">Your first seven weeks.</h2><p>Every week specifies exactly what to learn, what to practise, what mastery looks like, and what to leave for later. All seven detailed plans are expanded when this page opens.</p></div><div class="mini-actions"><button type="button" class="small-btn" id="expandAll">Expand all</button><button type="button" class="small-btn" id="collapseAll">Collapse all</button></div></div>
+        <div class="overview-card"><div class="overview-cell"><span class="ov-label">PERIOD</span><strong>09 Nov – 27 Dec</strong><small>2026</small></div><div class="overview-cell"><span class="ov-label">DURATION</span><strong>07 weeks</strong><small>56 learning hours</small></div><div class="overview-cell"><span class="ov-label">SCHEDULE</span><strong>Mon – Thu</strong><small>2 × 60 minutes / day</small></div><div class="overview-cell"><span class="ov-label">MASTERY TARGET</span><strong>≥80%</strong><small>Assess, mark, correct</small></div></div>
+        <p class="notice"><strong>Study rule.</strong> Work only within each week's listed topics. Review prerequisites briefly, solve problems independently, and log your mistakes. Do not treat completion of reading or videos as mastery.</p>
+        
+      <details class="week-detail" id="week-01" open data-week-detail="1">
+        <summary class="week-summary">
+          <div class="week-num">01</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 01<span class="dot-sep">·</span>Engineering mathematics</div><h3>Engineering Arithmetic &amp; Units</h3><p>Nov 09–15, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Develop reliable numerical calculation skills and understand how engineering quantities and units must be handled.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Arithmetic foundations</h4><ul><li>Order of operations, signed numbers, fractions and decimal arithmetic</li><li>Convert between fractions and decimals; calculate percentages and percentage change</li><li>Simple engineering examples involving efficiency, losses and remaining quantities</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Powers, roots &amp; precision</h4><ul><li>Squares, cubes, square roots and integer exponents</li><li>Scientific notation for large and small quantities</li><li>Decimal places, significant figures and sensible numerical precision</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Engineering measurement systems</h4><ul><li>SI base units: metre, kilogram, second and kelvin</li><li>Derived units: newton, pascal, joule and watt</li><li>Prefixes: milli, centi, kilo and mega</li><li>Unit conversion with cancellation and dimensional consistency</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Common engineering conversions</h4><ul><li>Length, area, volume and mass conversions</li><li>Pa, kPa, MPa, bar and psi; introductory feet and inches</li><li>US versus Imperial gallons; compound conversions when factors are supplied</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>Arithmetic first</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Order of operations, signed numbers, fractions and decimals</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>15–20 mixed arithmetic problems; complete some without a calculator.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Powers and percentages</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Percentages, exponent rules, squares, roots and scientific notation</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Percentage-change and scientific-notation problems using efficiency examples.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Measurement literacy</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>SI units, derived units, prefixes and significant figures</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Convert 15–20 quantities and show every conversion factor.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Check and connect</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Metric–Imperial conversions, dimensional checks and cumulative review</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>40-minute mixed assessment, marking and correction.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Calculate accurately with fractions, decimals and percentages</li><li>Express quantities in scientific notation with suitable precision</li><li>Identify the meaning of core SI and derived units</li><li>Convert standard engineering measurements, including squared and cubed units</li><li>Check dimensional consistency and present answers with units</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>One-page engineering unit reference sheet, solved conversion worksheet and marked assessment.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>About 20 mixed questions: arithmetic, percentages, notation, conversions and dimensional checks; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No advanced dimensional analysis, complex exponentials, logarithms, calculus or advanced unit systems. Formal algebra begins in Week 2.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">1 m³ = 1,000 L</span><span class="formula-pill">1 kW = 1,000 W</span><span class="formula-pill">1 MPa = 1,000 kPa</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="1"/><span class="checkbox-copy"><strong>Mark Week 01 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
 
-.top{padding-block:28px 22px}
-.eyebrow{font:500 11px/1.4 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
-h1{font-size:clamp(38px,7vw,60px);font-weight:700;letter-spacing:.005em}
-.lede{max-width:62ch;margin:12px 0 0;color:var(--muted);font-size:16px}
-.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 0}
-.phases div{border-top:2px solid var(--fg);padding-top:8px;min-width:0}
-.phases dt{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.phases dd{margin:0;font-size:14px}
+      <details class="week-detail" id="week-02" open data-week-detail="2">
+        <summary class="week-summary">
+          <div class="week-num">02</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 02<span class="dot-sep">·</span>Engineering mathematics</div><h3>Algebra &amp; Engineering Formulas</h3><p>Nov 16–22, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Manipulate equations accurately, isolate unknown quantities and translate simple engineering statements into mathematics.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Algebraic expressions</h4><ul><li>Variables, constants, coefficients and like terms</li><li>Positive and negative signs in expressions; expanding brackets</li><li>Simplification and elementary common-factor factorization</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Solving equations</h4><ul><li>Equality, inverse operations and multi-step linear equations</li><li>Brackets and variables on both sides of an equation</li><li>Checking answers using substitution</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Rearranging engineering formulas</h4><ul><li>Isolating variables in multiplication, division and basic square-root formulas</li><li>Substituting physical quantities with consistent units</li><li>Simple pressure, density, speed and efficiency relationships</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Ratio &amp; variation</h4><ul><li>Simplifying ratios and dividing a quantity in a specified ratio</li><li>Direct and inverse proportion; scaling quantities</li><li>Applications to drawing scales, consumption rates and rotational speed ratios</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>Expressions</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Variables, like terms, brackets and common-factor factorization</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Simplify and expand 15–20 expressions.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Equations</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Linear equations, inverse operations and substitution checks</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Solve 12–15 equations with increasing complexity.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Formula mastery</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Engineering formula rearrangement and unit substitution</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Rearrange eight distinct formulas, then complete numerical examples.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Variation and review</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Ratios, proportions, direct and inverse relationships</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Mixed algebra assessment including formula rearrangement and a word problem.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Simplify algebraic expressions while managing signs correctly</li><li>Solve multi-step linear equations</li><li>Rearrange a formula for any specified variable</li><li>Substitute numerical quantities with consistent units</li><li>Solve direct and inverse proportion problems</li><li>Translate a simple word problem into an equation and verify the result</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>Formula-rearrangement worksheet using at least eight formulas, solved application sheet and marked assessment.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>About 15–18 questions with an emphasis on equations and formula rearrangement; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No quadratics, simultaneous equations, complex rational expressions, matrix algebra or logarithmic equations. Simultaneous equations appear in Week 5.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">v = d / t</span><span class="formula-pill">ρ = m / V</span><span class="formula-pill">P = F / A</span><span class="formula-pill">η = useful output / input</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="2"/><span class="checkbox-copy"><strong>Mark Week 02 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
 
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-block:1px solid var(--line)}
-.barin{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;padding-block:9px}
-.barin a{font-weight:600;font-size:14px;text-decoration:none;color:var(--fg)}
-.barin a:hover{color:var(--accent);text-decoration:underline}
-.prog{margin-left:auto;display:flex;align-items:center;gap:10px;font:500 12px/1 var(--mono);color:var(--muted)}
-progress{appearance:none;-webkit-appearance:none;width:110px;height:8px;border:0;border-radius:4px;background:var(--surface2);overflow:hidden}
-progress::-webkit-progress-bar{background:var(--surface2)}
-progress::-webkit-progress-value{background:var(--accent)}
-progress::-moz-progress-bar{background:var(--accent)}
+      <details class="week-detail" id="week-03" open data-week-detail="3">
+        <summary class="week-summary">
+          <div class="week-num">03</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 03<span class="dot-sep">·</span>Engineering mathematics</div><h3>Engineering Geometry</h3><p>Nov 23–29, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Calculate lengths, areas and volumes, and interpret the dimensions of simple engineering components and storage tanks.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Geometric foundations</h4><ul><li>Basic lines, angles, triangle and rectangle properties</li><li>Radius versus diameter; perimeter versus area versus volume</li><li>Correct squared and cubed units</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Two-dimensional geometry</h4><ul><li>Perimeters of basic shapes; areas of rectangles, triangles and circles</li><li>Circular circumference and cross-section from radius or diameter</li><li>Simple compound shapes made from rectangles and triangles</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Three-dimensional geometry</h4><ul><li>Volumes of rectangular prisms and cylinders</li><li>Relationship between cross-sectional area, length and volume</li><li>Tank capacity in litres and cubic metres; partial fill of simple upright tanks</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Pythagoras &amp; diagrams</h4><ul><li>Identify the hypotenuse and calculate unknown right-triangle dimensions</li><li>Read labelled engineering sketches and select relevant formulas</li><li>Distinguish internal and external dimensions</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>Areas and shapes</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Lines, angles, triangles, rectangles, perimeter and area</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>10–12 perimeter and area problems, including compound shapes.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Circular calculations</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Radius, diameter, circumference and cross-sectional area</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Circular-area problems involving pipes, openings and plates.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Tanks and capacity</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Rectangular and cylindrical volumes, partial fill and unit conversion</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>8–10 tank-volume problems, including reverse calculations.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Geometry checkpoint</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Pythagoras, dimensioned drawings and full-week revision</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Mixed geometry assessment and correction of mistakes.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Calculate perimeters and areas of standard shapes</li><li>Determine circular areas from radius or diameter</li><li>Calculate simple tank volume and capacity</li><li>Convert between m³ and litres</li><li>Solve right-triangle length problems using Pythagoras</li><li>Read dimensioned diagrams and choose suitable formulas</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>Geometry formula sheet, annotated sketches and solved area, volume and tank-capacity problems.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>About 12–15 numerical problems, at least four based on practical engineering dimensions; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No irregular ship tank calibration, curved-surface integration, advanced solid geometry, geometric proofs or trigonometric calculations. Trigonometry begins in Week 4.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">A(circle) = πr²</span><span class="formula-pill">V(cylinder) = πr²h</span><span class="formula-pill">V(rectangular) = lwh</span><span class="formula-pill">a² + b² = c²</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="3"/><span class="checkbox-copy"><strong>Mark Week 03 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
 
-.sec{padding-block:36px 8px;scroll-margin-top:60px}
-.sech{font-size:34px;margin-bottom:8px}
-.intro{max-width:70ch;color:var(--muted);margin:0 0 20px}
+      <details class="week-detail" id="week-04" open data-week-detail="4">
+        <summary class="week-summary">
+          <div class="week-num">04</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 04<span class="dot-sep">·</span>Engineering mathematics</div><h3>Trigonometry &amp; Vectors</h3><p>Nov 30 – Dec 06, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Use angles to calculate unknown dimensions and represent forces or other directional quantities mathematically.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Right-angle trigonometry</h4><ul><li>Opposite, adjacent and hypotenuse; sine, cosine and tangent</li><li>Selecting a ratio to solve for an unknown side or angle</li><li>Inverse trigonometric functions and degree-mode calculator use</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Engineering geometry applications</h4><ul><li>Angles of elevation and depression</li><li>Horizontal and vertical dimensions of inclined members</li><li>Drawing and labelling triangles before solving</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Introduction to vectors</h4><ul><li>Scalar versus vector quantities; magnitude and direction</li><li>Coordinate axes, arrows and signed components</li><li>Basic vector addition and subtraction</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Components &amp; resultants</h4><ul><li>Resolve vectors into horizontal and vertical components</li><li>Add components, find resultant magnitude using Pythagoras</li><li>Determine direction with inverse tangent and correct quadrants</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>SOH–CAH–TOA</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Right-triangle ratios and calculator use</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>12 unknown-side and unknown-angle problems.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Dimension problems</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Inclined lengths, horizontal and vertical projections</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>8–10 applications, each with a labelled diagram.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Vector components</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Scalars, vectors, arrows, axes and resolution</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Resolve 8–10 given vectors and verify geometrically.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Resultants</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Adding vector components, magnitude, direction and revision</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Mixed trigonometry/vector assessment and corrections.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Select the correct trigonometric ratio for a right triangle</li><li>Calculate unknown sides and angles</li><li>Use trigonometric calculator functions accurately</li><li>Distinguish scalar and vector quantities</li><li>Draw vectors with direction and magnitude</li><li>Resolve vectors into perpendicular components</li><li>Calculate the magnitude and direction of a resultant</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>Trigonometry reference sheet, labelled triangle problems and vector-component worksheet.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>About 12 problems involving triangles, force components and resultants; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No dot or cross products, three-dimensional vector systems, calculus-based mechanics or general trigonometric identities. Static force equilibrium is Week 7.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">sin θ = opposite / hypotenuse</span><span class="formula-pill">cos θ = adjacent / hypotenuse</span><span class="formula-pill">tan θ = opposite / adjacent</span><span class="formula-pill">Fx = F cos θ; Fy = F sin θ</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="4"/><span class="checkbox-copy"><strong>Mark Week 04 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
 
-.phase{margin:30px 0 10px;padding-top:14px;border-top:2px solid var(--fg)}
-.phase h2{font-size:26px}
-.phase p{margin:6px 0 0;color:var(--muted);max-width:75ch}
-.block{margin-top:18px;min-width:0}
-.bh{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:baseline;background:var(--surface2);padding:10px 14px;border-radius:4px 4px 0 0}
-.code{font:600 12px/1 var(--mono);letter-spacing:.06em;color:var(--accent);white-space:nowrap}
-.bh h3{font-size:21px}
-.meta{grid-column:1 / -1;margin:4px 0 0;font:400 12px/1.5 var(--mono);color:var(--muted)}
-.weeks{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 4px 4px}
-.wk{display:grid;grid-template-columns:3rem 7.5rem minmax(0,1fr) auto;column-gap:14px;padding:12px 14px;border-top:1px solid var(--line);align-items:start}
-.wk:first-child{border-top:0}
-.wn{font:600 13px/1.6 var(--mono);color:var(--fg)}
-.wd{font:500 13px/1.4 var(--mono);display:flex;flex-direction:column}
-.wd small{font:400 11px/1.4 var(--mono);color:var(--muted)}
-.wt{display:flex;flex-direction:column;gap:2px;min-width:0}
-.wt strong{font-weight:600}
-.wt span{color:var(--muted);font-size:14px}
-.wl{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 8px;border-radius:3px;text-decoration:none;white-space:nowrap}
-.chip.test{background:var(--test-soft);color:var(--test)}
-.chip.link{background:var(--accent-soft);color:var(--accent)}
-.chip.link:hover{text-decoration:underline}
+      <details class="week-detail" id="week-05" open data-week-detail="5">
+        <summary class="week-summary">
+          <div class="week-num">05</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 05<span class="dot-sep">·</span>Engineering mathematics</div><h3>Graphs &amp; Mathematical Functions</h3><p>Dec 07–13, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Interpret relationships between engineering quantities using graphs and functions, while strengthening the algebra needed for later courses.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Coordinate systems &amp; linear graphs</h4><ul><li>Independent and dependent variables; Cartesian axes</li><li>Plotting points, straight lines and the form y = mx + c</li><li>Finding gradients, intercepts and the physical units of slopes</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Functions &amp; simultaneous equations</h4><ul><li>Function notation, input/output and elementary domain/range</li><li>Forming two linear equations from written data</li><li>Solving simultaneous linear equations by substitution and elimination</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Exponents, roots &amp; logarithms</h4><ul><li>Integer, zero and fractional powers; multiplication and division rules</li><li>Roots as fractional powers</li><li>Common logarithms as inverse powers, simple evaluations and elementary log laws</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Engineering graph interpretation</h4><ul><li>Titles, scales, axes and units; interpolation</li><li>Linear and nonlinear trends; changing gradients</li><li>Simple temperature–time and power–speed data; limits of extrapolation</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>Graphs</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Cartesian coordinates, linear equations, gradients and intercepts</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Plot three graphs from equations or data; calculate slopes.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Two unknowns</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Functions and simultaneous linear equations</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Solve eight systems using substitution and elimination.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Exponents and logs</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Exponent rules, radicals and introductory logarithms</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>12–15 structured numerical and algebraic exercises.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Mathematics checkpoint</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Engineering graphs and cumulative review of Weeks 1–5</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>60-minute checkpoint with marked errors and corrective practice.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Plot straight-line graphs from tabulated values</li><li>Find and interpret gradients and their units</li><li>Read estimated values from a graph</li><li>Use introductory function notation</li><li>Solve two simultaneous linear equations</li><li>Simplify expressions using exponent laws</li><li>Evaluate elementary powers, roots and logarithms</li><li>Interpret engineering data graphs</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>Three labelled graphs, simultaneous-equation worksheet, logarithm exercise and Weeks 1–5 mathematics formula sheet.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>60-minute cumulative mathematics assessment covering arithmetic, units, formulas, geometry, trigonometry, vectors and basic functions; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No calculus, complex numbers, matrix methods, detailed logarithmic modelling or advanced nonlinear equations. Quadratic equations can be added later if a college requires them.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">y = mx + c</span><span class="formula-pill">aᵐ × aⁿ = aᵐ⁺ⁿ</span><span class="formula-pill">log₁₀(1000) = 3</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="5"/><span class="checkbox-copy"><strong>Mark Week 05 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
 
-.dailyhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px}
-.btns{display:flex;gap:8px}
-button{font:600 13px/1 var(--body);padding:8px 12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:4px;cursor:pointer}
-button:hover{border-color:var(--accent);color:var(--accent)}
-.session{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px;margin-bottom:18px}
-.sl{margin:0 0 8px;font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.sbar{display:flex;height:16px;gap:3px}
-.sbar span{border-radius:2px;min-width:0}
-.s1{background:var(--muted)}
-.s2{background:var(--accent)}
-.s3{background:var(--brass)}
-.slegend{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px 20px;font-size:14px}
-.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px}
+      <details class="week-detail" id="week-06" open data-week-detail="6">
+        <summary class="week-summary">
+          <div class="week-num">06</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 06<span class="dot-sep">·</span>Engineering physics</div><h3>Motion &amp; Newton’s Laws</h3><p>Dec 14–20, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Describe how objects move, use basic motion equations and explain how forces affect motion.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Motion fundamentals</h4><ul><li>Distance versus displacement; speed versus velocity</li><li>Average quantities and conversions between m/s and km/h</li><li>Distance–time and displacement–time graphs; slope as velocity</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Acceleration &amp; kinematics</h4><ul><li>Positive and negative acceleration in one-dimensional motion</li><li>Velocity–time graphs, gradient and signed area under the curve</li><li>Uniform-acceleration equations and selecting a suitable formula</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Newton’s laws</h4><ul><li>Inertia, net force, mass and acceleration</li><li>Action–reaction pairs and distinguishing mass from weight</li><li>Force as a vector; gravitational acceleration</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Introductory mechanics applications</h4><ul><li>Forces acting during acceleration and deceleration</li><li>Calculating force, mass, weight and acceleration</li><li>Recognizing why constant velocity means zero net force</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>Describe motion</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Distance, displacement, speed, velocity and motion graphs</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>10–12 problems including speed conversions and graph reading.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Kinematics</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Acceleration, velocity–time graphs and uniform-acceleration equations</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>8–10 equation-based motion problems.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Force and laws</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Newton’s three laws, F = ma, mass, weight and net force</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>10–12 calculations for forces, masses and accelerations.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Mechanics checkpoint</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Combined motion/force problems and physical interpretation</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Mixed mechanics assessment and error analysis.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Distinguish distance/displacement and speed/velocity</li><li>Calculate average speed and velocity</li><li>Solve one-dimensional constant-acceleration problems</li><li>Interpret displacement–time and velocity–time graphs</li><li>Explain Newton’s laws using mechanical examples</li><li>Distinguish mass from weight</li><li>Calculate force with Newton’s second law</li><li>Explain why constant velocity implies zero net force</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>Kinematics formula sheet, annotated motion graphs, worked numerical problems and mechanics assessment.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>About 12–15 problems on motion graphs, acceleration, Newton’s laws, force and weight; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No projectile motion, circular motion, differential-equation motion, collision/momentum calculations, advanced friction or rotational dynamics.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">v = u + at</span><span class="formula-pill">s = ut + ½at²</span><span class="formula-pill">v² = u² + 2as</span><span class="formula-pill">ΣF = ma</span><span class="formula-pill">W(weight) = mg</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="6"/><span class="checkbox-copy"><strong>Mark Week 06 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
 
-details.week{border:1px solid var(--line);background:var(--surface);border-radius:4px;margin-bottom:10px;scroll-margin-top:60px}
-details.week>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3rem minmax(0,1fr) auto;column-gap:14px;align-items:center;padding:12px 14px}
-details.week>summary::-webkit-details-marker{display:none}
-details.week>summary::after{content:"";}
-.st{display:flex;flex-direction:column;min-width:0}
-.st strong{font-family:var(--display);font-size:21px;font-weight:600;line-height:1.15}
-.st small{color:var(--muted);font-size:13px}
-.wk-count{font:600 12px/1 var(--mono);color:var(--muted);background:var(--surface2);padding:6px 8px;border-radius:3px}
-details.week[open]>summary{border-bottom:1px solid var(--line)}
-details.week>summary:hover .st strong{color:var(--accent)}
-.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px}
-.day{border:1px solid var(--line);border-radius:4px;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--bg);min-width:0}
-.dh{display:flex;align-items:center;gap:8px}
-.dn{font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
-.dur{margin-left:auto;font:500 11px/1 var(--mono);color:var(--muted)}
-.day h4{font-size:20px}
-.day p{margin:0;font-size:14px}
-.lab{display:inline-block;font:600 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;padding:4px 6px;border-radius:3px;margin-right:8px;vertical-align:1px}
-.lab.learn{background:var(--accent-soft);color:var(--accent)}
-.lab.hw{background:var(--brass-soft);color:var(--brass)}
-.done{margin-top:auto;padding-top:6px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;cursor:pointer}
-.done input{width:18px;height:18px;accent-color:var(--accent);margin:0;cursor:pointer}
+      <details class="week-detail" id="week-07" open data-week-detail="7">
+        <summary class="week-summary">
+          <div class="week-num">07</div>
+          <div class="summary-title"><div class="summary-eyebrow">WEEK 07<span class="dot-sep">·</span>Applied mechanics</div><h3>Statics, Equilibrium &amp; Moments</h3><p>Dec 21–27, 2026</p></div>
+          <span class="week-hours">08 HRS</span><span class="summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="week-body">
+          <div class="objective-block"><span class="eyebrow teal">LEARNING OBJECTIVE</span><p>Analyse objects under balanced forces, construct free-body diagrams and calculate the turning effects of forces.</p></div>
+          <div class="subsection-header"><div><span class="section-kicker">01 / KNOWLEDGE</span><h4>What you’ll study</h4></div><span>Four carefully scoped units</span></div>
+          <div class="topic-grid"><article class="topic-card"><div class="topic-index">01</div><div><h4>Introduction to statics</h4><ul><li>Static equilibrium versus accelerated motion</li><li>External forces, applied loads and basic support reactions</li><li>Weight, tension, normal reaction and lines of action</li></ul></div></article><article class="topic-card"><div class="topic-index">02</div><div><h4>Free-body diagrams</h4><ul><li>Isolate the body; choose coordinate axes</li><li>Draw and label the direction, magnitude and location of external forces</li><li>Find omitted or incorrectly drawn forces</li></ul></div></article><article class="topic-card"><div class="topic-index">03</div><div><h4>Force equilibrium</h4><ul><li>Review horizontal and vertical vector components</li><li>Apply horizontal and vertical equilibrium equations</li><li>Solve simple unknown-force problems and check physical plausibility</li></ul></div></article><article class="topic-card"><div class="topic-index">04</div><div><h4>Moments &amp; rotational equilibrium</h4><ul><li>Moment as force times perpendicular distance; clockwise and anticlockwise</li><li>Moments about a pivot, torque and basic levers</li><li>Rotational equilibrium and the principle of moments</li></ul></div></article></div>
+          <div class="subsection-header schedule-heading"><div><span class="section-kicker">02 / WORK PLAN</span><h4>Monday — Thursday</h4></div><span>Eight one-hour sessions</span></div>
+          <div class="days-grid"><article class="day-card">
+          <div class="day-heading"><span class="day-rail">MON</span><strong>Statics first</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Force types, equilibrium and free-body diagrams</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Draw and label at least eight free-body diagrams.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">TUE</span><strong>Balanced forces</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Vector components and horizontal/vertical force balance</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>8–10 simple force-equilibrium calculations.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">WED</span><strong>Moments</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Moment arms, torque, levers and principle of moments</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>8–10 moment and lever problems.</p></div></div>
+        </article><article class="day-card">
+          <div class="day-heading"><span class="day-rail">THU</span><strong>Integrated mechanics</strong><span class="small-muted">2 × 60 min</span></div>
+          <div class="day-sessions"><div class="day-session"><span class="session-tag">01 · LEARN</span><p>Combined force-and-moment equilibrium and revision</p></div><div class="day-session"><span class="session-tag practice">02 · APPLY</span><p>Diagram-based mechanics assessment and corrections.</p></div></div>
+        </article></div>
+          <div class="subsection-header"><div><span class="section-kicker">03 / VERIFICATION</span><h4>Mastery & deliverables</h4></div><span>Target ≥80%</span></div>
+          <div class="verify-grid"><section class="competencies-panel"><h5>By the end of this week, you can…</h5><ol><li>Explain static equilibrium</li><li>Identify forces on a stationary body</li><li>Produce correctly labelled free-body diagrams</li><li>Resolve inclined forces into horizontal and vertical components</li><li>Apply force equilibrium equations in simple systems</li><li>Calculate moments using perpendicular distances</li><li>Distinguish clockwise and anticlockwise effects</li><li>Solve introductory lever problems</li><li>Check whether equilibrium conditions are satisfied</li></ol></section>
+             <div class="output-stack"><section class="output-panel"><div class="panel-kicker">REQUIRED OUTPUT</div><p>Annotated free-body diagrams, equilibrium problem sheet, moment worksheet and marked assessment.</p></section>
+                <section class="output-panel"><div class="panel-kicker">WEEKLY ASSESSMENT</div><p>About 10–12 problems with diagrams, force resolution, unknown forces, moments and lever equilibrium; mastery target ≥80%.</p></section>
+                <section class="exclusion-panel"><div class="panel-kicker">OUT OF SCOPE</div><p>No complex beam reactions, distributed loads, shear-force or bending-moment diagrams, structural frames, friction coefficients, advanced rotating machines or 3D statics.</p></section></div></div>
+          <div class="formula-row"><span class="formula-label">REFERENCE EQUATIONS</span><span class="formula-pill">ΣFx = 0</span><span class="formula-pill">ΣFy = 0</span><span class="formula-pill">M = F × d⊥</span><span class="formula-pill">ΣM = 0</span></div>
+          <div class="week-footer"><label class="complete-label"><input type="checkbox" data-complete-week="7"/><span class="checkbox-copy"><strong>Mark Week 07 mastered</strong><small>Only after assessment and corrections</small></span></label><a class="jump-link" href="#curriculum-top">Back to top ↑</a></div>
+        </div>
+      </details>
+      </section>
+      <section id="roadmapView" aria-labelledby="roadmapTitle" hidden>
+        <div class="content-header"><div><span class="intro-label">PART 01 / THE COMPLETE ROUTE</span><h2 id="roadmapTitle">The 52-week roadmap.</h2><p>A one-year, 416-hour foundation for Canadian marine engineering programs. Forty-two essential weeks, followed by ten weeks of revision and college transition.</p></div></div>
+        <div class="overview-card"><div class="overview-cell"><span class="ov-label">DURATION</span><strong>52 weeks</strong><small>Nov 2026 – Nov 2027</small></div><div class="overview-cell"><span class="ov-label">CAPACITY</span><strong>416 hours</strong><small>8 hours each week</small></div><div class="overview-cell"><span class="ov-label">CORE STUDY</span><strong>Weeks 01–42</strong><small>336 foundational hours</small></div><div class="overview-cell"><span class="ov-label">REINFORCEMENT</span><strong>Weeks 43–52</strong><small>80 hours / adaptable</small></div></div>
+        <p class="notice"><strong>College timing.</strong> If classes begin in September 2027, Weeks 01–42 are the pre-college priority. Weeks 43–52 should be adjusted to match actual assignments and college assessments. This plan prepares you academically but does not replace supervised practical training.</p>
+        <div class="roadmap-top-actions"><label class="search-box"><span class="sr-only">Search week topics</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 5 5"/></svg><input id="roadmapSearch" type="search" placeholder="Find a topic, skill, or week…" autocomplete="off"></label><span class="result-count" id="resultCount">52 weeks</span></div>
+        <p id="noResults" class="empty-results" hidden>No matching weeks. Try a different term.</p>
+        
+      <section class="phase-block" id="phase-01" data-phase="01">
+        <div class="phase-top"><span class="phase-code">PHASE 01</span><span class="phase-range">Weeks 01–05 · 40 HOURS</span></div>
+        <h3>Engineering Mathematics</h3><p class="phase-desc">Build computational fluency before beginning physics and engineering applications.</p>
+        <div class="phase-dates">Nov 09 – Dec 13, 2026</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Engineering arithmetic and units Fractions, decimals, percentages, scientific notation, significant figures, SI prefixes and dimensional conversions. Engineering Mathematics week 1">
+            <div class="roadmap-num">01</div>
+            <div class="roadmap-week-content"><h4>Engineering arithmetic and units</h4><p>Fractions, decimals, percentages, scientific notation, significant figures, SI prefixes and dimensional conversions.</p><span class="date-mini">Nov 09–15, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 1 mastered"><input type="checkbox" data-complete-week="1"/><span class="sr-only">Mark Week 1 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Algebra and engineering formulas Simplifying expressions, linear equations, formula rearrangement, ratios, direct and inverse proportion. Engineering Mathematics week 2">
+            <div class="roadmap-num">02</div>
+            <div class="roadmap-week-content"><h4>Algebra and engineering formulas</h4><p>Simplifying expressions, linear equations, formula rearrangement, ratios, direct and inverse proportion.</p><span class="date-mini">Nov 16–22, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 2 mastered"><input type="checkbox" data-complete-week="2"/><span class="sr-only">Mark Week 2 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Engineering geometry Pythagoras, perimeter, areas, volumes of cylinders and rectangular tanks, surface area and capacity conversions. Engineering Mathematics week 3">
+            <div class="roadmap-num">03</div>
+            <div class="roadmap-week-content"><h4>Engineering geometry</h4><p>Pythagoras, perimeter, areas, volumes of cylinders and rectangular tanks, surface area and capacity conversions.</p><span class="date-mini">Nov 23–29, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 3 mastered"><input type="checkbox" data-complete-week="3"/><span class="sr-only">Mark Week 3 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Trigonometry and vectors Sine, cosine, tangent, angles, resolving simple forces into components and calculating resultants. Engineering Mathematics week 4">
+            <div class="roadmap-num">04</div>
+            <div class="roadmap-week-content"><h4>Trigonometry and vectors</h4><p>Sine, cosine, tangent, angles, resolving simple forces into components and calculating resultants.</p><span class="date-mini">Nov 30 – Dec 06, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 4 mastered"><input type="checkbox" data-complete-week="4"/><span class="sr-only">Mark Week 4 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Graphs and mathematical functions Linear graphs, gradients, simultaneous equations, powers, roots, elementary logarithms and engineering graph interpretation. Engineering Mathematics week 5">
+            <div class="roadmap-num">05</div>
+            <div class="roadmap-week-content"><h4>Graphs and mathematical functions</h4><p>Linear graphs, gradients, simultaneous equations, powers, roots, elementary logarithms and engineering graph interpretation.</p><span class="date-mini">Dec 07–13, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 5 mastered"><input type="checkbox" data-complete-week="5"/><span class="sr-only">Mark Week 5 complete</span></label>
+          </article></div>
+      </section>
 
-.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px}
-.notes h3{font-size:22px;margin-bottom:6px}
-.notes p{margin:0 0 8px;color:var(--muted)}
-.notes>div{min-width:0}
-.foot{padding-block:28px 40px;color:var(--muted);font-size:13px}
-.foot p{margin:0;border-top:1px solid var(--line);padding-top:14px}
+      <section class="phase-block" id="phase-02" data-phase="02">
+        <div class="phase-top"><span class="phase-code">PHASE 02</span><span class="phase-range">Weeks 06–11 · 48 HOURS</span></div>
+        <h3>Physics &amp; Applied Mechanics</h3><p class="phase-desc">Understand the physical principles that support machinery, fluids and heat.</p>
+        <div class="phase-dates">Dec 14, 2026 – Jan 24, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Motion and Newton’s laws Speed, velocity, acceleration, mass, weight, force and uniformly accelerated motion. Physics &amp; Applied Mechanics week 6">
+            <div class="roadmap-num">06</div>
+            <div class="roadmap-week-content"><h4>Motion and Newton’s laws</h4><p>Speed, velocity, acceleration, mass, weight, force and uniformly accelerated motion.</p><span class="date-mini">Dec 14–20, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 6 mastered"><input type="checkbox" data-complete-week="6"/><span class="sr-only">Mark Week 6 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Statics and moments Free-body diagrams, force equilibrium, clockwise and anticlockwise moments, levers and introductory torque. Physics &amp; Applied Mechanics week 7">
+            <div class="roadmap-num">07</div>
+            <div class="roadmap-week-content"><h4>Statics and moments</h4><p>Free-body diagrams, force equilibrium, clockwise and anticlockwise moments, levers and introductory torque.</p><span class="date-mini">Dec 21–27, 2026 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 7 mastered"><input type="checkbox" data-complete-week="7"/><span class="sr-only">Mark Week 7 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Work, energy, power and efficiency Kinetic and potential energy, energy conservation, mechanical power, rotational power and efficiency. Physics &amp; Applied Mechanics week 8">
+            <div class="roadmap-num">08</div>
+            <div class="roadmap-week-content"><h4>Work, energy, power and efficiency</h4><p>Kinetic and potential energy, energy conservation, mechanical power, rotational power and efficiency.</p><span class="date-mini">Dec 28, 2026 – Jan 03, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 8 mastered"><input type="checkbox" data-complete-week="8"/><span class="sr-only">Mark Week 8 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Fluid statics Density, pressure, gauge versus absolute pressure, hydrostatic pressure, buoyancy, displacement and Archimedes’ principle. Physics &amp; Applied Mechanics week 9">
+            <div class="roadmap-num">09</div>
+            <div class="roadmap-week-content"><h4>Fluid statics</h4><p>Density, pressure, gauge versus absolute pressure, hydrostatic pressure, buoyancy, displacement and Archimedes’ principle.</p><span class="date-mini">Jan 04–10, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 9 mastered"><input type="checkbox" data-complete-week="9"/><span class="sr-only">Mark Week 9 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Heat and temperature Temperature scales, thermal expansion, specific heat, sensible heat, conduction, convection and radiation. Physics &amp; Applied Mechanics week 10">
+            <div class="roadmap-num">10</div>
+            <div class="roadmap-week-content"><h4>Heat and temperature</h4><p>Temperature scales, thermal expansion, specific heat, sensible heat, conduction, convection and radiation.</p><span class="date-mini">Jan 11–17, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 10 mastered"><input type="checkbox" data-complete-week="10"/><span class="sr-only">Mark Week 10 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Gas laws and phase changes Boyle’s and Charles’s laws, ideal gas equation, latent heat, boiling under pressure and introductory thermal balances. Physics &amp; Applied Mechanics week 11">
+            <div class="roadmap-num">11</div>
+            <div class="roadmap-week-content"><h4>Gas laws and phase changes</h4><p>Boyle’s and Charles’s laws, ideal gas equation, latent heat, boiling under pressure and introductory thermal balances.</p><span class="date-mini">Jan 18–24, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 11 mastered"><input type="checkbox" data-complete-week="11"/><span class="sr-only">Mark Week 11 complete</span></label>
+          </article></div>
+      </section>
 
-@media (max-width:700px){
-  .phases{grid-template-columns:1fr}
-  .days,.notes{grid-template-columns:1fr}
-  .wk{grid-template-columns:3rem minmax(0,1fr);row-gap:4px}
-  .wd{flex-direction:row;gap:8px;align-items:baseline}
-  .wt{grid-column:1 / -1}
-  .wl{grid-column:1 / -1;justify-content:flex-start}
-  .prog{margin-left:0;width:100%}
-  .sech{font-size:30px}
-}
-@media (prefers-reduced-motion: no-preference){
-  html{scroll-behavior:smooth}
-}
-</style>
+      <section class="phase-block" id="phase-03" data-phase="03">
+        <div class="phase-top"><span class="phase-code">PHASE 03</span><span class="phase-range">Weeks 12–15 · 32 HOURS</span></div>
+        <h3>Marine Chemistry &amp; Materials</h3><p class="phase-desc">Learn the chemical and material behaviour that affects shipboard systems.</p>
+        <div class="phase-dates">Jan 25 – Feb 21, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Essential engineering chemistry Atoms, elements, compounds, molecular formulas, balancing reactions, molar mass and mole calculations. Marine Chemistry &amp; Materials week 12">
+            <div class="roadmap-num">12</div>
+            <div class="roadmap-week-content"><h4>Essential engineering chemistry</h4><p>Atoms, elements, compounds, molecular formulas, balancing reactions, molar mass and mole calculations.</p><span class="date-mini">Jan 25–31, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 12 mastered"><input type="checkbox" data-complete-week="12"/><span class="sr-only">Mark Week 12 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Marine fuel and combustion chemistry Hydrocarbons, complete and incomplete combustion, theoretical air requirement, fuel properties and exhaust emissions. Marine Chemistry &amp; Materials week 13">
+            <div class="roadmap-num">13</div>
+            <div class="roadmap-week-content"><h4>Marine fuel and combustion chemistry</h4><p>Hydrocarbons, complete and incomplete combustion, theoretical air requirement, fuel properties and exhaust emissions.</p><span class="date-mini">Feb 01–07, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 13 mastered"><input type="checkbox" data-complete-week="13"/><span class="sr-only">Mark Week 13 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Industrial water chemistry and corrosion pH, water hardness, scale, corrosion mechanisms, galvanic corrosion and water treatment principles. Marine Chemistry &amp; Materials week 14">
+            <div class="roadmap-num">14</div>
+            <div class="roadmap-week-content"><h4>Industrial water chemistry and corrosion</h4><p>pH, water hardness, scale, corrosion mechanisms, galvanic corrosion and water treatment principles.</p><span class="date-mini">Feb 08–14, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 14 mastered"><input type="checkbox" data-complete-week="14"/><span class="sr-only">Mark Week 14 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Engineering materials under load Steel, cast iron, non-ferrous metals, material properties, tensile/compressive stress, strain and stress–strain graphs. Marine Chemistry &amp; Materials week 15">
+            <div class="roadmap-num">15</div>
+            <div class="roadmap-week-content"><h4>Engineering materials under load</h4><p>Steel, cast iron, non-ferrous metals, material properties, tensile/compressive stress, strain and stress–strain graphs.</p><span class="date-mini">Feb 15–21, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 15 mastered"><input type="checkbox" data-complete-week="15"/><span class="sr-only">Mark Week 15 complete</span></label>
+          </article></div>
+      </section>
 
-<header class="top wrap">
-  <p class="eyebrow">Georgian College · Marine Engineering Technology (MTCY) · Owen Sound</p>
-  <h1>Marine Engineering Study Plan</h1>
-  <p class="lede">Self-study from Oct 8, 2026 to Jun 30, 2027, so Semester 1 and Semester 2 feel familiar when classes start in Fall 2027. Eight hours a week: four sessions of two hours.</p>
-  <dl class="phases">
-    <div><dt>Phase 1</dt><dd>Weeks 1–19 · Oct 8 – Feb 28<br>Semester 1 courses · 152 h</dd></div>
-    <div><dt>Phase 2</dt><dd>Weeks 20–35 · Mar 1 – Jun 30<br>Semester 2 courses · 128 h</dd></div>
-    <div><dt>Reserve</dt><dd>Weeks 36–39 · July<br>Catch-up only</dd></div>
-  </dl>
-</header>
+      <section class="phase-block" id="phase-04" data-phase="04">
+        <div class="phase-top"><span class="phase-code">PHASE 04</span><span class="phase-range">Weeks 16–19 · 32 HOURS</span></div>
+        <h3>Drawings &amp; Technical Literacy</h3><p class="phase-desc">Read the drawings, diagrams and equipment documents used in college.</p>
+        <div class="phase-dates">Feb 22 – Mar 21, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Engineering drawing fundamentals Line types, scales, dimensions, title blocks, drawing symbols and component drawings. Drawings &amp; Technical Literacy week 16">
+            <div class="roadmap-num">16</div>
+            <div class="roadmap-week-content"><h4>Engineering drawing fundamentals</h4><p>Line types, scales, dimensions, title blocks, drawing symbols and component drawings.</p><span class="date-mini">Feb 22–28, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 16 mastered"><input type="checkbox" data-complete-week="16"/><span class="sr-only">Mark Week 16 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Mechanical drawing interpretation Orthographic projection, sections, isometric sketches, dimensional tolerances and introductory fits. Drawings &amp; Technical Literacy week 17">
+            <div class="roadmap-num">17</div>
+            <div class="roadmap-week-content"><h4>Mechanical drawing interpretation</h4><p>Orthographic projection, sections, isometric sketches, dimensional tolerances and introductory fits.</p><span class="date-mini">Mar 01–07, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 17 mastered"><input type="checkbox" data-complete-week="17"/><span class="sr-only">Mark Week 17 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Marine piping and system diagrams Pump, valve, tank and instrument symbols; flow direction, line identification and tracing basic circuits. Drawings &amp; Technical Literacy week 18">
+            <div class="roadmap-num">18</div>
+            <div class="roadmap-week-content"><h4>Marine piping and system diagrams</h4><p>Pump, valve, tank and instrument symbols; flow direction, line identification and tracing basic circuits.</p><span class="date-mini">Mar 08–14, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 18 mastered"><input type="checkbox" data-complete-week="18"/><span class="sr-only">Mark Week 18 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Technical communication and documentation Marine terminology, equipment descriptions, technical paragraphs, operating records, fault reports and professional communication. Drawings &amp; Technical Literacy week 19">
+            <div class="roadmap-num">19</div>
+            <div class="roadmap-week-content"><h4>Technical communication and documentation</h4><p>Marine terminology, equipment descriptions, technical paragraphs, operating records, fault reports and professional communication.</p><span class="date-mini">Mar 15–21, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 19 mastered"><input type="checkbox" data-complete-week="19"/><span class="sr-only">Mark Week 19 complete</span></label>
+          </article></div>
+      </section>
 
-<nav class="bar" aria-label="Sections">
-  <div class="wrap barin">
-    <a href="#roadmap">Roadmap, weeks 1–39</a>
-    <a href="#daily">Daily plan, weeks 1–12</a>
-    <a href="#notes">Notes</a>
-    <span class="prog"><span id="done-count">0</span> of 48 sessions done <progress id="meter" max="48" value="0" aria-label="Sessions completed"></progress></span>
+      <section class="phase-block" id="phase-05" data-phase="05">
+        <div class="phase-top"><span class="phase-code">PHASE 05</span><span class="phase-range">Weeks 20–26 · 56 HOURS</span></div>
+        <h3>Marine Diesel Engines &amp; Propulsion</h3><p class="phase-desc">Recognize major engine components and how marine propulsion systems work together.</p>
+        <div class="phase-dates">Mar 22 – May 09, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Marine propulsion plant overview Main and auxiliary engines, propulsion arrangements, shafting, propellers and engine-room layout. Marine Diesel Engines &amp; Propulsion week 20">
+            <div class="roadmap-num">20</div>
+            <div class="roadmap-week-content"><h4>Marine propulsion plant overview</h4><p>Main and auxiliary engines, propulsion arrangements, shafting, propellers and engine-room layout.</p><span class="date-mini">Mar 22–28, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 20 mastered"><input type="checkbox" data-complete-week="20"/><span class="sr-only">Mark Week 20 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Diesel engine working cycles Four-stroke and two-stroke cycles, cylinder events and marine engine applications. Marine Diesel Engines &amp; Propulsion week 21">
+            <div class="roadmap-num">21</div>
+            <div class="roadmap-week-content"><h4>Diesel engine working cycles</h4><p>Four-stroke and two-stroke cycles, cylinder events and marine engine applications.</p><span class="date-mini">Mar 29 – Apr 04, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 21 mastered"><input type="checkbox" data-complete-week="21"/><span class="sr-only">Mark Week 21 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Diesel engine construction Cylinder liners, pistons, connecting rods, crankshafts, bearings, valves and major structural components. Marine Diesel Engines &amp; Propulsion week 22">
+            <div class="roadmap-num">22</div>
+            <div class="roadmap-week-content"><h4>Diesel engine construction</h4><p>Cylinder liners, pistons, connecting rods, crankshafts, bearings, valves and major structural components.</p><span class="date-mini">Apr 05–11, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 22 mastered"><input type="checkbox" data-complete-week="22"/><span class="sr-only">Mark Week 22 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Combustion and air supply systems Compression ignition, fuel injection principles, scavenging, supercharging and turbocharging. Marine Diesel Engines &amp; Propulsion week 23">
+            <div class="roadmap-num">23</div>
+            <div class="roadmap-week-content"><h4>Combustion and air supply systems</h4><p>Compression ignition, fuel injection principles, scavenging, supercharging and turbocharging.</p><span class="date-mini">Apr 12–18, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 23 mastered"><input type="checkbox" data-complete-week="23"/><span class="sr-only">Mark Week 23 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Engine supporting systems Lubrication, jacket-water cooling, starting-air principles and engine-mounted auxiliaries. Marine Diesel Engines &amp; Propulsion week 24">
+            <div class="roadmap-num">24</div>
+            <div class="roadmap-week-content"><h4>Engine supporting systems</h4><p>Lubrication, jacket-water cooling, starting-air principles and engine-mounted auxiliaries.</p><span class="date-mini">Apr 19–25, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 24 mastered"><input type="checkbox" data-complete-week="24"/><span class="sr-only">Mark Week 24 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Engine performance fundamentals Indicated and brake power, mechanical efficiency, mean effective pressure, fuel consumption and performance calculations. Marine Diesel Engines &amp; Propulsion week 25">
+            <div class="roadmap-num">25</div>
+            <div class="roadmap-week-content"><h4>Engine performance fundamentals</h4><p>Indicated and brake power, mechanical efficiency, mean effective pressure, fuel consumption and performance calculations.</p><span class="date-mini">Apr 26 – May 02, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 25 mastered"><input type="checkbox" data-complete-week="25"/><span class="sr-only">Mark Week 25 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Diesel plant integration Trace relationships among engine, fuel, air, lubrication and cooling systems; diagrams and calculations. Marine Diesel Engines &amp; Propulsion week 26">
+            <div class="roadmap-num">26</div>
+            <div class="roadmap-week-content"><h4>Diesel plant integration</h4><p>Trace relationships among engine, fuel, air, lubrication and cooling systems; diagrams and calculations.</p><span class="date-mini">May 03–09, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 26 mastered"><input type="checkbox" data-complete-week="26"/><span class="sr-only">Mark Week 26 complete</span></label>
+          </article></div>
+      </section>
+
+      <section class="phase-block" id="phase-06" data-phase="06">
+        <div class="phase-top"><span class="phase-code">PHASE 06</span><span class="phase-range">Weeks 27–33 · 56 HOURS</span></div>
+        <h3>Auxiliary Systems &amp; Fluid Power</h3><p class="phase-desc">Understand the most common machinery supporting a marine propulsion plant.</p>
+        <div class="phase-dates">May 10 – Jun 27, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Fuel and lubricating oil distribution Storage, settling and service tanks, transfer and service circuits, filters, heating and system diagrams. Auxiliary Systems &amp; Fluid Power week 27">
+            <div class="roadmap-num">27</div>
+            <div class="roadmap-week-content"><h4>Fuel and lubricating oil distribution</h4><p>Storage, settling and service tanks, transfer and service circuits, filters, heating and system diagrams.</p><span class="date-mini">May 10–16, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 27 mastered"><input type="checkbox" data-complete-week="27"/><span class="sr-only">Mark Week 27 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Marine pumps and fluid flow Centrifugal and positive-displacement pumps, flow rate, pressure head, performance and simple calculations. Auxiliary Systems &amp; Fluid Power week 28">
+            <div class="roadmap-num">28</div>
+            <div class="roadmap-week-content"><h4>Marine pumps and fluid flow</h4><p>Centrifugal and positive-displacement pumps, flow rate, pressure head, performance and simple calculations.</p><span class="date-mini">May 17–23, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 28 mastered"><input type="checkbox" data-complete-week="28"/><span class="sr-only">Mark Week 28 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Cooling-water systems and heat exchangers Sea-water and fresh-water cooling, plate and shell-and-tube exchangers and heat-transfer calculations. Auxiliary Systems &amp; Fluid Power week 29">
+            <div class="roadmap-num">29</div>
+            <div class="roadmap-week-content"><h4>Cooling-water systems and heat exchangers</h4><p>Sea-water and fresh-water cooling, plate and shell-and-tube exchangers and heat-transfer calculations.</p><span class="date-mini">May 24–30, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 29 mastered"><input type="checkbox" data-complete-week="29"/><span class="sr-only">Mark Week 29 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Purification and fresh-water generation Oil separators, filtration, centrifugal separation and fresh-water generator fundamentals. Auxiliary Systems &amp; Fluid Power week 30">
+            <div class="roadmap-num">30</div>
+            <div class="roadmap-week-content"><h4>Purification and fresh-water generation</h4><p>Oil separators, filtration, centrifugal separation and fresh-water generator fundamentals.</p><span class="date-mini">May 31 – Jun 06, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 30 mastered"><input type="checkbox" data-complete-week="30"/><span class="sr-only">Mark Week 30 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Compressed air and pneumatics Compressor types, receivers, pressure regulation, air treatment, cylinders and elementary circuit symbols. Auxiliary Systems &amp; Fluid Power week 31">
+            <div class="roadmap-num">31</div>
+            <div class="roadmap-week-content"><h4>Compressed air and pneumatics</h4><p>Compressor types, receivers, pressure regulation, air treatment, cylinders and elementary circuit symbols.</p><span class="date-mini">Jun 07–13, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 31 mastered"><input type="checkbox" data-complete-week="31"/><span class="sr-only">Mark Week 31 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Hydraulics and steering machinery Pascal’s law, hydraulic pumps, actuators, directional valves, introductory circuits and steering gear. Auxiliary Systems &amp; Fluid Power week 32">
+            <div class="roadmap-num">32</div>
+            <div class="roadmap-week-content"><h4>Hydraulics and steering machinery</h4><p>Pascal’s law, hydraulic pumps, actuators, directional valves, introductory circuits and steering gear.</p><span class="date-mini">Jun 14–20, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 32 mastered"><input type="checkbox" data-complete-week="32"/><span class="sr-only">Mark Week 32 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Bilge, ballast and pollution-control systems General arrangements of bilge and ballast circuits, oily-water separation and pollution-prevention principles. Auxiliary Systems &amp; Fluid Power week 33">
+            <div class="roadmap-num">33</div>
+            <div class="roadmap-week-content"><h4>Bilge, ballast and pollution-control systems</h4><p>General arrangements of bilge and ballast circuits, oily-water separation and pollution-prevention principles.</p><span class="date-mini">Jun 21–27, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 33 mastered"><input type="checkbox" data-complete-week="33"/><span class="sr-only">Mark Week 33 complete</span></label>
+          </article></div>
+      </section>
+
+      <section class="phase-block" id="phase-07" data-phase="07">
+        <div class="phase-top"><span class="phase-code">PHASE 07</span><span class="phase-range">Weeks 34–40 · 56 HOURS</span></div>
+        <h3>Marine Electricity &amp; Controls</h3><p class="phase-desc">Build the electrical foundations needed to understand generation, distribution and control.</p>
+        <div class="phase-dates">Jun 28 – Aug 15, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Fundamentals of electricity Charge, voltage, current, resistance, conductors, insulators and Ohm’s law. Marine Electricity &amp; Controls week 34">
+            <div class="roadmap-num">34</div>
+            <div class="roadmap-week-content"><h4>Fundamentals of electricity</h4><p>Charge, voltage, current, resistance, conductors, insulators and Ohm’s law.</p><span class="date-mini">Jun 28 – Jul 04, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 34 mastered"><input type="checkbox" data-complete-week="34"/><span class="sr-only">Mark Week 34 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="DC circuit analysis Series and parallel circuits, Kirchhoff’s laws, electrical power, energy and circuit calculations. Marine Electricity &amp; Controls week 35">
+            <div class="roadmap-num">35</div>
+            <div class="roadmap-week-content"><h4>DC circuit analysis</h4><p>Series and parallel circuits, Kirchhoff’s laws, electrical power, energy and circuit calculations.</p><span class="date-mini">Jul 05–11, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 35 mastered"><input type="checkbox" data-complete-week="35"/><span class="sr-only">Mark Week 35 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Magnetism and alternating current Magnetic fields, induction, AC waveforms, frequency, RMS and introductory phase difference. Marine Electricity &amp; Controls week 36">
+            <div class="roadmap-num">36</div>
+            <div class="roadmap-week-content"><h4>Magnetism and alternating current</h4><p>Magnetic fields, induction, AC waveforms, frequency, RMS and introductory phase difference.</p><span class="date-mini">Jul 12–18, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 36 mastered"><input type="checkbox" data-complete-week="36"/><span class="sr-only">Mark Week 36 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Electrical machines Generators, motors, transformers, energy conversion and machine components. Marine Electricity &amp; Controls week 37">
+            <div class="roadmap-num">37</div>
+            <div class="roadmap-week-content"><h4>Electrical machines</h4><p>Generators, motors, transformers, energy conversion and machine components.</p><span class="date-mini">Jul 19–25, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 37 mastered"><input type="checkbox" data-complete-week="37"/><span class="sr-only">Mark Week 37 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Shipboard electrical distribution Main and emergency generators, switchboards, protective devices, distribution diagrams and electrical hazards. Marine Electricity &amp; Controls week 38">
+            <div class="roadmap-num">38</div>
+            <div class="roadmap-week-content"><h4>Shipboard electrical distribution</h4><p>Main and emergency generators, switchboards, protective devices, distribution diagrams and electrical hazards.</p><span class="date-mini">Jul 26 – Aug 01, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 38 mastered"><input type="checkbox" data-complete-week="38"/><span class="sr-only">Mark Week 38 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Instrumentation and measurement Pressure, level and temperature sensors; transducers, signals, instruments and basic control diagrams. Marine Electricity &amp; Controls week 39">
+            <div class="roadmap-num">39</div>
+            <div class="roadmap-week-content"><h4>Instrumentation and measurement</h4><p>Pressure, level and temperature sensors; transducers, signals, instruments and basic control diagrams.</p><span class="date-mini">Aug 02–08, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 39 mastered"><input type="checkbox" data-complete-week="39"/><span class="sr-only">Mark Week 39 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Automatic control fundamentals Open- and closed-loop control, feedback, setpoints, on/off and PID concepts, alarms and protective trips. Marine Electricity &amp; Controls week 40">
+            <div class="roadmap-num">40</div>
+            <div class="roadmap-week-content"><h4>Automatic control fundamentals</h4><p>Open- and closed-loop control, feedback, setpoints, on/off and PID concepts, alarms and protective trips.</p><span class="date-mini">Aug 09–15, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 40 mastered"><input type="checkbox" data-complete-week="40"/><span class="sr-only">Mark Week 40 complete</span></label>
+          </article></div>
+      </section>
+
+      <section class="phase-block" id="phase-08" data-phase="08">
+        <div class="phase-top"><span class="phase-code">PHASE 08</span><span class="phase-range">Weeks 41–42 · 16 HOURS</span></div>
+        <h3>Marine Auxiliary Steam Systems</h3><p class="phase-desc">Build a first-pass understanding of steam systems before beginning college.</p>
+        <div class="phase-dates">Aug 16 – Aug 29, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Steam and boiler fundamentals Saturation, latent heat, steam properties, steam tables, fire-tube and water-tube boiler construction. Marine Auxiliary Steam Systems week 41">
+            <div class="roadmap-num">41</div>
+            <div class="roadmap-week-content"><h4>Steam and boiler fundamentals</h4><p>Saturation, latent heat, steam properties, steam tables, fire-tube and water-tube boiler construction.</p><span class="date-mini">Aug 16–22, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 41 mastered"><input type="checkbox" data-complete-week="41"/><span class="sr-only">Mark Week 41 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Auxiliary steam plant systems Boiler mountings, feedwater, steam distribution, steam traps, condensate return, exhaust-gas boilers and safety principles. Marine Auxiliary Steam Systems week 42">
+            <div class="roadmap-num">42</div>
+            <div class="roadmap-week-content"><h4>Auxiliary steam plant systems</h4><p>Boiler mountings, feedwater, steam distribution, steam traps, condensate return, exhaust-gas boilers and safety principles.</p><span class="date-mini">Aug 23–29, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 42 mastered"><input type="checkbox" data-complete-week="42"/><span class="sr-only">Mark Week 42 complete</span></label>
+          </article></div>
+      </section><div class="milestone-banner"><span class="milestone-symbol">✦</span><div><strong>Core college-preparation milestone</strong><p>336 hours of foundational study completed across Weeks 01–42. Weeks 43–52 reinforce knowledge and adapt to actual college work.</p></div></div>
+
+      <section class="phase-block" id="phase-09" data-phase="09">
+        <div class="phase-top"><span class="phase-code">PHASE 09</span><span class="phase-range">Weeks 43–52 · 80 HOURS</span></div>
+        <h3>Reinforcement &amp; College Transition</h3><p class="phase-desc">Consolidate material already learned; adapt this phase to actual college assessment requirements.</p>
+        <div class="phase-dates">Aug 30 – Nov 07, 2027</div>
+        <div class="roadmap-weeks">
+          <article class="roadmap-week" data-roadmap-search="Mathematics consolidation Mixed units, algebra, graphs, geometry and trigonometry with attention to formula choice and accuracy. Reinforcement &amp; College Transition week 43">
+            <div class="roadmap-num">43</div>
+            <div class="roadmap-week-content"><h4>Mathematics consolidation</h4><p>Mixed units, algebra, graphs, geometry and trigonometry with attention to formula choice and accuracy.</p><span class="date-mini">Aug 30 – Sep 05, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 43 mastered"><input type="checkbox" data-complete-week="43"/><span class="sr-only">Mark Week 43 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Applied mechanics consolidation Free-body diagrams, equilibrium, torque, work, power, pressure, buoyancy and stress–strain. Reinforcement &amp; College Transition week 44">
+            <div class="roadmap-num">44</div>
+            <div class="roadmap-week-content"><h4>Applied mechanics consolidation</h4><p>Free-body diagrams, equilibrium, torque, work, power, pressure, buoyancy and stress–strain.</p><span class="date-mini">Sep 06–12, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 44 mastered"><input type="checkbox" data-complete-week="44"/><span class="sr-only">Mark Week 44 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Chemistry and thermodynamics consolidation Combustion, fuel properties, specific heat, gas laws, phase changes and water chemistry. Reinforcement &amp; College Transition week 45">
+            <div class="roadmap-num">45</div>
+            <div class="roadmap-week-content"><h4>Chemistry and thermodynamics consolidation</h4><p>Combustion, fuel properties, specific heat, gas laws, phase changes and water chemistry.</p><span class="date-mini">Sep 13–19, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 45 mastered"><input type="checkbox" data-complete-week="45"/><span class="sr-only">Mark Week 45 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Diesel engine knowledge assessment Engine cycles, construction diagrams, supporting systems and introductory performance problems. Reinforcement &amp; College Transition week 46">
+            <div class="roadmap-num">46</div>
+            <div class="roadmap-week-content"><h4>Diesel engine knowledge assessment</h4><p>Engine cycles, construction diagrams, supporting systems and introductory performance problems.</p><span class="date-mini">Sep 20–26, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 46 mastered"><input type="checkbox" data-complete-week="46"/><span class="sr-only">Mark Week 46 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Marine plant diagram assessment Fuel, lubrication, cooling, bilge and ballast diagrams and component relationships. Reinforcement &amp; College Transition week 47">
+            <div class="roadmap-num">47</div>
+            <div class="roadmap-week-content"><h4>Marine plant diagram assessment</h4><p>Fuel, lubrication, cooling, bilge and ballast diagrams and component relationships.</p><span class="date-mini">Sep 27 – Oct 03, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 47 mastered"><input type="checkbox" data-complete-week="47"/><span class="sr-only">Mark Week 47 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Auxiliary machinery consolidation Pumps, compressors, exchangers, separators, hydraulics and pneumatics via diagrams and questions. Reinforcement &amp; College Transition week 48">
+            <div class="roadmap-num">48</div>
+            <div class="roadmap-week-content"><h4>Auxiliary machinery consolidation</h4><p>Pumps, compressors, exchangers, separators, hydraulics and pneumatics via diagrams and questions.</p><span class="date-mini">Oct 04–10, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 48 mastered"><input type="checkbox" data-complete-week="48"/><span class="sr-only">Mark Week 48 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Electrical problem-solving assessment DC calculations, AC quantities, induction, motors, generators, transformers and distribution. Reinforcement &amp; College Transition week 49">
+            <div class="roadmap-num">49</div>
+            <div class="roadmap-week-content"><h4>Electrical problem-solving assessment</h4><p>DC calculations, AC quantities, induction, motors, generators, transformers and distribution.</p><span class="date-mini">Oct 11–17, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 49 mastered"><input type="checkbox" data-complete-week="49"/><span class="sr-only">Mark Week 49 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Controls and steam assessment Feedback and instrumentation diagrams, alarms/trips and introductory steam calculations. Reinforcement &amp; College Transition week 50">
+            <div class="roadmap-num">50</div>
+            <div class="roadmap-week-content"><h4>Controls and steam assessment</h4><p>Feedback and instrumentation diagrams, alarms/trips and introductory steam calculations.</p><span class="date-mini">Oct 18–24, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 50 mastered"><input type="checkbox" data-complete-week="50"/><span class="sr-only">Mark Week 50 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Integrated marine engineering assessment A paper-based case combining propulsion, auxiliaries, electricity, calculations and documentation. Reinforcement &amp; College Transition week 51">
+            <div class="roadmap-num">51</div>
+            <div class="roadmap-week-content"><h4>Integrated marine engineering assessment</h4><p>A paper-based case combining propulsion, auxiliaries, electricity, calculations and documentation.</p><span class="date-mini">Oct 25–31, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 51 mastered"><input type="checkbox" data-complete-week="51"/><span class="sr-only">Mark Week 51 complete</span></label>
+          </article>
+          <article class="roadmap-week" data-roadmap-search="Final academic readiness audit Mixed mock examination, classify errors and create targeted revision based on actual college requirements. Reinforcement &amp; College Transition week 52">
+            <div class="roadmap-num">52</div>
+            <div class="roadmap-week-content"><h4>Final academic readiness audit</h4><p>Mixed mock examination, classify errors and create targeted revision based on actual college requirements.</p><span class="date-mini">Nov 01–07, 2027 <b>·</b> 8 hours</span></div>
+            <label class="tiny-check" title="Mark week 52 mastered"><input type="checkbox" data-complete-week="52"/><span class="sr-only">Mark Week 52 complete</span></label>
+          </article></div>
+      </section>
+      </section>
+      <div class="footnote"><strong>Curriculum rationale.</strong> College-independent foundations selected from the overlapping early academic themes of Canadian marine engineering technology programs, including Georgian College and Nova Scotia Community College. This is a self-study plan, not an official college timetable. No reading plan replaces supervised lab, safety, workshop, sea-time or certification training.</div>
+    </main>
   </div>
-</nav>
-
-<main class="wrap">
-  <section id="roadmap" class="sec">
-    <h2 class="sech">Roadmap</h2>
-    <p class="intro">Each week is named by its month and week number (Week 2 Oct covers Oct 8–14; week 4 of a month runs from the 22nd to month end). Every course is studied in order, from first principles to the harder material, and finished before the next one starts.</p>
-    <div class="phase"><h2>Phase 1: Semester 1 courses</h2><p>Weeks 1–19 · Oct 8 – Feb 28 · 152 study hours · 8 courses, in a fixed order: maths and science first, then drawings, engines and plant systems.</p></div><section class="block"><header class="bh"><span class="code">MATH 1051</span><h3>Introduction to Marine Engineering Technology Mathematics</h3><p class="meta">Weeks 1–3 · Oct 8–31 · 24 study hours · 59 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W01</span><span class="wd">Oct 8–14<small>Week 2 Oct</small></span><div class="wt"><strong>Number work and units</strong><span>Fractions, percentages, powers, scientific notation, SI and imperial conversion.</span></div><div class="wl"><a class="chip link" href="#w1" data-open="w1">Daily plan</a></div></li><li class="wk"><span class="wn">W02</span><span class="wd">Oct 15–21<small>Week 3 Oct</small></span><div class="wt"><strong>Algebra and formulas</strong><span>Expressions, equations, rearranging formulas, ratio and proportion, straight-line graphs, simultaneous equations.</span></div><div class="wl"><a class="chip link" href="#w2" data-open="w2">Daily plan</a></div></li><li class="wk"><span class="wn">W03</span><span class="wd">Oct 22–31<small>Week 4 Oct</small></span><div class="wt"><strong>Geometry and trigonometry</strong><span>Areas, tank volumes, Pythagoras, right-angle trigonometry, quadratics. Ends with a test.</span></div><div class="wl"><span class="chip test">Test</span><a class="chip link" href="#w3" data-open="w3">Daily plan</a></div></li></ol></section><section class="block"><header class="bh"><span class="code">ENGN 1004</span><h3>Basic Engineering Science</h3><p class="meta">Weeks 4–6 · Nov 1–21 · 24 study hours · 66 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W04</span><span class="wd">Nov 1–7<small>Week 1 Nov</small></span><div class="wt"><strong>Motion and forces</strong><span>Velocity and acceleration, Newton&#x27;s laws, density, resolving forces, moments.</span></div><div class="wl"><a class="chip link" href="#w4" data-open="w4">Daily plan</a></div></li><li class="wk"><span class="wn">W05</span><span class="wd">Nov 8–14<small>Week 2 Nov</small></span><div class="wt"><strong>Work, energy, power and pressure</strong><span>Work and energy, power and efficiency, pressure, buoyancy.</span></div><div class="wl"><a class="chip link" href="#w5" data-open="w5">Daily plan</a></div></li><li class="wk"><span class="wn">W06</span><span class="wd">Nov 15–21<small>Week 3 Nov</small></span><div class="wt"><strong>Heat and temperature</strong><span>Temperature scales, specific heat, latent heat, heat transfer. Ends with a test.</span></div><div class="wl"><span class="chip test">Test</span><a class="chip link" href="#w6" data-open="w6">Daily plan</a></div></li></ol></section><section class="block"><header class="bh"><span class="code">CHEM 1017</span><h3>Fuel Combustion Chemistry</h3><p class="meta">Weeks 7–8 · Nov 22 – Dec 7 · 16 study hours · 38 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W07</span><span class="wd">Nov 22–30<small>Week 4 Nov</small></span><div class="wt"><strong>Chemistry basics</strong><span>Elements and compounds, equations and moles, gas laws, hydrocarbons and fuels.</span></div><div class="wl"><a class="chip link" href="#w7" data-open="w7">Daily plan</a></div></li><li class="wk"><span class="wn">W08</span><span class="wd">Dec 1–7<small>Week 1 Dec</small></span><div class="wt"><strong>Combustion and fuels</strong><span>Air requirement, exhaust gases, emission limits, fuel properties. Ends with a test.</span></div><div class="wl"><span class="chip test">Test</span><a class="chip link" href="#w8" data-open="w8">Daily plan</a></div></li></ol></section><section class="block"><header class="bh"><span class="code">MARE 1065</span><h3>Marine Systems and Components Blueprint</h3><p class="meta">Weeks 9–10 · Dec 8–21 · 16 study hours · 38 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W09</span><span class="wd">Dec 8–14<small>Week 2 Dec</small></span><div class="wt"><strong>Reading engineering drawings</strong><span>Lines and scales, orthographic views, sections, tolerances.</span></div><div class="wl"><a class="chip link" href="#w9" data-open="w9">Daily plan</a></div></li><li class="wk"><span class="wn">W10</span><span class="wd">Dec 15–21<small>Week 3 Dec</small></span><div class="wt"><strong>Marine system diagrams</strong><span>Piping and valve symbols, line diagrams, fuel, oil and cooling circuits. Ends with a test.</span></div><div class="wl"><span class="chip test">Test</span><a class="chip link" href="#w10" data-open="w10">Daily plan</a></div></li></ol></section><section class="block"><header class="bh"><span class="code">MARE 1066</span><h3>Marine Engine Plants</h3><p class="meta">Weeks 11–13 · Dec 22 – Jan 14 · 24 study hours · 66 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W11</span><span class="wd">Dec 22–31<small>Week 4 Dec</small></span><div class="wt"><strong>Engine room and engine basics</strong><span>Ships and engine rooms, heat engines, the two cycles, engine construction.</span></div><div class="wl"><a class="chip link" href="#w11" data-open="w11">Daily plan</a></div></li><li class="wk"><span class="wn">W12</span><span class="wd">Jan 1–7<small>Week 1 Jan</small></span><div class="wt"><strong>Engine systems</strong><span>Fuel injection, scavenging and turbocharging, lubrication, cooling.</span></div><div class="wl"><a class="chip link" href="#w12" data-open="w12">Daily plan</a></div></li><li class="wk"><span class="wn">W13</span><span class="wd">Jan 8–14<small>Week 2 Jan</small></span><div class="wt"><strong>Engine performance and operation</strong><span>Starting and reversing, indicator diagrams, mean effective pressure, indicated and brake power, mechanical efficiency, shafting and propellers in outline.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">MARE 1064</span><h3>Marine Plant Energy Distribution</h3><p class="meta">Weeks 14–16 · Jan 15 – Feb 7 · 24 study hours · 115 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W14</span><span class="wd">Jan 15–21<small>Week 3 Jan</small></span><div class="wt"><strong>Fuel and lubricating oil distribution</strong><span>Bunkering, storage, settling and service tanks, heating, filters, purifiers, transfer pumps, daily consumption.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W15</span><span class="wd">Jan 22–31<small>Week 4 Jan</small></span><div class="wt"><strong>Water, steam and air distribution</strong><span>Pumps and piping, sea-water and fresh-water systems, compressed air, steam distribution in outline, valves and strainers in service.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W16</span><span class="wd">Feb 1–7<small>Week 1 Feb</small></span><div class="wt"><strong>Electrical power distribution</strong><span>Generators, main switchboard, circuit breakers and fuses, emergency power, plant energy balance.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">MARE 1067</span><h3>Marine Auxiliary Systems</h3><p class="meta">Weeks 17–18 · Feb 8–21 · 16 study hours · 87 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W17</span><span class="wd">Feb 8–14<small>Week 2 Feb</small></span><div class="wt"><strong>Pumps, compressors and heat exchangers</strong><span>Centrifugal and positive-displacement pumps, air compressors, plate and shell-and-tube coolers, fresh-water generators, purifiers.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W18</span><span class="wd">Feb 15–21<small>Week 3 Feb</small></span><div class="wt"><strong>Shipboard auxiliary machines</strong><span>Ballast and bilge systems, steering gear, deck machinery, refrigeration and air conditioning in outline.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">COMM 1016</span><h3>Communication Essentials</h3><p class="meta">Week 19 · Feb 22–28 · 8 study hours · 42 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W19</span><span class="wd">Feb 22–28<small>Week 4 Feb</small></span><div class="wt"><strong>Technical communication and Semester 1 review</strong><span>Clear paragraphs, professional email, a short technical description, a résumé and cover-letter draft, then one consolidated formula sheet and glossary for Semester 1.</span></div><div class="wl"></div></li></ol></section><div class="phase"><h2>Phase 2: Semester 2 courses</h2><p>Weeks 20–35 · Mar 1 – Jun 30 · 128 study hours · 8 courses, from maths and mechanics through electricity and fluid power to steam and controls.</p></div><section class="block"><header class="bh"><span class="code">MATH 1052</span><h3>Marine Engineering Technology Mathematics</h3><p class="meta">Weeks 20–22 · Mar 1–21 · 24 study hours · 52 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W20</span><span class="wd">Mar 1–7<small>Week 1 Mar</small></span><div class="wt"><strong>Functions, exponentials and logarithms</strong><span>Function notation, graphs, exponents, logarithm laws, solving exponential equations.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W21</span><span class="wd">Mar 8–14<small>Week 2 Mar</small></span><div class="wt"><strong>Trigonometry and waves</strong><span>Radians, sine and cosine rules, graphs of sine waves, which prepare you for AC electricity.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W22</span><span class="wd">Mar 15–21<small>Week 3 Mar</small></span><div class="wt"><strong>Vectors and statistics</strong><span>Vectors in components, mean and spread, reading charts, rate of change as a concept.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">MENG 1025</span><h3>Basic Applied Mechanics</h3><p class="meta">Weeks 23–25 · Mar 22 – Apr 14 · 24 study hours · 66 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W23</span><span class="wd">Mar 22–31<small>Week 4 Mar</small></span><div class="wt"><strong>Statics</strong><span>Forces in equilibrium, free-body diagrams, beam support reactions.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W24</span><span class="wd">Apr 1–7<small>Week 1 Apr</small></span><div class="wt"><strong>Machines, friction and energy</strong><span>Friction, inclined planes, pulleys, gears, velocity ratio, mechanical advantage, efficiency, torque and rotation.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W25</span><span class="wd">Apr 8–14<small>Week 2 Apr</small></span><div class="wt"><strong>Stress and strain</strong><span>Direct stress and strain, Hooke&#x27;s law, modulus of elasticity, shear, factor of safety, introduction to bending.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">ELEC 1014</span><h3>Basic Electrical Engineering</h3><p class="meta">Weeks 26–28 · Apr 15 – May 7 · 24 study hours · 66 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W26</span><span class="wd">Apr 15–21<small>Week 3 Apr</small></span><div class="wt"><strong>DC circuits</strong><span>Charge, current, voltage, resistance, Ohm&#x27;s law, series and parallel circuits, Kirchhoff&#x27;s laws.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W27</span><span class="wd">Apr 22–30<small>Week 4 Apr</small></span><div class="wt"><strong>Electrical power, instruments and safety</strong><span>Power and energy (P = VI), heating effect, conductors and insulators, using a multimeter, electrical safety rules.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W28</span><span class="wd">May 1–7<small>Week 1 May</small></span><div class="wt"><strong>Magnetism, induction and AC</strong><span>Magnetic fields, electromagnetic induction, generator and motor principle, AC sine wave, frequency, RMS, transformer basics.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">MARE 1069</span><h3>Hydraulics and Pneumatics</h3><p class="meta">Weeks 29–30 · May 8–21 · 16 study hours · 52 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W29</span><span class="wd">May 8–14<small>Week 2 May</small></span><div class="wt"><strong>Hydraulic principles and components</strong><span>Pascal&#x27;s law, pumps, actuators, valves, reservoirs, filters, standard symbols.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W30</span><span class="wd">May 15–21<small>Week 3 May</small></span><div class="wt"><strong>Circuits, pneumatics and fault finding</strong><span>Reading hydraulic circuits, compressors, air treatment, pneumatic cylinders and circuits, safe working.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">MARE 1068</span><h3>Marine Auxiliary Steam Plants</h3><p class="meta">Weeks 31–32 · May 22 – Jun 7 · 16 study hours · 101 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W31</span><span class="wd">May 22–31<small>Week 4 May</small></span><div class="wt"><strong>Steam and boilers</strong><span>Properties of steam, steam tables, dryness fraction, fire-tube and water-tube boilers, exhaust-gas boilers, boiler mountings.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W32</span><span class="wd">Jun 1–7<small>Week 1 Jun</small></span><div class="wt"><strong>Boiler operation and steam distribution</strong><span>Feedwater, water treatment, steam traps, condensate return, boiler safety, steam turbines in outline.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">ENGN 1005</span><h3>Basic Control Engineering</h3><p class="meta">Week 33 · Jun 8–14 · 8 study hours · 101 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W33</span><span class="wd">Jun 8–14<small>Week 2 Jun</small></span><div class="wt"><strong>Basic control engineering</strong><span>Open and closed loops, sensors, controllers (on/off, P, PI and PID as concepts), actuators, block diagrams, alarms and trips.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">CHEM 1018</span><h3>Industrial Chemistry</h3><p class="meta">Week 34 · Jun 15–21 · 8 study hours · 38 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W34</span><span class="wd">Jun 15–21<small>Week 3 Jun</small></span><div class="wt"><strong>Industrial and water chemistry</strong><span>Water hardness and pH, scale and corrosion, boiler water treatment, lubricant additives, anodes and cathodic protection.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><section class="block"><header class="bh"><span class="code">MCHN 2003</span><h3>Machining</h3><p class="meta">Week 35 · Jun 22–30 · 8 study hours · 52 classroom hours at college</p></header><ol class="weeks"><li class="wk"><span class="wn">W35</span><span class="wd">Jun 22–30<small>Week 4 Jun</small></span><div class="wt"><strong>Machining basics and final review</strong><span>Workshop safety, vernier calipers and micrometers, lathe, mill and drill operations, cutting speed (N = 1000v / πd), then a final self-assessment and a weak-spot list for September.</span></div><div class="wl"><span class="chip test">Test</span></div></li></ol></section><div class="phase"><h2>Reserve: July</h2><p>Weeks 36–39 · Jul 1–31 · no new topics. This time absorbs missed sessions, a holiday break or a slow week.</p></div><section class="block"><header class="bh"><span class="code">JULY</span><h3>Catch-up and review</h3><p class="meta">Weeks 36–39 · Jul 1–31 · optional</p></header><ol class="weeks"><li class="wk"><span class="wn">W36</span><span class="wd">Jul 1–7<small>Week 1 Jul</small></span><div class="wt"><strong>Reserve week 1</strong><span>Catch up on any missed sessions. Redo the tests you scored lowest on.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W37</span><span class="wd">Jul 8–14<small>Week 2 Jul</small></span><div class="wt"><strong>Reserve week 2</strong><span>Re-read your formula sheet and glossary. Redo homework you skipped.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W38</span><span class="wd">Jul 15–21<small>Week 3 Jul</small></span><div class="wt"><strong>Reserve week 3</strong><span>Weak-spot review: pick the 3 topics you find hardest and rework them.</span></div><div class="wl"></div></li><li class="wk"><span class="wn">W39</span><span class="wd">Jul 22–31<small>Week 4 Jul</small></span><div class="wt"><strong>Reserve week 4</strong><span>Light review only. Rest before the move.</span></div><div class="wl"></div></li></ol></section>
-  </section>
-
-  <section id="daily" class="sec">
-    <div class="dailyhead">
-      <h2 class="sech">Daily plan, weeks 1–12</h2>
-      <div class="btns"><button type="button" id="expand">Expand all</button><button type="button" id="collapse">Collapse all</button></div>
-    </div>
-    <p class="intro">Four sessions a week, each with one topic to learn and one homework task. Tests sit on the last day of a course block. Tick sessions off as you go; ticks are saved in this browser only.</p>
-    <div class="session" aria-label="Structure of a 2-hour session">
-      <p class="sl">Every 2-hour session</p>
-      <div class="sbar" role="img" aria-label="10 minutes recap, 65 minutes learning, 45 minutes homework">
-        <span class="s1" style="flex:10"></span><span class="s2" style="flex:65"></span><span class="s3" style="flex:45"></span>
-      </div>
-      <ul class="slegend">
-        <li><i class="sw s1"></i>10 min recap of the last session</li>
-        <li><i class="sw s2"></i>65 min learn the new topic</li>
-        <li><i class="sw s3"></i>45 min homework</li>
-      </ul>
-    </div>
-    <details class="week" id="w1" open><summary><span class="wn">W01</span><span class="st"><strong>Number work and units</strong><small>Oct 8–14 · MATH 1051 · Fractions, percentages, powers, scientific notation, SI and imperial conversion.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Fractions, decimals and percentages</h4><p><span class="lab learn">Learn</span>Add, subtract, multiply and divide fractions. Convert between fractions, decimals and percentages. Order of operations (BODMAS).</p><p><span class="lab hw">Homework</span>25 mixed problems; do the first 10 without a calculator. Include 5 percentage problems such as efficiency and fuel saved.</p><label class="done" for="d1-1"><input type="checkbox" id="d1-1" data-day="w1d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Powers, roots and scientific notation</h4><p><span class="lab learn">Learn</span>Squares, cubes, roots, negative powers, scientific notation, rounding and significant figures.</p><p><span class="lab hw">Homework</span>20 problems: write very large and very small numbers in scientific notation and round answers to 3 significant figures.</p><label class="done" for="d1-2"><input type="checkbox" id="d1-2" data-day="w1d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>SI units and prefixes</h4><p><span class="lab learn">Learn</span>Base units (m, kg, s, K) and derived units (N, Pa, J, W). Prefixes from milli to mega. Converting with the unit-chain method.</p><p><span class="lab hw">Homework</span>Convert 20 quantities: mm to m, L to m³, kg to tonnes, kPa to bar, kW to W.</p><label class="done" for="d1-3"><input type="checkbox" id="d1-3" data-day="w1d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Imperial and metric conversion</h4><p><span class="lab learn">Learn</span>Feet, inches, US gallons, psi and °F against their metric partners. Check every answer by tracking units. Review the week.</p><p><span class="lab hw">Homework</span>Conversion sheet of 15 items (psi↔kPa, ft↔m, US gal↔L, °F↔°C), then a 10-question self-quiz on Week 1.</p><label class="done" for="d1-4"><input type="checkbox" id="d1-4" data-day="w1d4"> Done</label></article></div></details><details class="week" id="w2"><summary><span class="wn">W02</span><span class="st"><strong>Algebra and formulas</strong><small>Oct 15–21 · MATH 1051 · Expressions, equations, rearranging formulas, ratio and proportion, straight-line graphs, simultaneous equations.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Algebraic expressions</h4><p><span class="lab learn">Learn</span>Letters as numbers, like terms, brackets, expanding and factorising simple expressions.</p><p><span class="lab hw">Homework</span>25 simplify and expand problems.</p><label class="done" for="d2-1"><input type="checkbox" id="d2-1" data-day="w2d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Equations and rearranging formulas</h4><p><span class="lab learn">Learn</span>Solve linear equations. Rearrange formulas such as P = F/A, v = u + at and W = F × d for any variable.</p><p><span class="lab hw">Homework</span>Rearrange 12 formulas and solve 10 equations; check each by substituting back.</p><label class="done" for="d2-2"><input type="checkbox" id="d2-2" data-day="w2d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Ratio, proportion and variation</h4><p><span class="lab learn">Learn</span>Ratios, direct and inverse proportion, scaling. Gear ratios and mixing ratios as worked examples.</p><p><span class="lab hw">Homework</span>15 word problems, 5 of them on gear ratios and scale drawings.</p><label class="done" for="d2-3"><input type="checkbox" id="d2-3" data-day="w2d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Graphs and simultaneous equations</h4><p><span class="lab learn">Learn</span>Plot y = mx + c, read slope and intercept. Solve two equations in two unknowns by substitution and by elimination.</p><p><span class="lab hw">Homework</span>Plot 3 graphs on squared paper, solve 8 simultaneous pairs, then a 10-question self-quiz on Week 2.</p><label class="done" for="d2-4"><input type="checkbox" id="d2-4" data-day="w2d4"> Done</label></article></div></details><details class="week" id="w3"><summary><span class="wn">W03</span><span class="st"><strong>Geometry and trigonometry</strong><small>Oct 22–31 · MATH 1051 · Areas, tank volumes, Pythagoras, right-angle trigonometry, quadratics. Ends with a test.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Area and Pythagoras</h4><p><span class="lab learn">Learn</span>Perimeter and area of rectangles, triangles and circles. Pythagoras&#x27; theorem.</p><p><span class="lab hw">Homework</span>15 problems, including the area of a pipe cross-section.</p><label class="done" for="d3-1"><input type="checkbox" id="d3-1" data-day="w3d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Volume and tank capacity</h4><p><span class="lab learn">Learn</span>Volume of prisms, cylinders, cones and spheres. Litres and cubic metres. Surface area.</p><p><span class="lab hw">Homework</span>8 problems: capacity of cylindrical and rectangular tanks in litres.</p><label class="done" for="d3-2"><input type="checkbox" id="d3-2" data-day="w3d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Right-angle trigonometry</h4><p><span class="lab learn">Learn</span>Sine, cosine and tangent (SOH CAH TOA). Finding sides and angles. Angles of elevation.</p><p><span class="lab hw">Homework</span>15 problems, each with a labelled sketch.</p><label class="done" for="d3-3"><input type="checkbox" id="d3-3" data-day="w3d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="chip test">Test</span><span class="dur">2 h</span></div><h4>Quadratics and Test: MATH 1051</h4><p><span class="lab learn">Learn</span>Factorising and the quadratic formula (45 min). Then a closed-book test on Weeks 1–3 (60 min) and marking (15 min).</p><p><span class="lab hw">Homework</span>List every error from the test and redo those questions.</p><label class="done" for="d3-4"><input type="checkbox" id="d3-4" data-day="w3d4"> Done</label></article></div></details><details class="week" id="w4"><summary><span class="wn">W04</span><span class="st"><strong>Motion and forces</strong><small>Nov 1–7 · ENGN 1004 · Velocity and acceleration, Newton&#x27;s laws, density, resolving forces, moments.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Speed, velocity and acceleration</h4><p><span class="lab learn">Learn</span>Scalars and vectors. Speed, velocity, acceleration. Equations of uniform acceleration.</p><p><span class="lab hw">Homework</span>12 problems with units written on every line.</p><label class="done" for="d4-1"><input type="checkbox" id="d4-1" data-day="w4d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Mass, weight, density and Newton&#x27;s laws</h4><p><span class="lab learn">Learn</span>Mass against weight, F = ma, Newton&#x27;s three laws, density and relative density.</p><p><span class="lab hw">Homework</span>12 problems, including the mass of fuel oil in a tank when given its density.</p><label class="done" for="d4-2"><input type="checkbox" id="d4-2" data-day="w4d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Resolving and adding forces</h4><p><span class="lab learn">Learn</span>Draw force diagrams. Resolve a force into components with trigonometry. Find a resultant.</p><p><span class="lab hw">Homework</span>8 problems, each with a free-body sketch.</p><label class="done" for="d4-3"><input type="checkbox" id="d4-3" data-day="w4d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Moments and equilibrium</h4><p><span class="lab learn">Learn</span>Moment of a force, levers, torque, conditions for equilibrium. Review the week.</p><p><span class="lab hw">Homework</span>10 moment problems and a 10-question self-quiz on Week 4.</p><label class="done" for="d4-4"><input type="checkbox" id="d4-4" data-day="w4d4"> Done</label></article></div></details><details class="week" id="w5"><summary><span class="wn">W05</span><span class="st"><strong>Work, energy, power and pressure</strong><small>Nov 8–14 · ENGN 1004 · Work and energy, power and efficiency, pressure, buoyancy.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Work and energy</h4><p><span class="lab learn">Learn</span>Work = force × distance. Kinetic and potential energy. Conservation of energy.</p><p><span class="lab hw">Homework</span>12 problems, including lifting a load with a crane.</p><label class="done" for="d5-1"><input type="checkbox" id="d5-1" data-day="w5d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Power and efficiency</h4><p><span class="lab learn">Learn</span>Power in W and kW. Efficiency as output over input. Power from torque and rpm.</p><p><span class="lab hw">Homework</span>12 problems, 4 of them on engine and pump efficiency.</p><label class="done" for="d5-2"><input type="checkbox" id="d5-2" data-day="w5d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Pressure</h4><p><span class="lab learn">Learn</span>P = F/A. Atmospheric, gauge and absolute pressure. Pressure in a liquid (p = ρgh). Pa, kPa, bar and psi.</p><p><span class="lab hw">Homework</span>12 problems, including the pressure at the bottom of a 10 m tank.</p><label class="done" for="d5-3"><input type="checkbox" id="d5-3" data-day="w5d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Buoyancy and floating bodies</h4><p><span class="lab learn">Learn</span>Archimedes&#x27; principle, why ships float, displacement and draught. Review the week.</p><p><span class="lab hw">Homework</span>10 buoyancy problems and a 10-question self-quiz on Week 5.</p><label class="done" for="d5-4"><input type="checkbox" id="d5-4" data-day="w5d4"> Done</label></article></div></details><details class="week" id="w6"><summary><span class="wn">W06</span><span class="st"><strong>Heat and temperature</strong><small>Nov 15–21 · ENGN 1004 · Temperature scales, specific heat, latent heat, heat transfer. Ends with a test.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Temperature and expansion</h4><p><span class="lab learn">Learn</span>Celsius, Kelvin and Fahrenheit scales. Thermal expansion of solids and liquids.</p><p><span class="lab hw">Homework</span>10 problems, including the expansion of a steel pipe run.</p><label class="done" for="d6-1"><input type="checkbox" id="d6-1" data-day="w6d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Heat and specific heat capacity</h4><p><span class="lab learn">Learn</span>Heat energy, Q = mcΔT, mixing hot and cold water.</p><p><span class="lab hw">Homework</span>12 problems on heating fuel and water.</p><label class="done" for="d6-2"><input type="checkbox" id="d6-2" data-day="w6d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Change of state and latent heat</h4><p><span class="lab learn">Learn</span>Melting, boiling and latent heat. A first look at steam and why the boiling point changes with pressure.</p><p><span class="lab hw">Homework</span>10 problems on latent heat and steam.</p><label class="done" for="d6-3"><input type="checkbox" id="d6-3" data-day="w6d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="chip test">Test</span><span class="dur">2 h</span></div><h4>Heat transfer and Test: ENGN 1004</h4><p><span class="lab learn">Learn</span>Conduction, convection, radiation and insulation (45 min). Then a closed-book test on Weeks 4–6 (60 min) and marking (15 min).</p><p><span class="lab hw">Homework</span>List every error from the test and redo those questions.</p><label class="done" for="d6-4"><input type="checkbox" id="d6-4" data-day="w6d4"> Done</label></article></div></details><details class="week" id="w7"><summary><span class="wn">W07</span><span class="st"><strong>Chemistry basics</strong><small>Nov 22–30 · CHEM 1017 · Elements and compounds, equations and moles, gas laws, hydrocarbons and fuels.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Atoms, elements and compounds</h4><p><span class="lab learn">Learn</span>Periodic table basics, symbols, molecules, and compounds common on ships: H₂O, CO₂, CH₄, SO₂, NaCl.</p><p><span class="lab hw">Homework</span>Write formulas and names for 20 common substances.</p><label class="done" for="d7-1"><input type="checkbox" id="d7-1" data-day="w7d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Equations, moles and molar mass</h4><p><span class="lab learn">Learn</span>Balancing chemical equations, atomic mass, molar mass, the mole.</p><p><span class="lab hw">Homework</span>Balance 12 equations and calculate 8 molar masses.</p><label class="done" for="d7-2"><input type="checkbox" id="d7-2" data-day="w7d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Gas laws</h4><p><span class="lab learn">Learn</span>Boyle&#x27;s law, Charles&#x27;s law, the combined gas law and the ideal gas equation. Links straight to engine cylinders.</p><p><span class="lab hw">Homework</span>10 gas-law problems with temperature in kelvin on every line.</p><label class="done" for="d7-3"><input type="checkbox" id="d7-3" data-day="w7d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Hydrocarbons and marine fuels</h4><p><span class="lab learn">Learn</span>Alkanes, alkenes and aromatics. Crude oil fractions. Heavy fuel oil, marine diesel, gas oil and LNG in outline. Review the week.</p><p><span class="lab hw">Homework</span>A table comparing 5 fuels and a 10-question self-quiz on Week 7.</p><label class="done" for="d7-4"><input type="checkbox" id="d7-4" data-day="w7d4"> Done</label></article></div></details><details class="week" id="w8"><summary><span class="wn">W08</span><span class="st"><strong>Combustion and fuels</strong><small>Dec 1–7 · CHEM 1017 · Air requirement, exhaust gases, emission limits, fuel properties. Ends with a test.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Combustion and air requirement</h4><p><span class="lab learn">Learn</span>Complete and incomplete combustion. Air needed to burn carbon, hydrogen and sulphur. Excess air.</p><p><span class="lab hw">Homework</span>8 problems on balancing combustion equations and finding the air required.</p><label class="done" for="d8-1"><input type="checkbox" id="d8-1" data-day="w8d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Exhaust gases and emission rules</h4><p><span class="lab learn">Learn</span>CO₂, CO, SOx, NOx and soot. The global 0.50% fuel sulphur cap, the 0.10% limit in Emission Control Areas, and what an ECA is.</p><p><span class="lab hw">Homework</span>A one-page summary of why each exhaust gas matters, then 8 questions.</p><label class="done" for="d8-2"><input type="checkbox" id="d8-2" data-day="w8d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Fuel properties and testing</h4><p><span class="lab learn">Learn</span>Calorific value, density, viscosity, flash point, pour point and sulphur content, and what each tells an engineer.</p><p><span class="lab hw">Homework</span>Compare three published fuel data sheets in a table.</p><label class="done" for="d8-3"><input type="checkbox" id="d8-3" data-day="w8d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="chip test">Test</span><span class="dur">2 h</span></div><h4>Fire safety and Test: CHEM 1017</h4><p><span class="lab learn">Learn</span>Fire triangle, fuel handling and spill safety (30 min). Then a closed-book test on Weeks 7–8 (60 min) and marking (15 min).</p><p><span class="lab hw">Homework</span>List every error from the test and redo those questions.</p><label class="done" for="d8-4"><input type="checkbox" id="d8-4" data-day="w8d4"> Done</label></article></div></details><details class="week" id="w9"><summary><span class="wn">W09</span><span class="st"><strong>Reading engineering drawings</strong><small>Dec 8–14 · MARE 1065 · Lines and scales, orthographic views, sections, tolerances.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Lines, scales and dimensions</h4><p><span class="lab learn">Learn</span>Title blocks, line types, scales such as 1:10 and 1:50, dimensioning.</p><p><span class="lab hw">Homework</span>Read 3 simple sample drawings and list every line type and dimension you find.</p><label class="done" for="d9-1"><input type="checkbox" id="d9-1" data-day="w9d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Orthographic projection</h4><p><span class="lab learn">Learn</span>Front, top and side views. Third-angle projection, the convention used in North America.</p><p><span class="lab hw">Homework</span>Sketch three views of 3 simple blocks.</p><label class="done" for="d9-2"><input type="checkbox" id="d9-2" data-day="w9d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Sections, hidden detail and isometric sketches</h4><p><span class="lab learn">Learn</span>Sectional views, hidden lines, centre lines, isometric sketching.</p><p><span class="lab hw">Homework</span>4 sketches: one section view and three isometric drawings.</p><label class="done" for="d9-3"><input type="checkbox" id="d9-3" data-day="w9d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Tolerances, finish and parts lists</h4><p><span class="lab learn">Learn</span>Limits and fits in outline, surface finish symbols, bills of material. Review the week.</p><p><span class="lab hw">Homework</span>Interpret 2 drawings with tolerances, then a 10-question self-quiz on Week 9.</p><label class="done" for="d9-4"><input type="checkbox" id="d9-4" data-day="w9d4"> Done</label></article></div></details><details class="week" id="w10"><summary><span class="wn">W10</span><span class="st"><strong>Marine system diagrams</strong><small>Dec 15–21 · MARE 1065 · Piping and valve symbols, line diagrams, fuel, oil and cooling circuits. Ends with a test.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Piping and valve symbols</h4><p><span class="lab learn">Learn</span>Pipes; gate, globe, check, ball and butterfly valves; pumps, strainers and tanks.</p><p><span class="lab hw">Homework</span>Draw a symbol sheet from memory, then correct it.</p><label class="done" for="d10-1"><input type="checkbox" id="d10-1" data-day="w10d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Reading a line diagram</h4><p><span class="lab learn">Learn</span>Flow direction, tags, instruments, and how to trace a system from tank to user.</p><p><span class="lab hw">Homework</span>Trace the flow in 2 sample diagrams and list every component in order.</p><label class="done" for="d10-2"><input type="checkbox" id="d10-2" data-day="w10d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Marine system diagrams</h4><p><span class="lab learn">Learn</span>Fuel oil, lube oil, cooling water and bilge systems in outline: components and flow.</p><p><span class="lab hw">Homework</span>Sketch a simple sea-water cooling circuit by hand using standard symbols.</p><label class="done" for="d10-3"><input type="checkbox" id="d10-3" data-day="w10d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="chip test">Test</span><span class="dur">2 h</span></div><h4>Fluid and electrical symbols, Test: drawings</h4><p><span class="lab learn">Learn</span>Basic fluid-power and electrical symbols (30 min). Then a closed-book test on Weeks 9–10 (60 min) and marking (15 min).</p><p><span class="lab hw">Homework</span>List every error from the test and redo those questions.</p><label class="done" for="d10-4"><input type="checkbox" id="d10-4" data-day="w10d4"> Done</label></article></div></details><details class="week" id="w11"><summary><span class="wn">W11</span><span class="st"><strong>Engine room and engine basics</strong><small>Dec 22–31 · MARE 1066 · Ships and engine rooms, heat engines, the two cycles, engine construction.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Ships and the engine room</h4><p><span class="lab learn">Learn</span>Ship types, propulsion layouts, engine-room layout and the engineering officer&#x27;s watch.</p><p><span class="lab hw">Homework</span>Label a blank engine-room block diagram and write a 25-term glossary.</p><label class="done" for="d11-1"><input type="checkbox" id="d11-1" data-day="w11d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Heat engines and efficiency</h4><p><span class="lab learn">Learn</span>Energy conversion and thermal efficiency. Steam turbine, diesel engine and gas turbine compared.</p><p><span class="lab hw">Homework</span>8 efficiency problems and a comparison table of the three engine types.</p><label class="done" for="d11-2"><input type="checkbox" id="d11-2" data-day="w11d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Four-stroke and two-stroke cycles</h4><p><span class="lab learn">Learn</span>Each stroke of both cycles, valve and port timing, slow-speed against medium-speed engines.</p><p><span class="lab hw">Homework</span>Draw both cycles with labelled strokes from memory.</p><label class="done" for="d11-3"><input type="checkbox" id="d11-3" data-day="w11d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Engine construction</h4><p><span class="lab learn">Learn</span>Bedplate, frame, liner, piston, crosshead, connecting rod, crankshaft, cylinder head and valves, and what each part does. Review the week.</p><p><span class="lab hw">Homework</span>A part-and-function table and a 10-question self-quiz on Week 11.</p><label class="done" for="d11-4"><input type="checkbox" id="d11-4" data-day="w11d4"> Done</label></article></div></details><details class="week" id="w12"><summary><span class="wn">W12</span><span class="st"><strong>Engine systems</strong><small>Jan 1–7 · MARE 1066 · Fuel injection, scavenging and turbocharging, lubrication, cooling.</small></span><span class="wk-count">0/4</span></summary><div class="days"><article class="day"><div class="dh"><span class="dn">Day 1</span><span class="dur">2 h</span></div><h4>Fuel injection and diesel combustion</h4><p><span class="lab learn">Learn</span>Compression ignition, injectors, injection timing, ignition delay.</p><p><span class="lab hw">Homework</span>Half a page explaining how fuel burns in a diesel cylinder, in your own words.</p><label class="done" for="d12-1"><input type="checkbox" id="d12-1" data-day="w12d1"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 2</span><span class="dur">2 h</span></div><h4>Scavenging and turbocharging</h4><p><span class="lab learn">Learn</span>Why engines need charge air, scavenge ports, uniflow scavenging, how a turbocharger works.</p><p><span class="lab hw">Homework</span>Sketch the air and exhaust path of a turbocharged engine.</p><label class="done" for="d12-2"><input type="checkbox" id="d12-2" data-day="w12d2"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 3</span><span class="dur">2 h</span></div><h4>Lubrication systems</h4><p><span class="lab learn">Learn</span>Purpose of lubrication, system oil against cylinder oil, circuit parts: pump, cooler, filter, sump.</p><p><span class="lab hw">Homework</span>Sketch a lube-oil circuit with a symbol key.</p><label class="done" for="d12-3"><input type="checkbox" id="d12-3" data-day="w12d3"> Done</label></article><article class="day"><div class="dh"><span class="dn">Day 4</span><span class="dur">2 h</span></div><h4>Cooling systems and review</h4><p><span class="lab learn">Learn</span>Jacket-water, sea-water and central cooling, and temperature control (60 min). Then a 45-minute review quiz on Weeks 11–12.</p><p><span class="lab hw">Homework</span>Write 10 quiz questions of your own on Weeks 11–12 and answer them.</p><label class="done" for="d12-4"><input type="checkbox" id="d12-4" data-day="w12d4"> Done</label></article></div></details>
-  </section>
-
-  <section id="notes" class="sec">
-    <h2 class="sech">Notes</h2>
-    <div class="notes">
-      <div>
-        <h3>What this plan covers</h3>
-        <p>Semester 1 and Semester 2 only. The full diploma has 3,009 classroom hours over 7 semesters, and 280 hours of self-study can only build the base. That base (maths, physics, chemistry, drawings, engine basics) is what the first two semesters lean on.</p>
-        <p>Each topic is a first pass. You are learning the vocabulary and the method, not mastering the course.</p>
-      </div>
-      <div>
-        <h3>Where the topics come from</h3>
-        <p>Course codes, names and classroom hours come from the college's 2027–2028 program outline. The detailed course outlines could not be read automatically, so the topic lists use the course titles and standard marine engineering fundamentals. When you can, look up each code in the <a href="https://cat.georgiancollege.ca/cor-index/" rel="noopener">course outline search</a> and swap in any topic that differs.</p>
-      </div>
-      <div>
-        <h3>Dates</h3>
-        <p>Weeks run 1–7, 8–14, 15–21 and 22 to month end, four per month. The plan starts in Week 2 of October 2026 and ends in Week 4 of June 2027, which gives 35 study weeks. July is held as reserve.</p>
-        <p>Weeks 11 and 12 fall over the holidays. Skip them if you need to and use the July reserve to catch up.</p>
-      </div>
-      <div>
-        <h3>Before September 2027</h3>
-        <p>The program page says a valid Transport Canada marine medical, stating fit for sea service (with or without limitations), must be submitted before the program starts. Start that process early. Also check the college's laptop requirements.</p>
-      </div>
-      <div>
-        <h3>Free study material</h3>
-        <p><a href="https://www.khanacademy.org" rel="noopener">Khan Academy</a> for algebra, trigonometry and physics. <a href="https://openstax.org" rel="noopener">OpenStax</a> for free College Physics and Chemistry textbooks. The college will name its own textbooks after you enrol; buy those rather than extras.</p>
-      </div>
-      <div>
-        <h3>Sources</h3>
-        <p><a href="https://www.georgiancollege.ca/programs/marine-engineering-technology/" rel="noopener">Georgian College program page</a> and <a href="http://cat.georgiancollege.ca/programs/mtcy" rel="noopener">MTCY program outline</a>.</p>
-      </div>
-    </div>
-  </section>
-</main>
-<footer class="wrap foot"><p>Plan made October 7, 2026. Adjust week by week as your own pace shows.</p></footer>
-
-<script>
-(function(){
-  var KEY='marine-study-plan-v1', state={};
-  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ state={}; }
-  var boxes=[].slice.call(document.querySelectorAll('input[data-day]'));
-  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
-  function refresh(){
-    var done=0;
-    boxes.forEach(function(b){ if(b.checked) done++; });
-    document.getElementById('done-count').textContent=done;
-    document.getElementById('meter').value=done;
-    [].forEach.call(document.querySelectorAll('details.week'), function(d){
-      var bs=d.querySelectorAll('input[data-day]'), n=0;
-      [].forEach.call(bs, function(b){ if(b.checked) n++; });
-      d.querySelector('.wk-count').textContent=n+'/'+bs.length;
-    });
-  }
-  boxes.forEach(function(b){
-    b.checked=!!state[b.getAttribute('data-day')];
-    b.addEventListener('change', function(){
-      var k=b.getAttribute('data-day');
-      if(b.checked){ state[k]=1; } else { delete state[k]; }
-      save(); refresh();
-    });
-  });
-  refresh();
-  function openById(id){
-    var el=document.getElementById(id);
-    if(el && el.tagName==='DETAILS'){ el.open=true; }
-  }
-  document.addEventListener('click', function(e){
-    var a=e.target.closest ? e.target.closest('a[data-open]') : null;
-    if(a){ openById(a.getAttribute('data-open')); }
-  });
-  var h=(location.hash||'').replace('#','');
-  if(/^w\d+$/.test(h)){ openById(h); }
-  document.getElementById('expand').addEventListener('click', function(){
-    [].forEach.call(document.querySelectorAll('details.week'), function(d){ d.open=true; });
-  });
-  document.getElementById('collapse').addEventListener('click', function(){
-    [].forEach.call(document.querySelectorAll('details.week'), function(d){ d.open=false; });
-  });
-})();
-</script>
-
+  <footer class="footer"><span>STUDY ATLAS / MARINE ENGINEERING TECHNOLOGY</span><span>BUILT FOR FOCUS · BUILT FOR CONSISTENCY</span></footer>
+  <script>
+    (() => {
+      'use strict';
+      const storageKey = 'marine-study-atlas-progress-v1';
+      const themeKey = 'marine-study-atlas-theme-v1';
+      let completed = new Set();
+      try { const data = JSON.parse(localStorage.getItem(storageKey) || '[]'); if(Array.isArray(data)) completed = new Set(data.filter(n => Number.isInteger(n) && n >= 1 && n <= 52)); } catch (_) {}
+      const detailsView = document.getElementById('detailsView');
+      const roadmapView = document.getElementById('roadmapView');
+      const detailsTab = document.getElementById('detailsTab');
+      const roadmapTab = document.getElementById('roadmapTab');
+      const detailSideNav = document.getElementById('detailSideNav');
+      const roadmapSideNav = document.getElementById('roadmapSideNav');
+      let view = 'details';
+      const localSave = () => { try { localStorage.setItem(storageKey, JSON.stringify([...completed].sort((a,b)=>a-b))); } catch (_) {} };
+      const updateProgress = () => {
+        const count = completed.size;
+        const width = (count / 52 * 100) + '%';
+        document.getElementById('navComplete').textContent = count + ' / 52';
+        document.getElementById('sideComplete').textContent = count;
+        document.getElementById('navMeter').style.width = width;
+        document.getElementById('sideMeter').style.width = width;
+        document.querySelectorAll('[data-complete-week]').forEach(el => { el.checked = completed.has(Number(el.dataset.completeWeek)); });
+        document.querySelectorAll('[data-side-week]').forEach(el => { el.classList.toggle('completed', completed.has(Number(el.dataset.sideWeek))); });
+      };
+      document.querySelectorAll('[data-complete-week]').forEach(el => {
+        el.addEventListener('change', () => {
+          const num = Number(el.dataset.completeWeek);
+          if (el.checked) completed.add(num); else completed.delete(num);
+          localSave(); updateProgress();
+        });
+      });
+      const switchView = (next, move = true) => {
+        view = next;
+        const detailed = next === 'details';
+        detailsView.hidden = !detailed; roadmapView.hidden = detailed;
+        detailSideNav.hidden = !detailed; roadmapSideNav.hidden = detailed;
+        detailsTab.classList.toggle('active',detailed); roadmapTab.classList.toggle('active',!detailed);
+        detailsTab.setAttribute('aria-pressed', String(detailed)); roadmapTab.setAttribute('aria-pressed', String(!detailed));
+        document.getElementById('sideTitle').textContent = detailed ? 'The first 7 weeks' : 'The full 12 months';
+        document.getElementById('sideSubtitle').textContent = detailed ? 'Tap a week to jump to its syllabus.' : 'Jump to any of the nine learning phases.';
+        document.title = (detailed ? 'Seven-Week Detail' : '52-Week Roadmap') + ' · Marine Engineering Study Atlas';
+        if (move) document.getElementById('mainContent').scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+      };
+      document.querySelectorAll('[data-switch-view]').forEach(btn => btn.addEventListener('click',() => switchView(btn.dataset.switchView)));
+      document.getElementById('expandAll').addEventListener('click',()=>document.querySelectorAll('.week-detail').forEach(el=>el.open=true));
+      document.getElementById('collapseAll').addEventListener('click',()=>document.querySelectorAll('.week-detail').forEach(el=>el.open=false));
+      document.querySelectorAll('[data-side-week]').forEach(link => link.addEventListener('click',() => { const box=document.querySelector(link.getAttribute('href')); if(box) box.open=true; }));
+      document.getElementById('resetProgress').addEventListener('click',() => {
+        if (completed.size && !window.confirm('Clear all saved week-completion checkmarks?')) return;
+        completed.clear(); localSave(); updateProgress();
+      });
+      document.getElementById('printButton').addEventListener('click',() => window.print());
+      const search = document.getElementById('roadmapSearch');
+      const performSearch = () => {
+        const query=search.value.trim().toLowerCase(); let visible=0;
+        document.querySelectorAll('.phase-block').forEach(phase => {
+          let phaseVisible=0;
+          const isPhaseMatch=query && (phase.querySelector('h3').textContent + ' ' + phase.querySelector('.phase-desc').textContent).toLowerCase().includes(query);
+          phase.querySelectorAll('.roadmap-week').forEach(week => {
+            const match = !query || isPhaseMatch || week.dataset.roadmapSearch.toLowerCase().includes(query) || ('w'+week.querySelector('.roadmap-num').textContent).toLowerCase().includes(query);
+            week.hidden = !match;
+            if(match){visible++;phaseVisible++;}
+          });
+          phase.hidden = phaseVisible === 0;
+          // Phase milestone follows the phase; hide it during filtered searches to avoid confusing results.
+          if (phase.nextElementSibling && phase.nextElementSibling.classList.contains('milestone-banner')) phase.nextElementSibling.hidden = !!query;
+        });
+        document.getElementById('resultCount').textContent = visible + (visible===1 ? ' week' : ' weeks');
+        document.getElementById('noResults').hidden = visible !== 0;
+      };
+      search.addEventListener('input', performSearch);
+      const themeButton = document.getElementById('themeButton');
+      let theme = 'light';
+      try { theme = localStorage.getItem(themeKey) || 'light'; } catch (_) {}
+      const applyTheme = () => { document.documentElement.dataset.theme = theme; themeButton.setAttribute('aria-label', 'Switch to ' + (theme==='dark'?'light':'dark') + ' mode'); themeButton.title = themeButton.getAttribute('aria-label'); };
+      themeButton.addEventListener('click', () => { theme = theme === 'light' ? 'dark' : 'light'; try {localStorage.setItem(themeKey,theme);} catch (_) {} applyTheme(); });
+      applyTheme(); updateProgress();
+      // Intentional: every reload starts in the complete seven-week detail view.
+      switchView('details', false);
+    })();
+  </script>
 </body></html>
