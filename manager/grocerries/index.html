@@ -1,1 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f2">
+  <meta name="description" content="A simple, beautiful shopping checklist powered by items.json.">
+  <title>Groceries · Your shopping list</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f2;
+      --surface: #ffffff;
+      --text: #1b2d25;
+      --muted: #6c7d72;
+      --line: #e3eae3;
+      --green: #1e6546;
+      --green-dark: #174e39;
+      --light-green: #e8f4eb;
+      --focus: #327b5b;
+      --radius: 19px;
+    }
 
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+      min-width: 280px;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .42; }
+    button:focus-visible, input:focus-visible, .item-row:focus-within {
+      outline: 3px solid #9acdb0;
+      outline-offset: 3px;
+    }
+    .page { width: min(100%, 710px); margin: 0 auto; padding: 27px 17px 72px; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 30px; }
+    .identity { display: flex; align-items: center; gap: 10px; font-size: .78rem; font-weight: 800; letter-spacing: .16em; }
+    .brand-mark { width: 37px; height: 37px; border-radius: 12px; background: #dcece0; color: var(--green); display: grid; place-items: center; }
+    .today { color: var(--muted); font-size: .77rem; text-align: right; font-weight: 600; }
+    .intro { margin-bottom: 22px; }
+    .eyebrow { margin: 0 0 6px; font-size: .73rem; font-weight: 800; letter-spacing: .17em; color: var(--green); text-transform: uppercase; }
+    h1 { font-size: clamp(2.05rem, 7vw, 3.25rem); font-weight: 800; letter-spacing: -.05em; line-height: 1.13; margin: 0 0 8px; }
+    .subtitle { margin: 0; color: var(--muted); font-size: .96rem; }
+    .summary {
+      position: relative; isolation: isolate; overflow: hidden;
+      background: linear-gradient(135deg, #19533b 0%, #287657 100%);
+      color: white; padding: 23px 23px 21px; border-radius: 23px;
+      box-shadow: 0 14px 27px rgba(23, 79, 50, .12);
+      margin-bottom: 26px;
+    }
+    .summary::before { content: ""; position: absolute; z-index: -1; width: 240px; height: 240px; border: 50px solid rgba(255,255,255,.045); border-radius: 50%; right: -115px; top: -141px; }
+    .summary-top { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .summary-label { color: #d6eee0; font-size: .75rem; letter-spacing: .11em; text-transform: uppercase; font-weight: 700; }
+    .summary-count { font-size: clamp(1.9rem, 7vw, 2.55rem); font-weight: 800; letter-spacing: -.045em; line-height: 1.25; margin-top: 3px; }
+    .summary-count small { font-size: 1rem; font-weight: 500; color: #c8e1d3; letter-spacing: 0; }
+    .percentage { font-size: 1.22rem; font-weight: 800; white-space: nowrap; }
+    .progress-track { height: 9px; border-radius: 999px; background: rgba(255, 255, 255, .22); overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; border-radius: inherit; background: #b8f0c0; transition: width .25s ease; }
+    .summary-foot { display: flex; align-items: center; gap: 7px; margin-top: 14px; font-size: .81rem; color: #d6eee0; }
+    .list-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 0 0 13px; }
+    h2 { margin: 0; font-size: 1.27rem; letter-spacing: -.025em; }
+    .total-label { font-size: .78rem; color: var(--muted); font-weight: 650; }
+    .search-wrap { position: relative; display: block; margin-bottom: 12px; }
+    .search-icon { position: absolute; top: 50%; left: 15px; transform: translateY(-50%); color: #75877d; pointer-events: none; }
+    #search { width: 100%; min-height: 49px; padding: 12px 16px 12px 45px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); outline-offset: 2px; color: var(--text); }
+    #search::placeholder { color: #85938b; }
+    .filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-bottom: 23px; }
+    .filter { min-height: 43px; background: transparent; color: #627268; border: 1px solid transparent; border-radius: 11px; font-size: .82rem; font-weight: 750; padding: 8px 4px; white-space: nowrap; }
+    .filter[aria-pressed="true"] { color: var(--green-dark); background: #e0efe4; border-color: #d2e6d8; }
+    .filter-count { opacity: .65; margin-left: 2px; font-variant-numeric: tabular-nums; }
+    .group { margin-bottom: 20px; }
+    .group-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 1px 10px; }
+    .group-heading h3 { font-size: .88rem; font-weight: 800; margin: 0; letter-spacing: .01em; }
+    .group-heading span { color: var(--muted); font-size: .78rem; }
+    .item-card { overflow: hidden; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line); box-shadow: 0 5px 18px rgba(30, 63, 40, .025); }
+    .item-row { min-height: 61px; display: flex; align-items: center; gap: 14px; cursor: pointer; padding: 14px 17px; user-select: none; -webkit-tap-highlight-color: transparent; }
+    .item-row + .item-row { border-top: 1px solid #eef1ed; }
+    .item-row:active { background: #f6faf6; }
+    .item-checkbox { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .checkbox-visual { display: grid; place-items: center; flex: 0 0 25px; height: 25px; border-radius: 8px; border: 2px solid #becfc2; color: transparent; transition: background .15s ease, border-color .15s ease; }
+    .item-checkbox:checked + .checkbox-visual { background: var(--green); border-color: var(--green); color: white; }
+    .item-name { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: .97rem; font-weight: 600; }
+    .item-checkbox:checked ~ .item-name { color: #89968e; text-decoration: line-through; text-decoration-color: #aab8ad; }
+    .item-status { color: #819187; font-size: .73rem; font-weight: 650; white-space: nowrap; }
+    .empty-state { border: 1px dashed #ccdace; border-radius: var(--radius); background: rgba(255,255,255,.7); padding: 35px 21px; text-align: center; }
+    .empty-icon { width: 48px; height: 48px; display: grid; place-items: center; margin: 0 auto 12px; border-radius: 15px; color: var(--green); background: #e6f2e7; }
+    .empty-state h3 { font-size: 1rem; margin: 0 0 6px; }
+    .empty-state p { font-size: .85rem; color: var(--muted); margin: 0 auto; max-width: 300px; }
+    .empty-state code { font-size: .83em; background: #e7efe6; padding: 1px 4px; border-radius: 4px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .action { min-height: 45px; display: inline-flex; justify-content: center; align-items: center; gap: 9px; padding: 10px 16px; border-radius: 12px; border: 1px solid #d7e3da; background: white; color: var(--green-dark); font-size: .85rem; font-weight: 750; flex: 1; }
+    .action.primary { background: var(--green); color: white; border-color: var(--green); }
+    .action:not(:disabled):active { transform: translateY(1px); }
+    .footnote { margin: 24px 0 0; text-align: center; font-size: .76rem; color: #87958c; }
+    .toast { position: fixed; z-index: 10; left: 50%; bottom: 22px; transform: translate(-50%, 15px); padding: 11px 17px; border-radius: 12px; background: #193a2b; color: white; font-size: .85rem; font-weight: 650; box-shadow: 0 10px 30px rgba(0,0,0,.17); opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s, visibility .2s; max-width: calc(100% - 32px); text-align: center; }
+    .toast.is-visible { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+    .hidden { display: none !important; }
+    svg { display: block; }
+    @media (min-width: 640px) {
+      .page { padding: 46px 34px 90px; }
+      .masthead { margin-bottom: 44px; }
+      .intro { margin-bottom: 25px; }
+      .summary { padding: 29px 32px 26px; }
+      .item-row { padding: 16px 21px; }
+      .action { flex: 0 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div class="identity">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 11 2 9h10l2-9H5Z"/><path d="m9 11 3-8 3 8"/><path d="M9 15v2m6-2v2"/></svg>
+        </span>
+        THE LITTLE LIST
+      </div>
+      <div class="today" id="today"></div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Your everyday essentials</p>
+      <h1 id="page-title">Let's go shopping.</h1>
+      <p class="subtitle">A little list for everything you need.</p>
+    </section>
+
+    <section class="summary" aria-label="Shopping progress">
+      <div class="summary-top">
+        <div>
+          <div class="summary-label">Shopping progress</div>
+          <div class="summary-count"><span id="complete-count">0</span> <small>of <span id="total-count">0</span> picked up</small></div>
+        </div>
+        <div class="percentage" id="percentage">0%</div>
+      </div>
+      <div class="progress-track" id="progress" role="progressbar" aria-label="Items picked up" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="summary-foot">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <span id="progress-message">Your list is loading…</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="list-title">
+      <div class="list-heading">
+        <h2 id="list-title">Your list</h2>
+        <span class="total-label" id="total-label"></span>
+      </div>
+      <label class="search-wrap">
+        <svg class="search-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="search" type="search" placeholder="Search your groceries…" aria-label="Search groceries" autocomplete="off">
+      </label>
+      <div class="filters" aria-label="Filter groceries">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-count" id="all-count">0</span></button>
+        <button class="filter" type="button" data-filter="todo" aria-pressed="false">To buy <span class="filter-count" id="todo-count">0</span></button>
+        <button class="filter" type="button" data-filter="done" aria-pressed="false">Picked up <span class="filter-count" id="done-count">0</span></button>
+      </div>
+      <div id="list-content" aria-live="polite" aria-busy="true"></div>
+      <div class="actions">
+        <button class="action primary" id="copy-button" type="button" disabled>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+          Copy to-buy list
+        </button>
+        <button class="action" id="reset-button" type="button" disabled>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2 6"/><path d="M3 4v7h7"/></svg>
+          Reset checks
+        </button>
+      </div>
+    </section>
+    <p class="footnote">Your checkmarks are saved on this device.</p>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      // The only data file you need is items.json, next to index.html.
+      // Format: ["Milk", "Eggs", "Bread", "Bananas"]
+      const DATA_URL = './items.json';
+      const STORAGE_KEY = 'little-list-checked-v1';
+      const $ = (selector) => document.querySelector(selector);
+      const listContent = $('#list-content');
+      const state = {
+        items: [],
+        checked: readSavedChecks(),
+        filter: 'all',
+        search: '',
+        loaded: false,
+        error: null
+      };
+      let toastTimeout;
+
+      function readSavedChecks() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          return new Set(Array.isArray(parsed) ? parsed.filter((name) => typeof name === 'string') : []);
+        } catch { return new Set(); }
+      }
+
+      function saveChecks() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...state.checked])); }
+        catch { showToast('Could not save on this device.'); }
+      }
+
+      function showToast(message) {
+        const toast = $('#toast');
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('is-visible'), 2700);
+      }
+
+      function element(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+
+      function makeEmpty(title, message, isError = false) {
+        const container = element('div', 'empty-state');
+        const icon = element('div', 'empty-icon');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = isError ? '!' : '✓';
+        const heading = element('h3', '', title);
+        const desc = element('p', '', message);
+        container.append(icon, heading, desc);
+        return container;
+      }
+
+      function makeGroup(title, items) {
+        const section = element('section', 'group');
+        const heading = element('div', 'group-heading');
+        heading.append(element('h3', '', title), element('span', '', `${items.length} ${items.length === 1 ? 'item' : 'items'}`));
+        const card = element('div', 'item-card');
+
+        for (const name of items) {
+          const row = element('label', 'item-row');
+          const checkbox = element('input', 'item-checkbox');
+          checkbox.type = 'checkbox';
+          checkbox.checked = state.checked.has(name);
+          checkbox.setAttribute('aria-label', `Mark ${name} as ${checkbox.checked ? 'not picked up' : 'picked up'}`);
+          checkbox.dataset.item = name;
+          const visual = element('span', 'checkbox-visual');
+          visual.setAttribute('aria-hidden', 'true');
+          visual.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>';
+          const label = element('span', 'item-name', name);
+          row.append(checkbox, visual, label);
+          if (checkbox.checked) row.append(element('span', 'item-status', 'Done'));
+          checkbox.addEventListener('change', () => {
+            if (checkbox.checked) state.checked.add(name);
+            else state.checked.delete(name);
+            saveChecks();
+            render();
+            // Preserve keyboard focus after re-rendering the list.
+            const replacement = [...listContent.querySelectorAll('.item-checkbox')].find((input) => input.dataset.item === name);
+            if (replacement && !window.matchMedia('(pointer: coarse)').matches) replacement.focus({ preventScroll: true });
+          });
+          card.append(row);
+        }
+        section.append(heading, card);
+        return section;
+      }
+
+      function render() {
+        const total = state.items.length;
+        const completed = state.items.filter((name) => state.checked.has(name)).length;
+        const remaining = total - completed;
+        const percent = total ? Math.round((completed / total) * 100) : 0;
+
+        $('#complete-count').textContent = completed;
+        $('#total-count').textContent = total;
+        $('#percentage').textContent = `${percent}%`;
+        $('#progress-fill').style.width = `${percent}%`;
+        $('#progress').setAttribute('aria-valuemax', Math.max(1, total));
+        $('#progress').setAttribute('aria-valuenow', completed);
+        $('#progress-message').textContent = !state.loaded
+          ? 'Your list is loading…'
+          : state.error ? 'We couldn’t load your grocery list.'
+          : !total ? 'Add some groceries to get started.'
+          : !remaining ? 'All done. Nice work!' : `${remaining} ${remaining === 1 ? 'item' : 'items'} still to pick up`;
+        $('#total-label').textContent = state.loaded && !state.error ? `${total} ${total === 1 ? 'item' : 'items'} total` : '';
+        $('#all-count').textContent = total;
+        $('#todo-count').textContent = remaining;
+        $('#done-count').textContent = completed;
+        $('#copy-button').disabled = !state.loaded || !!state.error || remaining === 0;
+        $('#reset-button').disabled = completed === 0;
+        document.querySelectorAll('.filter').forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset.filter === state.filter));
+        });
+
+        listContent.replaceChildren();
+        listContent.setAttribute('aria-busy', String(!state.loaded));
+        if (!state.loaded) {
+          listContent.append(makeEmpty('Loading your list', 'Gathering your groceries…'));
+          return;
+        }
+        if (state.error) {
+          listContent.append(makeEmpty('Could not open items.json', state.error, true));
+          return;
+        }
+        if (!total) {
+          listContent.append(makeEmpty('Nothing on your list yet', 'Add item names to items.json, then refresh the page.'));
+          return;
+        }
+
+        const term = state.search.trim().toLocaleLowerCase();
+        const matching = state.items.filter((name) => name.toLocaleLowerCase().includes(term));
+        const todo = matching.filter((name) => !state.checked.has(name));
+        const done = matching.filter((name) => state.checked.has(name));
+        if ((state.filter === 'all' && !matching.length) || (state.filter === 'todo' && !todo.length) || (state.filter === 'done' && !done.length)) {
+          let message = term ? 'Try another search term.' : state.filter === 'todo' ? 'Everything has been picked up.' : state.filter === 'done' ? 'Tick an item when you put it in your basket.' : '';
+          listContent.append(makeEmpty(term ? 'No matching groceries' : state.filter === 'todo' ? 'Nothing left to buy!' : 'No items picked up yet', message));
+          return;
+        }
+        if (todo.length && state.filter !== 'done') listContent.append(makeGroup('Still to buy', todo));
+        if (done.length && state.filter !== 'todo') listContent.append(makeGroup('Picked up', done));
+      }
+
+      async function loadItems() {
+        try {
+          const response = await fetch(DATA_URL, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`Request returned ${response.status}`);
+          const data = await response.json();
+          if (!Array.isArray(data) || data.some((item) => typeof item !== 'string')) {
+            throw new Error('items.json must contain an array of item names, such as ["Milk", "Eggs", "Bread"].');
+          }
+          // Trim blanks and ignore duplicates to keep checkmarks linked to names.
+          state.items = [...new Set(data.map((name) => name.trim()).filter(Boolean))];
+          const validNames = new Set(state.items);
+          state.checked = new Set([...state.checked].filter((name) => validNames.has(name)));
+          saveChecks();
+          state.error = null;
+        } catch (error) {
+          state.error = error instanceof SyntaxError
+            ? 'Check that items.json is valid JSON, for example ["Milk", "Eggs", "Bread"].'
+            : error.message.startsWith('items.json must') ? error.message
+            : 'Make sure items.json is beside index.html and open the site through a local web server (not file://).';
+        } finally {
+          state.loaded = true;
+          render();
+        }
+      }
+
+      $('#today').textContent = new Intl.DateTimeFormat(undefined, { weekday: 'short', month: 'short', day: 'numeric' }).format(new Date());
+      $('#search').addEventListener('input', (event) => { state.search = event.target.value; render(); });
+      document.querySelectorAll('.filter').forEach((button) => {
+        button.addEventListener('click', () => { state.filter = button.dataset.filter; render(); });
+      });
+      $('#reset-button').addEventListener('click', () => {
+        if (!state.checked.size || !confirm('Uncheck all items and start a fresh shopping trip?')) return;
+        state.checked.clear();
+        saveChecks();
+        render();
+        showToast('All checkmarks cleared');
+      });
+      $('#copy-button').addEventListener('click', async () => {
+        const remaining = state.items.filter((name) => !state.checked.has(name));
+        if (!remaining.length) return;
+        const text = remaining.join('\n');
+        try {
+          if (!navigator.clipboard || !window.isSecureContext) throw new Error('Clipboard API unavailable');
+          await navigator.clipboard.writeText(text);
+        } catch {
+          // Fallback for browsers without Clipboard API support.
+          const area = element('textarea');
+          area.value = text;
+          area.style.cssText = 'position:fixed;left:-9999px;top:0';
+          document.body.append(area);
+          area.focus();
+          area.select();
+          const copied = document.execCommand('copy');
+          area.remove();
+          if (!copied) { showToast('Could not copy the list'); return; }
+        }
+        showToast('To-buy list copied!');
+      });
+      render();
+      loadItems();
+    })();
+  </script>
+</body>
+</html>
